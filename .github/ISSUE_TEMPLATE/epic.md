@@ -1,16 +1,10 @@
 ---
 name: Epic
 about: Use this for the creation of New Epics
-title: ''
-labels: ''
+title: "[EPIC]"
+labels: Epic
 assignees: ''
 
 ---
 
-### Epic Name
-
 ### Description
-
-### Related Tasks
-
-- [ ] Task 1

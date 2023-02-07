@@ -1,12 +1,10 @@
 ---
 name: Tasks
 about: Use this for the creation of New Tasks
-title: ''
-labels: ''
+title: "[TASK]"
+labels: Task
 assignees: ''
 
 ---
 
-### Task Name
-
-Task Description
+### Description
