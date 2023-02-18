@@ -33,7 +33,7 @@
 [![MIT License][license-shield]][license-url]
 
 [![Twitter][twitter-shield]][twitter-url]
-[![Youtube][youtube-shield]][youtube-url]
+[![Youtube][youtube-shield]][https://www.youtube.com/channel/UCsEz7-PU1gYQ-DuntVkb_oQ]
 
 
 
