@@ -32,7 +32,7 @@
 [![Forks][forks-shield]][forks-url]
 [![MIT License][license-shield]][license-url]
 
-[![Twitter][twitter-shield]][twitter-url]
+[![Twitter][twitter-shield]][https://twitter.com/AcePlay25807009]
 [![Youtube][youtube-shield]][youtube-url]
 
 
