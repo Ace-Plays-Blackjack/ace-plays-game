@@ -1,0 +1,9 @@
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/NightlyMemoryCheck.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/Experimental.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/Continuous.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/Nightly.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/OPENCV_TEST.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/PACKAGE.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/RUN_TESTS.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/ALL_BUILD.dir
+D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,0 +1,10 @@
+^D:\YEAR_5\REAL_TIME_EMB_PROGRAMMING\BLACKJACK_FILES\ACE-PLAYS-GAME\BUILD\CMAKEFILES\1F285C82F72DA478EABB78BC93724B45\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game -BD:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/YEAR_5/Real_Time_Emb_Programming/Blackjack_files/ace-plays-game/build/OPENCV_TEST.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
