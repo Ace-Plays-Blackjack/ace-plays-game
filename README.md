@@ -32,7 +32,7 @@
 [![Forks][forks-shield]][forks-url]
 [![MIT License][license-shield]][license-url]
 
-[![Twitter][twitter-shield]][https://twitter.com/AcePlay25807009]
+[![Twitter][twitter-shield]][twitter-url]
 [![Youtube][youtube-shield]][youtube-url]
 
 
@@ -136,7 +136,7 @@ The AcePlays device helps you learn about the game of Blackjack and win against 
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 
 [twitter-shield]: https://img.shields.io/twitter/follow/username?label=Twitter&style=social
-[twitter-url]: https://twitter.com/ourpage
+[twitter-url]: https://twitter.com/AcePlay25807009
 
 [youtube-shield]: https://img.shields.io/youtube/channel/views/username?style=social
-[youtube-url]: https://www.youtube.com/username
+[youtube-url]: https://www.youtube.com/@aceplaysblackjackdecisionmaker
