@@ -20,6 +20,10 @@ Camera::Camera(int camIdx, int camApi)
         std::cerr << "ERROR "<< errCode <<": Can't initialize camera capture" << std::endl;
     }
     activeCapture = capture;
+
+    std::cout << "Frame width: " << capture.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
+    std::cout << "     height: " << capture.get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
+    std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
 }
 
 void Camera::display(){
@@ -61,7 +65,7 @@ void Camera::startRecording(){
 }
 
 void Camera::stopRecording(){
-    CamSettings.isOn = false;
+    // CamSettings.isOn = false;
     camThread.join();
 }
 
