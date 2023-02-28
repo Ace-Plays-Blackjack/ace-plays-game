@@ -24,7 +24,7 @@ public:
     ~Camera();
     void startRecording();
     void stopRecording();
-    void getErr();
+    int getErr();
     
 };
 

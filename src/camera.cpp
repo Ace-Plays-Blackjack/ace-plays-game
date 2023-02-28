@@ -15,11 +15,12 @@ Camera::Camera(int camIdx, int camApi)
 }
 
 
-void get_err(){
+int Camera::getErr(){
     return errCode;
 }
 
 void Camera::startRecording(){
+
 }
 
 Camera::~Camera()
