@@ -4,7 +4,8 @@
 
 Camera::Camera(int camIdx, int camApi)
 {
-
+    CamSettings.camIdx = camIdx;
+    CamSettings.camApi = camApi;
     cv::VideoCapture capture(camIdx, camApi); // open the first camera
     if (!capture.isOpened())
     {
@@ -14,13 +15,12 @@ Camera::Camera(int camIdx, int camApi)
     active_capture = capture;
 }
 
+void Camera::startRecording(){
+
+}
 
 int Camera::getErr(){
     return errCode;
-}
-
-void Camera::startRecording(){
-
 }
 
 Camera::~Camera()

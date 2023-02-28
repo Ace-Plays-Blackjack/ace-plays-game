@@ -13,8 +13,12 @@ enum Err_type{
 class Camera
 {
 private:
+    struct{
+        int camIdx; 
+        int camApi;
+    } CamSettings;
+
     int errCode;
-    int camIdx, camApi;
     cv::Mat current_frame;
     cv::VideoCapture active_capture;
     void camThread();
