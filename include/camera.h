@@ -19,8 +19,8 @@ private:
     } CamSettings;
 
     int errCode;
-    cv::Mat current_frame;
-    cv::VideoCapture active_capture;
+    cv::Mat currentFrame;
+    cv::VideoCapture activeCapture;
     void camThread();
 
 public:

@@ -12,7 +12,7 @@ Camera::Camera(int camIdx, int camApi)
         errCode = ERR_INIT;
         std::cerr << "ERROR "<< errCode <<": Can't initialize camera capture" << std::endl;
     }
-    active_capture = capture;
+    activeCapture = capture;
 }
 
 void Camera::startRecording(){
