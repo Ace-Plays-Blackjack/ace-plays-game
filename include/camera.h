@@ -13,15 +13,18 @@ enum Err_type{
 class Camera
 {
 private:
-    int err_code;
+    int errCode;
+    int camIdx, camApi;
     cv::Mat current_frame;
-    
-public:
     cv::VideoCapture active_capture;
-    Camera(/* args */);
+    void camThread();
+
+public:
+    Camera(int camIdx = 0, int camApi = cv::CAP_ANY);
     ~Camera();
-    void start_recording();
-    void stop();
+    void startRecording();
+    void stopRecording();
+    void getErr();
     
 };
 
