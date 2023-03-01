@@ -14,7 +14,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/Ace-Plays-Blackjack/ace-plays-game">
     <img src="logo/aceplays-blackjack-logo-transparent4.png" alt="Logo" width="400" height="400">
   </a>
 
@@ -30,6 +30,7 @@
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
+[![Stars][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
 
 [![Twitter][twitter-shield]][twitter-url]
@@ -126,17 +127,20 @@ The AcePlays device helps you learn about the game of Blackjack and win against 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/Ace-Plays-Blackjack/ace-plays-game.svg?style=for-the-badge
 [contributors-url]: https://github.com/Ace-Plays-Blackjack/ace-plays-game/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/Ace-Plays-Blackjack/ace-plays-game.svg?style=for-the-badge
 [forks-url]: https://github.com/Ace-Plays-Blackjack/ace-plays-game/network/members
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Ace-Plays-Blackjack/ace-plays-game.svg?style=for-the-badge
+[stars-url]: https://github.com/Ace-Plays-Blackjack/ace-plays-game/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Ace-Plays-Blackjack/ace-plays-game.svg?style=for-the-badge
 [issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/Ace-Plays-Blackjack/ace-plays-game.svg?style=for-the-badge
+[license-url]: https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/master/LICENSE.txt
 
 [twitter-shield]: https://img.shields.io/twitter/follow/username?label=Twitter&style=social
 [twitter-url]: https://twitter.com/AcePlay25807009
 
-[youtube-shield]: https://img.shields.io/youtube/channel/views/username?style=social
-[youtube-url]: https://www.youtube.com/@aceplaysblackjackdecisionmaker
+[youtube-shield]: https://img.shields.io/youtube/channel/views/UCsEz7-PU1gYQ-DuntVkb_oQ?style=social
+[youtube-url]: https://www.youtube.com/channel/UCsEz7-PU1gYQ-DuntVkb_oQ
+<!-- [youtube-url]: https://www.youtube.com/@aceplaysblackjackdecisionmaker -->
