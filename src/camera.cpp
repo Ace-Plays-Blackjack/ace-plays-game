@@ -26,9 +26,9 @@ Camera::Camera(int camIdx, int camApi)
     std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
 }
 
-void Camera::display(){
-    cv::imshow("Frame", currentFrame);
-}
+// void Camera::display(){
+//     cv::imshow("Frame", currentFrame);
+// }
 
 /**
  * @brief Main loop used by Camera Thread.
@@ -46,10 +46,28 @@ void Camera::camThreadLoop(){
         }
 
         // Here add the callback
-        display();
+        // display();
+        cameraCallback->passFrame(currentFrame);
         int key = cv::waitKey(1);
         if (key == 27/*ESC*/){break;}
     }
+}
+
+/**
+ * @brief Register a Callback for the Camera Class
+ * 
+ * @param cb is a CallbackLinker class pointer
+ */
+void Camera::registerCallback(CallbackLinker* cb){
+    cameraCallback = cb;
+}
+
+/**
+ * @brief Unregister existing callback
+ * 
+ */
+void Camera::unregisterCallback(){
+    cameraCallback = nullptr;
 }
 
 /**

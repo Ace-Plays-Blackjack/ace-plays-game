@@ -3,24 +3,21 @@
 
 #include <opencv2/core.hpp>
 
+/**
+ * @brief Generic abstract Callback Interface class
+ * 
+ */
 class CallbackLinker
 {
 public:
-    CallbackLinker(/* args */);
-    ~CallbackLinker();
-
+    /**
+     * @brief Abstract method
+     * @details Implement method in a Derived class
+     * 
+     * @param nextFrame a cv::Mat type variable
+     */
     virtual void passFrame(cv::Mat nextFrame) = 0;
-
 };
-
-CallbackLinker::CallbackLinker(/* args */)
-{
-}
-
-CallbackLinker::~CallbackLinker()
-{
-}
-
 
 
 #endif /*CALLBACK_LINKER_H*/
