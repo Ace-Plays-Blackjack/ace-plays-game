@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <thread>
+#include "CallbackLinker.h"
 
 enum Err_type{
     NO_ERROR,
@@ -27,12 +28,14 @@ private:
     cv::VideoCapture activeCapture;
     std::thread camThread;
     void camThreadLoop();
+    CallbackLinker* cameraCallback = nullptr;
 
 public:
     Camera(int camIdx = 0, int camApi = cv::CAP_ANY);
     ~Camera();
-    //virtual void hasFrame(cv::Mat frame) = 0;
-    void display(); // Temporary
+    void registerCallback(CallbackLinker* cb);
+    void unregisterCallback();
+    //void display(); // Temporary
     void startRecording();
     void stopRecording();
     int getErr();
