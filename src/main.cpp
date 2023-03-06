@@ -10,6 +10,12 @@
 using namespace cv;
 using std::cout; using std::cerr; using std::endl;
 
+class CameraCallback : public CallbackLinker{
+    virtual void passFrame(Mat nextFrame){
+        cv::imshow("Frame", nextFrame);
+    }
+};
+
 int main(int, char**)
 {
     
@@ -17,7 +23,8 @@ int main(int, char**)
 	flasher.mainthread();
     cout << "Opening camera..." << endl;
     Camera camera_obj;
-
+    CameraCallback show_cam_callback;
+    camera_obj.registerCallback(&show_cam_callback);
     camera_obj.startRecording();
     camera_obj.stopRecording();
     return 0;

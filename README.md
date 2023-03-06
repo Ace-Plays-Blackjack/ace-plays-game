@@ -15,7 +15,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Ace-Plays-Blackjack/ace-plays-game">
-    <img src="logo/aceplays-blackjack-logo-transparent4.png" alt="Logo" width="400" height="400">
+    <img src="logo/aceplays-blackjack-logo-transparent3.png" alt="Logo" width="400" height="400">
   </a>
 
 <h3 align="center">AcePlays</h3>
