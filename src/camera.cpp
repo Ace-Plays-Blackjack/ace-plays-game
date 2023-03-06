@@ -52,6 +52,10 @@ void Camera::camThreadLoop(){
     }
 }
 
+/**
+ * @brief Method call to start the camera recording thread
+ * 
+ */
 void Camera::startRecording(){
     CamSettings.isOn = true;
     if(!activeCapture.open(CamSettings.camIdx, CamSettings.camApi)){
@@ -64,15 +68,29 @@ void Camera::startRecording(){
     
 }
 
+/**
+ * @brief Method call to stop the camera recording thread
+ * Call when exiting the programme
+ * 
+ */
 void Camera::stopRecording(){
     // CamSettings.isOn = false;
     camThread.join();
 }
 
+/**
+ * @brief Get latest Error Code
+ * 
+ * @return int, return enum Err_type error code
+ */
 int Camera::getErr(){
     return errCode;
 }
 
+/**
+ * @brief Destroy the Camera:: Camera object
+ * 
+ */
 Camera::~Camera()
 {
     CamSettings.isOn = false;
