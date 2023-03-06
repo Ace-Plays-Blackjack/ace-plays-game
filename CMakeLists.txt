@@ -9,7 +9,6 @@ include_directories(include)
 add_executable(OPENCV_TEST 
     src/main.cpp
     src/camera.cpp
-    include/camera.h
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
