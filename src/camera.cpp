@@ -26,9 +26,9 @@ Camera::Camera(int camIdx, int camApi)
     std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
 }
 
-void Camera::display(){
-    cv::imshow("Frame", currentFrame);
-}
+// void Camera::display(){
+//     cv::imshow("Frame", currentFrame);
+// }
 
 /**
  * @brief Main loop used by Camera Thread.
@@ -46,12 +46,34 @@ void Camera::camThreadLoop(){
         }
 
         // Here add the callback
-        display();
+        // display();
+        cameraCallback->passFrame(currentFrame);
         int key = cv::waitKey(1);
         if (key == 27/*ESC*/){break;}
     }
 }
 
+/**
+ * @brief Register a Callback for the Camera Class
+ * 
+ * @param cb is a CallbackLinker class pointer
+ */
+void Camera::registerCallback(CallbackLinker* cb){
+    cameraCallback = cb;
+}
+
+/**
+ * @brief Unregister existing callback
+ * 
+ */
+void Camera::unregisterCallback(){
+    cameraCallback = nullptr;
+}
+
+/**
+ * @brief Method call to start the camera recording thread
+ * 
+ */
 void Camera::startRecording(){
     CamSettings.isOn = true;
     if(!activeCapture.open(CamSettings.camIdx, CamSettings.camApi)){
@@ -64,15 +86,29 @@ void Camera::startRecording(){
     
 }
 
+/**
+ * @brief Method call to stop the camera recording thread
+ * Call when exiting the programme
+ * 
+ */
 void Camera::stopRecording(){
     // CamSettings.isOn = false;
     camThread.join();
 }
 
+/**
+ * @brief Get latest Error Code
+ * 
+ * @return int, return enum Err_type error code
+ */
 int Camera::getErr(){
     return errCode;
 }
 
+/**
+ * @brief Destroy the Camera:: Camera object
+ * 
+ */
 Camera::~Camera()
 {
     CamSettings.isOn = false;
