@@ -70,6 +70,11 @@ cv::Mat preprocess_image(cv::Mat image){
     
 }
 
+struct Card_params{
+        std::vector<int> contour_is_card_idx;
+        std::vector<std::vector<cv::Point>> card_approxs;
+        std::vector<double> card_peris;
+};
 
 void find_cards(cv::Mat image){
 
@@ -79,8 +84,9 @@ void find_cards(cv::Mat image){
     std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(image, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE );
+    const size_t num_cntrs = contours.size();
     // If there are no contours, do nothing
-    if (contours.size() == 0){
+    if (num_cntrs == 0){
         return;
     }    
     // std::cout << contours.size() << std::endl;
@@ -99,10 +105,11 @@ void find_cards(cv::Mat image){
     // following criteria: 1) Smaller area than the maximum card size,
     // 2), bigger area than the minimum card size, 3) have no parents,
     // and 4) have four corners
+    int num_of_cards = 0;
     double area, perimeter, area_approx;
     std::vector<cv::Point> approx;
-    int num_of_cards = 0;
-    for( size_t i = 0; i< contours.size(); i++ ){
+
+    for( size_t i = 0; i < num_cntrs; i++ ){
         area = std::abs(cv::contourArea(contours[i]));
         perimeter = cv::arcLength(contours[i], true);
         // approximate contour with accuracy proportional
@@ -118,22 +125,115 @@ void find_cards(cv::Mat image){
         // contour orientation
         if( approx.size() == 4 && area_approx < CARD_MAX_AREA && \
         area_approx > CARD_MIN_AREA && cv::isContourConvex(approx) && hierarchy[i][3] == -1){
-            // contour_is_card[i] = 1;
+            
+            /* Store the Contour that is a card parameters and the index position */
             num_of_cards ++;
+            /* Store Index position */
+            contour_is_card_idx.push_back(i);
+
+            /* Store Card Approximations*/
+            card_approxs.push_back(approx);
+
+            /* Store Card Perimeters*/
+            card_peris.push_back(perimeter);
         }
     }
-    std::cout << num_of_cards << std::endl;
-
-    // for i in range(len(cnts_sort)):
-    //     peri = cv2.arcLength(cnts_sort[i],True)
-    //     approx = cv2.approxPolyDP(cnts_sort[i],0.01*peri,True)
-        
-    //     if ((size < CARD_MAX_AREA) and (size > CARD_MIN_AREA)
-    //         and (hier_sort[i][3] == -1) and (len(approx) == 4)):
-    //         cnt_is_card[i] = 1
+    // std::cout << num_of_cards << std::endl;
 
     // return cnts_sort, cnt_is_card
 }
+
+class Query_card
+{
+    /* Structure to store information about query cards in the camera image.*/
+    public:
+        Query_card();
+        ~Query_card();
+        std::vector<std::vector<cv::Point>> contours; /* Contour of card */
+        cv::Size img_size; /* Image dimensions */
+        cv::Point corner_pts; /* Card corner points */
+        cv::Point centre_pts; /* Card centre points */
+        // self.warp = [] # 200x300, flattened, grayed, blurred image
+        // self.rank_img = [] # Thresholded, sized image of card's rank
+        // self.suit_img = [] # Thresholded, sized image of card's suit
+        // self.best_rank_match = "Unknown" # Best matched rank
+        // self.best_suit_match = "Unknown" # Best matched suit
+        // self.rank_diff = 0 # Difference between rank image and best matched train rank image
+        // self.suit_diff = 0 # Difference between suit image and best matched train suit image
+
+};
+
+// void preprocess_card(cv::Mat image, std::vector<std::vector<cv::Point>> contours, \
+//                     double perimeter, std::vector<cv::Point> approx)
+// {
+//     /* Uses contour to find information about the query card. Isolates rank
+//     and suit images from the card.*/
+
+//     // Initialize new Query_card object
+//     Query_card qCard;
+//     qCard.contours = contours;
+
+
+//     // # Find perimeter of card and use it to approximate corner points
+//     // peri = cv2.arcLength(contour,True)
+//     // approx = cv2.approxPolyDP(contour,0.01*peri,True)
+//     // pts = np.float32(approx)
+//     // qCard.corner_pts = pts
+
+//     // # Find width and height of card's bounding rectangle
+//     // x,y,w,h = cv2.boundingRect(contour)
+//     // qCard.width, qCard.height = w, h
+
+//     // # Find center point of card by taking x and y average of the four corners.
+//     // average = np.sum(pts, axis=0)/len(pts)
+//     // cent_x = int(average[0][0])
+//     // cent_y = int(average[0][1])
+//     // qCard.center = [cent_x, cent_y]
+
+//     // # Warp card into 200x300 flattened image using perspective transform
+//     // qCard.warp = flattener(image, pts, w, h)
+
+//     // # Grab corner of warped card image and do a 4x zoom
+//     // Qcorner = qCard.warp[0:CORNER_HEIGHT, 0:CORNER_WIDTH]
+//     // Qcorner_zoom = cv2.resize(Qcorner, (0,0), fx=4, fy=4)
+
+//     // # Sample known white pixel intensity to determine good threshold level
+//     // white_level = Qcorner_zoom[15,int((CORNER_WIDTH*4)/2)]
+//     // thresh_level = white_level - CARD_THRESH
+//     // if (thresh_level <= 0):
+//     //     thresh_level = 1
+//     // retval, query_thresh = cv2.threshold(Qcorner_zoom, thresh_level, 255, cv2. THRESH_BINARY_INV)
+    
+//     // # Split in to top and bottom half (top shows rank, bottom shows suit)
+//     // Qrank = query_thresh[20:185, 0:128]
+//     // Qsuit = query_thresh[186:336, 0:128]
+
+//     // # Find rank contour and bounding rectangle, isolate and find largest contour
+//     // dummy, Qrank_cnts, hier = cv2.findContours(Qrank, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+//     // Qrank_cnts = sorted(Qrank_cnts, key=cv2.contourArea,reverse=True)
+
+//     // # Find bounding rectangle for largest contour, use it to resize query rank
+//     // # image to match dimensions of the train rank image
+//     // if len(Qrank_cnts) != 0:
+//     //     x1,y1,w1,h1 = cv2.boundingRect(Qrank_cnts[0])
+//     //     Qrank_roi = Qrank[y1:y1+h1, x1:x1+w1]
+//     //     Qrank_sized = cv2.resize(Qrank_roi, (RANK_WIDTH,RANK_HEIGHT), 0, 0)
+//     //     qCard.rank_img = Qrank_sized
+
+//     // # Find suit contour and bounding rectangle, isolate and find largest contour
+//     // dummy, Qsuit_cnts, hier = cv2.findContours(Qsuit, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+//     // Qsuit_cnts = sorted(Qsuit_cnts, key=cv2.contourArea,reverse=True)
+    
+//     // # Find bounding rectangle for largest contour, use it to resize query suit
+//     // # image to match dimensions of the train suit image
+//     // if len(Qsuit_cnts) != 0:
+//     //     x2,y2,w2,h2 = cv2.boundingRect(Qsuit_cnts[0])
+//     //     Qsuit_roi = Qsuit[y2:y2+h2, x2:x2+w2]
+//     //     Qsuit_sized = cv2.resize(Qsuit_roi, (SUIT_WIDTH, SUIT_HEIGHT), 0, 0)
+//     //     qCard.suit_img = Qsuit_sized
+
+//     // return qCard
+// }
 
 class CameraCallback : public CallbackLinker{
     virtual void passFrame(Mat nextFrame){
