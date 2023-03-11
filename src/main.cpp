@@ -74,20 +74,24 @@ struct Card_params{
         std::vector<int> contour_is_card_idx;
         std::vector<std::vector<cv::Point>> card_approxs;
         std::vector<double> card_peris;
+        int num_of_cards = 0;
+        int err = 0;
 };
 
-void find_cards(cv::Mat image){
+struct Card_params find_cards(cv::Mat image){
 
     /* Finds all card-sized contours in a thresholded camera image.
     Returns the number of cards, and a list of card contours sorted
     from largest to smallest. */
+    Card_params Card_params;
     std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(image, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE );
-    const size_t num_cntrs = contours.size();
+    size_t num_cntrs = contours.size();
     // If there are no contours, do nothing
     if (num_cntrs == 0){
-        return;
+        Card_params.err = 1;
+        return Card_params;
     }    
     // std::cout << contours.size() << std::endl;
 
@@ -105,7 +109,6 @@ void find_cards(cv::Mat image){
     // following criteria: 1) Smaller area than the maximum card size,
     // 2), bigger area than the minimum card size, 3) have no parents,
     // and 4) have four corners
-    int num_of_cards = 0;
     double area, perimeter, area_approx;
     std::vector<cv::Point> approx;
 
@@ -126,21 +129,23 @@ void find_cards(cv::Mat image){
         if( approx.size() == 4 && area_approx < CARD_MAX_AREA && \
         area_approx > CARD_MIN_AREA && cv::isContourConvex(approx) && hierarchy[i][3] == -1){
             
-            /* Store the Contour that is a card parameters and the index position */
-            num_of_cards ++;
+            /* Store the parameters and the index position of the contour that is a card */
+
+            /* Increment the number of cards variable */
+            Card_params.num_of_cards ++;
+
             /* Store Index position */
-            contour_is_card_idx.push_back(i);
+            Card_params.contour_is_card_idx.push_back(i);
 
             /* Store Card Approximations*/
-            card_approxs.push_back(approx);
+            Card_params.card_approxs.push_back(approx);
 
             /* Store Card Perimeters*/
-            card_peris.push_back(perimeter);
+            Card_params.card_peris.push_back(perimeter);
         }
     }
-    // std::cout << num_of_cards << std::endl;
 
-    // return cnts_sort, cnt_is_card
+    return Card_params;
 }
 
 class Query_card
@@ -238,11 +243,13 @@ class Query_card
 class CameraCallback : public CallbackLinker{
     virtual void passFrame(Mat nextFrame){
         cv::Mat processed_image = preprocess_image(nextFrame);
-        find_cards(processed_image);
+        Card_params card_params = find_cards(processed_image);
         /* Need to Show frame after find_cards()*/
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
         cv::imshow("Frame", processed_image);
+        std::cout << "Num of Cards: " << card_params.num_of_cards << std::endl;
+
     }
 };
 
