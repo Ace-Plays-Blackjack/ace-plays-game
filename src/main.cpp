@@ -160,7 +160,7 @@ class Query_card
         std::vector<std::vector<cv::Point>> contours; /* Contour of card */
         cv::Size card_size; /* Card dimensions */
         std::vector<cv::Point> corner_pts; /* Card corner points */
-        cv::Point_<size_t> centre_pts; /* Card centre points */
+        cv::Point_<int> centre_pts; /* Card centre points */
         // self.warp = [] # 200x300, flattened, grayed, blurred image
         // self.rank_img = [] # Thresholded, sized image of card's rank
         // self.suit_img = [] # Thresholded, sized image of card's suit
@@ -171,23 +171,29 @@ class Query_card
 
 };
 
-void preprocess_card(cv::Mat image, struct Card_params Card_params)
+// cv::Mat flatten_card(){
+
+// }
+
+cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
 
     // Initialize new Query_card object
     Query_card qCard;
-    if (Card_params.err == 1){
-        return;
+
+    /* Check if Card_params is filled before procceeding */
+    if (Card_params.num_of_cards == 0 || Card_params.err || Card_params.card_approxs.empty()){
+        return image;
     }
     qCard.contours = Card_params.contours;
 
     // Corner Points of a single card
-    qCard.corner_pts = Card_params.card_approxs[0];
+    qCard.corner_pts = Card_params.card_approxs.front();
 
     // Find width and height of card's bounding rectangle
-    cv::Rect boundingBox = cv::boundingRect(Card_params.card_approxs[0]);
+    cv::Rect boundingBox = cv::boundingRect(qCard.corner_pts);
     qCard.card_size.height = boundingBox.height;
     qCard.card_size.width = boundingBox.width;
 
@@ -197,13 +203,18 @@ void preprocess_card(cv::Mat image, struct Card_params Card_params)
         qCard.centre_pts.x += qCard.corner_pts[k].x;
         qCard.centre_pts.y += qCard.corner_pts[k].y;
     }
-    qCard.centre_pts.x /= num_corners;
-    qCard.centre_pts.y /= num_corners;
+    qCard.centre_pts.x /= (int)num_corners;
+    qCard.centre_pts.y /= (int)num_corners;
 
-    // # Warp card into 200x300 flattened image using perspective transform
-    // qCard.warp = flattener(image, pts, w, h)
+    /* Draw the Box */
+    cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
+    cv::rectangle(image, boundingBox, Scalar( 0, 255, 0), 2);
 
-    // # Grab corner of warped card image and do a 4x zoom
+
+    // Warp card into 200x300 flattened image using perspective transform
+    // qCard.warp = cv: (image, pts, w, h)
+
+    // Grab corner of warped card image and do a 4x zoom
     // Qcorner = qCard.warp[0:CORNER_HEIGHT, 0:CORNER_WIDTH]
     // Qcorner_zoom = cv2.resize(Qcorner, (0,0), fx=4, fy=4)
 
@@ -243,13 +254,14 @@ void preprocess_card(cv::Mat image, struct Card_params Card_params)
     //     qCard.suit_img = Qsuit_sized
 
     // return qCard
+    return image;
 }
 
 class CameraCallback : public CallbackLinker{
     virtual void passFrame(Mat nextFrame){
         cv::Mat processed_image = preprocess_image(nextFrame);
         Card_params card_params = find_cards(processed_image);
-        preprocess_card(processed_image, card_params);
+        processed_image = preprocess_card(processed_image, card_params);
         /* Need to Show frame after find_cards()*/
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
