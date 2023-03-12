@@ -171,7 +171,7 @@ class Query_card
 
 };
 
-void flatten_card(Query_card qCard){
+cv::Mat flatten_card(Query_card qCard, cv::Mat image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
     /* If card is placed HORIZONTALLY, then card Rank is 
@@ -207,27 +207,42 @@ void flatten_card(Query_card qCard){
 
     /* For cards at an angle, height/width < 1.4 and height/width > 0.72
      * Also find which direction card is tilted */
-    // if (height > 0.72 * width && height < 1.4 * width){
-    //     if 
-    // }
+    if (height > 0.72 * width && height < 1.4 * width){
+        /* Card tilted to the right*/
+        if (qCard.corner_pts[1].y <= qCard.corner_pts[3].y ){
+            roi_corners[0] = qCard.corner_pts[0]; // T-L
+            roi_corners[1] = qCard.corner_pts[1]; // B-L
+            roi_corners[2] = qCard.corner_pts[2]; // B-R
+            roi_corners[3] = qCard.corner_pts[3]; // T-R
+            std::cout << "Card is TILTED RIGHT" << endl;
+        }
+        /* Card tilted to the left*/
+        if (qCard.corner_pts[1].y >= qCard.corner_pts[3].y ){
+            roi_corners[0] = qCard.corner_pts[1]; // T-L
+            roi_corners[1] = qCard.corner_pts[2]; // B-L
+            roi_corners[2] = qCard.corner_pts[3]; // B-R
+            roi_corners[3] = qCard.corner_pts[0]; // T-R
+            std::cout << "Card is TILTED LEFT" << endl;
+        }
+    }
 
 
     int maxWidth = 200;
     int maxHeight = 300;
 
     // Create destination array, calculate perspective transform matrix, and warp card image
-    std::array<std::array<int, 2>, 4> dst = {
-        {{0, 0}, 
-        {maxWidth-1, 0}, 
-        {maxWidth-1, maxHeight-1}, 
-        {0, maxHeight-1}}
+    std::vector<cv::Point2f> dst = {
+        cv::Point2f(0, 0), // T-L
+        cv::Point2f((float)0, (float)(maxHeight-1)), // B-L
+        cv::Point2f((float)(maxWidth-1), (float)(maxHeight-1)), // B-R
+        cv::Point2f((float)(maxWidth-1), 0) // T-R
         };
-    // cv::getPerspectiveTransform()
-    // M = cv2.getPerspectiveTransform(temp_rect,dst)
-    // warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
+
+    cv::Mat M = cv::getPerspectiveTransform(roi_corners, dst);
+    cv::warpPerspective(image, image, M, cv::Size(maxWidth, maxHeight));
     // warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)
     // cv::Mat nothing;
-    // return nothing;
+    return image;
 
 }
 
@@ -270,7 +285,8 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
     cv::rectangle(image, boundingBox, Scalar( 0, 255, 0), 2);
 
-    flatten_card(qCard);
+    cv::imshow("Flattened", flatten_card(qCard, image));
+
     // Warp card into 200x300 flattened image using perspective transform
     // qCard.warp = cv: (image, pts, w, h)
 
