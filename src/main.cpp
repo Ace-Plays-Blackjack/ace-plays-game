@@ -174,6 +174,10 @@ class Query_card
 void flatten_card(Query_card qCard){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
+    /* If card is placed HORIZONTALLY, then card Rank is 
+     * in the [1] and [3] corner points */
+    /* If card is placed at an angle, then card Rank is 
+     * in the [1] and [3] or [0] and [2] corner points */
 
     std::vector< cv::Point2f> roi_corners(4);
     std::vector< cv::Point2f> dst_corners(4);
@@ -201,12 +205,11 @@ void flatten_card(Query_card qCard){
         std::cout << "Card is HORIZONTAL" << endl;
     }
 
-    /* If card is placed HORIZONTALLY, then card Rank is 
-     * in the [1] and [3] corner points */
-
-
-    /* If card is placed at an angle, then card Rank is 
-     * in the [1] and [3] or [0] and [2] corner points */
+    /* For cards at an angle, height/width < 1.4 and height/width > 0.72
+     * Also find which direction card is tilted */
+    // if (height > 0.72 * width && height < 1.4 * width){
+    //     if 
+    // }
 
 
     int maxWidth = 200;
