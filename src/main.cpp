@@ -153,7 +153,7 @@ struct Card_params find_cards(cv::Mat image){
 
 class Query_card
 {
-    /* Structure to store information about query cards in the camera image.*/
+    /* Structure to store information about single card in the camera image.*/
     public:
         Query_card(){};
         ~Query_card(){};
@@ -171,9 +171,53 @@ class Query_card
 
 };
 
-// cv::Mat flatten_card(){
+cv::Mat flatten_card(Query_card qCard){
+    /* If card is placed VERTICALLY, then card Rank is 
+     * in the [0] and [2] corner points */
 
-// }
+    std::vector< cv::Point2f> roi_corners(4);
+    std::vector< cv::Point2f> dst_corners(4);
+    int width = qCard.card_size.width;
+    int height = qCard.card_size.height;
+    
+    /* For VERTICAL cards, width < height, and ratio
+     * height/width = ~ 1.4 */
+    if (height >= 1.4 * width){
+        roi_corners[0] = qCard.corner_pts[0];
+        roi_corners[0] = qCard.corner_pts[0];
+        roi_corners[0] = qCard.corner_pts[0];
+        roi_corners[0] = qCard.corner_pts[0];
+    }
+    
+
+    /* If card is placed HORIZONTALLY, then card Rank is 
+     * in the [1] and [3] corner points */
+
+    /* For HORIZONTAL cards, width > height, and ratio
+     * height/width = ~ 1/1.4 = 0.7 */
+
+    /* If card is placed at an angle, then card Rank is 
+     * in the [1] and [3] or [0] and [2] corner points */
+
+
+    int maxWidth = 200;
+    int maxHeight = 300;
+
+    // Create destination array, calculate perspective transform matrix, and warp card image
+    std::array<std::array<int, 2>, 4> dst = {
+        {{0, 0}, 
+        {maxWidth-1, 0}, 
+        {maxWidth-1, maxHeight-1}, 
+        {0, maxHeight-1}}
+        };
+    // cv::getPerspectiveTransform()
+    // M = cv2.getPerspectiveTransform(temp_rect,dst)
+    // warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
+    // warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)
+    cv::Mat nothing;
+    return nothing;
+
+}
 
 cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
 {
@@ -190,6 +234,10 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     qCard.contours = Card_params.contours;
 
     // Corner Points of a single card
+    /* Corner points are stored with [0] position 
+     * as the point closest to the top of the Frame (min y).
+     * The remaining points are then populated in counter-clockwise
+     * direction. */
     qCard.corner_pts = Card_params.card_approxs.front();
 
     // Find width and height of card's bounding rectangle
