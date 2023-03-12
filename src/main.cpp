@@ -171,30 +171,39 @@ class Query_card
 
 };
 
-cv::Mat flatten_card(Query_card qCard){
+void flatten_card(Query_card qCard){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
 
     std::vector< cv::Point2f> roi_corners(4);
     std::vector< cv::Point2f> dst_corners(4);
-    int width = qCard.card_size.width;
-    int height = qCard.card_size.height;
+    float width = (float)qCard.card_size.width;
+    float height = (float)qCard.card_size.height;
     
     /* For VERTICAL cards, width < height, and ratio
      * height/width = ~ 1.4 */
     if (height >= 1.4 * width){
-        roi_corners[0] = qCard.corner_pts[0];
-        roi_corners[0] = qCard.corner_pts[0];
-        roi_corners[0] = qCard.corner_pts[0];
-        roi_corners[0] = qCard.corner_pts[0];
+        roi_corners[0] = qCard.corner_pts[0]; // T-L
+        roi_corners[1] = qCard.corner_pts[1]; // B-L
+        roi_corners[2] = qCard.corner_pts[2]; // B-R
+        roi_corners[3] = qCard.corner_pts[3]; // T-R
+        std::cout << "Card is VERTICAL" << endl;
     }
     
+    /* For HORIZONTAL cards, width > height, and ratio
+     * height/width = ~ 1/1.4 = 0.72 */
+    
+    if (height <= 0.72 * width){
+        roi_corners[0] = qCard.corner_pts[3]; // T-L
+        roi_corners[1] = qCard.corner_pts[0]; // B-L
+        roi_corners[2] = qCard.corner_pts[1]; // B-R
+        roi_corners[3] = qCard.corner_pts[2]; // T-R
+        std::cout << "Card is HORIZONTAL" << endl;
+    }
 
     /* If card is placed HORIZONTALLY, then card Rank is 
      * in the [1] and [3] corner points */
 
-    /* For HORIZONTAL cards, width > height, and ratio
-     * height/width = ~ 1/1.4 = 0.7 */
 
     /* If card is placed at an angle, then card Rank is 
      * in the [1] and [3] or [0] and [2] corner points */
@@ -214,8 +223,8 @@ cv::Mat flatten_card(Query_card qCard){
     // M = cv2.getPerspectiveTransform(temp_rect,dst)
     // warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     // warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)
-    cv::Mat nothing;
-    return nothing;
+    // cv::Mat nothing;
+    // return nothing;
 
 }
 
@@ -258,7 +267,7 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
     cv::rectangle(image, boundingBox, Scalar( 0, 255, 0), 2);
 
-
+    flatten_card(qCard);
     // Warp card into 200x300 flattened image using perspective transform
     // qCard.warp = cv: (image, pts, w, h)
 
@@ -314,7 +323,7 @@ class CameraCallback : public CallbackLinker{
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
         cv::imshow("Frame", processed_image);
-        std::cout << "Num of Cards: " << card_params.num_of_cards << std::endl;
+        // std::cout << "Num of Cards: " << card_params.num_of_cards << std::endl;
 
     }
 };
