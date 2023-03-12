@@ -77,6 +77,9 @@ struct Card_params{
     std::vector<std::vector<cv::Point>> contours;
     std::vector<std::vector<cv::Point>> card_approxs;
     std::vector<double> card_peris;
+    std::vector<cv::RotatedRect> rotatedbox;
+    std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
+
 };
 
 struct Card_params find_cards(cv::Mat image){
@@ -145,6 +148,13 @@ struct Card_params find_cards(cv::Mat image){
 
             /* Store Card Perimeters*/
             Card_params.card_peris.push_back(perimeter);
+
+            std::vector<cv::Point2f> box_pts(4); 
+            cv::RotatedRect boundingBox = cv::minAreaRect(contours[i]);
+            boundingBox.points(box_pts.data());
+            Card_params.rotatedbox.push_back(boundingBox);
+            Card_params.rotatedbox_pts.push_back(box_pts);
+
         }
     }
 
@@ -168,6 +178,7 @@ class Query_card
         // self.best_suit_match = "Unknown" # Best matched suit
         // self.rank_diff = 0 # Difference between rank image and best matched train rank image
         // self.suit_diff = 0 # Difference between suit image and best matched train suit image
+        cv::RotatedRect rotatedbox;
 
 };
 
@@ -183,14 +194,37 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
     std::vector< cv::Point2f> dst_corners(4);
     float width = (float)qCard.card_size.width;
     float height = (float)qCard.card_size.height;
-    
+    cv::Point tl,tr,bl,br;
+    int sum_min, sum_max;
+    std::vector<int> sum;
+    std::vector<int>::iterator result;
+    for (int i=0; i < qCard.corner_pts.size(); i++){
+        sum.push_back(qCard.corner_pts[i].x + qCard.corner_pts[i].y); 
+    }
+    result = std::min_element(sum.begin(), sum.end());
+    sum_min = std::distance(sum.begin(), result);
+    result = std::max_element(sum.begin(), sum.end());
+    sum_max = std::distance(sum.begin(), result);
+
+    tl = qCard.corner_pts[sum_min];
+    br = qCard.corner_pts[sum_max];
+
     /* For VERTICAL cards, width < height, and ratio
      * height/width = ~ 1.4 */
     if (height >= 1.4 * width){
-        roi_corners[0] = qCard.corner_pts[0]; // T-L
-        roi_corners[1] = qCard.corner_pts[1]; // B-L
-        roi_corners[2] = qCard.corner_pts[2]; // B-R
-        roi_corners[3] = qCard.corner_pts[3]; // T-R
+        if (tl == qCard.corner_pts[0]){
+            roi_corners[0] = qCard.corner_pts[0]; // T-L
+            roi_corners[1] = qCard.corner_pts[1]; // B-L
+            roi_corners[2] = qCard.corner_pts[2]; // B-R
+            roi_corners[3] = qCard.corner_pts[3]; // T-R
+        }
+        else{
+            roi_corners[0] = qCard.corner_pts[1]; // T-L
+            roi_corners[1] = qCard.corner_pts[2]; // B-L
+            roi_corners[2] = qCard.corner_pts[3]; // B-R
+            roi_corners[3] = qCard.corner_pts[0]; // T-R
+        }
+
         std::cout << "Card is VERTICAL" << endl;
     }
     
@@ -198,10 +232,18 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
      * height/width = ~ 1/1.4 = 0.72 */
     
     if (height <= 0.72 * width){
-        roi_corners[0] = qCard.corner_pts[3]; // T-L
-        roi_corners[1] = qCard.corner_pts[0]; // B-L
-        roi_corners[2] = qCard.corner_pts[1]; // B-R
-        roi_corners[3] = qCard.corner_pts[2]; // T-R
+        if (tl == qCard.corner_pts[0]){
+            roi_corners[0] = qCard.corner_pts[3]; // T-L
+            roi_corners[1] = qCard.corner_pts[0]; // B-L
+            roi_corners[2] = qCard.corner_pts[1]; // B-R
+            roi_corners[3] = qCard.corner_pts[2]; // T-R
+        }
+        else{
+            roi_corners[0] = qCard.corner_pts[0]; // T-L
+            roi_corners[1] = qCard.corner_pts[1]; // B-L
+            roi_corners[2] = qCard.corner_pts[2]; // B-R
+            roi_corners[3] = qCard.corner_pts[3]; // T-R
+        }
         std::cout << "Card is HORIZONTAL" << endl;
     }
 
@@ -209,7 +251,8 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
      * Also find which direction card is tilted */
     if (height > 0.72 * width && height < 1.4 * width){
         /* Card tilted to the right*/
-        if (qCard.corner_pts[1].y <= qCard.corner_pts[3].y ){
+        if (qCard.corner_pts[1].y > qCard.corner_pts[3].y
+        && qCard.rotatedbox.angle > 5 && qCard.rotatedbox.angle < 40){
             roi_corners[0] = qCard.corner_pts[0]; // T-L
             roi_corners[1] = qCard.corner_pts[1]; // B-L
             roi_corners[2] = qCard.corner_pts[2]; // B-R
@@ -217,7 +260,8 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
             std::cout << "Card is TILTED RIGHT" << endl;
         }
         /* Card tilted to the left*/
-        if (qCard.corner_pts[1].y >= qCard.corner_pts[3].y ){
+        if (qCard.corner_pts[1].y < qCard.corner_pts[3].y 
+        && qCard.rotatedbox.angle < 85 && qCard.rotatedbox.angle > 40){
             roi_corners[0] = qCard.corner_pts[1]; // T-L
             roi_corners[1] = qCard.corner_pts[2]; // B-L
             roi_corners[2] = qCard.corner_pts[3]; // B-R
@@ -240,8 +284,7 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
 
     cv::Mat M = cv::getPerspectiveTransform(roi_corners, dst);
     cv::warpPerspective(image, image, M, cv::Size(maxWidth, maxHeight));
-    // warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)
-    // cv::Mat nothing;
+
     return image;
 
 }
@@ -259,7 +302,7 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
         return image;
     }
     qCard.contours = Card_params.contours;
-
+    qCard.rotatedbox = Card_params.rotatedbox[0];
     // Corner Points of a single card
     /* Corner points are stored with [0] position 
      * as the point closest to the top of the Frame (min y).
@@ -283,9 +326,13 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
 
     /* Draw the Box */
     cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
-    cv::rectangle(image, boundingBox, Scalar( 0, 255, 0), 2);
-
+    // cv::rectangle(image, boundingBox.boundingRect(), Scalar( 0, 255, 0), 2);
+    for (int i = 0; i < 4; i++){
+        cv::line(image, Card_params.rotatedbox_pts[0][i], Card_params.rotatedbox_pts[0][(i+1)%4], Scalar(0,255,0), 2);
+    }
+    std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
     cv::imshow("Flattened", flatten_card(qCard, image));
+
 
     // Warp card into 200x300 flattened image using perspective transform
     // qCard.warp = cv: (image, pts, w, h)
