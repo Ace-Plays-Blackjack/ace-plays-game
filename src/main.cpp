@@ -49,7 +49,7 @@ cv::Mat preprocess_image(cv::Mat image){
     cv::cvtColor(image, processed_img, cv::COLOR_BGR2GRAY);
     cv::GaussianBlur(processed_img, processed_img,cv::Size(5,5),0);
     /* Canny Edge Detection filter seems to improve detection of cards with Red coloured suits*/
-    cv::Canny(processed_img, processed_img, 100, 200);
+    // cv::Canny(processed_img, processed_img, 100, 200);
     // # The best threshold level depends on the ambient lighting conditions.
     // # For bright lighting, a high threshold must be used to isolate the cards
     // # from the background. For dim lighting, a low threshold must be used.
@@ -63,9 +63,13 @@ cv::Mat preprocess_image(cv::Mat image){
     int thresh_level = processed_img.at<uchar>(img_size.height/100, img_size.width/2) + BKG_ADAPTIVE_THRESH;
 
     // cv::threshold(processed_img, processed_img, thresh_level, 255, cv::THRESH_BINARY);
-    cv::threshold(processed_img, processed_img, 0, 255, cv::THRESH_OTSU);
+    // cv::threshold(processed_img, processed_img, 0, 255, cv::THRESH_OTSU);
     // Also test Otsus binarization
-    // cv::adaptiveThreshold(processed_img, processed_img, 255,cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY_INV,3,3);
+
+    /* Adaptive threshold provides image in the same format as
+     * the matching template, thus reducing the need to re-format
+     * in later steps */
+    cv::adaptiveThreshold(processed_img, processed_img, 255,cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY_INV,3,3);
     
     // string filename = samples::findFile(names[i]);
 
@@ -327,6 +331,8 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     qCard.centre_pts.x /= (int)num_corners;
     qCard.centre_pts.y /= (int)num_corners;
 
+    cv::Mat flat_card = flatten_card(qCard, image);
+
     /* Draw the Box */
     cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
     // cv::rectangle(image, boundingBox.boundingRect(), Scalar( 0, 255, 0), 2);
@@ -335,27 +341,29 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     }
     // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
     // Warp card into 200x300 flattened image using perspective transform
-    cv::Mat flat_card = flatten_card(qCard, image);
-    cv::imshow("Flattened", flat_card);
+    // cv::imshow("Flattened", flat_card);
 
-    // Grab corner of warped card image and do a 4x zoom
     /* The corner division by 7 is good for the wider cards*/
-    cv::Mat Qcorner = flat_card(cv::Rect(0,0, FLATTENED_WIDTH/7, FLATTENED_HEIGHT/7));
+    /* Corner dimension relative to card width-height to account
+     * for varying camera vertical height (distance to card) */
+    cv::Mat Qcorner = flat_card(cv::Rect(0,0, FLATTENED_WIDTH/7, FLATTENED_HEIGHT/4));
 
+
+    /* Resize up by factor of 4 */
+    cv::resize(Qcorner, Qcorner, cv::Size(), 4, 4, cv::INTER_LINEAR);
+    /* Threshold the upsized image. The rank and suit will look bolder and clearer */
+    cv::threshold(Qcorner, Qcorner, 40, 255, cv::THRESH_BINARY);
+
+    std::vector<std::vector<cv::Point>> corner_contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours(Qcorner, corner_contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE );
+    // // # Split in to top and bottom half (top shows rank, bottom shows suit)
+    // int vert_offset = 10; // Look 10 rows further down to better isolate the rank and suit
+    // cv::Mat rank = Qcorner(cv::Rect(0, vert_offset, 4*(FLATTENED_WIDTH/7), vert_offset + FLATTENED_HEIGHT/2));
+    // cv::Mat suit = Qcorner(cv::Rect(0, vert_offset + FLATTENED_HEIGHT/2, 4*(FLATTENED_WIDTH/7), (FLATTENED_HEIGHT/2) - vert_offset));
+    // cv::imshow("Rank", rank);
+    // cv::imshow("Suit", suit);
     cv::imshow("Corner", Qcorner);
-
-    // Qcorner_zoom = cv2.resize(Qcorner, (0,0), fx=4, fy=4);
-
-    // # Sample known white pixel intensity to determine good threshold level
-    // white_level = Qcorner_zoom[15,int((CORNER_WIDTH*4)/2)]
-    // thresh_level = white_level - CARD_THRESH
-    // if (thresh_level <= 0):
-    //     thresh_level = 1
-    // retval, query_thresh = cv2.threshold(Qcorner_zoom, thresh_level, 255, cv2. THRESH_BINARY_INV)
-    
-    // # Split in to top and bottom half (top shows rank, bottom shows suit)
-    // Qrank = query_thresh[20:185, 0:128]
-    // Qsuit = query_thresh[186:336, 0:128]
 
     // # Find rank contour and bounding rectangle, isolate and find largest contour
     // dummy, Qrank_cnts, hier = cv2.findContours(Qrank, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
