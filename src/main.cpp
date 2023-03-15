@@ -13,6 +13,9 @@ using std::cout; using std::cerr; using std::endl;
 #define BKG_ADAPTIVE_THRESH 50
 #define CARD_MAX_AREA 120000
 #define CARD_MIN_AREA 25000
+// Width and height of card corner, where rank and suit are
+#define FLATTENED_WIDTH 230
+#define FLATTENED_HEIGHT 300
 RNG rng(12345);
 
 
@@ -191,21 +194,25 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
      * in the [1] and [3] or [0] and [2] corner points */
 
     std::vector< cv::Point2f> roi_corners(4);
-    std::vector< cv::Point2f> dst_corners(4);
     float width = (float)qCard.card_size.width;
     float height = (float)qCard.card_size.height;
     cv::Point tl;
-    int sum_min;
+    int sum_min_idx;
     std::vector<int> sum;
     std::vector<int>::iterator result;
+
+    /* Sum the coordinates of all 4 corners 
+     * The top left corner will have the smallest sum */
     for (int i=0; i < qCard.corner_pts.size(); i++){
         sum.push_back(qCard.corner_pts[i].x + qCard.corner_pts[i].y); 
     }
+    /* Find the minimum value */
     result = std::min_element(sum.begin(), sum.end());
-    sum_min = std::distance(sum.begin(), result);
+    /* Find the index of the minimum value */
+    sum_min_idx = std::distance(sum.begin(), result);
 
 
-    tl = qCard.corner_pts[sum_min];
+    tl = qCard.corner_pts[sum_min_idx];
 
     /* For VERTICAL cards, width < height, and ratio
      * height/width = ~ 1.4 */
@@ -223,7 +230,7 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
             roi_corners[3] = qCard.corner_pts[0]; // T-R
         }
 
-        std::cout << "Card is VERTICAL" << endl;
+        // std::cout << "Card is VERTICAL" << endl;
     }
     
     /* For HORIZONTAL cards, width > height, and ratio
@@ -242,7 +249,7 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
             roi_corners[2] = qCard.corner_pts[2]; // B-R
             roi_corners[3] = qCard.corner_pts[3]; // T-R
         }
-        std::cout << "Card is HORIZONTAL" << endl;
+        // std::cout << "Card is HORIZONTAL" << endl;
     }
 
     /* For cards at an angle, height/width < 1.4 and height/width > 0.72
@@ -255,7 +262,7 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
             roi_corners[1] = qCard.corner_pts[1]; // B-L
             roi_corners[2] = qCard.corner_pts[2]; // B-R
             roi_corners[3] = qCard.corner_pts[3]; // T-R
-            std::cout << "Card is TILTED RIGHT" << endl;
+            // std::cout << "Card is TILTED RIGHT" << endl;
         }
         /* Card tilted to the left*/
         if (qCard.corner_pts[1].y < qCard.corner_pts[3].y 
@@ -264,26 +271,24 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
             roi_corners[1] = qCard.corner_pts[2]; // B-L
             roi_corners[2] = qCard.corner_pts[3]; // B-R
             roi_corners[3] = qCard.corner_pts[0]; // T-R
-            std::cout << "Card is TILTED LEFT" << endl;
+            // std::cout << "Card is TILTED LEFT" << endl;
         }
     }
 
 
-    int maxWidth = 200;
-    int maxHeight = 300;
-
     // Create destination array, calculate perspective transform matrix, and warp card image
     std::vector<cv::Point2f> dst = {
         cv::Point2f(0, 0), // T-L
-        cv::Point2f((float)0, (float)(maxHeight-1)), // B-L
-        cv::Point2f((float)(maxWidth-1), (float)(maxHeight-1)), // B-R
-        cv::Point2f((float)(maxWidth-1), 0) // T-R
+        cv::Point2f((float)0, (float)(FLATTENED_HEIGHT-1)), // B-L
+        cv::Point2f((float)(FLATTENED_WIDTH-1), (float)(FLATTENED_HEIGHT-1)), // B-R
+        cv::Point2f((float)(FLATTENED_WIDTH-1), 0) // T-R
         };
 
     cv::Mat M = cv::getPerspectiveTransform(roi_corners, dst);
-    cv::warpPerspective(image, image, M, cv::Size(maxWidth, maxHeight));
+    cv::Mat wrapped;
+    cv::warpPerspective(image, wrapped, M, cv::Size(FLATTENED_WIDTH, FLATTENED_HEIGHT));
 
-    return image;
+    return wrapped;
 
 }
 
@@ -329,15 +334,17 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
         cv::line(image, Card_params.rotatedbox_pts[0][i], Card_params.rotatedbox_pts[0][(i+1)%4], Scalar(0,255,0), 2);
     }
     // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
-    cv::imshow("Flattened", flatten_card(qCard, image));
-
-
     // Warp card into 200x300 flattened image using perspective transform
-    // qCard.warp = cv: (image, pts, w, h)
+    cv::Mat flat_card = flatten_card(qCard, image);
+    cv::imshow("Flattened", flat_card);
 
     // Grab corner of warped card image and do a 4x zoom
-    // Qcorner = qCard.warp[0:CORNER_HEIGHT, 0:CORNER_WIDTH]
-    // Qcorner_zoom = cv2.resize(Qcorner, (0,0), fx=4, fy=4)
+    /* The corner division by 7 is good for the wider cards*/
+    cv::Mat Qcorner = flat_card(cv::Rect(0,0, FLATTENED_WIDTH/7, FLATTENED_HEIGHT/7));
+
+    cv::imshow("Corner", Qcorner);
+
+    // Qcorner_zoom = cv2.resize(Qcorner, (0,0), fx=4, fy=4);
 
     // # Sample known white pixel intensity to determine good threshold level
     // white_level = Qcorner_zoom[15,int((CORNER_WIDTH*4)/2)]
