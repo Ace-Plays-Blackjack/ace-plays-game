@@ -194,8 +194,8 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
     std::vector< cv::Point2f> dst_corners(4);
     float width = (float)qCard.card_size.width;
     float height = (float)qCard.card_size.height;
-    cv::Point tl,tr,bl,br;
-    int sum_min, sum_max;
+    cv::Point tl;
+    int sum_min;
     std::vector<int> sum;
     std::vector<int>::iterator result;
     for (int i=0; i < qCard.corner_pts.size(); i++){
@@ -203,15 +203,13 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
     }
     result = std::min_element(sum.begin(), sum.end());
     sum_min = std::distance(sum.begin(), result);
-    result = std::max_element(sum.begin(), sum.end());
-    sum_max = std::distance(sum.begin(), result);
+
 
     tl = qCard.corner_pts[sum_min];
-    br = qCard.corner_pts[sum_max];
 
     /* For VERTICAL cards, width < height, and ratio
      * height/width = ~ 1.4 */
-    if (height >= 1.4 * width){
+    if (height >= 1.3 * width){
         if (tl == qCard.corner_pts[0]){
             roi_corners[0] = qCard.corner_pts[0]; // T-L
             roi_corners[1] = qCard.corner_pts[1]; // B-L
@@ -229,9 +227,9 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
     }
     
     /* For HORIZONTAL cards, width > height, and ratio
-     * height/width = ~ 1/1.4 = 0.72 */
+     * height/width = ~ 1/1.3 = 0.77 */
     
-    if (height <= 0.72 * width){
+    if (height <= 0.77 * width){
         if (tl == qCard.corner_pts[0]){
             roi_corners[0] = qCard.corner_pts[3]; // T-L
             roi_corners[1] = qCard.corner_pts[0]; // B-L
@@ -249,7 +247,7 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
 
     /* For cards at an angle, height/width < 1.4 and height/width > 0.72
      * Also find which direction card is tilted */
-    if (height > 0.72 * width && height < 1.4 * width){
+    if (height > 0.77 * width && height < 1.3 * width){
         /* Card tilted to the right*/
         if (qCard.corner_pts[1].y > qCard.corner_pts[3].y
         && qCard.rotatedbox.angle > 5 && qCard.rotatedbox.angle < 40){
@@ -330,7 +328,7 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     for (int i = 0; i < 4; i++){
         cv::line(image, Card_params.rotatedbox_pts[0][i], Card_params.rotatedbox_pts[0][(i+1)%4], Scalar(0,255,0), 2);
     }
-    std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
+    // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
     cv::imshow("Flattened", flatten_card(qCard, image));
 
 
