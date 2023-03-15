@@ -12,10 +12,13 @@ using std::cout; using std::cerr; using std::endl;
 
 #define BKG_ADAPTIVE_THRESH 50
 #define CARD_MAX_AREA 120000
-#define CARD_MIN_AREA 25000
+#define CARD_MIN_AREA 10000
 // Width and height of card corner, where rank and suit are
 #define FLATTENED_WIDTH 230
 #define FLATTENED_HEIGHT 300
+// Dimensions of rank train images
+#define RANK_WIDTH 70
+#define RANK_HEIGHT 125
 RNG rng(12345);
 
 
@@ -354,42 +357,47 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     /* Threshold the upsized image. The rank and suit will look bolder and clearer */
     cv::threshold(Qcorner, Qcorner, 40, 255, cv::THRESH_BINARY);
 
-    std::vector<std::vector<cv::Point>> corner_contours;
-    std::vector<cv::Vec4i> hierarchy;
-    cv::findContours(Qcorner, corner_contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE );
-    // // # Split in to top and bottom half (top shows rank, bottom shows suit)
-    // int vert_offset = 10; // Look 10 rows further down to better isolate the rank and suit
-    // cv::Mat rank = Qcorner(cv::Rect(0, vert_offset, 4*(FLATTENED_WIDTH/7), vert_offset + FLATTENED_HEIGHT/2));
-    // cv::Mat suit = Qcorner(cv::Rect(0, vert_offset + FLATTENED_HEIGHT/2, 4*(FLATTENED_WIDTH/7), (FLATTENED_HEIGHT/2) - vert_offset));
-    // cv::imshow("Rank", rank);
-    // cv::imshow("Suit", suit);
-    cv::imshow("Corner", Qcorner);
+    std::vector<std::vector<cv::Point>> rank_contours, suit_contours;
+    std::vector<cv::Vec4i> rank_hierarchy, suit_hierarchy;
+    // Split in to top and bottom half (top shows rank, bottom shows suit)
+    int vert_offset = 20; // Crop 20 rows further down to better isolate the rank and suit
+    int hor_offset = 5; // Crop 5 columns further down to better isolate the rank and suit
+    cv::Mat rank = Qcorner(cv::Rect(hor_offset, vert_offset, 4*(FLATTENED_WIDTH/7) - hor_offset, FLATTENED_HEIGHT/2));
+    cv::Mat suit = Qcorner(cv::Rect(hor_offset, vert_offset + FLATTENED_HEIGHT/2, 4*(FLATTENED_WIDTH/7) - hor_offset, (FLATTENED_HEIGHT/2) - vert_offset));
 
-    // # Find rank contour and bounding rectangle, isolate and find largest contour
-    // dummy, Qrank_cnts, hier = cv2.findContours(Qrank, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    // Qrank_cnts = sorted(Qrank_cnts, key=cv2.contourArea,reverse=True)
+    cv::findContours(rank, rank_contours, rank_hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
+    cv::findContours(suit, suit_contours, suit_hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
 
-    // # Find bounding rectangle for largest contour, use it to resize query rank
-    // # image to match dimensions of the train rank image
-    // if len(Qrank_cnts) != 0:
-    //     x1,y1,w1,h1 = cv2.boundingRect(Qrank_cnts[0])
-    //     Qrank_roi = Qrank[y1:y1+h1, x1:x1+w1]
-    //     Qrank_sized = cv2.resize(Qrank_roi, (RANK_WIDTH,RANK_HEIGHT), 0, 0)
-    //     qCard.rank_img = Qrank_sized
-
-    // # Find suit contour and bounding rectangle, isolate and find largest contour
-    // dummy, Qsuit_cnts, hier = cv2.findContours(Qsuit, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    // Qsuit_cnts = sorted(Qsuit_cnts, key=cv2.contourArea,reverse=True)
+    /* Isolated rank and suit images will have additional artifacts present
+     * due to non-accurate cropping, or including symbols too close to the rank-suit */
     
-    // # Find bounding rectangle for largest contour, use it to resize query suit
-    // # image to match dimensions of the train suit image
-    // if len(Qsuit_cnts) != 0:
-    //     x2,y2,w2,h2 = cv2.boundingRect(Qsuit_cnts[0])
-    //     Qsuit_roi = Qsuit[y2:y2+h2, x2:x2+w2]
-    //     Qsuit_sized = cv2.resize(Qsuit_roi, (SUIT_WIDTH, SUIT_HEIGHT), 0, 0)
-    //     qCard.suit_img = Qsuit_sized
+    /* Sort rank contours by area, largest placed first */
+    std::sort(rank_contours.begin(), rank_contours.end(), [](const std::vector<Point>& c1, const std::vector<Point>& c2)
+    {
+        return cv::contourArea(c1, false) > cv::contourArea(c2, false);
+    });
 
-    // return qCard
+    /* Sort suit contours by area, largest placed first*/
+    std::sort(suit_contours.begin(), suit_contours.end(), [](const std::vector<Point>& c1, const std::vector<Point>& c2)
+    {
+        return cv::contourArea(c1, false) > cv::contourArea(c2, false);
+    });
+
+    /* Create a bounding box around the largest contours and upsize it to the dimensions 
+     * of the reference images that will be used for matching */
+    if(rank_contours.size()){
+        cv::Rect rank_box = cv::boundingRect(rank_contours[0]);
+        cv::Mat rank_roi = rank(rank_box);
+        cv::resize(rank_roi, rank_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
+        cv::imshow("Rank ROI", rank_roi);
+    }
+    if(suit_contours.size()){
+        cv::Rect suit_box = cv::boundingRect(suit_contours[0]);
+        cv::Mat suit_roi = suit(suit_box);
+        cv::resize(suit_roi, suit_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
+        cv::imshow("Suit ROI", suit_roi);
+    }
+
     return image;
 }
 
