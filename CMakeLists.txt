@@ -10,6 +10,11 @@ add_executable(OPENCV_TEST
     src/main.cpp
     src/camera.cpp
 )
+set_property (TARGET ${PROJECT_NAME}
+  PROPERTY
+    # Enable C++17 standard compliance
+    CXX_STANDARD 17
+)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

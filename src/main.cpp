@@ -3,12 +3,14 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>  // cv::Canny()
 #include <iostream>
+#include <filesystem>
 
 #include "camera.h"
 
 using namespace cv;
 using namespace std;
 using std::cout; using std::cerr; using std::endl;
+namespace fs = std::filesystem;
 
 #define BKG_ADAPTIVE_THRESH 50
 #define CARD_MAX_AREA 120000
@@ -19,6 +21,7 @@ using std::cout; using std::cerr; using std::endl;
 // Dimensions of rank train images
 #define RANK_WIDTH 70
 #define RANK_HEIGHT 125
+
 RNG rng(12345);
 
 
@@ -385,20 +388,27 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
 
     /* Create a bounding box around the largest contours and upsize it to the dimensions 
      * of the reference images that will be used for matching */
+    cv::Mat rank_roi, suit_roi;
     if(rank_contours.size()){
         cv::Rect rank_box = cv::boundingRect(rank_contours[0]);
-        cv::Mat rank_roi = rank(rank_box);
+        rank_roi = rank(rank_box);
         cv::resize(rank_roi, rank_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
         cv::imshow("Rank ROI", rank_roi);
     }
     if(suit_contours.size()){
         cv::Rect suit_box = cv::boundingRect(suit_contours[0]);
-        cv::Mat suit_roi = suit(suit_box);
+        suit_roi = suit(suit_box);
         cv::resize(suit_roi, suit_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
         cv::imshow("Suit ROI", suit_roi);
     }
 
-    return image;
+    /* Return the Rank ROI to be passed on the template matching function*/
+    return rank_roi;
+}
+
+void template_matching(cv::Mat roi, bool rank=true){
+
+
 }
 
 class CameraCallback : public CallbackLinker{
@@ -409,7 +419,7 @@ class CameraCallback : public CallbackLinker{
         /* Need to Show frame after find_cards()*/
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
-        cv::imshow("Frame", processed_image);
+        cv::imshow("Frame", nextFrame);
         // std::cout << "Num of Cards: " << card_params.num_of_cards << std::endl;
 
     }
