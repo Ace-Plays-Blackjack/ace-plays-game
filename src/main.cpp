@@ -22,6 +22,8 @@ namespace fs = std::filesystem;
 #define RANK_WIDTH 70
 #define RANK_HEIGHT 125
 
+std::vector<cv::String> filenames; // notice here that we are using the Opencv's embedded "String" class
+
 RNG rng(12345);
 
 
@@ -432,10 +434,11 @@ int main(int, char**)
 
     CameraCallback show_cam_callback;
     camera_obj.registerCallback(&show_cam_callback);
+
+    cv::String folder = "../../Card_Imgs/*.jpg"; // again we are using the Opencv's embedded "String" class
+    cv::glob(folder, filenames); // new function that does the job ;-)
+
     camera_obj.startRecording();
-
- 
-
     camera_obj.stopRecording();
     return 0;
 }
