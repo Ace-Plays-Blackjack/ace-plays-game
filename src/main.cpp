@@ -22,9 +22,33 @@ namespace fs = std::filesystem;
 #define RANK_WIDTH 70
 #define RANK_HEIGHT 125
 
-std::vector<cv::String> filenames; // notice here that we are using the Opencv's embedded "String" class
-
 RNG rng(12345);
+
+class CardTemplate
+{
+private:
+    const std::vector<cv::Mat> template_cards; // Load template cards once
+public:
+    CardTemplate(std::vector<cv::String> files) : template_cards(init(files)) {};
+    
+    static std::vector<cv::Mat> init(std::vector<cv::String> files)
+    {
+       std::vector<cv::Mat> result;
+       for (size_t i = 0; i < files.size(); i++){
+        result.push_back(cv::imread(files[i]));
+       }
+        return result;
+    }
+
+    cv::Mat getCard(int index){
+        if(index > template_cards.size() || index < 0){
+            std::cout << "Error: Index Invalid" << endl;
+            return cv::Mat{};
+        }
+        return template_cards[index];
+    }    
+};
+
 
 
 string type2str(int type) {
@@ -435,9 +459,13 @@ int main(int, char**)
     CameraCallback show_cam_callback;
     camera_obj.registerCallback(&show_cam_callback);
 
+    std::vector<cv::String> filenames; // notice here that we are using the Opencv's embedded "String" class
     cv::String folder = "../../Card_Imgs/*.jpg"; // again we are using the Opencv's embedded "String" class
     cv::glob(folder, filenames); // new function that does the job ;-)
+    CardTemplate cardTemplates(filenames);
 
+    cv::imshow("Card 1", cardTemplates.getCard(2));
+    int key = cv::waitKey(1);
     camera_obj.startRecording();
     camera_obj.stopRecording();
     return 0;
