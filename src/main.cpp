@@ -26,27 +26,36 @@ class CardTemplate
 {
 private:
     const std::vector<cv::Mat> template_cards; // Load template cards once
+
 public:
-    CardTemplate(std::vector<cv::String> files) : template_cards(init(files)) {};
+    const std::uint8_t num_template_cards;
+
+    CardTemplate(cv::String folder) : template_cards(init(folder)), num_template_cards((std::uint8_t)template_cards.size()) {};
     
-    static std::vector<cv::Mat> init(std::vector<cv::String> files)
+    static std::vector<cv::Mat> init(cv::String folder)
     {
+	   std::vector<cv::String> filenames;
        std::vector<cv::Mat> result;
-       for (size_t i = 0; i < files.size(); i++){
-        result.push_back(cv::imread(files[i]));
+       cv::glob(folder, filenames);
+
+       for (size_t i = 0; i < filenames.size(); i++){
+            result.push_back(cv::imread(filenames[i], cv::IMREAD_GRAYSCALE));
        }
         return result;
     }
 
-    cv::Mat getCard(int index){
+    cv::Mat getCard(size_t index){
         if(index > template_cards.size() || index < 0){
             std::cout << "Error: Index Invalid" << endl;
             return cv::Mat{};
         }
-        return template_cards[index];
+		cv::Mat card = template_cards.at(index);
+        return card;
     }    
 };
 
+cv::String folder = "../../Card_Imgs/*.jpg"; // again we are using the Opencv's embedded "String" class
+CardTemplate cardTemplates(folder);
 
 
 string type2str(int type) {
@@ -417,22 +426,42 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
         cv::Rect rank_box = cv::boundingRect(rank_contours[0]);
         rank_roi = rank(rank_box);
         cv::resize(rank_roi, rank_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
-        cv::imshow("Rank ROI", rank_roi);
+        // cv::imshow("Rank ROI", rank_roi);
     }
     if(suit_contours.size()){
         cv::Rect suit_box = cv::boundingRect(suit_contours[0]);
         suit_roi = suit(suit_box);
         cv::resize(suit_roi, suit_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
-        cv::imshow("Suit ROI", suit_roi);
+        // cv::imshow("Suit ROI", suit_roi);
     }
 
     /* Return the Rank ROI to be passed on the template matching function*/
     return rank_roi;
 }
 
-void template_matching(cv::Mat roi, bool rank=true){
-
-
+void template_matching(cv::Mat roi, CardTemplate card_templates, bool rank=true){
+    if (roi.rows == RANK_HEIGHT && roi.cols == RANK_WIDTH){
+		/* Clone roi image */
+		cv::Mat result(cv::Size(roi.rows, roi.cols), CV_8UC1);
+		/* Initialise as a high number, i.e. all pixels are non-zero */
+		int prev_count = roi.rows * roi.cols;
+		int num_non_zero, matching_card_idx;
+		// cout<< type2str(card_templates.getCard(0).type()) <<endl;
+		// cout<< type2str(result.type()) <<endl;
+		for (int i = 0; i < card_templates.num_template_cards; i++)
+		{
+			// cv::matchTemplate(roi, card_templates.getCard(i), result, cv::TM_SQDIFF);
+			// cv::compare(roi, card_templates.getCard(i), result, cv::CmpTypes);
+			cv::absdiff(roi, card_templates.getCard(i), result);
+			num_non_zero = cv::countNonZero(result);
+			if (num_non_zero < prev_count){
+				prev_count = num_non_zero;
+				matching_card_idx = i;
+			}
+		}
+		result = card_templates.getCard(matching_card_idx);
+		cv::imshow("Matching Card", result);
+	}
 }
 
 class CameraCallback : public CallbackLinker{
@@ -440,6 +469,9 @@ class CameraCallback : public CallbackLinker{
         cv::Mat processed_image = preprocess_image(nextFrame);
         Card_params card_params = find_cards(processed_image);
         processed_image = preprocess_card(processed_image, card_params);
+
+        template_matching(processed_image, cardTemplates);
+
         /* Need to Show frame after find_cards()*/
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
@@ -457,13 +489,6 @@ int main(int, char**)
     CameraCallback show_cam_callback;
     camera_obj.registerCallback(&show_cam_callback);
 
-    std::vector<cv::String> filenames; // notice here that we are using the Opencv's embedded "String" class
-    cv::String folder = "../../Card_Imgs/*.jpg"; // again we are using the Opencv's embedded "String" class
-    cv::glob(folder, filenames); // new function that does the job ;-)
-    CardTemplate cardTemplates(filenames);
-
-    cv::imshow("Card 1", cardTemplates.getCard(2));
-    int key = cv::waitKey(1);
     camera_obj.startRecording();
     camera_obj.stopRecording();
     return 0;
