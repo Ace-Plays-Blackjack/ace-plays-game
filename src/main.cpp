@@ -3,14 +3,12 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>  // cv::Canny()
 #include <iostream>
-#include <filesystem>
 
 #include "camera.h"
 
 using namespace cv;
 using namespace std;
 using std::cout; using std::cerr; using std::endl;
-namespace fs = std::filesystem;
 
 #define BKG_ADAPTIVE_THRESH 50
 #define CARD_MAX_AREA 120000
