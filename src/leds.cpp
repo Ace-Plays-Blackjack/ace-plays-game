@@ -17,19 +17,10 @@
 
 led_flasher::led_flasher(){
 	std::cout << "construct led flasher" << std::endl;
-	decision = STAND;
 	return;
 };
-bool led_flasher::changeled(bool on){
-	if (on) {
-	   std::cout << "flash ON" << std::endl;
-	}
-	else {
-	   std::cout << "flash OFF" << std::endl;
-	}
-	return true;
-};
-bool led_flasher::mainthread(){
+
+bool led_flasher::mainthread(decisions (*gd)()) {
 	std::cout << "starting flasher" << std::endl;
 	int status;   
 	status = gpioInitialise();
@@ -43,20 +34,19 @@ bool led_flasher::mainthread(){
 	bool ledValue = false;
 	int i = 0;
 	while (i < 100) {
-		changeled(ledValue);
 		ledValue = !ledValue;
-		switch (decision) {
+		switch ((*gd)()) {
 			case HIT:
-				gpio(18, ledValue);
+				gpio(12, ledValue);
 				break;
 			case STAND:
-				gpio(22, ledValue);
+				gpio(19, ledValue);
 				break;
 			case SPLIT:
-				gpio(17, ledValue);
+				gpio(18, ledValue);
 				break;
 			case DOUBLE:
-				gpio(27, ledValue);
+				gpio(13, ledValue);
 				break;
 			case UNKNOWN:
 				break;
@@ -64,10 +54,10 @@ bool led_flasher::mainthread(){
 		usleep (100000);
 		i++;
 	}
-	gpioWrite(17, PI_HIGH);
+	gpioWrite(12, PI_HIGH);
+	gpioWrite(13, PI_HIGH);
 	gpioWrite(18, PI_HIGH);
-	gpioWrite(22, PI_HIGH);
-	gpioWrite(27, PI_HIGH);
+	gpioWrite(19, PI_HIGH);
 	gpioTerminate();
 	return true;
 };
