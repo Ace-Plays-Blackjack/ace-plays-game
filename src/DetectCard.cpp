@@ -1,16 +1,6 @@
 #include "DetectCard.h"
 
 
-#define BKG_ADAPTIVE_THRESH 50
-#define CARD_MAX_AREA 120000
-#define CARD_MIN_AREA 10000
-// Width and height of card corner, where rank and suit are
-#define FLATTENED_WIDTH 230
-#define FLATTENED_HEIGHT 300
-// Dimensions of rank train images
-#define RANK_WIDTH 70
-#define RANK_HEIGHT 125
-
 /*
 string type2str(int type) {
   string r;
@@ -69,37 +59,6 @@ class Query_card
 
 };
 
-class CardTemplate
-{
-private:
-    const std::vector<cv::Mat> template_cards; // Load template cards once
-
-public:
-    const std::uint8_t num_template_cards;
-
-    CardTemplate(cv::String folder) : template_cards(init(folder)), num_template_cards((std::uint8_t)template_cards.size()) {};
-    
-    static std::vector<cv::Mat> init(cv::String folder)
-    {
-	   std::vector<cv::String> filenames;
-       std::vector<cv::Mat> result;
-       cv::glob(folder, filenames);
-
-       for (size_t i = 0; i < filenames.size(); i++){
-            result.push_back(cv::imread(filenames[i], cv::IMREAD_GRAYSCALE));
-       }
-        return result;
-    }
-
-    cv::Mat getCard(size_t index){
-        if(index > template_cards.size() || index < 0){
-            std::cout << "Error: Index Invalid" << endl;
-            return cv::Mat{};
-        }
-		cv::Mat card = template_cards.at(index);
-        return card;
-    }    
-};
 
 
 
