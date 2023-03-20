@@ -6,7 +6,8 @@ enum decisions {
     STAND,
     SPLIT,
     DOUBLE,
-    UNKNOWN
+    UNKNOWN,
+    STOP
 };
 
 
@@ -15,8 +16,9 @@ class led_flasher {
     led_flasher();
     bool changeled(bool on);
     bool mainthread(decisions (*gd)());
-    bool gpio(int led, bool on);
+    bool gpio(int led);
 
 };
 
 #endif //LEDS_H
+

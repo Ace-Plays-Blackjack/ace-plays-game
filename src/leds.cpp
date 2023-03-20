@@ -31,38 +31,55 @@ bool led_flasher::mainthread(decisions (*gd)()) {
 		return 1;
 	}
 	bool done = false;
-	bool ledValue = false;
-	int i = 0;
-	while (i < 100) {
-		ledValue = !ledValue;
+	gpio(12);
+	gpio(13);
+	gpio(18);
+	gpio(19);
+	
+	while (!done) {
 		switch ((*gd)()) {
-			case HIT:
-				gpio(12, ledValue);
-				break;
-			case STAND:
-				gpio(19, ledValue);
-				break;
-			case SPLIT:
-				gpio(18, ledValue);
-				break;
-			case DOUBLE:
-				gpio(13, ledValue);
-				break;
-			case UNKNOWN:
-				break;
-		}
-		usleep (100000);
-		i++;
+		case HIT:
+			gpioWrite(12, PI_LOW);
+			gpioWrite(13, PI_HIGH);
+			gpioWrite(18, PI_HIGH);
+			gpioWrite(19, PI_HIGH);
+			break;
+		case STAND:
+			gpioWrite(12, PI_HIGH);
+			gpioWrite(13, PI_HIGH);
+			gpioWrite(18, PI_HIGH);
+			gpioWrite(19, PI_LOW);
+			break;
+		case SPLIT:
+			gpioWrite(12, PI_HIGH);
+			gpioWrite(13, PI_HIGH);
+			gpioWrite(18, PI_LOW);
+			gpioWrite(19, PI_HIGH);
+			break;
+		case DOUBLE:
+			gpioWrite(12, PI_HIGH);
+			gpioWrite(13, PI_LOW);
+			gpioWrite(18, PI_HIGH);
+			gpioWrite(19, PI_HIGH);
+			break;
+		case UNKNOWN:
+			break;
+		case STOP:
+			gpioWrite(12, PI_HIGH);
+			gpioWrite(13, PI_HIGH);
+			gpioWrite(18, PI_HIGH);
+			gpioWrite(19, PI_HIGH);
+			gpioTerminate();
+			done = true;
+			break;
 	}
-	gpioWrite(12, PI_HIGH);
-	gpioWrite(13, PI_HIGH);
-	gpioWrite(18, PI_HIGH);
-	gpioWrite(19, PI_HIGH);
+	}
+	
 	gpioTerminate();
 	return true;
 };
 
-bool led_flasher::gpio(int led, bool on) {
+bool led_flasher::gpio(int led) {
 	int v;
 	int GPIO = led;
    gpioSetMode(GPIO, PI_INPUT);
@@ -75,18 +92,5 @@ bool led_flasher::gpio(int led, bool on) {
    gpioSetPullUpDown(GPIO, PI_PUD_DOWN);
    gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
    v = gpioRead(GPIO);
-   if (on) {
-	gpioWrite(GPIO, PI_LOW);
-	v = gpioGetMode(GPIO);
-
-	v = gpioRead(GPIO);
-   }
-   else {
-	gpioWrite(GPIO, PI_HIGH);
-	gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
-	v = gpioRead(GPIO);
-	}
 	return true;
 }
-
-
