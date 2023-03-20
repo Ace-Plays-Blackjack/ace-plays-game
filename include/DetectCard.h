@@ -1,6 +1,7 @@
 #ifndef DETECT_CARD_H
 #define DETECT_CARD_H
 #include <opencv2/core.hpp>
+#include "CallbackLinker.h"
 
 #define BKG_ADAPTIVE_THRESH 50
 #define CARD_MAX_AREA 120000
@@ -82,10 +83,16 @@ public:
 class DetectCard
 {
 private:
-    /* data */
+    std::thread procThread;
+    void processingThreadLoop();
+    CallbackLinker* processingCallback = nullptr;
+
 public:
     DetectCard(/* args */);
     ~DetectCard();
+    void registerCallback(CallbackLinker* cb);
+    void unregisterCallback();
+    void startProcessing();
 };
 
 

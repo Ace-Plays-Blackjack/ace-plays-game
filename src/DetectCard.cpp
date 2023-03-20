@@ -97,8 +97,6 @@ cv::Mat preprocess_image(cv::Mat image){
     
 }
 
-
-
 struct Card_params find_cards(cv::Mat image){
 
     /* Finds all card-sized contours in a thresholded camera image.
@@ -177,7 +175,6 @@ struct Card_params find_cards(cv::Mat image){
 
     return Card_params;
 }
-
 
 cv::Mat flatten_card(Query_card qCard, cv::Mat image){
     /* If card is placed VERTICALLY, then card Rank is 
@@ -414,6 +411,24 @@ void template_matching(cv::Mat roi, CardTemplate card_templates, bool rank=true)
 		cv::imshow("Matching Card", result);
 	}
 }
+
+/**
+ * @brief Register a Callback for the DetectCard Class
+ * 
+ * @param cb is a CallbackLinker class pointer
+ */
+void DetectCard::registerCallback(CallbackLinker* cb){
+    processingCallback = cb;
+}
+
+/**
+ * @brief Unregister existing callback
+ * 
+ */
+void DetectCard::unregisterCallback(){
+    processingCallback = nullptr;
+}
+
 
 
 DetectCard::DetectCard(/* args */)
