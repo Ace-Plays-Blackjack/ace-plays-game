@@ -1,4 +1,7 @@
 #include "DetectCard.h"
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>  // cv::Canny()
 
 
 /*
@@ -35,7 +38,6 @@ struct Card_params{
     std::vector<double> card_peris;
     std::vector<cv::RotatedRect> rotatedbox;
     std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
-
 };
 
 class Query_card
@@ -61,8 +63,7 @@ class Query_card
 
 
 
-
-cv::Mat preprocess_image(cv::Mat image){
+cv::Mat DetectCard::preprocess_image(cv::Mat image){
 
     // Returns a grayed, blurred, and adaptively thresholded camera image.
     cv::Mat processed_img;
@@ -70,15 +71,14 @@ cv::Mat preprocess_image(cv::Mat image){
     cv::GaussianBlur(processed_img, processed_img,cv::Size(5,5),0);
     /* Canny Edge Detection filter seems to improve detection of cards with Red coloured suits*/
     // cv::Canny(processed_img, processed_img, 100, 200);
-    // # The best threshold level depends on the ambient lighting conditions.
-    // # For bright lighting, a high threshold must be used to isolate the cards
-    // # from the background. For dim lighting, a low threshold must be used.
-    // # To make the card detector independent of lighting conditions, the
-    // # following adaptive threshold method is used.
-    // #
-    // # A background pixel in the center top of the image is sampled to determine
-    // # its intensity. The adaptive threshold is set at 50 (THRESH_ADDER) higher
-    // # than that. This allows the threshold to adapt to the lighting conditions.
+    // The best threshold level depends on the ambient lighting conditions.
+    // For bright lighting, a high threshold must be used to isolate the cards
+    // from the background. For dim lighting, a low threshold must be used.
+    // To make the card detector independent of lighting conditions, the
+    // following adaptive threshold method is used.
+    // A background pixel in the center top of the image is sampled to determine
+    // its intensity. The adaptive threshold is set at 50 (THRESH_ADDER) higher
+    // than that. This allows the threshold to adapt to the lighting conditions.
     cv::Size img_size = image.size();
     int thresh_level = processed_img.at<uchar>(img_size.height/100, img_size.width/2) + BKG_ADAPTIVE_THRESH;
 
@@ -90,14 +90,12 @@ cv::Mat preprocess_image(cv::Mat image){
      * the matching template, thus reducing the need to re-format
      * in later steps */
     cv::adaptiveThreshold(processed_img, processed_img, 255,cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY_INV,3,3);
-    
-    // string filename = samples::findFile(names[i]);
 
     return processed_img;
     
 }
 
-struct Card_params find_cards(cv::Mat image){
+struct Card_params DetectCard::find_cards(cv::Mat image){
 
     /* Finds all card-sized contours in a thresholded camera image.
     Returns the number of cards, and a list of card contours sorted
@@ -176,7 +174,7 @@ struct Card_params find_cards(cv::Mat image){
     return Card_params;
 }
 
-cv::Mat flatten_card(Query_card qCard, cv::Mat image){
+cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
     /* If card is placed HORIZONTALLY, then card Rank is 
@@ -283,7 +281,7 @@ cv::Mat flatten_card(Query_card qCard, cv::Mat image){
 
 }
 
-cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
+cv::Mat DetectCard::preprocess_card(cv::Mat image, struct Card_params Card_params)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
@@ -387,7 +385,7 @@ cv::Mat preprocess_card(cv::Mat image, struct Card_params Card_params)
     return rank_roi;
 }
 
-void template_matching(cv::Mat roi, CardTemplate card_templates, bool rank=true){
+void DetectCard::template_matching(cv::Mat roi, CardTemplate card_templates, bool rank=true){
     if (roi.rows == RANK_HEIGHT && roi.cols == RANK_WIDTH){
 		/* Clone roi image */
 		cv::Mat result(cv::Size(roi.rows, roi.cols), CV_8UC1);
@@ -412,6 +410,22 @@ void template_matching(cv::Mat roi, CardTemplate card_templates, bool rank=true)
 	}
 }
 
+void DetectCard::processingThreadLoop(){
+    while(isProcessing){
+        /* Need to Show frame after find_cards()*/
+        /* imshow converts image to 3-channel */
+        /* find_cards() requires single monochrome channel */
+        cv::Mat processed_image = preprocess_image(image);
+        Card_params card_params = find_cards(processed_image);
+        processed_image = preprocess_card(processed_image, card_params);
+
+        template_matching(processed_image, cardTemplates);
+        // Here add the callback
+        // display();
+        // processingCallback->passFrame();
+    }
+}
+
 /**
  * @brief Register a Callback for the DetectCard Class
  * 
@@ -429,6 +443,11 @@ void DetectCard::unregisterCallback(){
     processingCallback = nullptr;
 }
 
+void DetectCard::startProcessing(){
+    isProcessing = true;
+    /* Start Thread */
+    procThread = std::thread(&DetectCard::processingThreadLoop, this);
+}
 
 
 DetectCard::DetectCard(/* args */)
