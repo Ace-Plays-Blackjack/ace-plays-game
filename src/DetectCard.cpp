@@ -35,7 +35,6 @@ struct Card_params{
     std::vector<int> contour_is_card_idx;
     std::vector<std::vector<cv::Point>> contours;
     std::vector<std::vector<cv::Point>> card_approxs;
-    std::vector<double> card_peris;
     std::vector<cv::RotatedRect> rotatedbox;
     std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
 };
@@ -62,10 +61,16 @@ class Query_card
 };
 
 
-
+/**
+ * @brief Preprocesses a frame. Frame is turned to grayscale and blurred
+ * before applying thresholding to turn into monochrome.
+ * 
+ * @param image the current frame to be processsed
+ * @return cv::Mat processed frame
+ */
 cv::Mat DetectCard::preprocess_image(cv::Mat image){
 
-    // Returns a grayed, blurred, and adaptively thresholded camera image.
+    /* Returns a grayed, blurred, and adaptively thresholded camera image */
     cv::Mat processed_img;
     cv::cvtColor(image, processed_img, cv::COLOR_BGR2GRAY);
     cv::GaussianBlur(processed_img, processed_img,cv::Size(5,5),0);
@@ -82,69 +87,57 @@ cv::Mat DetectCard::preprocess_image(cv::Mat image){
     cv::Size img_size = image.size();
     int thresh_level = processed_img.at<uchar>(img_size.height/100, img_size.width/2) + BKG_ADAPTIVE_THRESH;
 
-    // cv::threshold(processed_img, processed_img, thresh_level, 255, cv::THRESH_BINARY);
-    // cv::threshold(processed_img, processed_img, 0, 255, cv::THRESH_OTSU);
-    // Also test Otsus binarization
-
     /* Adaptive threshold provides image in the same format as
      * the matching template, thus reducing the need to re-format
      * in later steps */
     cv::adaptiveThreshold(processed_img, processed_img, 255,cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY_INV,3,3);
 
     return processed_img;
-    
 }
 
+/**
+ * @brief Find card in current frame by checking for rectangular
+ * shaped objects in the frame.
+ * 
+ * @param image the frame to process
+ * @return struct Card_params contains contours and bounding boxes for all cards
+ */
 struct Card_params DetectCard::find_cards(cv::Mat image){
 
     /* Finds all card-sized contours in a thresholded camera image.
-    Returns the number of cards, and a list of card contours sorted
-    from largest to smallest. */
+     * Returns the number of cards, and a list of card contours */
     Card_params Card_params;
     std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
+
+    /* Find the contours */
     cv::findContours(image, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE );
     size_t num_cntrs = contours.size();
+
+    /* Store contours */
     Card_params.contours = contours;
 
-    // If there are no contours, do nothing
+    /* If there are no contours, do nothing */
     if (num_cntrs == 0){
         Card_params.err = 1;
         return Card_params;
     }    
-    // std::cout << contours.size() << std::endl;
 
-    /* Draw the Contours */
-    // Mat drawing = Mat::zeros( image.size(), CV_8UC3 );
-    // for( size_t i = 0; i< contours.size(); i++ )
-    // {
-    //     Scalar color = Scalar( 255, 255-i, 255-i );
-    //     drawContours( drawing, contours, (int)i, color, 2, LINE_8, hierarchy, 0 );
-
-    // }
-    // cv::imshow("Contours", drawing);
-
-    // Determine which of the contours are cards by applying the
-    // following criteria: 1) Smaller area than the maximum card size,
-    // 2), bigger area than the minimum card size, 3) have no parents,
-    // and 4) have four corners
+    /* Contours that are cards will have an area smaller 
+     * between the max and min area thresholds, are the outer-most
+     * contour (no parent contours) and have four corners */
     double area, perimeter, area_approx;
     std::vector<cv::Point> approx;
 
     for( int i = 0; i < num_cntrs; i++ ){
         area = std::abs(cv::contourArea(contours[i]));
         perimeter = cv::arcLength(contours[i], true);
-        // approximate contour with accuracy proportional
-        // to the contour perimeter
+        /* Approximate contour with accuracy proportional to the contour perimeter */
         cv::approxPolyDP(contours[i], approx, 0.01*perimeter, true);
         area_approx = std::abs(cv::contourArea(approx));
 
-        // square contours should have 4 vertices after approximation
-        // relatively large area (to filter out noisy contours)
-        // be convex and not have parent contours.
-        // Note: absolute value of an area is used because
-        // area may be positive or negative - in accordance with the
-        // contour orientation
+        /* Check condition for contour being a card. 
+         * Additional condition is the contour being convex shape */
         if( approx.size() == 4 && area_approx < CARD_MAX_AREA && \
         area_approx > CARD_MIN_AREA && cv::isContourConvex(approx) && hierarchy[i][3] == -1){
             
@@ -159,15 +152,14 @@ struct Card_params DetectCard::find_cards(cv::Mat image){
             /* Store Card Approximations*/
             Card_params.card_approxs.push_back(approx); // approx has 4 pairs of (x,y) coordinates
 
-            /* Store Card Perimeters*/
-            Card_params.card_peris.push_back(perimeter);
-
+            /* Create rotated bounding boxes around cards */
             std::vector<cv::Point2f> box_pts(4); 
             cv::RotatedRect boundingBox = cv::minAreaRect(contours[i]);
             boundingBox.points(box_pts.data());
+
+            /* Store each bounding box and its points */
             Card_params.rotatedbox.push_back(boundingBox);
             Card_params.rotatedbox_pts.push_back(box_pts);
-
         }
     }
 
@@ -415,14 +407,17 @@ void DetectCard::processingThreadLoop(){
         /* Need to Show frame after find_cards()*/
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
-        cv::Mat processed_image = preprocess_image(image);
-        Card_params card_params = find_cards(processed_image);
-        processed_image = preprocess_card(processed_image, card_params);
+        if(newFrame){
+            /* First preprocess the entire frame */
+            cv::Mat processed_image = preprocess_image(currentFrame);
+            /* Next find cards inthe frame */
+            Card_params card_params = find_cards(processed_image);
+            processed_image = preprocess_card(processed_image, card_params);
 
-        template_matching(processed_image, cardTemplates);
-        // Here add the callback
-        // display();
-        // processingCallback->passFrame();
+            template_matching(processed_image, cardTemplates);
+            /* Processing finished */
+            processingCallback->passFrame();
+        }
     }
 }
 

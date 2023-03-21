@@ -85,6 +85,8 @@ class DetectCard
 {
 private:
     bool isProcessing = false;
+    bool newFrame = false;
+    cv::Mat currentFrame;
     std::thread procThread;
     void processingThreadLoop();
     CallbackLinker* processingCallback = nullptr;
