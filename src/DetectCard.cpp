@@ -1,8 +1,4 @@
 #include "DetectCard.h"
-#include <opencv2/videoio.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>  // cv::Canny()
-
 
 /*
 string type2str(int type) {
@@ -28,38 +24,6 @@ string type2str(int type) {
   return r;
 }
 */
-
-struct Card_params{
-    int err = 0;
-    int num_of_cards = 0;
-    std::vector<int> contour_is_card_idx;
-    std::vector<std::vector<cv::Point>> contours;
-    std::vector<std::vector<cv::Point>> card_approxs;
-    std::vector<cv::RotatedRect> rotatedbox;
-    std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
-};
-
-class Query_card
-{
-    /* Structure to store information about single card in the camera image.*/
-    public:
-        Query_card(){};
-        ~Query_card(){};
-        std::vector<std::vector<cv::Point>> contours; /* Contour of card */
-        cv::Size card_size; /* Card dimensions */
-        std::vector<cv::Point> corner_pts; /* Card corner points */
-        cv::Point_<int> centre_pts; /* Card centre points */
-        // self.warp = [] # 200x300, flattened, grayed, blurred image
-        // self.rank_img = [] # Thresholded, sized image of card's rank
-        // self.suit_img = [] # Thresholded, sized image of card's suit
-        // self.best_rank_match = "Unknown" # Best matched rank
-        // self.best_suit_match = "Unknown" # Best matched suit
-        // self.rank_diff = 0 # Difference between rank image and best matched train rank image
-        // self.suit_diff = 0 # Difference between suit image and best matched train suit image
-        cv::RotatedRect rotatedbox;
-
-};
-
 
 /**
  * @brief Preprocesses a frame. Frame is turned to grayscale and blurred
@@ -314,7 +278,7 @@ cv::Mat DetectCard::preprocess_card(cv::Mat image, struct Card_params Card_param
     cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
     // cv::rectangle(image, boundingBox.boundingRect(), Scalar( 0, 255, 0), 2);
     for (int i = 0; i < 4; i++){
-        cv::line(image, Card_params.rotatedbox_pts[0][i], Card_params.rotatedbox_pts[0][(i+1)%4], Scalar(0,255,0), 2);
+        cv::line(image, Card_params.rotatedbox_pts[0][i], Card_params.rotatedbox_pts[0][(i+1)%4], cv::Scalar(0,255,0), 2);
     }
     // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
     // Warp card into 200x300 flattened image using perspective transform
@@ -346,13 +310,13 @@ cv::Mat DetectCard::preprocess_card(cv::Mat image, struct Card_params Card_param
      * due to non-accurate cropping, or including symbols too close to the rank-suit */
     
     /* Sort rank contours by area, largest placed first */
-    std::sort(rank_contours.begin(), rank_contours.end(), [](const std::vector<Point>& c1, const std::vector<Point>& c2)
+    std::sort(rank_contours.begin(), rank_contours.end(), [](const std::vector<cv::Point>& c1, const std::vector<cv::Point>& c2)
     {
         return cv::contourArea(c1, false) > cv::contourArea(c2, false);
     });
 
     /* Sort suit contours by area, largest placed first*/
-    std::sort(suit_contours.begin(), suit_contours.end(), [](const std::vector<Point>& c1, const std::vector<Point>& c2)
+    std::sort(suit_contours.begin(), suit_contours.end(), [](const std::vector<cv::Point>& c1, const std::vector<cv::Point>& c2)
     {
         return cv::contourArea(c1, false) > cv::contourArea(c2, false);
     });
@@ -377,7 +341,7 @@ cv::Mat DetectCard::preprocess_card(cv::Mat image, struct Card_params Card_param
     return rank_roi;
 }
 
-void DetectCard::template_matching(cv::Mat roi, CardTemplate card_templates, bool rank=true){
+void DetectCard::template_matching(cv::Mat roi, CardTemplate card_templates, bool rank){
     if (roi.rows == RANK_HEIGHT && roi.cols == RANK_WIDTH){
 		/* Clone roi image */
 		cv::Mat result(cv::Size(roi.rows, roi.cols), CV_8UC1);
@@ -414,9 +378,9 @@ void DetectCard::processingThreadLoop(){
             Card_params card_params = find_cards(processed_image);
             processed_image = preprocess_card(processed_image, card_params);
 
-            template_matching(processed_image, cardTemplates);
+            // template_matching(processed_image, cardTemplates);
             /* Processing finished */
-            processingCallback->passFrame();
+            // processingCallback->passFrame();
         }
     }
 }

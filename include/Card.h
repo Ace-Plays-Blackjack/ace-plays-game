@@ -1,0 +1,118 @@
+#ifndef CARDS_H
+#define CARDS_H
+
+#include <opencv2/core.hpp>
+#include <iostream>
+
+#define BKG_ADAPTIVE_THRESH 50
+#define CARD_MAX_AREA 120000
+#define CARD_MIN_AREA 10000
+// Width and height of card corner, where rank and suit are
+#define FLATTENED_WIDTH 230
+#define FLATTENED_HEIGHT 300
+// Dimensions of rank train images
+#define RANK_WIDTH 70
+#define RANK_HEIGHT 125
+
+
+struct Card_params{
+    int err = 0;
+    int num_of_cards = 0;
+    std::vector<int> contour_is_card_idx;
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<std::vector<cv::Point>> card_approxs;
+    std::vector<cv::RotatedRect> rotatedbox;
+    std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
+};
+
+class Query_card
+{
+    /* Structure to store information about single card in the camera image.*/
+    public:
+        Query_card(){};
+        ~Query_card(){};
+        std::vector<std::vector<cv::Point>> contours; /* Contour of card */
+        cv::Size card_size; /* Card dimensions */
+        std::vector<cv::Point> corner_pts; /* Card corner points */
+        cv::Point_<int> centre_pts; /* Card centre points */
+        // self.warp = [] # 200x300, flattened, grayed, blurred image
+        // self.rank_img = [] # Thresholded, sized image of card's rank
+        // self.suit_img = [] # Thresholded, sized image of card's suit
+        // self.best_rank_match = "Unknown" # Best matched rank
+        // self.best_suit_match = "Unknown" # Best matched suit
+        // self.rank_diff = 0 # Difference between rank image and best matched train rank image
+        // self.suit_diff = 0 # Difference between suit image and best matched train suit image
+        cv::RotatedRect rotatedbox;
+
+};
+
+
+/**
+ * @brief Class to load and store the template cards
+ * from a folder path
+ * 
+ */
+class CardTemplate
+{
+private:
+    /* Load template cards once */
+    const std::vector<cv::Mat> template_cards;
+
+public:
+    /* Keep track on number of template cards stored */
+    const std::uint8_t num_template_cards;
+
+    /**
+     * @brief Construct a new Card Template object.
+     * Template cards are defined as constant. The following
+     * procedure (initialiser list) is required to set a const
+     * in runtime.
+     * 
+     * Similarly set the num_template_cards variable.
+     * 
+     * @param folder is a string to the folder path 
+     */
+    CardTemplate(cv::String folder) : template_cards(init(folder)), num_template_cards((std::uint8_t)template_cards.size()) {};
+    
+    /**
+     * @brief Init function to parse the folder path and read
+     * the template card images.
+     * 
+     * @param folder is a string to the folder path 
+     * @return std::vector<cv::Mat> 
+     */
+    static std::vector<cv::Mat> init(cv::String folder)
+    {
+	   std::vector<cv::String> filenames;
+       std::vector<cv::Mat> result;
+       cv::glob(folder, filenames);
+
+       /**
+        * @brief read and store each image as single
+        * channel GRAYSCALE
+        */
+       for (size_t i = 0; i < filenames.size(); i++){
+            result.push_back(cv::imread(filenames[i], cv::IMREAD_GRAYSCALE));
+       }
+        return result;
+    }
+
+    /**
+     * @brief Get the Card object
+     * 
+     * @param index index of card in template_cards object
+     * @return cv::Mat single template card at index location
+     */
+    cv::Mat getCard(size_t index){
+        if(index > template_cards.size() || index < 0){
+            std::cout << "Error: Index Invalid" << std::endl;
+            return cv::Mat{};
+        }
+		cv::Mat card = template_cards.at(index);
+        return card;
+    }    
+};
+
+
+
+#endif /* CARDS_H */
