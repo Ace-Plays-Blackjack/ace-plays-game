@@ -1,7 +1,4 @@
 #include <opencv2/core.hpp>
-#include <opencv2/videoio.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>  // cv::Canny()
 #include <iostream>
 
 #include "camera.h"
@@ -16,16 +13,7 @@ CardTemplate cardTemplates(folder);
 
 
 class CameraCallback : public CallbackLinker{
-    virtual void passFrame(Mat nextFrame){
-        cv::Mat processed_image = preprocess_image(nextFrame);
-        Card_params card_params = find_cards(processed_image);
-        processed_image = preprocess_card(processed_image, card_params);
-
-        template_matching(processed_image, cardTemplates);
-
-        /* Need to Show frame after find_cards()*/
-        /* imshow converts image to 3-channel */
-        /* find_cards() requires single monochrome channel */
+    void passFrame(Mat nextFrame){
         cv::imshow("Frame", nextFrame);
         // std::cout << "Num of Cards: " << card_params.num_of_cards << std::endl;
 
