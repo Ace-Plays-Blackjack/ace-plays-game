@@ -5,12 +5,7 @@
 #include <iostream>
 #include "leds.h"
 #include "camera.h"
-#include <thread>
-#include "strategy.h"
 
-#include <vector>
-#include <stdlib.h>
-#include <sys/stat.h>
 #include <unistd.h>
 
 using namespace cv;
@@ -29,16 +24,16 @@ int main(int, char**)
     Camera camera_obj;
     decisions choice;
     CameraCallback show_cam_callback;
-    led_flasher leds;
+    ToggleLED leds;
     camera_obj.registerCallback(&show_cam_callback);
     camera_obj.startRecording();
+
     choice = SPLIT;
     leds.flashled(choice);
-    std::vector<int> vect{ 11, 6, 5};
-    decisionmaker firstdecision;
-    choice = firstdecision.getchoice();
-    leds.flashled(choice);
     usleep(5000000);
+    choice = HIT;
+    leds.flashled(choice);
+
     camera_obj.stopRecording();
     return 0;
 }
