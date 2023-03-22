@@ -14,8 +14,10 @@ enum decisions {
 class led_flasher {
     public: 
     led_flasher();
+    ~led_flasher();
+    bool flashled(decisions choice);
+    private:
     bool changeled(bool on);
-    bool mainthread(decisions (*gd)());
     bool gpio(int led);
 
 };
