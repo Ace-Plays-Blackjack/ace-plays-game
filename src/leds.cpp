@@ -17,27 +17,24 @@
 
 led_flasher::led_flasher(){
 	std::cout << "construct led flasher" << std::endl;
-	return;
-};
-
-bool led_flasher::mainthread(decisions (*gd)()) {
-	std::cout << "starting flasher" << std::endl;
 	int status;   
 	status = gpioInitialise();
 
     if (status < 0)
 	{
 		fprintf(stderr, "pigpio initialisation failed.\n");
-		return 1;
+		return;
 	}
-	bool done = false;
 	gpio(12);
 	gpio(13);
 	gpio(18);
 	gpio(19);
+	return;
+};
+
+bool led_flasher::flashled(decisions choice) {
 	
-	while (!done) {
-		switch ((*gd)()) {
+	switch (choice) {
 		case HIT:
 			gpioWrite(12, PI_LOW);
 			gpioWrite(13, PI_HIGH);
@@ -70,12 +67,9 @@ bool led_flasher::mainthread(decisions (*gd)()) {
 			gpioWrite(18, PI_HIGH);
 			gpioWrite(19, PI_HIGH);
 			gpioTerminate();
-			done = true;
 			break;
 	}
-	}
 	
-	gpioTerminate();
 	return true;
 };
 
@@ -93,4 +87,8 @@ bool led_flasher::gpio(int led) {
    gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
    v = gpioRead(GPIO);
 	return true;
+}
+
+led_flasher::~led_flasher() {
+	gpioTerminate();
 }

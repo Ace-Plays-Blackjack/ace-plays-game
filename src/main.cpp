@@ -6,7 +6,9 @@
 #include "leds.h"
 #include "camera.h"
 #include <thread>
+#include "strategy.h"
 
+#include <vector>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -20,31 +22,23 @@ class CameraCallback : public CallbackLinker{
     }
 };
 
-void flashled(decisions (*gd)()) {
-    led_flasher flasher;
-	flasher.mainthread(gd);
-}
-
-static decisions choice;
-
-decisions getdecision() {
-    return choice;
-
-}
 
 int main(int, char**)
 {
-    std::thread flasher (flashled, getdecision);
     cout << "Opening camera..." << endl;
     Camera camera_obj;
+    decisions choice;
     CameraCallback show_cam_callback;
+    led_flasher leds;
     camera_obj.registerCallback(&show_cam_callback);
     camera_obj.startRecording();
-    usleep(5000000);
-    choice = HIT;
-    usleep(1000000);
     choice = SPLIT;
+    leds.flashled(choice);
+    std::vector<int> vect{ 11, 6, 5};
+    decisionmaker firstdecision;
+    choice = firstdecision.getchoice();
+    leds.flashled(choice);
+    usleep(5000000);
     camera_obj.stopRecording();
-    flasher.join();
     return 0;
 }

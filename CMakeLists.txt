@@ -10,8 +10,11 @@ add_executable(OPENCV_TEST
     src/main.cpp
     src/camera.cpp
     src/leds.cpp
+    src/strategy_engine.cpp
     include/camera.h
     include/leds.h
+    include/strategy.h
+    include/strategy_interface.h
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
