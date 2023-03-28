@@ -3,7 +3,9 @@
 
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>  // cv::Canny()
+#include <opencv2/imgproc.hpp>
+#include <thread>
+
 #include "Card.h"
 #include "CallbackLinker.h"
 
@@ -25,6 +27,8 @@ private:
     Card_params find_cards(cv::Mat &image);
     cv::Mat flatten_card(Query_card qCard, cv::Mat &image);
     std::vector<cv::Mat> preprocess_card(cv::Mat &image, Card_params Card_params);
+    /* Output, match template and store cards detected */
+    void template_matching(const std::vector<cv::Mat> &roi, CardTemplate card_templates, bool rank=true);
 
 public:
     DetectCard(cv::String folder_path);
@@ -32,9 +36,6 @@ public:
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
     void passFrame(cv::Mat &nextFrame);
-
-    /* Output, match template and store cards detected */
-    void template_matching(std::vector<cv::Mat> &roi, CardTemplate card_templates, bool rank=true);
 
     /* Spawn thread */
     void startProcessing();

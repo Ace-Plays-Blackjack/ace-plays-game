@@ -353,7 +353,7 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
     return all_rois;
 }
 
-void DetectCard::template_matching(std::vector<cv::Mat> &roi, CardTemplate card_templates, bool rank){
+void DetectCard::template_matching(const std::vector<cv::Mat> &roi, CardTemplate card_templates, bool rank){
 
     std::vector<cv::String> result_name;
 
