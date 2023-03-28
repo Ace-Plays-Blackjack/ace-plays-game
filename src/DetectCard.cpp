@@ -390,6 +390,9 @@ void DetectCard::processingThreadLoop(){
         /* imshow converts image to 3-channel */
         /* find_cards() requires single monochrome channel */
         if(newFrame){
+            /* Processing loop busy */
+            busy = true;
+            std::cout << "Frames dropped: " << frame_counter << std::endl;
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
             /* Next find cards inthe frame */
@@ -397,11 +400,23 @@ void DetectCard::processingThreadLoop(){
             // processed_image = preprocess_card(processed_image, card_params);
             template_matching(preprocess_card(processed_image, card_params), cardTemplates);
 
-            // template_matching(processed_image, cardTemplates);
             /* Processing finished */
+            newFrame = false;
+            busy = false;
+            frame_counter = 0;
             // processingCallback->passFrame();
         }
     }
+}
+
+void DetectCard::passFrame(cv::Mat &nextFrame){
+    if (busy){
+        /* Count dropped frames when processing loop is busy */
+        frame_counter++;
+    }
+    newFrame = true;
+    currentFrame = nextFrame;
+    cv::imshow("Frame", currentFrame);
 }
 
 /**

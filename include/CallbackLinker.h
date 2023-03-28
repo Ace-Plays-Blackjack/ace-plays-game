@@ -16,7 +16,7 @@ public:
      * 
      * @param nextFrame a cv::Mat type variable
      */
-    virtual void passFrame(cv::Mat nextFrame) = 0;
+    virtual void passFrame(cv::Mat &nextFrame) = 0;
 };
 
 
