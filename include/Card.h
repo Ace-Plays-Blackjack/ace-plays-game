@@ -46,6 +46,12 @@ class Query_card
 
 };
 
+struct TemplateImages{
+    /* Images of loaded template cards */
+    std::vector<cv::Mat> template_cards;
+    /* Names of loaded template cards */
+    std::vector<cv::String> names;
+};
 
 /**
  * @brief Class to load and store the template cards
@@ -55,8 +61,10 @@ class Query_card
 class CardTemplate
 {
 private:
-    /* Load template cards once */
-    const std::vector<cv::Mat> template_cards;
+    /* Load template ranks once */
+    const TemplateImages rank_images;
+    /* Not implemented yet */
+    const TemplateImages suit_images;
 
 public:
     /* Keep track on number of template cards stored */
@@ -72,45 +80,68 @@ public:
      * 
      * @param folder is a string to the folder path 
      */
-    CardTemplate(cv::String folder) : template_cards(init(folder)), num_template_cards((std::uint8_t)template_cards.size()) {};
+    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards((std::uint8_t) rank_images.template_cards.size()) {};
     
     /**
      * @brief Init function to parse the folder path and read
      * the template card images.
      * 
      * @param folder is a string to the folder path 
-     * @return std::vector<cv::Mat> 
+     * @param suit_flag boolean to distinguish between loading 
+     * of ranks or suit images
+     * @return TemplateImages 
      */
-    static std::vector<cv::Mat> init(cv::String folder)
+    static TemplateImages init(cv::String folder, bool suit_flag)
     {
-	   std::vector<cv::String> filenames;
-       std::vector<cv::Mat> result;
-       cv::glob(folder, filenames);
+        TemplateImages temp;
+        cv::String filename;
+        std::vector<cv::Mat> result;
+        std::vector<cv::String> card_names;
 
-       /**
-        * @brief read and store each image as single
-        * channel GRAYSCALE
-        */
-       for (size_t i = 0; i < filenames.size(); i++){
-            result.push_back(cv::imread(filenames[i], cv::IMREAD_GRAYSCALE));
-       }
-        return result;
+        if(suit_flag){
+            card_names = {"Club","Heart","Diamond","Spade"};
+        }
+        else{
+            card_names = {"Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King"};
+        }
+
+        for (size_t i = 0; i < card_names.size(); i++){
+            filename = folder + card_names[i] + ".jpg";
+            result.push_back(cv::imread(filename, cv::IMREAD_GRAYSCALE));
+        }
+
+        temp.template_cards = result;
+        temp.names = card_names;        
+        return temp;
     }
 
     /**
      * @brief Get the Card object
      * 
-     * @param index index of card in template_cards object
+     * @param index index of card in rank_images object
      * @return cv::Mat single template card at index location
      */
     cv::Mat getCard(size_t index){
-        if(index > template_cards.size() || index < 0){
+        if(index > rank_images.template_cards.size() || index < 0){
             std::cout << "Error: Index Invalid" << std::endl;
             return cv::Mat{};
         }
-		cv::Mat card = template_cards.at(index);
-        return card;
-    }    
+        return rank_images.template_cards.at(index);
+    }
+
+    /**
+     * @brief Get the Card name
+     * 
+     * @param index index of card in rank_images object
+     * @return cv::String name of detected card
+     */
+    cv::String getCardRank(size_t index){
+        if(index > rank_images.names.size() || index < 0){
+            std::cout << "Error: Index Invalid" << std::endl;
+            return "None";
+        }
+        return rank_images.names.at(index);
+    }
 };
 
 
