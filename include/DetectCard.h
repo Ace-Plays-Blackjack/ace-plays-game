@@ -10,7 +10,7 @@
 class DetectCard
 {
 private:
-    CardTemplate cardTemplates;
+    const CardTemplate cardTemplates;
     bool isProcessing = false;
     bool newFrame = false;
     cv::Mat currentFrame;
