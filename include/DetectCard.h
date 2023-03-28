@@ -10,9 +10,11 @@
 class DetectCard
 {
 private:
+    CardTemplate cardTemplates;
     bool isProcessing = false;
     bool newFrame = false;
     cv::Mat currentFrame;
+
     std::thread procThread;
     void processingThreadLoop();
     CallbackLinker* processingCallback = nullptr;
@@ -23,7 +25,7 @@ private:
     std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, struct Card_params Card_params);
 
 public:
-    DetectCard(/* args */);
+    DetectCard(cv::String folder_path);
     ~DetectCard();
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();

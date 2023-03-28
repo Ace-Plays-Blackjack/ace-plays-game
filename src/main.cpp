@@ -7,7 +7,7 @@ using namespace cv;
 using namespace std;
 using std::cout; using std::cerr; using std::endl;
 
-cv::String folder = "../../Card_Imgs/*.jpg"; // again we are using the Opencv's embedded "String" class
+// cv::String folder = "../../Card_Imgs/*.jpg"; // again we are using the Opencv's embedded "String" class
 // CardTemplate cardTemplates(folder);
 
 

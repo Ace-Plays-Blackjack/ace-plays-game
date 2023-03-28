@@ -395,6 +395,7 @@ void DetectCard::processingThreadLoop(){
             /* Next find cards inthe frame */
             Card_params card_params = find_cards(processed_image);
             // processed_image = preprocess_card(processed_image, card_params);
+            template_matching(preprocess_card(processed_image, card_params), cardTemplates);
 
             // template_matching(processed_image, cardTemplates);
             /* Processing finished */
@@ -426,8 +427,13 @@ void DetectCard::startProcessing(){
     procThread = std::thread(&DetectCard::processingThreadLoop, this);
 }
 
-
-DetectCard::DetectCard(/* args */)
+/**
+ * @brief Construct a new Detect Card:: Detect Card object
+ * 
+ * @param folder_path get folder path of template cards and 
+ * call cardTemplates constructor to load all templates
+ */
+DetectCard::DetectCard(cv::String folder_path):cardTemplates(folder_path)
 {
 }
 
