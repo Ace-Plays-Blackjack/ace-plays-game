@@ -19,9 +19,15 @@ using std::cout; using std::cerr; using std::endl;
 
 int main(int, char**)
 {
+    std::cout<<cv::getBuildInformation();
     cout << "Opening camera..." << endl;
-    Camera camera_obj(0,0, 1280, 720);
-    DetectCard cards_obj("../../Card_Imgs/");
+    // Camera camera_obj(0,0, 1280, 720);
+    
+    Camera camera_obj(0, cv::CAP_V4L2, 1280, 720); // cv::CAP_V4L2 required to run on Pi
+
+    /* PATH depends on where the executable is called from */
+    //DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
+    DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
 
     camera_obj.registerCallback(&cards_obj);
 

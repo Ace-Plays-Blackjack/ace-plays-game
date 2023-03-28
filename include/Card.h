@@ -68,7 +68,7 @@ private:
 
 public:
     /* Keep track on number of template cards stored */
-    const std::uint8_t num_template_cards;
+    const int num_template_cards;
 
     /**
      * @brief Construct a new Card Template object.
@@ -80,7 +80,7 @@ public:
      * 
      * @param folder is a string to the folder path 
      */
-    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards((std::uint8_t) rank_images.template_cards.size()) {};
+    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards(rank_images.template_cards.size()) {};
     
     /**
      * @brief Init function to parse the folder path and read
@@ -121,7 +121,7 @@ public:
      * @param index index of card in rank_images object
      * @return cv::Mat single template card at index location
      */
-    cv::Mat getCard(size_t index){
+    cv::Mat getCard(int index){
         if(index > rank_images.template_cards.size() || index < 0){
             std::cout << "Error: Index Invalid" << std::endl;
             return cv::Mat{};
@@ -135,7 +135,7 @@ public:
      * @param index index of card in rank_images object
      * @return cv::String name of detected card
      */
-    cv::String getCardRank(size_t index){
+    cv::String getCardRank(int index){
         if(index > rank_images.names.size() || index < 0){
             std::cout << "Error: Index Invalid" << std::endl;
             return "None";

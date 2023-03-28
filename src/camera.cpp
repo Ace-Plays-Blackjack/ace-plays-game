@@ -28,10 +28,6 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
     activeCapture = capture;
 }
 
-// void Camera::display(){
-//     cv::imshow("Frame", currentFrame);
-// }
-
 /**
  * @brief Main loop used by Camera Thread.
  * Loop ends by passing on frames to the pipeline via a callback
@@ -47,8 +43,7 @@ void Camera::camThreadLoop(){
             return;
         }
 
-        // Here add the callback
-        // display();
+        /* Here add the callback */
         cameraCallback->passFrame(currentFrame);
         int key = cv::waitKey(1);
         if (key == 27/*ESC*/){break;}
