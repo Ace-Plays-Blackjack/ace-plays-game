@@ -12,7 +12,7 @@
 class DetectCard : public CallbackLinker
 {
 private:
-    const CardTemplate cardTemplates;
+    CardTemplate cardTemplates;
     bool isProcessing = false;
     bool busy = false;
     bool newFrame = false;
@@ -28,7 +28,7 @@ private:
     cv::Mat flatten_card(Query_card qCard, cv::Mat &image);
     std::vector<cv::Mat> preprocess_card(cv::Mat &image, Card_params Card_params);
     /* Output, match template and store cards detected */
-    void template_matching(const std::vector<cv::Mat> &roi, CardTemplate card_templates, bool rank=true);
+    void template_matching(const std::vector<cv::Mat> &roi, bool rank=true);
 
 public:
     DetectCard(cv::String folder_path);

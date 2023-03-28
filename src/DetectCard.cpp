@@ -353,7 +353,7 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
     return all_rois;
 }
 
-void DetectCard::template_matching(const std::vector<cv::Mat> &roi, CardTemplate card_templates, bool rank){
+void DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
 
     std::vector<cv::String> result_name;
 
@@ -366,9 +366,9 @@ void DetectCard::template_matching(const std::vector<cv::Mat> &roi, CardTemplate
             int prev_count = roi[i].rows * roi[i].cols;
             int num_non_zero, matching_card_idx;
 
-            for (int k = 0; k < card_templates.num_template_cards; k++)
+            for (int k = 0; k < cardTemplates.num_template_cards; k++)
             {
-                cv::absdiff(roi[i], card_templates.getCard(k), result);
+                cv::absdiff(roi[i], cardTemplates.getCard(k), result);
                 num_non_zero = cv::countNonZero(result);
                 if (num_non_zero < prev_count){
                     prev_count = num_non_zero;
@@ -376,7 +376,7 @@ void DetectCard::template_matching(const std::vector<cv::Mat> &roi, CardTemplate
                 }
             }
             // result = card_templates.getCard(matching_card_idx);
-            result_name.push_back(card_templates.getCardRank(matching_card_idx));
+            result_name.push_back(cardTemplates.getCardRank(matching_card_idx));
         }
     }
     for (int i = 0; i < result_name.size(); i++){
@@ -398,7 +398,7 @@ void DetectCard::processingThreadLoop(){
             /* Next find cards inthe frame */
             Card_params card_params = find_cards(processed_image);
             // processed_image = preprocess_card(processed_image, card_params);
-            template_matching(preprocess_card(processed_image, card_params), cardTemplates);
+            template_matching(preprocess_card(processed_image, card_params));
 
             /* Processing finished */
             newFrame = false;
