@@ -23,7 +23,6 @@ int main(int, char**)
     Camera camera_obj(0,0, 1280, 720);
     DetectCard cards_obj("../../Card_Imgs/");
 
-    CameraCallback show_cam_callback;
     camera_obj.registerCallback(&cards_obj);
 
     cards_obj.startProcessing();

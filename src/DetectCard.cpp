@@ -67,7 +67,7 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
  * @param image the frame to process
  * @return struct Card_params contains contours and bounding boxes for all cards
  */
-struct Card_params DetectCard::find_cards(cv::Mat &image){
+Card_params DetectCard::find_cards(cv::Mat &image){
 
     /* Finds all card-sized contours in a thresholded camera image.
      * Returns the number of cards, and a list of card contours */
@@ -238,7 +238,7 @@ cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat &image){
 
 }
 
-std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, struct Card_params Card_params)
+std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Card_params)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
