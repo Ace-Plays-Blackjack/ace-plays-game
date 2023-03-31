@@ -9,6 +9,7 @@ include_directories(include)
 add_executable(OPENCV_TEST 
     src/main.cpp
     src/camera.cpp
+	src/StrategyEngine.cpp
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

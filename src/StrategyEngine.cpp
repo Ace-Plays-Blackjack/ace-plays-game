@@ -1,13 +1,13 @@
 #include <unistd.h>
 #include <iostream>
-#include "strategy.h"
+#include "StrategyEngine.h"
 
-decisionmaker::decisionmaker() {
+StrategyEngine::StrategyEngine() {
 	std::cout << "Computing strategy" << std::endl;
 	return;
 }
 
-decisions decisionmaker::getchoice(int dealercard, std::vector<int> playercards) {
+decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards) {
 	
 	int numofcards = playercards.size();
 	int i = 0;
