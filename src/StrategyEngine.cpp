@@ -3,8 +3,7 @@
 #include "StrategyEngine.h"
 
 StrategyEngine::StrategyEngine() {
-	std::cout << "Computing strategy" << std::endl;
-	return;
+
 }
 
 decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards) {
@@ -32,6 +31,7 @@ decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards
 		std::cout << playertotal << std::endl;
 		if (playertotal > 21) {
 			std::cout << "You Lose!" << std::endl;
+			return LOSE;
 		}
 	}
 	
