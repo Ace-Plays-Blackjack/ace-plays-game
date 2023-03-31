@@ -6,7 +6,7 @@
  * @param camIdx Defaults to 0. Finds default connected camera
  * @param camApi Defaults to cv::CAP_ANY. Automatically finds a suitable backend API
  */
-Camera::Camera(int camIdx, int camApi)
+Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
 {
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
@@ -19,16 +19,14 @@ Camera::Camera(int camIdx, int camApi)
         errCode = ERR_INIT;
         std::cerr << "ERROR "<< errCode <<": Can't initialize camera capture" << std::endl;
     }
-    activeCapture = capture;
+    capture.set(cv::CAP_PROP_FRAME_WIDTH, res_w);
+    capture.set(cv::CAP_PROP_FRAME_HEIGHT, res_h);
 
     std::cout << "Frame width: " << capture.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
     std::cout << "     height: " << capture.get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
     std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
+    activeCapture = capture;
 }
-
-// void Camera::display(){
-//     cv::imshow("Frame", currentFrame);
-// }
 
 /**
  * @brief Main loop used by Camera Thread.
@@ -45,8 +43,7 @@ void Camera::camThreadLoop(){
             return;
         }
 
-        // Here add the callback
-        // display();
+        /* Here add the callback */
         cameraCallback->passFrame(currentFrame);
         int key = cv::waitKey(1);
         if (key == 27/*ESC*/){break;}

@@ -10,12 +10,21 @@ add_executable(OPENCV_TEST
     src/main.cpp
     src/camera.cpp
     src/leds.cpp
+    src/DetectCard.cpp
+)
+set_property (TARGET ${PROJECT_NAME}
+  PROPERTY
+    # Enable C++17 standard compliance
+    CXX_STANDARD 17
+
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
+# Remove this later
+set(OpenCV_DIR "${OPENCV_DIR}/x64/vc15/")
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS})
 target_link_libraries( ${PROJECT_NAME} ${pigpio_LIBRARY} ${OpenCV_LIBS}  )

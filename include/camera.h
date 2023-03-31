@@ -31,7 +31,7 @@ private:
     CallbackLinker* cameraCallback = nullptr;
 
 public:
-    Camera(int camIdx = 0, int camApi = cv::CAP_ANY);
+    Camera(int camIdx = 0, int camApi = cv::CAP_ANY, double res_w = 640, double res_h = 480);
     ~Camera();
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
