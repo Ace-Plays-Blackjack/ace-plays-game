@@ -4,8 +4,6 @@
 #include "camera.h"
 #include "DetectCard.h"
 
-#include <unistd.h>
-
 using namespace cv;
 using namespace std;
 using std::cout; using std::cerr; using std::endl;
