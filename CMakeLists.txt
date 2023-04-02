@@ -21,7 +21,7 @@ add_executable(${PROJECT_NAME}
     src/DetectCard.cpp
 )
 if(NEW_CAM_STACK)
-add_executable(${PROJECT_NAME}  
+target_sources(${PROJECT_NAME} PRIVATE
     LCCV/src/lccv.cpp
     LCCV/src/libcamera_app.cpp
     LCCV/src/libcamera_app_options.cpp
