@@ -353,7 +353,7 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params Ca
     return all_rois;
 }
 
-void DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
+std::vector<cv::String> DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
 
     std::vector<cv::String> result_name;
 
@@ -373,6 +373,7 @@ void DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
                 if (num_non_zero < prev_count){
                     prev_count = num_non_zero;
                     matching_card_idx = k;
+                    std::cout << "num_non_zero " + std::to_string(k) + ":" << num_non_zero << std::endl;
                 }
             }
             // result = card_templates.getCard(matching_card_idx);
@@ -382,6 +383,8 @@ void DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
     for (int i = 0; i < result_name.size(); i++){
         std::cout << "Card " + std::to_string(i) + ":" << result_name[i] << std::endl;
     }
+
+    return result_name;
 }
 
 void DetectCard::processingThreadLoop(){
@@ -399,7 +402,10 @@ void DetectCard::processingThreadLoop(){
             Card_params card_params = find_cards(processed_image);
 
             /* Take isolated ranks and match them with the template cards */
-            template_matching(preprocess_cards(processed_image, card_params));
+            std::vector<cv::String> card_names = template_matching(preprocess_cards(processed_image, card_params));
+
+            /* Take Card Names and respective Card Positions 
+             * and pass it to the GamePlay class */
 
             /* Processing finished */
             newFrame = false;
