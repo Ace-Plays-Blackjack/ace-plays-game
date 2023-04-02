@@ -3,7 +3,6 @@ project(ACE_PLAYS VERSION 1.0.0)
 option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" ON)
 
 add_definitions(-DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK})
-message("New CAM stack option: -DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK}")
 
 include(CTest)
 enable_testing()
@@ -47,8 +46,6 @@ set(OpenCV_DIR "${OPENCV_DIR}/x64/vc15/")
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS})
 target_link_libraries( ${PROJECT_NAME} ${pigpio_LIBRARY} ${OpenCV_LIBS} )
-message("OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")
-# message("OpenCV_LIBS: ${OpenCV_LIBS}")
 
 if(NEW_CAM_STACK)
 # Add libcamera library
@@ -62,11 +59,7 @@ target_link_libraries(${PROJECT_NAME}
 ${libcamera_link}  
 ${libcamera_link_base}
 )
-message("Libcamera Path: ${libcamera}")
 endif(NEW_CAM_STACK)
-# Clean cache to always load the latest NEW_CAM_STACK option 
-unset(NEW_CAM_STACK CACHE)
-
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
@@ -97,3 +90,11 @@ include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(pigpio 
     DEFAULT_MSG 
     pigpio_INCLUDE_DIR pigpio_LIBRARY pigpiod_if_LIBRARY pigpiod_if2_LIBRARY)
+
+
+message("**** OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS} ****")
+# message("OpenCV_LIBS: ${OpenCV_LIBS}")
+message("**** Libcamera Path: ${libcamera} ****")
+message("**** New CAM stack option: -DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK} ****")
+# Clean cache to always load the latest NEW_CAM_STACK option 
+unset(NEW_CAM_STACK CACHE)
