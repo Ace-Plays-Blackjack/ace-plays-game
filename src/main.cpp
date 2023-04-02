@@ -34,13 +34,6 @@ int main(int, char**)
     DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
 
     camera_obj.registerCallback(&cards_obj);
-    decisions choice;
-    ToggleLED leds;
-    choice = SPLIT;
-    leds.flashled(choice);
-    usleep(5000000);
-    choice = HIT;
-    leds.flashled(choice);
     cards_obj.startProcessing();
     camera_obj.startRecording();
     camera_obj.stopRecording();
