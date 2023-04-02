@@ -26,7 +26,7 @@ private:
     cv::Mat preprocess_image(cv::Mat &image);
     Card_params find_cards(cv::Mat &image);
     cv::Mat flatten_card(Query_card qCard, cv::Mat &image);
-    std::vector<cv::Mat> preprocess_card(cv::Mat &image, Card_params Card_params);
+    std::vector<cv::Mat> preprocess_cards(cv::Mat &image, Card_params Card_params);
     /* Output, match template and store cards detected */
     void template_matching(const std::vector<cv::Mat> &roi, bool rank=true);
 

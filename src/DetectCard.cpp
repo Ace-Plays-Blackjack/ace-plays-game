@@ -238,7 +238,7 @@ cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat &image){
 
 }
 
-std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Card_params)
+std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params Card_params)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
@@ -292,12 +292,12 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
 
         /* Resize up by factor of 4 */
         cv::resize(Qcorner, Qcorner, cv::Size(), 4, 4, cv::INTER_LINEAR);
-        /* Threshold the upsized image. The rank and suit will look bolder and clearer */
+        /* Threshold the upsized image. The rank and suit will look bolder and clearer with a small threshold */
         cv::threshold(Qcorner, Qcorner, 5, 255, cv::THRESH_BINARY);
 
         std::vector<std::vector<cv::Point>> rank_contours, suit_contours;
         std::vector<cv::Vec4i> rank_hierarchy, suit_hierarchy;
-        // Split in to top and bottom half (top shows rank, bottom shows suit)
+        /* Split in to top and bottom half (top shows rank, bottom shows suit) */
         int vert_offset = 20; // Crop 20 rows further down to better isolate the rank and suit
         int hor_offset = 5; // Crop 5 columns further down to better isolate the rank and suit
         cv::Mat rank = Qcorner(cv::Rect(hor_offset, vert_offset, 4*(FLATTENED_WIDTH/7) - hor_offset, FLATTENED_HEIGHT/2));
@@ -395,10 +395,11 @@ void DetectCard::processingThreadLoop(){
             std::cout << "Frames dropped: " << frame_counter << std::endl;
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
-            /* Next find cards inthe frame */
+            /* Next find cards in the frame */
             Card_params card_params = find_cards(processed_image);
-            // processed_image = preprocess_card(processed_image, card_params);
-            template_matching(preprocess_card(processed_image, card_params));
+
+            /* Take isolated ranks and match them with the template cards */
+            template_matching(preprocess_cards(processed_image, card_params));
 
             /* Processing finished */
             newFrame = false;
