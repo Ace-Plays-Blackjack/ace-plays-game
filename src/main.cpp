@@ -1,5 +1,7 @@
 #include <opencv2/core.hpp>
 #include <iostream>
+
+#include "strategy.h"
 #include "leds.h"
 #include "camera.h"
 #include "DetectCard.h"
@@ -46,6 +48,12 @@ int main(int, char**)
     camera_obj.registerCallback(&cards_obj);
     cards_obj.startProcessing();
     camera_obj.startRecording();
+    
+    choice = SPLIT;
+    std::vector<int> vect{ 11, 6, 5, 10};
+    decisionmaker firstdecision;
+    choice = firstdecision.getchoice(10, vect);
+    usleep(5000000);
     camera_obj.stopRecording();
     return 0;
 }

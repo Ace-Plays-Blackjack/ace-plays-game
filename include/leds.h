@@ -7,19 +7,20 @@ enum decisions {
     SPLIT,
     DOUBLE,
     UNKNOWN,
+    LOSE,
     STOP
 };
 
 
-class ToggleLED {
-public: 
-    ToggleLED();
-    ~ToggleLED();
+class led_flasher {
+    public: 
+    led_flasher();
+    ~led_flasher();
     bool flashled(decisions choice);
-private:
-    void gpio(int led);
+    private:
+    bool changeled(bool on);
+    bool gpio(int led);
 
 };
 
 #endif //LEDS_H
-

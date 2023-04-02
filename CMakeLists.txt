@@ -18,6 +18,7 @@ add_executable(${PROJECT_NAME}
     src/camera.cpp
     src/leds.cpp
     src/DetectCard.cpp
+    src/StrategyEngine.cpp
 )
 if(NEW_CAM_STACK)
 target_sources(${PROJECT_NAME} PRIVATE
