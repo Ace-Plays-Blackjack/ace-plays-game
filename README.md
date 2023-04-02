@@ -67,59 +67,127 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+# About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-The AcePlays device helps you learn about the game of Blackjack and win against your friends. By identifying the cards played in real-time, AcePlays can let the user know whether to Hit, Stand, Double or Split.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+The AcePlays device helps you learn about the game of Blackjack and win against your friends. By identifying the cards played in real-time, AcePlays can teach the player how to play the game with the optimal strategy, telling them whether to Hit, Stand, Double or Split.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+# Getting Started
 
+## Prerequisites
+* The AcePlays code has been developed using a **Raspberry Pi 3B**. However, any model *shoud* work.
+* Installation of the **Raspbian Bullseye** Raspberry Pi OS.
+* A working **Raspberry Pi Camera** (Module V2 has been used for development). Follow https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/0 for first-usage instructions.
 
-### Prerequisites
+## Installation
+1. Clone this repository on your Pi:
+```
+$ git clone https://github.com/Ace-Plays-Blackjack/ace-plays-game.git
+```
 
+2. Install `cmake` and `gcc` compiler:
+```
+$ sudo apt install cmake gcc
+```
 
-### Installation
+3. Install OpenCV. Easiest method is to use the following command, which will install all OpenCV libraries and dependencies:
+```
+$ sudo apt install libopencv-dev
+```
 
+4. Install the `libcamera` dependencies:
+```
+$ sudo apt install libcamera-dev
+```
+
+4. Install pigpio:
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+# Usage
+The Raspbian Bullseye OS introduced a new camera stack driver called [libcamera](https://www.raspberrypi.com/documentation/computers/camera_software.html#getting-started) (follow the link for more information).
 
+OpenCV can find an appropriate driver automatically, however the resolution defaults at the lowest available option. Moreover, OpenCV does not support libcamera at the moment.
 
+The [LCCV](https://github.com/Qengineering/LCCV) repo by [QEngineering](https://github.com/Qengineering) has been used to provide support for the new camera stack. Follow the link for more detailed explanation.
 
+Users have the freedom to select between the **OLD** or **NEW** stack. Unfortunately, when using the OLD stack the resolution cannot be changed.
+
+## Using the NEW stack
+1. **Disable** Legacy stack support in Pi configuration. Write the following command in the terminal:
+```
+$ sudo raspi-config
+```
+2. Navigate to `Interface Options` -> `Legacy Camera` -> `No`
+3. Reboot to enable the changes
+4. In `CMakeLists.txt` set the `NEW_CAM_STACK` option to `ON`:
+
+```
+option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" ON)
+```
+5. Build the project
+
+## Using the OLD stack
+1. **Enable** Legacy stack support in Pi configuration. Write the following command in the terminal:
+```
+$ sudo raspi-config
+```
+2. Navigate to `Interface Options` -> `Legacy Camera` -> `Yes`
+3. Reboot to enable the changes
+4. In `CMakeLists.txt` set the `NEW_CAM_STACK` option to `OFF`:
+
+```
+option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" OFF)
+```
+5. OpenCV needs to be pointed to the [V4L Linux Driver](https://www.kernel.org/doc/html/v4.8/media/v4l-drivers/index.html) to access the camera. Ensure that `cv::CAP_V4L2` is used in the `camera_obj` constructor in `camera.cpp`:
+
+```
+CamSettings.camApi = cv::CAP_V4L2;
+```
+5. Build the project
+
+## Running the project
+An `~/ace-plays-game/build` folder is used to place all built project files from CMake. 
+
+Navigate to the cloned AcePlays directory and run the following:
+
+```
+$ mkdir build && cd build
+$ cmake .. && make
+$ ./ACE_PLAYS
+```
+
+Command `$ ./ACE_PLAYS` runs the created `ACE_PLAYS.exe`.
 
 <!-- ROADMAP -->
-## Roadmap
-
+# Roadmap
+Future Work
 
 <!-- CONTRIBUTING -->
-## Contributing
+# Contributing
 
 <!-- LICENSE -->
-## License
-
+# License
+Distributed under the XXXXX License. See [`LICENSE`](https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/main/LICENCE) for more information.
+Need to rework the license.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- CONTACT -->
-## Contact
-
+# Contact
+* [Georgios Titas](https://github.com/titasg) --> giorgostitas@gmail.com
+* [Alexander Douglas](https://github.com/Eagleeye101) --> lex4ander@gmail.com
+* [Jijo Neeruvilayil Varghese](https://github.com/jijoNV) -->	jijon92@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
+# Acknowledgments
+We would like to thank the following repositories:
+* [EdjeElectronics](https://github.com/EdjeElectronics/OpenCV-Playing-Card-Detector): AcePlays builds on top of this Python-based card detection repo
+* [QEngineering](https://github.com/Qengineering/LCCV): AcePlays uses the Libcamera C++ API wrapper for OpenCV (LCCV) to support the new Rasp Pi camera stack
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
