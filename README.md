@@ -157,7 +157,7 @@ Navigate to the cloned AcePlays directory and run the following:
 ```
 $ mkdir build && cd build
 $ cmake .. && make
-$ ./ACE_PLAYS
+$ sudo ./ACE_PLAYS
 ```
 
 Command `$ sudo ./ACE_PLAYS` runs the created `ACE_PLAYS.exe`.
