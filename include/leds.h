@@ -12,15 +12,13 @@ enum decisions {
 };
 
 
-class led_flasher {
-    public: 
-    led_flasher();
-    ~led_flasher();
+class ToggleLED {
+public: 
+    ToggleLED();
+    ~ToggleLED();
     bool flashled(decisions choice);
-    private:
-    bool changeled(bool on);
+private:
     bool gpio(int led);
-
 };
 
 #endif //LEDS_H
