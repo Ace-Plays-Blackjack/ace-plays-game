@@ -24,10 +24,22 @@ int main(int, char**)
 {
     std::cout<<cv::getBuildInformation();
     cout << "Opening camera..." << endl;
-    
+
+/*  Choose one of the resolutions bellow when using the 
+    new LIBCAMERA stack with LCCV
+
+    | Size        | FPS     | LCCV CPU usage |
+    | ----------- | :-----: | :-----: |
+    | 640 X 480   | 15      | **10%** |
+    | 640 X 480   | 30      | **17%** |
+    | 1024 x 768  | 15      | **16%** |
+    | 1280 x 960  | 15      | **18%** |
+    | 2592 x 1944 | 15      | **48%** |
+    | 3280 x 2464 | 15      | **51%** |
+*/ 
     // Camera camera_obj(0,0, 1280, 720);
     
-    Camera camera_obj(0, cv::CAP_V4L2, 1280, 720); // cv::CAP_V4L2 required to run on Pi
+    Camera camera_obj(0, cv::CAP_V4L2, 1024, 768); // cv::CAP_V4L2 required to run on Pi
 
     /* PATH depends on where the executable is called from */
     //DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows

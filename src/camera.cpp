@@ -12,10 +12,13 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
 #if NEW_CAM_STACK
     std::cout << " NEW camera stack selected " << std::endl;
 
-    activeCapture.options->video_width=res_w;
-    activeCapture.options->video_height=res_h;
-    activeCapture.options->framerate=30;
+    activeCapture.options->video_width = res_w;
+    activeCapture.options->video_height = res_h;
+    activeCapture.options->framerate = 30;
     activeCapture.options->verbose=true;
+    std::cout << "Frame width: " << activeCapture.options->video_width << std::endl;
+    std::cout << "     height: " << activeCapture.options->video_height << std::endl;
+    std::cout << "Capturing FPS: " << activeCapture.options->framerate << std::endl;
 #else
     std::cout << " OLD camera stack selected " << std::endl;
 
@@ -34,10 +37,11 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
     capture.set(cv::CAP_PROP_FRAME_HEIGHT, res_h);
     activeCapture = capture;
 
-#endif
     std::cout << "Frame width: " << capture.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
     std::cout << "     height: " << capture.get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
     std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
+#endif
+    
 }
 
 /**
