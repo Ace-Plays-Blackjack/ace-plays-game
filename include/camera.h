@@ -8,6 +8,14 @@
 #include <thread>
 #include "CallbackLinker.h"
 
+/* Select the old or new Pi camera stack */
+#define NEW_CAM_STACK TRUE
+
+#if NEW_CAM_STACK
+#include <lccv.hpp>
+#endif
+
+
 enum Err_type{
     NO_ERROR,
     ERR_INIT,
@@ -25,7 +33,13 @@ private:
 
     int errCode;
     cv::Mat currentFrame;
+
+#if NEW_CAM_STACK
+    lccv::PiCamera activeCapture;
+#else
     cv::VideoCapture activeCapture;
+#endif
+
     std::thread camThread;
     void camThreadLoop();
     CallbackLinker* cameraCallback = nullptr;
@@ -35,7 +49,6 @@ public:
     ~Camera();
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
-    //void display(); // Temporary
     void startRecording();
     void stopRecording();
     int getErr();

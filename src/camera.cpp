@@ -8,6 +8,13 @@
  */
 Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
 {
+
+#if NEW_CAM_STACK
+    activeCapture.options->video_width=res_w;
+    activeCapture.options->video_height=res_h;
+    activeCapture.options->framerate=30;
+    activeCapture.options->verbose=true;
+#else
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
     CamSettings.camApi = camApi;
@@ -21,11 +28,12 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
     }
     capture.set(cv::CAP_PROP_FRAME_WIDTH, res_w);
     capture.set(cv::CAP_PROP_FRAME_HEIGHT, res_h);
+    activeCapture = capture;
 
+#endif
     std::cout << "Frame width: " << capture.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
     std::cout << "     height: " << capture.get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
     std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
-    activeCapture = capture;
 }
 
 /**
@@ -35,16 +43,23 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
  */
 void Camera::camThreadLoop(){
     while(CamSettings.isOn){
+
+#if NEW_CAM_STACK
+        if(!activeCapture.getVideoFrame(currentFrame,1000)){
+            std::cout<<"Timeout error"<<std::endl;
+        }
+#else
         activeCapture.read(currentFrame);
 
         if (currentFrame.empty()) {
             errCode = ERR_EMPTY_FRAME;
             std::cerr << "ERROR: "<< ERR_EMPTY_FRAME << " blank frame grabbed\n";
-            return;
         }
-
-        /* Here add the callback */
-        cameraCallback->passFrame(currentFrame);
+#endif
+        else{
+            /* Here add the callback */
+            cameraCallback->passFrame(currentFrame);
+        }
         int key = cv::waitKey(1);
         if (key == 27/*ESC*/){break;}
     }
@@ -73,14 +88,18 @@ void Camera::unregisterCallback(){
  */
 void Camera::startRecording(){
     CamSettings.isOn = true;
+
+#if NEW_CAM_STACK
+    activeCapture.startVideo();
+#else
     if(!activeCapture.open(CamSettings.camIdx, CamSettings.camApi)){
         errCode = ERR_INIT;
         std::cerr << "ERROR "<< errCode <<": Can't initialize camera capture" << std::endl;
     }
-    
+#endif
     /* Start Thread */
     camThread = std::thread(&Camera::camThreadLoop, this);
-    
+
 }
 
 /**
@@ -109,5 +128,11 @@ int Camera::getErr(){
 Camera::~Camera()
 {
     CamSettings.isOn = false;
+    
+#if NEW_CAM_STACK
+    activeCapture.stopVideo();
+#else
     activeCapture.release();
+#endif
+    cv::destroyWindow("Frame");
 }
