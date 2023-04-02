@@ -75,18 +75,10 @@ bool ToggleLED::flashled(decisions choice) {
 }
 
 void ToggleLED::gpio(int led) {
-	// int v;
 	int GPIO = led;
 	gpioSetMode(GPIO, PI_OUTPUT);
-	// v = gpioGetMode(GPIO);
-
 	gpioSetPullUpDown(GPIO, PI_PUD_UP);
 	gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
-	// v = gpioRead(GPIO);
-
-	// gpioSetPullUpDown(GPIO, PI_PUD_DOWN);
-	// gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
-	// v = gpioRead(GPIO);
 }
 
 ToggleLED::~ToggleLED() {

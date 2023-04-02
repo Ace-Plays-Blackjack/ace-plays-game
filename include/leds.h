@@ -18,7 +18,8 @@ public:
     ~ToggleLED();
     bool flashled(decisions choice);
 private:
-    bool gpio(int led);
+    void gpio(int led);
+
 };
 
 #endif //LEDS_H
