@@ -7,7 +7,7 @@
 #include "DetectCard.h"
 
 #include <thread>
-#include "strategy.h"
+#include "StrategyEngine.h"
 
 #include <vector>
 #include <stdlib.h>
@@ -55,7 +55,7 @@ int main(int, char**)
     
     choice = SPLIT;
     std::vector<int> vect{ 11, 6, 5, 10};
-    decisionmaker firstdecision;
+    StrategyEngine firstdecision;
     choice = firstdecision.getchoice(10, vect);
     usleep(5000000);
     camera_obj.stopRecording();
