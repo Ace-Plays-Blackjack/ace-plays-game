@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(ACE_PLAYS VERSION 1.0.0)
 option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" OFF)
+# that would define macro constant CMAKE_VAR_B 
+add_definitions(-DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK})
+message("New CAM stack option: -DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK}")
 
 include(CTest)
 enable_testing()
@@ -43,7 +46,7 @@ set(OpenCV_DIR "${OPENCV_DIR}/x64/vc15/")
 # Add OpenCV library
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS})
-target_link_libraries( ${PROJECT_NAME} ${pigpio_LIBRARY} ${OpenCV_LIBS}  )
+target_link_libraries( ${PROJECT_NAME} ${pigpio_LIBRARY} ${OpenCV_LIBS} )
 message("OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")
 # message("OpenCV_LIBS: ${OpenCV_LIBS}")
 

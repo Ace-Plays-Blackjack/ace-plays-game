@@ -8,8 +8,12 @@
 #include <thread>
 #include "CallbackLinker.h"
 
-/* Select the old or new Pi camera stack */
+/* Choose the old or new Pi camera stack from CMakeLists.txt file*/
+#if CMAKE_NEW_CAM_STACK_ON
 #define NEW_CAM_STACK TRUE
+elif CMAKE_NEW_CAM_STACK_OFF
+#define NEW_CAM_STACK FALSE
+#endif
 
 #if NEW_CAM_STACK
 #include <lccv.hpp>

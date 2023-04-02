@@ -414,9 +414,18 @@ void DetectCard::passFrame(cv::Mat &nextFrame){
         /* Count dropped frames when processing loop is busy */
         frame_counter++;
     }
-    newFrame = true;
-    currentFrame = nextFrame;
-    cv::imshow("Frame", currentFrame);
+    
+    try
+    {
+        newFrame = true;
+        currentFrame = nextFrame;
+        cv::imshow("Frame", currentFrame);
+    }
+    catch (cv::Exception& e)
+    {
+        const char* err_msg = e.what();
+        std::cout << "exception caught: imshow:\n" << err_msg << std::endl;
+    }
 }
 
 /**

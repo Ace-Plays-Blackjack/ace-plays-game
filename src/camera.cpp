@@ -10,11 +10,15 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
 {
 
 #if NEW_CAM_STACK
+    std::cout << " NEW camera stack selected " << std::endl;
+
     activeCapture.options->video_width=res_w;
     activeCapture.options->video_height=res_h;
     activeCapture.options->framerate=30;
     activeCapture.options->verbose=true;
 #else
+    std::cout << " OLD camera stack selected " << std::endl;
+
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
     CamSettings.camApi = camApi;
