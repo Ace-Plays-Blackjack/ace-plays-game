@@ -1,10 +1,10 @@
 #include <opencv2/core.hpp>
 #include <iostream>
 
-#include "strategy.h"
 #include "leds.h"
 #include "camera.h"
 #include "DetectCard.h"
+#include "StrategyEngine.h"
 
 using namespace cv;
 using namespace std;
