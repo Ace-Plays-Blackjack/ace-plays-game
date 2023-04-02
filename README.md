@@ -160,7 +160,8 @@ $ cmake .. && make
 $ ./ACE_PLAYS
 ```
 
-Command `$ ./ACE_PLAYS` runs the created `ACE_PLAYS.exe`.
+Command `$ sudo ./ACE_PLAYS` runs the created `ACE_PLAYS.exe`.
+`pigpio` library requires running with `sudo` privileges.
 
 <!-- ROADMAP -->
 # Roadmap
