@@ -1,17 +1,7 @@
-#include <unistd.h>
 #include <iostream>
-#include "leds.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
 
 #include "pigpio.h"
+#include "leds.h"
 
 #define HIT_PIN 12
 #define STAND_PIN 19
@@ -75,18 +65,10 @@ bool ToggleLED::flashled(decisions choice) {
 }
 
 void ToggleLED::gpio(int led) {
-	// int v;
 	int GPIO = led;
 	gpioSetMode(GPIO, PI_OUTPUT);
-	// v = gpioGetMode(GPIO);
-
 	gpioSetPullUpDown(GPIO, PI_PUD_UP);
 	gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
-	// v = gpioRead(GPIO);
-
-	// gpioSetPullUpDown(GPIO, PI_PUD_DOWN);
-	// gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
-	// v = gpioRead(GPIO);
 }
 
 ToggleLED::~ToggleLED() {

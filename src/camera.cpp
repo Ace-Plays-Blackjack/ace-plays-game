@@ -3,17 +3,34 @@
 /**
  * @brief Construct a new Camera:: Camera object
  * 
- * @param camIdx Defaults to 0. Finds default connected camera
- * @param camApi Defaults to cv::CAP_ANY. Automatically finds a suitable backend API
+ * @param camIdx Defaults to 0. If multiple cameras present can be used to define
+ * which one to be used
+ * @param res_w Defaults to 640. Camera resolution (width)
+ * @param res_h Defaults to 480. Camera resolution (width)
  */
-Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
+Camera::Camera(int camIdx, double res_w, double res_h)
 {
+
+#if NEW_CAM_STACK
+    std::cout << " NEW camera stack selected " << std::endl;
+
+    activeCapture.options->video_width = res_w;
+    activeCapture.options->video_height = res_h;
+    activeCapture.options->framerate = 30;
+    activeCapture.options->verbose=true;
+    std::cout << "Frame width: " << activeCapture.options->video_width << std::endl;
+    std::cout << "     height: " << activeCapture.options->video_height << std::endl;
+    std::cout << "Capturing FPS: " << activeCapture.options->framerate << std::endl;
+#else
+    std::cout << " OLD camera stack selected " << std::endl;
+
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
-    CamSettings.camApi = camApi;
+    /* cv::CAP_V4L2 required to run with OLD camera stack */
+    CamSettings.camApi = cv::CAP_V4L2;
 
     /* Open Camera */
-    cv::VideoCapture capture(camIdx, camApi);
+    cv::VideoCapture capture(CamSettings.camIdx, CamSettings.camApi);
     if (!capture.isOpened())
     {
         errCode = ERR_INIT;
@@ -21,11 +38,13 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
     }
     capture.set(cv::CAP_PROP_FRAME_WIDTH, res_w);
     capture.set(cv::CAP_PROP_FRAME_HEIGHT, res_h);
+    activeCapture = capture;
 
     std::cout << "Frame width: " << capture.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
     std::cout << "     height: " << capture.get(cv::CAP_PROP_FRAME_HEIGHT) << std::endl;
     std::cout << "Capturing FPS: " << capture.get(cv::CAP_PROP_FPS) << std::endl;
-    activeCapture = capture;
+#endif
+    
 }
 
 /**
@@ -35,16 +54,23 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
  */
 void Camera::camThreadLoop(){
     while(CamSettings.isOn){
+
+#if NEW_CAM_STACK
+        if(!activeCapture.getVideoFrame(currentFrame,1000)){
+            std::cout<<"Timeout error"<<std::endl;
+        }
+#else
         activeCapture.read(currentFrame);
 
         if (currentFrame.empty()) {
             errCode = ERR_EMPTY_FRAME;
             std::cerr << "ERROR: "<< ERR_EMPTY_FRAME << " blank frame grabbed\n";
-            return;
         }
-
-        /* Here add the callback */
-        cameraCallback->passFrame(currentFrame);
+#endif
+        else{
+            /* Here add the callback */
+            cameraCallback->passFrame(currentFrame);
+        }
         int key = cv::waitKey(1);
         if (key == 27/*ESC*/){break;}
     }
@@ -73,14 +99,18 @@ void Camera::unregisterCallback(){
  */
 void Camera::startRecording(){
     CamSettings.isOn = true;
+
+#if NEW_CAM_STACK
+    activeCapture.startVideo();
+#else
     if(!activeCapture.open(CamSettings.camIdx, CamSettings.camApi)){
         errCode = ERR_INIT;
         std::cerr << "ERROR "<< errCode <<": Can't initialize camera capture" << std::endl;
     }
-    
+#endif
     /* Start Thread */
     camThread = std::thread(&Camera::camThreadLoop, this);
-    
+
 }
 
 /**
@@ -109,5 +139,11 @@ int Camera::getErr(){
 Camera::~Camera()
 {
     CamSettings.isOn = false;
+    
+#if NEW_CAM_STACK
+    activeCapture.stopVideo();
+#else
     activeCapture.release();
+#endif
+    cv::destroyWindow("Frame");
 }

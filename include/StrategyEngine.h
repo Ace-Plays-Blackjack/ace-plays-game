@@ -5,7 +5,7 @@
 #include <vector>
 
 class StrategyEngine {
-	public:
+public:
 	StrategyEngine();
 	decisions getchoice(int dealercard, std::vector<int> playecards);
 };
