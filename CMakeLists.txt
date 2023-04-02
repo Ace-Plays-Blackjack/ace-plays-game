@@ -11,7 +11,9 @@ add_executable(OPENCV_TEST
     src/camera.cpp
     src/leds.cpp
     src/DetectCard.cpp
+    src/StrategyEngine.cpp
 )
+
 set_property (TARGET ${PROJECT_NAME}
   PROPERTY
     # Enable C++17 standard compliance
