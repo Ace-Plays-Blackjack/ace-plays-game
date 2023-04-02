@@ -3,10 +3,12 @@
 /**
  * @brief Construct a new Camera:: Camera object
  * 
- * @param camIdx Defaults to 0. Finds default connected camera
- * @param camApi Defaults to cv::CAP_ANY. Automatically finds a suitable backend API
+ * @param camIdx Defaults to 0. If multiple cameras present can be used to define
+ * which one to be used
+ * @param res_w Defaults to 640. Camera resolution (width)
+ * @param res_h Defaults to 480. Camera resolution (width)
  */
-Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
+Camera::Camera(int camIdx, double res_w, double res_h)
 {
 
 #if NEW_CAM_STACK
@@ -24,10 +26,11 @@ Camera::Camera(int camIdx, int camApi, double res_w, double res_h)
 
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
-    CamSettings.camApi = camApi;
+    /* cv::CAP_V4L2 required to run with OLD camera stack */
+    CamSettings.camApi = cv::CAP_V4L2;
 
     /* Open Camera */
-    cv::VideoCapture capture(camIdx, camApi);
+    cv::VideoCapture capture(CamSettings.camIdx, CamSettings.camApi);
     if (!capture.isOpened())
     {
         errCode = ERR_INIT;

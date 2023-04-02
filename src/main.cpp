@@ -35,9 +35,9 @@ int main(int, char**)
     | 2592 x 1944 | 15      | **48%** |
     | 3280 x 2464 | 15      | **51%** |
 */ 
-    // Camera camera_obj(0,0, 1280, 720);
+    // Camera camera_obj(0, 1280, 720);
     
-    Camera camera_obj(0, cv::CAP_V4L2, 1024, 768); // cv::CAP_V4L2 required to run on Pi
+    Camera camera_obj(0, 1024, 768); 
 
     /* PATH depends on where the executable is called from */
     //DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
