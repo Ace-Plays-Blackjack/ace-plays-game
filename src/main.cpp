@@ -40,18 +40,17 @@ int main(int, char**)
     camera_obj.startRecording();
     
     /* Demonstration of LED Toggling*/
-    decisions choice;
     ToggleLED leds;
-    choice = SPLIT;
-    leds.flashled(choice);
-    usleep(5000000);
-    choice = HIT;
-    leds.flashled(choice);
+    leds.flashled(SPLIT);
+    usleep(1000000);
+    leds.flashled(HIT);
+    usleep(1000000);
+    leds.flashled(STOP);
 
     /* Demonstration of Strategy Engine */
     std::vector<int> vect{ 11, 6, 5, 10};
     StrategyEngine firstdecision;
-    choice = firstdecision.getchoice(10, vect);
+    decisions choice = firstdecision.getchoice(10, vect);
     
     camera_obj.stopRecording();
     return 0;

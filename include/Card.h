@@ -25,23 +25,17 @@ struct Card_params{
     std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
 };
 
-class Query_card
+class DetectedCards
 {
     /* Structure to store information about single card in the camera image.*/
     public:
-        Query_card(){};
-        ~Query_card(){};
+        DetectedCards(){};
+        ~DetectedCards(){};
         std::vector<std::vector<cv::Point>> contours; /* Contour of card */
         cv::Size card_size; /* Card dimensions */
         std::vector<cv::Point> corner_pts; /* Card corner points */
         cv::Point_<int> centre_pts; /* Card centre points */
-        // self.warp = [] # 200x300, flattened, grayed, blurred image
-        // self.rank_img = [] # Thresholded, sized image of card's rank
-        // self.suit_img = [] # Thresholded, sized image of card's suit
-        // self.best_rank_match = "Unknown" # Best matched rank
-        // self.best_suit_match = "Unknown" # Best matched suit
-        // self.rank_diff = 0 # Difference between rank image and best matched train rank image
-        // self.suit_diff = 0 # Difference between suit image and best matched train suit image
+
         cv::RotatedRect rotatedbox;
 
 };

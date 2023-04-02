@@ -131,7 +131,7 @@ Card_params DetectCard::find_cards(cv::Mat &image){
     return Card_params;
 }
 
-cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat &image){
+cv::Mat DetectCard::flatten_card(DetectedCards qCard, cv::Mat &image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
     /* If card is placed HORIZONTALLY, then card Rank is 
@@ -246,8 +246,8 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params Ca
     /* Vector of images to hold all detected Ranks */
     std::vector<cv::Mat> all_rois;
 
-    // Initialize new Query_card object
-    Query_card qCard;
+    // Initialize new DetectedCards object
+    DetectedCards qCard;
 
     /* Check if Card_params is filled before procceeding */
     if (Card_params.num_of_cards == 0 || Card_params.err || Card_params.card_approxs.empty()){
@@ -373,7 +373,6 @@ std::vector<cv::String> DetectCard::template_matching(const std::vector<cv::Mat>
                 if (num_non_zero < prev_count){
                     prev_count = num_non_zero;
                     matching_card_idx = k;
-                    std::cout << "num_non_zero " + std::to_string(k) + ":" << num_non_zero << std::endl;
                 }
             }
             // result = card_templates.getCard(matching_card_idx);
