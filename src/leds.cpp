@@ -1,17 +1,7 @@
-#include <unistd.h>
 #include <iostream>
-#include "leds.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
 
 #include "pigpio.h"
+#include "leds.h"
 
 #define HIT_PIN 12
 #define STAND_PIN 19

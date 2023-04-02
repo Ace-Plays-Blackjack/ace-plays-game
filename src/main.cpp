@@ -5,20 +5,11 @@
 #include "camera.h"
 #include "DetectCard.h"
 #include "StrategyEngine.h"
+#include <unistd.h>
 
 using namespace cv;
 using namespace std;
 using std::cout; using std::cerr; using std::endl;
-
-
-/* Not Used */
-// class CameraCallback : public CallbackLinker{
-//     void passFrame(cv::Mat &nextFrame){
-//         cv::imshow("Frame", nextFrame);
-//         // std::cout << "Num of Cards: " << card_params.num_of_cards << std::endl;
-//     }
-// };
-
 
 int main(int, char**)
 {
@@ -37,7 +28,6 @@ int main(int, char**)
     | 2592 x 1944 | 15      | **48%** |
     | 3280 x 2464 | 15      | **51%** |
 */ 
-    // Camera camera_obj(0, 1280, 720);
     
     Camera camera_obj(0, 1024, 768); 
 
@@ -46,6 +36,10 @@ int main(int, char**)
     DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
 
     camera_obj.registerCallback(&cards_obj);
+    cards_obj.startProcessing();
+    camera_obj.startRecording();
+    
+    /* Demonstration of LED Toggling*/
     decisions choice;
     ToggleLED leds;
     choice = SPLIT;
@@ -53,14 +47,12 @@ int main(int, char**)
     usleep(5000000);
     choice = HIT;
     leds.flashled(choice);
-    cards_obj.startProcessing();
-    camera_obj.startRecording();
-    
-    choice = SPLIT;
+
+    /* Demonstration of Strategy Engine */
     std::vector<int> vect{ 11, 6, 5, 10};
     StrategyEngine firstdecision;
     choice = firstdecision.getchoice(10, vect);
-    usleep(5000000);
+    
     camera_obj.stopRecording();
     return 0;
 }
