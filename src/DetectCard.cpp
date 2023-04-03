@@ -242,7 +242,7 @@ cv::Mat DetectCard::flatten_card(DetectedCard &qCard, cv::Mat &image){
 
 }
 
-std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &Card_params)
+void DetectCard::preprocess_cards(cv::Mat &image, Card_params &Card_params)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
@@ -256,7 +256,7 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &C
     }
 
     for(int k = 0; k < Card_params.num_of_cards; k++){
-        struct DetectedCard qCard;
+        DetectedCard qCard;
         qCard.corner_pts = Card_params.card_approxs[k];
 
         /* Find width and height of card's bounding rectangle */
@@ -277,6 +277,8 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &C
         Card_params.card_size.push_back(qCard.card_size);
         Card_params.centre_pts.push_back(qCard.centre_pts);
         Card_params.rotatedbox.push_back(qCard.rotatedbox);
+
+        /* Flatten the card to fix for wrapped perspective */
         cv::Mat flat_card = flatten_card(qCard, image);
 
         // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
@@ -351,12 +353,13 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &C
         
     Card_params.rank_rois = rank_rois;
     /* Return the Rank ROI to be passed on the template matching function*/
-    return rank_rois;
+    // return rank_rois;
 }
 
-std::vector<cv::String> DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
+std::vector<cv::String> DetectCard::template_matching(const Card_params &Card_params, bool rank){
 
     std::vector<cv::String> result_name;
+    std::vector<cv::Mat> roi = Card_params.rank_rois;
 
     for (int i = 0; i < roi.size(); i++)
     {
@@ -400,9 +403,10 @@ void DetectCard::processingThreadLoop(){
             cv::Mat processed_image = preprocess_image(currentFrame);
             /* Next find cards in the frame */
             Card_params card_params = find_cards(processed_image);
-
+            /* Find the cards rank ROI (region of interest) */
+            preprocess_cards(processed_image, card_params);
             /* Take isolated ranks and match them with the template cards */
-            std::vector<cv::String> card_names = template_matching(preprocess_cards(processed_image, card_params));
+            std::vector<cv::String> card_names = template_matching(card_params);
 
             /* Take Card Names and respective Card Positions 
              * and pass it to the GamePlay class */
