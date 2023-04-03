@@ -37,6 +37,7 @@ public:
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
     void nextCallback(cv::Mat &nextFrame);
+    void nextCallback(Card_params &Card_params){};
 
     /* Spawn thread */
     void startProcessing();
