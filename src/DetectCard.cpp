@@ -267,8 +267,8 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &C
         /* Find center point of card by taking x and y average of the four corners */
         size_t num_corners = qCard.corner_pts.size();
         for (int i = 0; i < num_corners; i++){
-            Card_params.centre_pts[k].x += qCard.corner_pts[i].x;
-            Card_params.centre_pts[k].y += qCard.corner_pts[i].y;
+            qCard.centre_pts.x += qCard.corner_pts[i].x;
+            qCard.centre_pts.y += qCard.corner_pts[i].y;
         }
         qCard.centre_pts.x /= (int)num_corners;
         qCard.centre_pts.y /= (int)num_corners;
