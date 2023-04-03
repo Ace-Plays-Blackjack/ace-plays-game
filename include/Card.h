@@ -19,25 +19,32 @@ struct Card_params{
     int err = 0;
     int num_of_cards = 0;
     std::vector<int> contour_is_card_idx;
+    /* Holds all contours of single frame */
     std::vector<std::vector<cv::Point>> contours;
+    /* Card corner points */
     std::vector<std::vector<cv::Point>> card_approxs;
+    /* Card centre points */
+    std::vector<cv::Point_<int>> centre_pts;
+    /* Card dimensions */
+    std::vector<cv::Size> card_size; 
+    /* Card rotated bounding box */
     std::vector<cv::RotatedRect> rotatedbox;
     std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
+    /* Vector of images to hold all detected Ranks */
+    std::vector<cv::Mat> rank_rois;
 };
 
-class DetectedCards
+struct DetectedCard
 {
     /* Structure to store information about single card in the camera image.*/
-    public:
-        DetectedCards(){};
-        ~DetectedCards(){};
-        std::vector<std::vector<cv::Point>> contours; /* Contour of card */
-        cv::Size card_size; /* Card dimensions */
-        std::vector<cv::Point> corner_pts; /* Card corner points */
-        cv::Point_<int> centre_pts; /* Card centre points */
-
-        cv::RotatedRect rotatedbox;
-
+    /* Card dimensions */
+    cv::Size card_size;
+    /* Card centre points */
+    cv::Point_<int> centre_pts;
+    /* Card corner points */
+    std::vector<cv::Point> corner_pts;
+    /* Card rotated bounding box */
+    cv::RotatedRect rotatedbox;
 };
 
 struct TemplateImages{
