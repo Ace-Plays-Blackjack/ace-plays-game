@@ -36,7 +36,7 @@ struct Card_params{
     std::vector<cv::String> card_names;
 };
 
-struct DetectedCard
+struct qCard
 {
     /* Structure to store information about single card in the camera image.*/
     /* Card dimensions */

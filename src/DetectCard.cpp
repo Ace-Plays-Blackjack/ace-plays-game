@@ -135,7 +135,7 @@ Card_params DetectCard::find_cards(cv::Mat &image){
     return Card_params;
 }
 
-cv::Mat DetectCard::flatten_card(DetectedCard &qCard, cv::Mat &image){
+cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
     /* If card is placed HORIZONTALLY, then card Rank is 
@@ -256,7 +256,7 @@ void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
     }
 
     for(int k = 0; k < Card_params.num_of_cards; k++){
-        DetectedCard qCard;
+        qCard qCard;
         qCard.corner_pts = Card_params.card_approxs[k];
 
         /* Find width and height of card's bounding rectangle */
@@ -415,12 +415,12 @@ void DetectCard::processingThreadLoop(){
             newFrame = false;
             busy = false;
             frame_counter = 0;
-            // processingCallback->passFrame();
+            // processingCallback->nextCallback(card_params);
         }
     }
 }
 
-void DetectCard::passFrame(cv::Mat &nextFrame){
+void DetectCard::nextCallback(cv::Mat &nextFrame){
     if (busy){
         /* Count dropped frames when processing loop is busy */
         frame_counter++;

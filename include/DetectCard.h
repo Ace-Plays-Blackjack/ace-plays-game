@@ -25,7 +25,7 @@ private:
 
     cv::Mat preprocess_image(cv::Mat &image);
     Card_params find_cards(cv::Mat &image);
-    cv::Mat flatten_card(DetectedCard &qCard, cv::Mat &image);
+    cv::Mat flatten_card(qCard &qCard, cv::Mat &image);
     void preprocess_cards(Card_params &Card_params, cv::Mat &image);
 
     /* Output, match template and store cards detected */
@@ -36,7 +36,7 @@ public:
     ~DetectCard();
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
-    void passFrame(cv::Mat &nextFrame);
+    void nextCallback(cv::Mat &nextFrame);
 
     /* Spawn thread */
     void startProcessing();

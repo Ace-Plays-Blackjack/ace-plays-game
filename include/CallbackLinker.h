@@ -1,7 +1,7 @@
 #ifndef CALLBACK_LINKER_H 
 #define CALLBACK_LINKER_H
 
-#include <opencv2/core.hpp>
+#include "Card.h"
 
 /**
  * @brief Generic abstract Callback Interface class
@@ -14,9 +14,16 @@ public:
      * @brief Abstract method
      * @details Implement method in a Derived class
      * 
-     * @param nextFrame a cv::Mat type variable
+     * @param nextFrame a cv::Mat type object
      */
-    virtual void passFrame(cv::Mat &nextFrame) = 0;
+    virtual void nextCallback(cv::Mat &nextFrame) = 0;
+
+    /**
+     * @brief Overloaded Abstract method
+     * 
+     * @param Card_params a Card_params type object
+     */
+    virtual void nextCallback(Card_params &Card_params) = 0;
 };
 
 
