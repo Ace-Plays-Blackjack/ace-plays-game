@@ -115,6 +115,10 @@ Card_params DetectCard::find_cards(cv::Mat &image){
             Card_params.contour_is_card_idx.push_back(i);
 
             /* Store Card Approximations*/
+            /* Corner points are stored with [0] position 
+             * as the point closest to the top of the Frame (min y).
+             * The remaining points are then populated in counter-clockwise
+             * direction. */
             Card_params.card_approxs.push_back(approx); // approx has 4 pairs of (x,y) coordinates
 
             /* Create rotated bounding boxes around cards */
@@ -131,7 +135,7 @@ Card_params DetectCard::find_cards(cv::Mat &image){
     return Card_params;
 }
 
-cv::Mat DetectCard::flatten_card(DetectedCards qCard, cv::Mat &image){
+cv::Mat DetectCard::flatten_card(DetectedCard &qCard, cv::Mat &image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
     /* If card is placed HORIZONTALLY, then card Rank is 
@@ -238,46 +242,42 @@ cv::Mat DetectCard::flatten_card(DetectedCards qCard, cv::Mat &image){
 
 }
 
-std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params Card_params)
+std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &Card_params)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
 
     /* Vector of images to hold all detected Ranks */
-    std::vector<cv::Mat> all_rois;
-
-    // Initialize new DetectedCards object
-    DetectedCards qCard;
+    std::vector<cv::Mat> rank_rois;
 
     /* Check if Card_params is filled before procceeding */
     if (Card_params.num_of_cards == 0 || Card_params.err || Card_params.card_approxs.empty()){
-        return all_rois;
+        return rank_rois;
     }
-    qCard.contours = Card_params.contours;
 
     for(int k = 0; k < Card_params.num_of_cards; k++){
 
-        qCard.rotatedbox = Card_params.rotatedbox[k];
-        /* Corner points are stored with [0] position 
-        * as the point closest to the top of the Frame (min y).
-        * The remaining points are then populated in counter-clockwise
-        * direction. */
-        qCard.corner_pts = Card_params.card_approxs[k];
+        std::vector<cv::Point> corner_pts = Card_params.card_approxs[k];
 
         /* Find width and height of card's bounding rectangle */
-        cv::Rect boundingBox = cv::boundingRect(qCard.corner_pts);
-        qCard.card_size.height = boundingBox.height;
-        qCard.card_size.width = boundingBox.width;
+        cv::Rect boundingBox = cv::boundingRect(corner_pts);
+        Card_params.card_size[k].height = boundingBox.height;
+        Card_params.card_size[k].width = boundingBox.width;
 
         /* Find center point of card by taking x and y average of the four corners */
-        size_t num_corners = qCard.corner_pts.size();
+        size_t num_corners = corner_pts.size();
         for (int i = 0; i < num_corners; i++){
-            qCard.centre_pts.x += qCard.corner_pts[i].x;
-            qCard.centre_pts.y += qCard.corner_pts[i].y;
+            Card_params.centre_pts[k].x += corner_pts[i].x;
+            Card_params.centre_pts[k].y += corner_pts[i].y;
         }
-        qCard.centre_pts.x /= (int)num_corners;
-        qCard.centre_pts.y /= (int)num_corners;
+        Card_params.centre_pts[k].x /= (int)num_corners;
+        Card_params.centre_pts[k].y /= (int)num_corners;
 
+        DetectedCard qCard;
+        qCard.card_size = Card_params.card_size[k];
+        qCard.corner_pts = corner_pts;
+        qCard.centre_pts = Card_params.centre_pts[k];
+        qCard.rotatedbox = Card_params.rotatedbox[k];
         cv::Mat flat_card = flatten_card(qCard, image);
 
         // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
@@ -325,13 +325,15 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params Ca
         * of the reference images that will be used for matching */
         cv::Mat rank_roi, suit_roi;
         if(rank_contours.size()){
+            /* Isolate the largest contour */
             cv::Rect rank_box = cv::boundingRect(rank_contours[0]);
             rank_roi = rank(rank_box);
             cv::resize(rank_roi, rank_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
             // cv::imshow("Rank ROI", rank_roi);
-            all_rois.push_back(rank_roi);
+            rank_rois.push_back(rank_roi);
         }
         if(suit_contours.size()){
+            /* Isolate the largest contour */
             cv::Rect suit_box = cv::boundingRect(suit_contours[0]);
             suit_roi = suit(suit_box);
             cv::resize(suit_roi, suit_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
@@ -348,9 +350,9 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params Ca
     // }
     // cv::imshow("Bounding box", image);
         
-
+    Card_params.rank_rois = rank_rois;
     /* Return the Rank ROI to be passed on the template matching function*/
-    return all_rois;
+    return rank_rois;
 }
 
 std::vector<cv::String> DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
