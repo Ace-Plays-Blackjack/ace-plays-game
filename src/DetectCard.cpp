@@ -252,7 +252,7 @@ void DetectCard::preprocess_cards(cv::Mat &image, Card_params &Card_params)
 
     /* Check if Card_params is filled before procceeding */
     if (Card_params.num_of_cards == 0 || Card_params.err || Card_params.card_approxs.empty()){
-        return rank_rois;
+        return;
     }
 
     for(int k = 0; k < Card_params.num_of_cards; k++){
