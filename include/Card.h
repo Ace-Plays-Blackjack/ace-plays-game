@@ -34,8 +34,11 @@ struct Card_params{
     std::vector<cv::Mat> rank_rois;
 };
 
-struct DetectedCard
+class DetectedCard
 {
+public:
+    DetectedCard(){};
+    ~DetectedCard(){};
     /* Structure to store information about single card in the camera image.*/
     /* Card dimensions */
     cv::Size card_size;
