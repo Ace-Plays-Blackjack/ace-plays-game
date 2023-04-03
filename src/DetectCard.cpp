@@ -256,28 +256,27 @@ std::vector<cv::Mat> DetectCard::preprocess_cards(cv::Mat &image, Card_params &C
     }
 
     for(int k = 0; k < Card_params.num_of_cards; k++){
-
-        std::vector<cv::Point> corner_pts = Card_params.card_approxs[k];
+        struct DetectedCard qCard;
+        qCard.corner_pts = Card_params.card_approxs[k];
 
         /* Find width and height of card's bounding rectangle */
-        cv::Rect boundingBox = cv::boundingRect(corner_pts);
-        Card_params.card_size[k].height = boundingBox.height;
-        Card_params.card_size[k].width = boundingBox.width;
+        cv::Rect boundingBox = cv::boundingRect(qCard.corner_pts);
+        qCard.card_size.height = boundingBox.height;
+        qCard.card_size.width = boundingBox.width;
 
         /* Find center point of card by taking x and y average of the four corners */
-        size_t num_corners = corner_pts.size();
+        size_t num_corners = qCard.corner_pts.size();
         for (int i = 0; i < num_corners; i++){
-            Card_params.centre_pts[k].x += corner_pts[i].x;
-            Card_params.centre_pts[k].y += corner_pts[i].y;
+            Card_params.centre_pts[k].x += qCard.corner_pts[i].x;
+            Card_params.centre_pts[k].y += qCard.corner_pts[i].y;
         }
-        Card_params.centre_pts[k].x /= (int)num_corners;
-        Card_params.centre_pts[k].y /= (int)num_corners;
+        qCard.centre_pts.x /= (int)num_corners;
+        qCard.centre_pts.y /= (int)num_corners;
 
-        DetectedCard qCard;
-        qCard.card_size = Card_params.card_size[k];
-        qCard.corner_pts = corner_pts;
-        qCard.centre_pts = Card_params.centre_pts[k];
-        qCard.rotatedbox = Card_params.rotatedbox[k];
+        /* Store calculated card parameters in Card_params */
+        Card_params.card_size.push_back(qCard.card_size);
+        Card_params.centre_pts.push_back(qCard.centre_pts);
+        Card_params.rotatedbox.push_back(qCard.rotatedbox);
         cv::Mat flat_card = flatten_card(qCard, image);
 
         // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
