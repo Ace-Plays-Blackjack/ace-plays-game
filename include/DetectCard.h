@@ -26,10 +26,10 @@ private:
     cv::Mat preprocess_image(cv::Mat &image);
     Card_params find_cards(cv::Mat &image);
     cv::Mat flatten_card(DetectedCard &qCard, cv::Mat &image);
-    void preprocess_cards(cv::Mat &image, Card_params &Card_params);
+    void preprocess_cards(Card_params &Card_params, cv::Mat &image);
 
     /* Output, match template and store cards detected */
-    std::vector<cv::String> template_matching(const Card_params &Card_params, bool rank=true);
+    void template_matching(Card_params &Card_params, bool rank=true);
 
 public:
     DetectCard(cv::String folder_path);

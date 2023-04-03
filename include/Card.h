@@ -32,6 +32,8 @@ struct Card_params{
     std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
     /* Vector of images to hold all detected Ranks */
     std::vector<cv::Mat> rank_rois;
+    /* Hold detect card names */
+    std::vector<cv::String> card_names;
 };
 
 struct DetectedCard

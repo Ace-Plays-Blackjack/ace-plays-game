@@ -242,7 +242,7 @@ cv::Mat DetectCard::flatten_card(DetectedCard &qCard, cv::Mat &image){
 
 }
 
-void DetectCard::preprocess_cards(cv::Mat &image, Card_params &Card_params)
+void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
@@ -356,7 +356,7 @@ void DetectCard::preprocess_cards(cv::Mat &image, Card_params &Card_params)
     // return rank_rois;
 }
 
-std::vector<cv::String> DetectCard::template_matching(const Card_params &Card_params, bool rank){
+void DetectCard::template_matching(Card_params &Card_params, bool rank){
 
     std::vector<cv::String> result_name;
     std::vector<cv::Mat> roi = Card_params.rank_rois;
@@ -387,7 +387,7 @@ std::vector<cv::String> DetectCard::template_matching(const Card_params &Card_pa
         std::cout << "Card " + std::to_string(i) + ":" << result_name[i] << std::endl;
     }
 
-    return result_name;
+    Card_params.card_names = result_name;
 }
 
 void DetectCard::processingThreadLoop(){
@@ -404,9 +404,9 @@ void DetectCard::processingThreadLoop(){
             /* Next find cards in the frame */
             Card_params card_params = find_cards(processed_image);
             /* Find the cards rank ROI (region of interest) */
-            preprocess_cards(processed_image, card_params);
+            preprocess_cards(card_params, processed_image);
             /* Take isolated ranks and match them with the template cards */
-            std::vector<cv::String> card_names = template_matching(card_params);
+            template_matching(card_params);
 
             /* Take Card Names and respective Card Positions 
              * and pass it to the GamePlay class */
