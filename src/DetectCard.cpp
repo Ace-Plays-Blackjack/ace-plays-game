@@ -415,7 +415,7 @@ void DetectCard::processingThreadLoop(){
             newFrame = false;
             busy = false;
             frame_counter = 0;
-            // processingCallback->nextCallback(card_params);
+            processingCallback->nextCallback(card_params);
         }
     }
 }
