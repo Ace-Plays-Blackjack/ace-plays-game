@@ -5,13 +5,13 @@
 #include "CallbackLinker.h"
 
 #define ACCUM_CNTR_THRESH 50
-class GamePlay
+class GamePlay : public CallbackLinker
 {
 private:
     int accum_cntr = 0;
     std::vector<int> card_accum;
     void accumulator();
-    std::vector<int> convertStr2Int();
+    std::vector<int> convertStr2Int(std::vector<cv::String> &card_names);
 
 public:
     GamePlay(/* args */);
