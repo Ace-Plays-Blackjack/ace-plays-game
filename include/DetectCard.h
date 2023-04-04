@@ -37,7 +37,8 @@ public:
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
     void nextCallback(cv::Mat &nextFrame);
-    void nextCallback(Card_params &Card_params){};
+    /* Overlead the nextCallback function. Keep here for now */
+    void nextCallback(Card_params &Card_params){}; // Unused
 
     /* Spawn thread */
     void startProcessing();
