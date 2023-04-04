@@ -220,7 +220,7 @@ We would like to thank the following repositories:
 [license-url]: https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/master/LICENSE.txt
 
 [twitter-shield]: https://img.shields.io/twitter/follow/username?label=Twitter&style=social
-[twitter-url]: https://twitter.com/AcePlay25807009
+[twitter-url]: https://twitter.com/AcePlays_UoG
 
 [youtube-shield]: https://img.shields.io/youtube/channel/views/UCsEz7-PU1gYQ-DuntVkb_oQ?style=social
 [youtube-url]: https://www.youtube.com/channel/UCsEz7-PU1gYQ-DuntVkb_oQ
