@@ -112,6 +112,12 @@ $ make
 $ sudo make install
 ```
 
+5. Install Doxygen and Graphviz:
+```
+$ sudo apt-get install doxygen
+$ sudo apt install graphviz
+```
+
 <!-- USAGE EXAMPLES -->
 # Usage
 The Raspbian Bullseye OS introduced a new camera stack driver called [libcamera](https://www.raspberrypi.com/documentation/computers/camera_software.html#getting-started) (follow the link for more information).
