@@ -104,7 +104,19 @@ $ sudo apt install libcamera-dev
 ```
 
 4. Install pigpio:
+```
+$ wget https://github.com/joan2937/pigpio/archive/master.zip
+$ unzip master.zip
+$ cd pigpio-master
+$ make
+$ sudo make install
+```
 
+5. Install Doxygen and Graphviz:
+```
+$ sudo apt-get install doxygen
+$ sudo apt install graphviz
+```
 
 <!-- USAGE EXAMPLES -->
 # Usage
