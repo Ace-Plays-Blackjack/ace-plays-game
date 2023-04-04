@@ -421,10 +421,8 @@ void DetectCard::processingThreadLoop(){
 }
 
 void DetectCard::nextCallback(cv::Mat &nextFrame){
-    if (busy){
-        /* Count dropped frames when processing loop is busy */
-        frame_counter++;
-    }
+    /* Count dropped frames when processing loop is busy */
+    frame_counter++;
     
     try
     {
@@ -460,6 +458,11 @@ void DetectCard::startProcessing(){
     isProcessing = true;
     /* Start Thread */
     procThread = std::thread(&DetectCard::processingThreadLoop, this);
+}
+
+void DetectCard::stopProcessing(){
+    // isProcessing = false;
+    procThread.join();
 }
 
 /**

@@ -42,6 +42,7 @@ public:
 
     /* Spawn thread */
     void startProcessing();
+    void stopProcessing();
 };
 
 

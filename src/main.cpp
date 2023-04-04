@@ -6,7 +6,7 @@
 #include "DetectCard.h"
 #include "StrategyEngine.h"
 #include "GamePlay.h"
-#include <unistd.h>
+// #include <unistd.h>
 
 using namespace cv;
 using namespace std;
@@ -38,7 +38,7 @@ int main(int, char**)
     GamePlay gameplay_obj;
     camera_obj.registerCallback(&cards_obj);
     cards_obj.registerCallback(&gameplay_obj);
-    
+
     cards_obj.startProcessing();
     camera_obj.startRecording();
     
@@ -56,6 +56,7 @@ int main(int, char**)
     // decisions choice = firstdecision.getchoice(10, vect);
     
     camera_obj.stopRecording();
+    cards_obj.stopProcessing();
     return 0;
 }
 
