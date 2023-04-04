@@ -77,6 +77,7 @@ std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
             default:
                 break;
         }
+    std::cout << "Int Card " + std::to_string(i) + ":" << cards_int[i] << std::endl;
     }
     return cards_int;
 }
