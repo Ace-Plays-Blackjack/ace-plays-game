@@ -15,7 +15,8 @@
 #define RANK_HEIGHT 125
 
 
-struct Card_params{
+struct Card_params
+{
     int err = 0;
     int num_of_cards = 0;
     std::vector<int> contour_is_card_idx;
