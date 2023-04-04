@@ -29,56 +29,51 @@ std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
 
     for (int i = 0; i < card_names.size(); i++)
     {
-        switch (card_names[i]){
-            case "Ace":
-                /* Ace has value of 11 */
-                cards_int.push_back(11);
-                break;
-            case "Two":
-                cards_int.push_back(2);
-                break;
-            case "Three":
-                cards_int.push_back(3);
-                break;
-            case "Four":
-                cards_int.push_back(4);
-                break;
-            case "Five":
-                cards_int.push_back(5);
-                break;
-            case "Six":
-                cards_int.push_back(6);
-                break;
-            case "Seven":
-                cards_int.push_back(7);
-                break;
-            case "Eight":
-                cards_int.push_back(8);
-                break;
-            case "Nine":
-                cards_int.push_back(9);
-                break;
-            case "Ten":
-                cards_int.push_back(10);
-                break;
-            case "Jack":
-                /* Jack has value of 10 */
-                cards_int.push_back(10);
-                break;
-            case "Queen":
-                /* Queen has value of 10 */
-                cards_int.push_back(10);
-                break;
-            case "King":
-                /* King has value of 10 */
-                cards_int.push_back(10);
-                break;
-            
-            default:
-                break;
+        if (card_names[i] == "Ace"){
+            /* Ace has value of 11 */
+            cards_int.push_back(11);
+        }
+        else if (card_names[i] == "Two"){
+            cards_int.push_back(2);
+        }
+        else if (card_names[i] == "Three"){
+            cards_int.push_back(3);
+        }
+        else if (card_names[i] == "Four"){
+            cards_int.push_back(4);
+        }
+        else if (card_names[i] == "Five"){
+            cards_int.push_back(5);
+        }
+        else if (card_names[i] == "Six"){
+            cards_int.push_back(6);
+        }
+        else if (card_names[i] == "Seven"){
+            cards_int.push_back(7);
+        }
+        else if (card_names[i] == "Eight"){
+            cards_int.push_back(8);
+        }
+        else if (card_names[i] == "Nine"){
+            cards_int.push_back(9);
+        }
+        else if (card_names[i] == "Ten"){
+            cards_int.push_back(10);
+        }
+        else if (card_names[i] == "Jack"){
+            /* Jack has value of 10 */
+            cards_int.push_back(10);
+        }
+        else if (card_names[i] == "Queen"){
+            /* Queen has value of 10 */
+            cards_int.push_back(10);
+        }
+        else if (card_names[i] == "King"){
+            /* King has value of 10 */
+            cards_int.push_back(10);
         }
     std::cout << "Int Card " + std::to_string(i) + ":" << cards_int[i] << std::endl;
-    }
+    } 
     return cards_int;
 }
 
