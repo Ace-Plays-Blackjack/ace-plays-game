@@ -2,6 +2,7 @@
 #define CARDS_H
 
 #include <opencv2/core.hpp>
+#include <vector>
 #include <iostream>
 
 #define BKG_ADAPTIVE_THRESH 50
