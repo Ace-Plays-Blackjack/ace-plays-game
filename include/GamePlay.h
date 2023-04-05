@@ -113,11 +113,11 @@ void GamePlay::clear_whosHand(){
 void GamePlay::whosHand(cv::Point_<int> &card_midpoint){
     /* Camera view is upside down, hence top of frame will be 
      * for the player (top of frame has smaller y value)*/
-    if (card_midpoint.x < frame_h_midpoint){
+    if (card_midpoint.y < frame_h_midpoint){
         num_dealer_cards ++;
         whos_hand.push_back(true);
     }
-    else if(card_midpoint.x > frame_h_midpoint){
+    else if(card_midpoint.y > frame_h_midpoint){
         num_player_cards ++;
         whos_hand.push_back(false);
     }
@@ -135,7 +135,7 @@ void GamePlay::nextCallback(Card_params &Card_params){
     
     /* Game starts when 3 cards are present in the field of view 
      * 1 for the dealer and 2 for the player. If new game hasn't started: */
-    if (!gameStarted && cards_names_int.size() == cards_centre_pts.size() &&cards_names_int.size() == 3){
+    if (!gameStarted && cards_names_int.size() == cards_centre_pts.size() && cards_names_int.size() == 3){
         /* Check if 1 card in dealers side and 2 cards in players side */
         for (int i = 0; i < cards_centre_pts.size(); i++)
         {
