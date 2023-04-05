@@ -29,13 +29,15 @@ int main(int, char**)
     | 2592 x 1944 | 15      | **48%** |
     | 3280 x 2464 | 15      | **51%** |
 */ 
-    
-    Camera camera_obj(0, 1024, 768); 
+    double res_w = 1024;
+    double res_h = 768;
+    Camera camera_obj(0, res_w, res_h); 
 
     /* PATH depends on where the executable is called from */
-    //DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
-    DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
-    GamePlay gameplay_obj;
+    DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
+    // DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
+    GamePlay gameplay_obj(res_w, res_h);
+
     camera_obj.registerCallback(&cards_obj);
     cards_obj.registerCallback(&gameplay_obj);
 
@@ -55,7 +57,7 @@ int main(int, char**)
     // StrategyEngine firstdecision;
     // decisions choice = firstdecision.getchoice(10, vect);
     
-    camera_obj.stopRecording();
+    // camera_obj.stopRecording();
     cards_obj.stopProcessing();
     return 0;
 }
