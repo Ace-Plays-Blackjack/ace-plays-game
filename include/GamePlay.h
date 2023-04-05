@@ -121,10 +121,6 @@ void GamePlay::whosHand(cv::Point_<int> &card_midpoint){
         num_player_cards ++;
         whos_hand.push_back(false);
     }
-    else{
-        num_dealer_cards = 0;
-        num_player_cards = 0;
-    }
 }
 
 void GamePlay::nextCallback(Card_params &Card_params){
@@ -150,6 +146,8 @@ void GamePlay::nextCallback(Card_params &Card_params){
             clear_whosHand();
             gameStarted = true;
         }
+        num_dealer_cards = 0;
+        num_player_cards = 0;
     }
     
 
