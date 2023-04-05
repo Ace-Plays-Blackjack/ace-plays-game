@@ -20,6 +20,7 @@ struct Card_params
 {
     int err = 0;
     int num_of_cards = 0;
+    cv::Mat currentFrame;
     std::vector<int> contour_is_card_idx;
     /* Holds all contours of single frame */
     std::vector<std::vector<cv::Point>> contours;
