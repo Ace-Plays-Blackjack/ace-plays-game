@@ -113,11 +113,11 @@ void GamePlay::clear_whosHand(){
 void GamePlay::whosHand(cv::Point_<int> &card_midpoint){
     /* Camera view is upside down, hence top of frame will be 
      * for the player (top of frame has smaller y value)*/
-    if (card_midpoint.y < frame_h_midpoint){
+    if (card_midpoint.y > frame_h_midpoint){
         num_dealer_cards ++;
         whos_hand.push_back(true);
     }
-    else if(card_midpoint.y > frame_h_midpoint){
+    else if(card_midpoint.y < frame_h_midpoint){
         num_player_cards ++;
         whos_hand.push_back(false);
     }
