@@ -383,9 +383,9 @@ void DetectCard::template_matching(Card_params &Card_params, bool rank){
             result_name.push_back(cardTemplates.getCardRank(matching_card_idx));
         }
     }
-    for (int i = 0; i < result_name.size(); i++){
-        std::cout << "Card " + std::to_string(i) + ":" << result_name[i] << std::endl;
-    }
+    // for (int i = 0; i < result_name.size(); i++){
+    //     std::cout << "Card " + std::to_string(i) + ":" << result_name[i] << std::endl;
+    // }
 
     Card_params.card_names = result_name;
 }
@@ -398,7 +398,7 @@ void DetectCard::processingThreadLoop(){
         if(newFrame){
             /* Processing loop busy */
             busy = true;
-            std::cout << "Frames dropped: " << frame_counter << std::endl;
+            // std::cout << "Frames dropped: " << frame_counter << std::endl;
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
             /* Next find cards in the frame */
@@ -408,14 +408,19 @@ void DetectCard::processingThreadLoop(){
             /* Take isolated ranks and match them with the template cards */
             template_matching(card_params);
 
-            /* Take Card Names and respective Card Positions 
-             * and pass it to the GamePlay class */
+            // card_params.currentFrame = processed_image;
+            card_params.currentFrame = currentFrame;
 
             /* Processing finished */
             newFrame = false;
             busy = false;
             frame_counter = 0;
+            
+            /* Take Card Names and respective Card Positions 
+             * and pass it to the GamePlay class */
             processingCallback->nextCallback(card_params);
+            int key = cv::waitKey(1);
+            if (key == 27/*ESC*/){break;}
         }
     }
 }
@@ -428,12 +433,12 @@ void DetectCard::nextCallback(cv::Mat &nextFrame){
     {
         newFrame = true;
         currentFrame = nextFrame;
-        cv::imshow("Frame", currentFrame);
+        // cv::imshow("Frame", currentFrame);
     }
     catch (cv::Exception& e)
     {
         const char* err_msg = e.what();
-        std::cout << "exception caught: imshow:\n" << err_msg << std::endl;
+        std::cout << "Exception caught: imshow:\n" << err_msg << std::endl;
     }
 }
 
