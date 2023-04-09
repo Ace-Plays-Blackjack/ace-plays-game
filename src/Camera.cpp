@@ -1,4 +1,4 @@
-#include "camera.h"
+#include "Camera.h"
 
 /**
  * @brief Construct a new Camera:: Camera object
