@@ -207,19 +207,6 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         }
     }
 
-    /* Count how many cards have been played */
-    /* If suddenly the detections are less than what we had then reject this reading */
-    /* If we have another the detection (+1) then it is valid and keep playing */
-
-
-    /* If counter expires, check most prominent result */
-    // if (accum_cntr == ACCUM_CNTR_THRESH){
-    //     /* Reset counter */
-    //     accum_cntr = 0;
-    //     /* Also clear hand in case the buffer has filled accidentaly */
-    //     clear_whosHand();
-    // }
-
     try
     {
         /* Print out the detected value once */
