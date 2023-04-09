@@ -37,9 +37,7 @@ private:
 public:
     GamePlay(double res_w, double res_h);
     ~GamePlay();
-    void nextCallback(cv::Mat &nextFrame){}; // Unused
-    /* Overlead the nextCallback function */
-    void nextCallback(Card_params &Card_params);
+    void nextCallback(AcePlaysUtils &callbackData);
 };
 
 #endif /* PLAY_GAME_H */

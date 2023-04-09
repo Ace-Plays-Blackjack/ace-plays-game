@@ -14,10 +14,10 @@ public:
      * @brief Abstract method
      * @details Implement method in a Derived class
      * 
-     * @param nextFrame a cv::Mat type object
+     * @param callbackData an AcePlaysUtils type object to pass all
+     * relevant data down the AcePlays pipeline
      */
-    virtual void nextCallback(cv::Mat &nextFrame) = 0;
-    // virtual void nextCallback(AcePlaysUtils &callbackData) = 0;
+    virtual void nextCallback(AcePlaysUtils &callbackData) = 0;
 };
 
 

@@ -106,7 +106,8 @@ void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Po
     }
 }
 
-void GamePlay::nextCallback(Card_params &Card_params){
+void GamePlay::nextCallback(AcePlaysUtils &callbackData){
+    Card_params Card_params = callbackData.cardParams;
     /* Received Card_params need to be accumulated */
     std::vector<cv::String> card_names = Card_params.card_names;
     /* Cards centerpoints index position corresponds to each card */

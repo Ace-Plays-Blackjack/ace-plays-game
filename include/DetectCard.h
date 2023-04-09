@@ -33,9 +33,7 @@ public:
     ~DetectCard();
     void registerCallback(CallbackLinker* cb);
     void unregisterCallback();
-    void nextCallback(cv::Mat &nextFrame);
-    /* Overlead the nextCallback function. Keep here for now */
-    void nextCallback(Card_params &Card_params){}; // Unused
+    void nextCallback(AcePlaysUtils &callbackData);
 
     /* Spawn thread */
     void startProcessing();

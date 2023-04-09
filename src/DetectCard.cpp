@@ -426,21 +426,23 @@ void DetectCard::processingThreadLoop(){
             
             /* Take Card Names and respective Card Positions 
              * and pass it to the GamePlay class */
-            processingCallback->nextCallback(card_params);
+            AcePlaysUtils callbackData;
+            callbackData.cardParams = card_params;
+            processingCallback->nextCallback(callbackData);
             int key = cv::waitKey(1);
             if (key == 27/*ESC*/){break;}
         }
     }
 }
 
-void DetectCard::nextCallback(cv::Mat &nextFrame){
+void DetectCard::nextCallback(AcePlaysUtils &callbackData){
     /* Count dropped frames when processing loop is busy */
     frame_counter++;
     
     try
     {
         newFrame = true;
-        currentFrame = nextFrame;
+        currentFrame = callbackData.nextFrame;
         // cv::imshow("Frame", currentFrame);
     }
     catch (cv::Exception& e)

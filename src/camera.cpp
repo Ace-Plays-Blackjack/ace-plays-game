@@ -70,7 +70,9 @@ void Camera::camThreadLoop(){
 #endif
         else{
             /* Here add the callback */
-            cameraCallback->nextCallback(currentFrame);
+            AcePlaysUtils callbackData;
+            callbackData.nextFrame = currentFrame;
+            cameraCallback->nextCallback(callbackData);
         }
         // int key = cv::waitKey(1);
         // if (key == 27/*ESC*/){break;}
