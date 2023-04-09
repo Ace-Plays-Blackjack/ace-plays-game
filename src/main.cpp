@@ -6,7 +6,6 @@
 #include "DetectCard.h"
 #include "StrategyEngine.h"
 #include "GamePlay.h"
-#include <unistd.h>
 
 using namespace cv;
 using namespace std;
@@ -47,9 +46,7 @@ int main(int, char**)
     /* Demonstration of LED Toggling*/
     ToggleLED leds;
     leds.flashled(SPLIT);
-    usleep(1000000);
     leds.flashled(HIT);
-    usleep(1000000);
     leds.flashled(STOP);
 
     /* Demonstration of Strategy Engine */
