@@ -1,9 +1,6 @@
 #ifndef DETECT_CARD_H
 #define DETECT_CARD_H
 
-#include <opencv2/videoio.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
 #include <thread>
 
 #include "Card.h"
