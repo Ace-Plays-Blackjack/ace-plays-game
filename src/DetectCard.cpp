@@ -388,7 +388,16 @@ void DetectCard::template_matching(Card_params &Card_params, bool rank){
 
             for (int k = 0; k < cardTemplates.num_template_cards; k++)
             {
-                cv::absdiff(roi[i], cardTemplates.getCard(k), result);
+                try{
+                    /* absdiff may crash if roi is empty */
+                    cv::absdiff(roi[i], cardTemplates.getCard(k), result);
+                }
+                catch (cv::Exception& e)
+                {
+                    const char* err_msg = e.what();
+                    std::cout << "Exception caught: " << DetectCard::template_matching << " cv::cvtColor:\n" << err_msg << std::endl;
+                    break;
+                }
                 num_non_zero = cv::countNonZero(result);
                 if (num_non_zero < prev_count){
                     prev_count = num_non_zero;
