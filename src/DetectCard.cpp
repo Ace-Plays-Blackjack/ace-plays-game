@@ -36,7 +36,15 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
 
     /* Returns a grayed, blurred, and adaptively thresholded camera image */
     cv::Mat processed_img;
-    cv::cvtColor(image, processed_img, cv::COLOR_BGR2GRAY);
+    try{
+        /* cvtColor may crash if image is empty */
+        cv::cvtColor(image, processed_img, cv::COLOR_BGR2GRAY);
+    }
+    catch (cv::Exception& e)
+    {
+        const char* err_msg = e.what();
+        std::cout << "Exception caught (DetectCard::preprocess_image): cv::cvtColor:\n" << err_msg << std::endl;
+    }
     cv::GaussianBlur(processed_img, processed_img,cv::Size(5,5),0);
     /* Canny Edge Detection filter seems to improve detection of cards with Red coloured suits*/
     // cv::Canny(processed_img, processed_img, 100, 200);
