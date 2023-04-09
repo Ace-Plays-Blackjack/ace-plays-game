@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(ACE_PLAYS VERSION 1.0.0)
-option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" OFF)
+option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" ON)
 
 add_definitions(-DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK})
 
