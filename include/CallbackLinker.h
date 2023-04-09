@@ -17,13 +17,7 @@ public:
      * @param nextFrame a cv::Mat type object
      */
     virtual void nextCallback(cv::Mat &nextFrame) = 0;
-    
-    /**
-     * @brief Overloaded Abstract method
-     * 
-     * @param Card_params a Card_params type object
-     */
-    virtual void nextCallback(Card_params &Card_params) = 0;
+    // virtual void nextCallback(AcePlaysUtils &callbackData) = 0;
 };
 
 

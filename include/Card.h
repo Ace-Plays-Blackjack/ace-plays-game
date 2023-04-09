@@ -18,6 +18,22 @@
 #define RANK_HEIGHT 125
 
 
+enum decisions {
+    HIT,
+    STAND,
+    SPLIT,
+    DOUBLE,
+    UNKNOWN,
+    LOSE,
+    STOP
+};
+
+struct AcePlaysUtils{
+    cv::Mat nextFrame;
+    Card_params Card_params;
+    decisions blackjackDecision;
+};
+
 struct Card_params
 {
     int err = 0;

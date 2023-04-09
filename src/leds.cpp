@@ -1,6 +1,3 @@
-#include <iostream>
-
-#include "pigpio.h"
 #include "leds.h"
 
 #define HIT_PIN 12

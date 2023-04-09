@@ -1,16 +1,9 @@
 #ifndef LEDS_H
 #define LEDS_H
 
-enum decisions {
-    HIT,
-    STAND,
-    SPLIT,
-    DOUBLE,
-    UNKNOWN,
-    LOSE,
-    STOP
-};
-
+#include <iostream>
+#include "pigpio.h"
+#include "Card.h"
 
 class ToggleLED {
 public: 
