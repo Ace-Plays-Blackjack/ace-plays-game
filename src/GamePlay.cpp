@@ -1,6 +1,6 @@
 #include "GamePlay.h"
 
-GamePlay::GamePlay(double res_w, double res_h){
+GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     /* Get resolution of frame */
     frame_w = res_w;
     frame_h = res_h;
