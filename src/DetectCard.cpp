@@ -1,5 +1,4 @@
 #include "DetectCard.h"
-
 /*
 string type2str(int type) {
   string r;
@@ -36,8 +35,24 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
 
     /* Returns a grayed, blurred, and adaptively thresholded camera image */
     cv::Mat processed_img;
-    cv::cvtColor(image, processed_img, cv::COLOR_BGR2GRAY);
-    cv::GaussianBlur(processed_img, processed_img,cv::Size(5,5),0);
+    try{
+        /* cvtColor may crash if image is empty */
+        cv::cvtColor(image, processed_img, cv::COLOR_BGR2GRAY);
+    }
+    catch (cv::Exception& e)
+    {
+        const char* err_msg = e.what();
+        std::cout << "Exception caught (DetectCard::preprocess_image): cv::cvtColor:\n" << err_msg << std::endl;
+    }
+    try{
+        /* GaussianBlur may crash if image is empty */
+        cv::GaussianBlur(processed_img, processed_img,cv::Size(5,5),0);
+    }
+    catch (cv::Exception& e)
+    {
+        const char* err_msg = e.what();
+        std::cout << "Exception caught (DetectCard::preprocess_image): cv::GaussianBlur:\n" << err_msg << std::endl;
+    }
     /* Canny Edge Detection filter seems to improve detection of cards with Red coloured suits*/
     // cv::Canny(processed_img, processed_img, 100, 200);
     // The best threshold level depends on the ambient lighting conditions.
@@ -115,6 +130,10 @@ Card_params DetectCard::find_cards(cv::Mat &image){
             Card_params.contour_is_card_idx.push_back(i);
 
             /* Store Card Approximations*/
+            /* Corner points are stored with [0] position 
+             * as the point closest to the top of the Frame (min y).
+             * The remaining points are then populated in counter-clockwise
+             * direction. */
             Card_params.card_approxs.push_back(approx); // approx has 4 pairs of (x,y) coordinates
 
             /* Create rotated bounding boxes around cards */
@@ -131,7 +150,7 @@ Card_params DetectCard::find_cards(cv::Mat &image){
     return Card_params;
 }
 
-cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat &image){
+cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
     /* If card is placed HORIZONTALLY, then card Rank is 
@@ -155,7 +174,7 @@ cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat &image){
     /* Find the minimum value */
     result = std::min_element(sum.begin(), sum.end());
     /* Find the index of the minimum value */
-    sum_min_idx = std::distance(sum.begin(), result);
+    sum_min_idx = (int)std::distance(sum.begin(), result);
 
 
     tl = qCard.corner_pts[sum_min_idx];
@@ -238,30 +257,21 @@ cv::Mat DetectCard::flatten_card(Query_card qCard, cv::Mat &image){
 
 }
 
-std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Card_params)
+void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
 {
     /* Uses contour to find information about the query card. Isolates rank
     and suit images from the card.*/
 
     /* Vector of images to hold all detected Ranks */
-    std::vector<cv::Mat> all_rois;
-
-    // Initialize new Query_card object
-    Query_card qCard;
+    std::vector<cv::Mat> rank_rois;
 
     /* Check if Card_params is filled before procceeding */
     if (Card_params.num_of_cards == 0 || Card_params.err || Card_params.card_approxs.empty()){
-        return all_rois;
+        return;
     }
-    qCard.contours = Card_params.contours;
 
     for(int k = 0; k < Card_params.num_of_cards; k++){
-
-        qCard.rotatedbox = Card_params.rotatedbox[k];
-        /* Corner points are stored with [0] position 
-        * as the point closest to the top of the Frame (min y).
-        * The remaining points are then populated in counter-clockwise
-        * direction. */
+        qCard qCard;
         qCard.corner_pts = Card_params.card_approxs[k];
 
         /* Find width and height of card's bounding rectangle */
@@ -278,6 +288,12 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
         qCard.centre_pts.x /= (int)num_corners;
         qCard.centre_pts.y /= (int)num_corners;
 
+        /* Store calculated card parameters in Card_params */
+        Card_params.card_size.push_back(qCard.card_size);
+        Card_params.centre_pts.push_back(qCard.centre_pts);
+        Card_params.rotatedbox.push_back(qCard.rotatedbox);
+
+        /* Flatten the card to fix for wrapped perspective */
         cv::Mat flat_card = flatten_card(qCard, image);
 
         // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
@@ -292,12 +308,12 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
 
         /* Resize up by factor of 4 */
         cv::resize(Qcorner, Qcorner, cv::Size(), 4, 4, cv::INTER_LINEAR);
-        /* Threshold the upsized image. The rank and suit will look bolder and clearer */
+        /* Threshold the upsized image. The rank and suit will look bolder and clearer with a small threshold */
         cv::threshold(Qcorner, Qcorner, 5, 255, cv::THRESH_BINARY);
 
         std::vector<std::vector<cv::Point>> rank_contours, suit_contours;
         std::vector<cv::Vec4i> rank_hierarchy, suit_hierarchy;
-        // Split in to top and bottom half (top shows rank, bottom shows suit)
+        /* Split in to top and bottom half (top shows rank, bottom shows suit) */
         int vert_offset = 20; // Crop 20 rows further down to better isolate the rank and suit
         int hor_offset = 5; // Crop 5 columns further down to better isolate the rank and suit
         cv::Mat rank = Qcorner(cv::Rect(hor_offset, vert_offset, 4*(FLATTENED_WIDTH/7) - hor_offset, FLATTENED_HEIGHT/2));
@@ -325,13 +341,15 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
         * of the reference images that will be used for matching */
         cv::Mat rank_roi, suit_roi;
         if(rank_contours.size()){
+            /* Isolate the largest contour */
             cv::Rect rank_box = cv::boundingRect(rank_contours[0]);
             rank_roi = rank(rank_box);
             cv::resize(rank_roi, rank_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
             // cv::imshow("Rank ROI", rank_roi);
-            all_rois.push_back(rank_roi);
+            rank_rois.push_back(rank_roi);
         }
         if(suit_contours.size()){
+            /* Isolate the largest contour */
             cv::Rect suit_box = cv::boundingRect(suit_contours[0]);
             suit_roi = suit(suit_box);
             cv::resize(suit_roi, suit_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
@@ -348,40 +366,14 @@ std::vector<cv::Mat> DetectCard::preprocess_card(cv::Mat &image, Card_params Car
     // }
     // cv::imshow("Bounding box", image);
         
-
+    Card_params.rank_rois = rank_rois;
     /* Return the Rank ROI to be passed on the template matching function*/
-    return all_rois;
+    // return rank_rois;
 }
 
-void DetectCard::template_matching(const std::vector<cv::Mat> &roi, bool rank){
+void DetectCard::template_matching(Card_params &params, bool rank){
 
-    std::vector<cv::String> result_name;
-
-    for (int i = 0; i < roi.size(); i++)
-    {
-        if (roi[i].rows == RANK_HEIGHT && roi[i].cols == RANK_WIDTH){
-            /* Clone roi image */
-            cv::Mat result(cv::Size(roi[i].rows, roi[i].cols), CV_8UC1);
-            /* Initialise as a high number, i.e. all pixels are non-zero */
-            int prev_count = roi[i].rows * roi[i].cols;
-            int num_non_zero, matching_card_idx;
-
-            for (int k = 0; k < cardTemplates.num_template_cards; k++)
-            {
-                cv::absdiff(roi[i], cardTemplates.getCard(k), result);
-                num_non_zero = cv::countNonZero(result);
-                if (num_non_zero < prev_count){
-                    prev_count = num_non_zero;
-                    matching_card_idx = k;
-                }
-            }
-            // result = card_templates.getCard(matching_card_idx);
-            result_name.push_back(cardTemplates.getCardRank(matching_card_idx));
-        }
-    }
-    for (int i = 0; i < result_name.size(); i++){
-        std::cout << "Card " + std::to_string(i) + ":" << result_name[i] << std::endl;
-    }
+    carddiscriminator.template_matching(params, rank);
 }
 
 void DetectCard::processingThreadLoop(){
@@ -392,39 +384,49 @@ void DetectCard::processingThreadLoop(){
         if(newFrame){
             /* Processing loop busy */
             busy = true;
-            std::cout << "Frames dropped: " << frame_counter << std::endl;
+            // std::cout << "Frames dropped: " << frame_counter << std::endl;
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
-            /* Next find cards inthe frame */
+            /* Next find cards in the frame */
             Card_params card_params = find_cards(processed_image);
-            // processed_image = preprocess_card(processed_image, card_params);
-            template_matching(preprocess_card(processed_image, card_params));
+            /* Find the cards rank ROI (region of interest) */
+            preprocess_cards(card_params, processed_image);
+            /* Take isolated ranks and match them with the template cards */
+            template_matching(card_params);
+
+            // card_params.currentFrame = processed_image;
+            card_params.currentFrame = currentFrame;
 
             /* Processing finished */
             newFrame = false;
             busy = false;
             frame_counter = 0;
-            // processingCallback->passFrame();
+            
+            /* Take Card Names and respective Card Positions 
+             * and pass it to the GamePlay class */
+            AcePlaysUtils callbackData;
+            callbackData.cardParams = card_params;
+            processingCallback->nextCallback(callbackData);
+            int key = cv::waitKey(1);
+            if (key == 27/*ESC*/){break;}
         }
     }
 }
 
-void DetectCard::passFrame(cv::Mat &nextFrame){
-    if (busy){
-        /* Count dropped frames when processing loop is busy */
-        frame_counter++;
-    }
+void DetectCard::nextCallback(AcePlaysUtils &callbackData){
+    /* Count dropped frames when processing loop is busy */
+    frame_counter++;
     
     try
     {
         newFrame = true;
-        currentFrame = nextFrame;
-        cv::imshow("Frame", currentFrame);
+        currentFrame = callbackData.nextFrame;
+        // cv::imshow("Frame", currentFrame);
     }
     catch (cv::Exception& e)
     {
         const char* err_msg = e.what();
-        std::cout << "exception caught: imshow:\n" << err_msg << std::endl;
+        std::cout << "Exception caught: imshow:\n" << err_msg << std::endl;
     }
 }
 
@@ -451,13 +453,18 @@ void DetectCard::startProcessing(){
     procThread = std::thread(&DetectCard::processingThreadLoop, this);
 }
 
+void DetectCard::stopProcessing(){
+    // isProcessing = false;
+    procThread.join();
+}
+
 /**
  * @brief Construct a new Detect Card:: Detect Card object
  * 
  * @param folder_path get folder path of template cards and 
  * call cardTemplates constructor to load all templates
  */
-DetectCard::DetectCard(cv::String folder_path):cardTemplates(folder_path)
+DetectCard::DetectCard(cv::String folder_path):carddiscriminator(folder_path)
 {
 }
 
