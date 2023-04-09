@@ -1,6 +1,7 @@
+project(LCCV)
 include_directories(include)
 
-add_executable(${CMAKE_PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
     src/lccv.cpp
     src/libcamera_app.cpp
     src/libcamera_app_options.cpp
@@ -12,7 +13,7 @@ set(libcamera_link_base "/usr/lib/arm-linux-gnueabihf/libcamera-base.so")
 
 include_directories(${libcamera})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} 
+target_link_libraries(${PROJECT_NAME} 
 ${libcamera_link}  
 ${libcamera_link_base}
 )
