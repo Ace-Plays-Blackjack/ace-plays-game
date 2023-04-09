@@ -6,7 +6,7 @@
 #include "DetectCard.h"
 #include "StrategyEngine.h"
 #include "GamePlay.h"
-// #include <unistd.h>
+#include <unistd.h>
 
 using namespace cv;
 using namespace std;
@@ -34,8 +34,8 @@ int main(int, char**)
     Camera camera_obj(0, res_w, res_h); 
 
     /* PATH depends on where the executable is called from */
-    DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
-    // DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
+    // DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
+    DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
     GamePlay gameplay_obj(res_w, res_h);
 
     camera_obj.registerCallback(&cards_obj);
@@ -44,18 +44,18 @@ int main(int, char**)
     cards_obj.startProcessing();
     camera_obj.startRecording();
     
-    // /* Demonstration of LED Toggling*/
-    // ToggleLED leds;
-    // leds.flashled(SPLIT);
-    // usleep(1000000);
-    // leds.flashled(HIT);
-    // usleep(1000000);
-    // leds.flashled(STOP);
+    /* Demonstration of LED Toggling*/
+    ToggleLED leds;
+    leds.flashled(SPLIT);
+    usleep(1000000);
+    leds.flashled(HIT);
+    usleep(1000000);
+    leds.flashled(STOP);
 
-    // /* Demonstration of Strategy Engine */
-    // std::vector<int> vect{ 11, 6, 5, 10};
-    // StrategyEngine firstdecision;
-    // decisions choice = firstdecision.getchoice(10, vect);
+    /* Demonstration of Strategy Engine */
+    std::vector<int> vect{ 11, 6, 5, 10};
+    StrategyEngine firstdecision;
+    decisions choice = firstdecision.getchoice(10, vect);
     
     // camera_obj.stopRecording();
     cards_obj.stopProcessing();
