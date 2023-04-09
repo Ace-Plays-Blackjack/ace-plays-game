@@ -61,7 +61,6 @@ std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
 }
 
 
-
 void GamePlay::clear_whosHand(){
     /* Clear the whos_hand vector when done */
     // if (!whos_hand.empty()){
@@ -106,6 +105,30 @@ void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Po
     }
 }
 
+void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts){
+
+    /* New card has been played, hence make prev equal to current */
+    prev_total_cards = total_cards;
+    for (int i = 0; i < cards_played.size(); i++){
+        /* If true, card in dealer's hand */
+        if (whos_hand[i]){
+            dealersHand.cards.push_back(cards_played[i]);
+            dealersHand.card_midpoint.push_back(cards_centre_pts[i]);
+        }
+        else if (!whos_hand[i]){
+            playersHand.cards.push_back(cards_played[i]);
+            playersHand.card_midpoint.push_back(cards_centre_pts[i]);
+        }
+    }
+
+    /* Demonstration of Strategy Engine */
+    /* Dealer only plays one card */
+    decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
+    /* Demonstration of LED Toggling*/
+    leds.flashled(choice);
+}
+
+
 void GamePlay::nextCallback(AcePlaysUtils &callbackData){
     Card_params Card_params = callbackData.cardParams;
     /* Received Card_params need to be accumulated */
@@ -125,6 +148,7 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         /* Check if 1 card in dealers side and 2 cards in players side */
         if (num_dealer_cards == 1 && num_player_cards == 2){
             gameStarted = true;
+            total_cards = 3;
         }
         else if (num_dealer_cards > 1 && num_player_cards > 2){
             clear_whosHand();
@@ -143,6 +167,16 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         cv::putText(Card_params.currentFrame, "Game Started!",cv::Point(25,25),cv::FONT_HERSHEY_COMPLEX, 1,font_Color_GS, font_weight);
         /* Accumulate results */
         // accumulator(cards_names_int, cards_centre_pts);
+
+        /* If new cards played, then play the game */
+        if(cards_names_int.size() > total_cards){
+            total_cards++;
+        }
+        /* This check also verifies that ocassionally missed detections */
+        /* will not trigger wrong counting */
+        if(total_cards > prev_total_cards){
+            play_game(cards_names_int, cards_centre_pts);
+        }
     }
 
     /* Count how many cards have been played */

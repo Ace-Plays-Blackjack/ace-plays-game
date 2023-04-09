@@ -1,6 +1,8 @@
 #ifndef PLAY_GAME_H 
 #define PLAY_GAME_H
 
+#include "Leds.h"
+#include "StrategyEngine.h"
 #include "Card.h"
 #include "CallbackLinker.h"
 
@@ -15,6 +17,11 @@ private:
     bool gameStarted = false;
     int num_dealer_cards = 0;
     int num_player_cards = 0;
+    int total_cards = 0;
+    int prev_total_cards = 0;
+    ToggleLED leds;
+    StrategyEngine game_engine;
+
     struct Hand{
         std::vector<int> cards;
         std::vector<cv::Point_<int>> card_midpoint;
@@ -33,6 +40,7 @@ private:
     void whosHand(cv::Point_<int> &card_midpoint);
     void clear_whosHand();
     // void identifyHand();
+    void play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts);
 
 public:
     GamePlay(double res_w, double res_h);
