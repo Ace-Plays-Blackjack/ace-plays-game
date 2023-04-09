@@ -107,9 +107,17 @@ void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Po
 
 void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts){
 
-    /* New card has been played, hence make prev equal to current */
-    prev_total_cards = total_cards;
-    for (int i = 0; i < cards_played.size(); i++){
+    /* Get how many new cards have been played */
+    int new_cards_played = total_cards - prev_total_cards;
+    /* If 3, then we started the game. Clear the hand. */
+    if (new_cards_played == 3){
+        clear_whosHand();
+    }
+
+    /* At the game start, prev_total_cards == 0 and new_cards_played == 3 */
+    /* When new card is played, prev_total_cards == 3 and total_cards == 4*/
+    for (int i = prev_total_cards; i < total_cards; i++){
+        whosHand(cards_centre_pts[i]);
         /* If true, card in dealer's hand */
         if (whos_hand[i]){
             dealersHand.cards.push_back(cards_played[i]);
@@ -126,6 +134,8 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
     decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
     /* Demonstration of LED Toggling*/
     leds.flashled(choice);
+    /* New card has been played, hence make prev equal to current */
+    prev_total_cards = total_cards;
 }
 
 
@@ -171,6 +181,12 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         /* If new cards played, then play the game */
         if(cards_names_int.size() > total_cards){
             total_cards++;
+        }
+        else if(cards_names_int.size() == 0){
+            /* Game Reset */
+            gameStarted = false;
+            total_cards = 0;
+            prev_total_cards = 0;
         }
         /* This check also verifies that ocassionally missed detections */
         /* will not trigger wrong counting */
