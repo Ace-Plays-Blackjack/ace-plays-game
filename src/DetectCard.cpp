@@ -159,7 +159,7 @@ cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
     /* Find the minimum value */
     result = std::min_element(sum.begin(), sum.end());
     /* Find the index of the minimum value */
-    sum_min_idx = std::distance(sum.begin(), result);
+    sum_min_idx = (int)std::distance(sum.begin(), result);
 
 
     tl = qCard.corner_pts[sum_min_idx];
