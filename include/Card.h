@@ -1,7 +1,10 @@
 #ifndef CARDS_H
 #define CARDS_H
 
-#include <opencv2/core.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include <vector>
 #include <iostream>
 
 #define BKG_ADAPTIVE_THRESH 50
@@ -15,35 +18,56 @@
 #define RANK_HEIGHT 125
 
 
-struct Card_params{
-    int err = 0;
-    int num_of_cards = 0;
-    std::vector<int> contour_is_card_idx;
-    std::vector<std::vector<cv::Point>> contours;
-    std::vector<std::vector<cv::Point>> card_approxs;
-    std::vector<cv::RotatedRect> rotatedbox;
-    std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
+enum decisions {
+    HIT,
+    STAND,
+    SPLIT,
+    DOUBLE,
+    UNKNOWN,
+    LOSE,
+    STOP
 };
 
-class Query_card
+struct Card_params
+{
+    int err = 0;
+    int num_of_cards = 0;
+    cv::Mat currentFrame;
+    std::vector<int> contour_is_card_idx;
+    /* Holds all contours of single frame */
+    std::vector<std::vector<cv::Point>> contours;
+    /* Card corner points */
+    std::vector<std::vector<cv::Point>> card_approxs;
+    /* Card centre points */
+    std::vector<cv::Point_<int>> centre_pts;
+    /* Card dimensions */
+    std::vector<cv::Size> card_size; 
+    /* Card rotated bounding box */
+    std::vector<cv::RotatedRect> rotatedbox;
+    std::vector<std::vector<cv::Point2f>> rotatedbox_pts; 
+    /* Vector of images to hold all detected Ranks */
+    std::vector<cv::Mat> rank_rois;
+    /* Hold detect card names */
+    std::vector<cv::String> card_names;
+};
+
+struct AcePlaysUtils{
+    cv::Mat nextFrame;
+    Card_params cardParams;
+    decisions blackjackDecision;
+};
+
+struct qCard
 {
     /* Structure to store information about single card in the camera image.*/
-    public:
-        Query_card(){};
-        ~Query_card(){};
-        std::vector<std::vector<cv::Point>> contours; /* Contour of card */
-        cv::Size card_size; /* Card dimensions */
-        std::vector<cv::Point> corner_pts; /* Card corner points */
-        cv::Point_<int> centre_pts; /* Card centre points */
-        // self.warp = [] # 200x300, flattened, grayed, blurred image
-        // self.rank_img = [] # Thresholded, sized image of card's rank
-        // self.suit_img = [] # Thresholded, sized image of card's suit
-        // self.best_rank_match = "Unknown" # Best matched rank
-        // self.best_suit_match = "Unknown" # Best matched suit
-        // self.rank_diff = 0 # Difference between rank image and best matched train rank image
-        // self.suit_diff = 0 # Difference between suit image and best matched train suit image
-        cv::RotatedRect rotatedbox;
-
+    /* Card dimensions */
+    cv::Size card_size;
+    /* Card centre points */
+    cv::Point_<int> centre_pts;
+    /* Card corner points */
+    std::vector<cv::Point> corner_pts;
+    /* Card rotated bounding box */
+    cv::RotatedRect rotatedbox;
 };
 
 struct TemplateImages{
@@ -80,7 +104,7 @@ public:
      * 
      * @param folder is a string to the folder path 
      */
-    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards(rank_images.template_cards.size()) {};
+    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards((int)rank_images.template_cards.size()) {};
     
     /**
      * @brief Init function to parse the folder path and read

@@ -1,8 +1,9 @@
 #ifndef STRATEGY_ENGINE_H
 #define STRATEGY_ENGINE_H
 
-#include "leds.h"
+#include <iostream>
 #include <vector>
+#include "Card.h"
 
 class StrategyEngine {
 public:

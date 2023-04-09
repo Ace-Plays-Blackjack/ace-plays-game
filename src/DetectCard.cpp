@@ -372,7 +372,6 @@ void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
 }
 
 void DetectCard::template_matching(Card_params &params, bool rank){
-
     carddiscriminator.template_matching(params, rank);
 }
 

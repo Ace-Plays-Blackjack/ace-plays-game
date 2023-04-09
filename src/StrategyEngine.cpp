@@ -1,4 +1,3 @@
-#include <iostream>
 #include "StrategyEngine.h"
 
 StrategyEngine::StrategyEngine() {
@@ -7,7 +6,7 @@ StrategyEngine::StrategyEngine() {
 
 decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards) {
 	
-	int numofcards = playercards.size();
+	int numofcards = (int)playercards.size();
 	int i = 0;
 	int playertotal = 0;
 	bool soft = false;

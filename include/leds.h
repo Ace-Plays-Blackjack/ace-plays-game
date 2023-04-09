@@ -1,6 +1,5 @@
 #ifndef LEDS_H
 #define LEDS_H
-
 #include "Card.h"
 
 class ToggleLED {

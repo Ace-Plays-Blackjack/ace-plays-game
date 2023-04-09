@@ -27,7 +27,8 @@ Camera::Camera(int camIdx, double res_w, double res_h)
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
     /* cv::CAP_V4L2 required to run with OLD camera stack */
-    CamSettings.camApi = cv::CAP_V4L2;
+    // CamSettings.camApi = cv::CAP_V4L2;
+    CamSettings.camApi = cv::CAP_ANY;
 
     /* Open Camera */
     cv::VideoCapture capture(CamSettings.camIdx, CamSettings.camApi);
@@ -69,10 +70,12 @@ void Camera::camThreadLoop(){
 #endif
         else{
             /* Here add the callback */
-            cameraCallback->passFrame(currentFrame);
+            AcePlaysUtils callbackData;
+            callbackData.nextFrame = currentFrame;
+            cameraCallback->nextCallback(callbackData);
         }
-        int key = cv::waitKey(1);
-        if (key == 27/*ESC*/){break;}
+        // int key = cv::waitKey(1);
+        // if (key == 27/*ESC*/){break;}
     }
 }
 
