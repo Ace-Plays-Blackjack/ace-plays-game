@@ -390,7 +390,7 @@ void DetectCard::processingThreadLoop(){
             // std::cout << "Frames dropped: " << frame_counter << std::endl;
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
-            if (err_frame){
+            if (!err_frame){
                 /* Next find cards in the frame */
                 Card_params card_params = find_cards(processed_image);
                 /* Find the cards rank ROI (region of interest) */
