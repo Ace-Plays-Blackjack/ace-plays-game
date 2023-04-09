@@ -86,7 +86,7 @@ public:
      * 
      * @param folder is a string to the folder path 
      */
-    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards(rank_images.template_cards.size()) {};
+    CardTemplate(cv::String folder) : rank_images(init(folder, false)), suit_images(init(folder, true)), num_template_cards((int)rank_images.template_cards.size()) {};
     
     /**
      * @brief Init function to parse the folder path and read
