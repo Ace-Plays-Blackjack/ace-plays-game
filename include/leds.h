@@ -1,8 +1,5 @@
 #ifndef LEDS_H
 #define LEDS_H
-
-#include <iostream>
-#include "pigpio.h"
 #include "Card.h"
 
 class ToggleLED {
