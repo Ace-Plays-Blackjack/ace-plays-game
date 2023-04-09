@@ -1,8 +1,8 @@
 #include <opencv2/core.hpp>
 #include <iostream>
 
-#include "leds.h"
-#include "camera.h"
+#include "Leds.h"
+#include "Camera.h"
 #include "DetectCard.h"
 #include "StrategyEngine.h"
 #include "GamePlay.h"
