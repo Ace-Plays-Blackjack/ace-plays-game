@@ -1,6 +1,3 @@
-#include <iostream>
-
-#include "pigpio.h"
 #include "leds.h"
 
 #define HIT_PIN 12
@@ -9,7 +6,6 @@
 #define DOUBLE_PIN 13
 
 ToggleLED::ToggleLED(){
-	std::cout << "construct led flasher" << std::endl;
 	int status;   
 	status = gpioInitialise();
 
