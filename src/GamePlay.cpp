@@ -117,7 +117,7 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
     
     /* Game starts when 3 cards are present in the field of view 
      * 1 for the dealer and 2 for the player. If new game hasn't started: */
-    if (!gameStarted && cards_names_int.size() == cards_centre_pts.size()){
+    if (!gameStarted && cards_names_int.size() == cards_centre_pts.size() && cards_names_int.size() == 3){
         for (int i = 0; i < cards_names_int.size(); i++)
         {          
             whosHand(cards_centre_pts[i]);
