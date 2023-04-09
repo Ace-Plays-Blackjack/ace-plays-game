@@ -55,7 +55,6 @@ bool ToggleLED::flashled(decisions choice) {
 			gpioWrite(DOUBLE_PIN, PI_HIGH);
 			gpioWrite(SPLIT_PIN, PI_HIGH);
 			gpioWrite(STAND_PIN, PI_HIGH);
-			gpioTerminate();
 			break;
 	}
 	

@@ -41,6 +41,7 @@ private:
     void clear_whosHand();
     // void identifyHand();
     void play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts);
+    void game_reset();
 
 public:
     GamePlay(double res_w, double res_h);

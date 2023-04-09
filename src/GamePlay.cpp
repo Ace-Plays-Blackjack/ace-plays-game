@@ -6,6 +6,8 @@ GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     frame_h = res_h;
     frame_w_midpoint = (int)(frame_w/2);
     frame_h_midpoint = (int)(frame_h/2);
+    /* Reset LEDs at startup */
+    leds.flashled(STOP);
 }
 
 std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
@@ -105,6 +107,17 @@ void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Po
     }
 }
 
+void GamePlay::game_reset(){
+    gameStarted = false;
+    total_cards = 0;
+    prev_total_cards = 0;
+    dealersHand.cards.clear();
+    dealersHand.card_midpoint.clear();
+    playersHand.cards.clear();
+    playersHand.card_midpoint.clear();
+    leds.flashled(STOP);
+}
+
 void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts){
 
     /* Get how many new cards have been played */
@@ -184,9 +197,7 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         }
         else if(cards_names_int.size() == 0){
             /* Game Reset */
-            gameStarted = false;
-            total_cards = 0;
-            prev_total_cards = 0;
+            game_reset();
         }
         /* This check also verifies that ocassionally missed detections */
         /* will not trigger wrong counting */
