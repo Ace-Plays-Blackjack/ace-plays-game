@@ -1,4 +1,6 @@
 #include "Leds.h"
+#include "pigpio.h"
+
 
 #define HIT_PIN 12
 #define STAND_PIN 19

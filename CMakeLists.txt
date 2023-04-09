@@ -15,6 +15,7 @@ add_executable(${PROJECT_NAME}
     src/Leds.cpp
     src/DetectCard.cpp
     src/StrategyEngine.cpp
+    src/CardDiscriminator.cpp
     src/GamePlay.cpp
 )
 
