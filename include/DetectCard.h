@@ -5,11 +5,11 @@
 
 #include "Card.h"
 #include "CallbackLinker.h"
+#include "CardDiscriminator.h"
 
 class DetectCard : public CallbackLinker
 {
 private:
-    CardTemplate cardTemplates;
     bool isProcessing = false;
     bool busy = false;
     bool newFrame = false;
@@ -27,6 +27,7 @@ private:
 
     /* Output, match template and store cards detected */
     void template_matching(Card_params &Card_params, bool rank=true);
+    CardDiscriminator carddiscriminator;
 
 public:
     DetectCard(cv::String folder_path);
