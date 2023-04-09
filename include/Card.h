@@ -28,12 +28,6 @@ enum decisions {
     STOP
 };
 
-struct AcePlaysUtils{
-    cv::Mat nextFrame;
-    Card_params Card_params;
-    decisions blackjackDecision;
-};
-
 struct Card_params
 {
     int err = 0;
@@ -55,6 +49,12 @@ struct Card_params
     std::vector<cv::Mat> rank_rois;
     /* Hold detect card names */
     std::vector<cv::String> card_names;
+};
+
+struct AcePlaysUtils{
+    cv::Mat nextFrame;
+    Card_params cardParams;
+    decisions blackjackDecision;
 };
 
 struct qCard
