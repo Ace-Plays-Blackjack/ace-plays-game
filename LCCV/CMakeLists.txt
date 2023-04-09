@@ -1,7 +1,6 @@
-project(ACE_PLAYS VERSION 1.0.0)
 include_directories(include)
 
-target_sources(${PROJECT_NAME} PRIVATE
+add_executable(${CMAKE_PROJECT_NAME}
     src/lccv.cpp
     src/libcamera_app.cpp
     src/libcamera_app_options.cpp
@@ -13,7 +12,7 @@ set(libcamera_link_base "/usr/lib/arm-linux-gnueabihf/libcamera-base.so")
 
 include_directories(${libcamera})
 
-target_link_libraries(${PROJECT_NAME} 
+target_link_libraries(${CMAKE_PROJECT_NAME} 
 ${libcamera_link}  
 ${libcamera_link_base}
 )
