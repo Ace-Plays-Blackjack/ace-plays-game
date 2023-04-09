@@ -65,9 +65,9 @@ std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
 void GamePlay::clear_whosHand(){
     /* Clear the whos_hand vector when done */
     // if (!whos_hand.empty()){
-        whos_hand.clear();
-        num_dealer_cards = 0;
-        num_player_cards = 0;
+    whos_hand.clear();
+    num_dealer_cards = 0;
+    num_player_cards = 0;
 }
 
 void GamePlay::whosHand(cv::Point_<int> &card_midpoint){
@@ -116,17 +116,19 @@ void GamePlay::nextCallback(Card_params &Card_params){
     
     /* Game starts when 3 cards are present in the field of view 
      * 1 for the dealer and 2 for the player. If new game hasn't started: */
-    if (!gameStarted && cards_names_int.size() == cards_centre_pts.size() && cards_names_int.size() == 3){
-        /* Check if 1 card in dealers side and 2 cards in players side */
+    if (!gameStarted && cards_names_int.size() == cards_centre_pts.size()){
         for (int i = 0; i < cards_names_int.size(); i++)
-        {
+        {          
             whosHand(cards_centre_pts[i]);
         }
-
+        /* Check if 1 card in dealers side and 2 cards in players side */
         if (num_dealer_cards == 1 && num_player_cards == 2){
             gameStarted = true;
         }
-        clear_whosHand();
+        else if (num_dealer_cards > 1 && num_player_cards > 2){
+            clear_whosHand();
+            gameStarted = false;
+        }
     }
     
 
