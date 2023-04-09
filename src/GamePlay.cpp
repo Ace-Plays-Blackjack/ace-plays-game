@@ -111,6 +111,7 @@ void GamePlay::game_reset(){
     gameStarted = false;
     total_cards = 0;
     prev_total_cards = 0;
+    clear_whosHand();
     dealersHand.cards.clear();
     dealersHand.card_midpoint.clear();
     playersHand.cards.clear();
