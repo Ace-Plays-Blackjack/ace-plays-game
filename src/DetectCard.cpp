@@ -395,7 +395,7 @@ void DetectCard::template_matching(Card_params &Card_params, bool rank){
                 catch (cv::Exception& e)
                 {
                     const char* err_msg = e.what();
-                    std::cout << "Exception caught: " << DetectCard::template_matching << " cv::cvtColor:\n" << err_msg << std::endl;
+                    std::cout << "Exception caught: " << __FUNCTION__ << " cv::cvtColor:\n" << err_msg << std::endl;
                     break;
                 }
                 num_non_zero = cv::countNonZero(result);
