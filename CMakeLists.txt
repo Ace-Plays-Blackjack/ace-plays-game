@@ -9,10 +9,6 @@ enable_testing()
 
 include_directories(include)
 
-if(NEW_CAM_STACK)
-add_subdirectory(LCCV)
-endif(NEW_CAM_STACK)
-
 add_executable(${PROJECT_NAME}  
     src/main.cpp
     src/camera.cpp
@@ -22,26 +18,25 @@ add_executable(${PROJECT_NAME}
     src/GamePlay.cpp
 )
 
-set_property (TARGET ${PROJECT_NAME}
-  PROPERTY
+set_property (TARGET ${PROJECT_NAME} 
+    PROPERTY
     # Enable C++17 standard compliance
     CXX_STANDARD 17
-
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+if(NOT NEW_CAM_STACK)
 include(CPack)
+endif(NOT NEW_CAM_STACK)
 
 # Remove this later
-set(OpenCV_DIR "${OPENCV_DIR}/x64/vc15/")
+#~ set(OpenCV_DIR "${OPENCV_DIR}/x64/vc15/")
 
 # Add OpenCV library
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS})
-target_link_libraries( ${PROJECT_NAME} ${pigpio_LIBRARY} ${OpenCV_LIBS} )
-
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+target_link_libraries( ${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
 
 # Find the path to the pigpio includes.
 find_path(pigpio_INCLUDE_DIR 
@@ -71,9 +66,23 @@ find_package_handle_standard_args(pigpio
     DEFAULT_MSG 
     pigpio_INCLUDE_DIR pigpio_LIBRARY pigpiod_if_LIBRARY pigpiod_if2_LIBRARY)
 
+target_link_libraries( ${PROJECT_NAME} PUBLIC ${pigpio_LIBRARY})
+
+
+# Include LCCV library
+if(NEW_CAM_STACK)
+
+add_subdirectory(LCCV)
+target_link_libraries(${PROJECT_NAME} PUBLIC LCCV)
+
+endif(NEW_CAM_STACK)
+
 
 message("**** OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS} ****")
 # message("OpenCV_LIBS: ${OpenCV_LIBS}")
 message("**** New CAM stack option: -DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK} ****")
+
+# Add CMAKE flag
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 # Clean cache to always load the latest NEW_CAM_STACK option 
 unset(NEW_CAM_STACK CACHE)
