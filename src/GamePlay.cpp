@@ -147,7 +147,9 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
     /* Dealer only plays one card */
     decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
     /* Demonstration of LED Toggling*/
-    leds.flashled(choice);
+    AcePlaysUtils callbackData;
+    callbackData.blackjackDecision = choice;
+    ledCallback->nextCallback(callbackData);
     /* New card has been played, hence make prev equal to current */
     prev_total_cards = total_cards;
 }
@@ -235,6 +237,14 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         std::cout << "Exception caught: cv::imshow:\n" << err_msg << std::endl;
     }
 
+}
+
+void GamePlay::registerCallback(CallbackLinker* cb){
+    ledCallback = cb;
+}
+
+void GamePlay::unregisterCallback(){
+    ledCallback = nullptr;
 }
 
 

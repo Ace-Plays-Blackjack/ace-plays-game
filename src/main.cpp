@@ -1,7 +1,7 @@
 #include <opencv2/core.hpp>
 #include <iostream>
 
-#include "Leds.h"
+#include "ToggleLED.h"
 #include "Camera.h"
 #include "DetectCard.h"
 #include "StrategyEngine.h"
@@ -39,16 +39,16 @@ int main(int, char**)
 
     camera_obj.registerCallback(&cards_obj);
     cards_obj.registerCallback(&gameplay_obj);
-
     cards_obj.startProcessing();
     camera_obj.startRecording();
     
     /* Demonstration of LED Toggling*/
-    ToggleLED leds;
-    leds.flashled(SPLIT);
-    leds.flashled(HIT);
-    leds.flashled(STOP);
-
+    ToggleLED leds_obj;
+    gameplay_obj.registerCallback(&leds_obj);
+    leds_obj.flashled(SPLIT);
+    leds_obj.flashled(HIT);
+    leds_obj.flashled(STOP);
+    
     /* Demonstration of Strategy Engine */
     std::vector<int> vect{ 11, 6, 5, 10};
     StrategyEngine firstdecision;

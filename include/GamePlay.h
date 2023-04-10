@@ -1,7 +1,7 @@
 #ifndef PLAY_GAME_H 
 #define PLAY_GAME_H
 
-#include "Leds.h"
+#include "ToggleLED.h"
 #include "StrategyEngine.h"
 #include "Card.h"
 #include "CallbackLinker.h"
@@ -42,11 +42,14 @@ private:
     // void identifyHand();
     void play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts);
     void game_reset();
+    CallbackLinker* ledCallback = nullptr;
 
 public:
     GamePlay(double res_w, double res_h);
     ~GamePlay();
     void nextCallback(AcePlaysUtils &callbackData);
+    void registerCallback(CallbackLinker* cb);
+    void unregisterCallback();
 };
 
 #endif /* PLAY_GAME_H */

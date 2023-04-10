@@ -12,7 +12,7 @@ include_directories(include)
 add_executable(${PROJECT_NAME}  
     src/main.cpp
     src/Camera.cpp
-    src/Leds.cpp
+    src/ToggleLED.cpp
     src/DetectCard.cpp
     src/StrategyEngine.cpp
     src/CardDiscriminator.cpp
