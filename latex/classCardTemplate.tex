@@ -1,0 +1,118 @@
+\hypertarget{classCardTemplate}{}\doxysection{Card\+Template Class Reference}
+\label{classCardTemplate}\index{CardTemplate@{CardTemplate}}
+
+
+Class to load and store the template cards from a folder path.  
+
+
+
+
+{\ttfamily \#include $<$Card\+Discriminator.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCardTemplate_a320a2ebfbaa7ee0a8765926fb47a1636}{Card\+Template}} (cv\+::\+String folder)
+\begin{DoxyCompactList}\small\item\em Construct a new Card Template object. Template cards are defined as constant. The following procedure (initialiser list) is required to set a const in runtime. \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classCardTemplate_a3af3ca7f24df221a29178271a46e265f}{get\+Card}} (int index)
+\begin{DoxyCompactList}\small\item\em Get the Card object. \end{DoxyCompactList}\item 
+cv\+::\+String \mbox{\hyperlink{classCardTemplate_a9a6d66d1b0db71514366d248a932616a}{get\+Card\+Rank}} (int index)
+\begin{DoxyCompactList}\small\item\em Get the Card name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structTemplateImages}{Template\+Images}} \mbox{\hyperlink{classCardTemplate_aa0af08025bfccf47ab7fcdc9e2e82160}{init}} (cv\+::\+String folder, bool suit\+\_\+flag)
+\begin{DoxyCompactList}\small\item\em Init function to parse the folder path and read the template card images. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCardTemplate_a8cc5bfd9f0732fd1a239a07109d0ad47}\label{classCardTemplate_a8cc5bfd9f0732fd1a239a07109d0ad47}} 
+const int {\bfseries num\+\_\+template\+\_\+cards}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to load and store the template cards from a folder path. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCardTemplate_a320a2ebfbaa7ee0a8765926fb47a1636}\label{classCardTemplate_a320a2ebfbaa7ee0a8765926fb47a1636}} 
+\index{CardTemplate@{CardTemplate}!CardTemplate@{CardTemplate}}
+\index{CardTemplate@{CardTemplate}!CardTemplate@{CardTemplate}}
+\doxysubsubsection{\texorpdfstring{CardTemplate()}{CardTemplate()}}
+{\footnotesize\ttfamily Card\+Template\+::\+Card\+Template (\begin{DoxyParamCaption}\item[{cv\+::\+String}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new Card Template object. Template cards are defined as constant. The following procedure (initialiser list) is required to set a const in runtime. 
+
+Similarly set the num\+\_\+template\+\_\+cards variable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em folder} & is a string to the folder path \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCardTemplate_a3af3ca7f24df221a29178271a46e265f}\label{classCardTemplate_a3af3ca7f24df221a29178271a46e265f}} 
+\index{CardTemplate@{CardTemplate}!getCard@{getCard}}
+\index{getCard@{getCard}!CardTemplate@{CardTemplate}}
+\doxysubsubsection{\texorpdfstring{getCard()}{getCard()}}
+{\footnotesize\ttfamily cv\+::\+Mat Card\+Template\+::get\+Card (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Card object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of card in rank\+\_\+images object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cv\+::\+Mat single template card at index location 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCardTemplate_a9a6d66d1b0db71514366d248a932616a}\label{classCardTemplate_a9a6d66d1b0db71514366d248a932616a}} 
+\index{CardTemplate@{CardTemplate}!getCardRank@{getCardRank}}
+\index{getCardRank@{getCardRank}!CardTemplate@{CardTemplate}}
+\doxysubsubsection{\texorpdfstring{getCardRank()}{getCardRank()}}
+{\footnotesize\ttfamily cv\+::\+String Card\+Template\+::get\+Card\+Rank (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Card name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of card in rank\+\_\+images object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cv\+::\+String name of detected card 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCardTemplate_aa0af08025bfccf47ab7fcdc9e2e82160}\label{classCardTemplate_aa0af08025bfccf47ab7fcdc9e2e82160}} 
+\index{CardTemplate@{CardTemplate}!init@{init}}
+\index{init@{init}!CardTemplate@{CardTemplate}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{structTemplateImages}{Template\+Images}} Card\+Template\+::init (\begin{DoxyParamCaption}\item[{cv\+::\+String}]{folder,  }\item[{bool}]{suit\+\_\+flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Init function to parse the folder path and read the template card images. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em folder} & is a string to the folder path \\
+\hline
+{\em suit\+\_\+flag} & boolean to distinguish between loading of ranks or suit images \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structTemplateImages}{Template\+Images}} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Card\+Discriminator.\+h\end{DoxyCompactItemize}

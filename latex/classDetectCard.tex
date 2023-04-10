@@ -1,0 +1,103 @@
+\hypertarget{classDetectCard}{}\doxysection{Detect\+Card Class Reference}
+\label{classDetectCard}\index{DetectCard@{DetectCard}}
+
+
+Inheritance diagram for Detect\+Card\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{classDetectCard__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Detect\+Card\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{classDetectCard__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDetectCard_a48997cc0a6fdc0bc19881e2497d0e3b3}{Detect\+Card}} (cv\+::\+String folder\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Construct a new Detect Card\+:\+: Detect Card object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDetectCard_a0953c5436ade541a690b474adf261c8e}{register\+Callback}} (\mbox{\hyperlink{classCallbackLinker}{Callback\+Linker}} $\ast$cb)
+\begin{DoxyCompactList}\small\item\em Register a Callback for the \mbox{\hyperlink{classDetectCard}{Detect\+Card}} Class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDetectCard_a597a730ad33d68de7364f0f6f33b4467}\label{classDetectCard_a597a730ad33d68de7364f0f6f33b4467}} 
+void \mbox{\hyperlink{classDetectCard_a597a730ad33d68de7364f0f6f33b4467}{unregister\+Callback}} ()
+\begin{DoxyCompactList}\small\item\em Unregister existing callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDetectCard_aa00bd7587e6168fd9b858d7ec16baac6}{next\+Callback}} (\mbox{\hyperlink{structAcePlaysUtils}{Ace\+Plays\+Utils}} \&callback\+Data)
+\begin{DoxyCompactList}\small\item\em Abstract method. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDetectCard_a807d0b7f4e2f13ec1c9cb356f488f8e8}\label{classDetectCard_a807d0b7f4e2f13ec1c9cb356f488f8e8}} 
+void {\bfseries start\+Processing} ()
+\item 
+\mbox{\Hypertarget{classDetectCard_ab082dd0e79979627651ec928fd0d476b}\label{classDetectCard_ab082dd0e79979627651ec928fd0d476b}} 
+void {\bfseries stop\+Processing} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDetectCard_a48997cc0a6fdc0bc19881e2497d0e3b3}\label{classDetectCard_a48997cc0a6fdc0bc19881e2497d0e3b3}} 
+\index{DetectCard@{DetectCard}!DetectCard@{DetectCard}}
+\index{DetectCard@{DetectCard}!DetectCard@{DetectCard}}
+\doxysubsubsection{\texorpdfstring{DetectCard()}{DetectCard()}}
+{\footnotesize\ttfamily Detect\+Card\+::\+Detect\+Card (\begin{DoxyParamCaption}\item[{cv\+::\+String}]{folder\+\_\+path }\end{DoxyParamCaption})}
+
+
+
+Construct a new Detect Card\+:\+: Detect Card object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em folder\+\_\+path} & get folder path of template cards and call card\+Templates constructor to load all templates \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDetectCard_aa00bd7587e6168fd9b858d7ec16baac6}\label{classDetectCard_aa00bd7587e6168fd9b858d7ec16baac6}} 
+\index{DetectCard@{DetectCard}!nextCallback@{nextCallback}}
+\index{nextCallback@{nextCallback}!DetectCard@{DetectCard}}
+\doxysubsubsection{\texorpdfstring{nextCallback()}{nextCallback()}}
+{\footnotesize\ttfamily void Detect\+Card\+::next\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAcePlaysUtils}{Ace\+Plays\+Utils}} \&}]{callback\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Abstract method. 
+
+Implement method in a Derived class
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback\+Data} & an \mbox{\hyperlink{structAcePlaysUtils}{Ace\+Plays\+Utils}} type object to pass all relevant data down the Ace\+Plays pipeline \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classCallbackLinker_a44f8a8924124460e8f8ff37fcb6159b0}{Callback\+Linker}}.
+
+\mbox{\Hypertarget{classDetectCard_a0953c5436ade541a690b474adf261c8e}\label{classDetectCard_a0953c5436ade541a690b474adf261c8e}} 
+\index{DetectCard@{DetectCard}!registerCallback@{registerCallback}}
+\index{registerCallback@{registerCallback}!DetectCard@{DetectCard}}
+\doxysubsubsection{\texorpdfstring{registerCallback()}{registerCallback()}}
+{\footnotesize\ttfamily void Detect\+Card\+::register\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCallbackLinker}{Callback\+Linker}} $\ast$}]{cb }\end{DoxyParamCaption})}
+
+
+
+Register a Callback for the \mbox{\hyperlink{classDetectCard}{Detect\+Card}} Class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cb} & is a \mbox{\hyperlink{classCallbackLinker}{Callback\+Linker}} class pointer \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Detect\+Card.\+h\item 
+src/Detect\+Card.\+cpp\end{DoxyCompactItemize}

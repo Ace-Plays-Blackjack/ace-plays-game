@@ -1,0 +1,58 @@
+\hypertarget{classCallbackLinker}{}\doxysection{Callback\+Linker Class Reference}
+\label{classCallbackLinker}\index{CallbackLinker@{CallbackLinker}}
+
+
+Generic abstract Callback Interface class.  
+
+
+
+
+{\ttfamily \#include $<$Callback\+Linker.\+h$>$}
+
+
+
+Inheritance diagram for Callback\+Linker\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classCallbackLinker__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classCallbackLinker_a44f8a8924124460e8f8ff37fcb6159b0}{next\+Callback}} (\mbox{\hyperlink{structAcePlaysUtils}{Ace\+Plays\+Utils}} \&callback\+Data)=0
+\begin{DoxyCompactList}\small\item\em Abstract method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generic abstract Callback Interface class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCallbackLinker_a44f8a8924124460e8f8ff37fcb6159b0}\label{classCallbackLinker_a44f8a8924124460e8f8ff37fcb6159b0}} 
+\index{CallbackLinker@{CallbackLinker}!nextCallback@{nextCallback}}
+\index{nextCallback@{nextCallback}!CallbackLinker@{CallbackLinker}}
+\doxysubsubsection{\texorpdfstring{nextCallback()}{nextCallback()}}
+{\footnotesize\ttfamily virtual void Callback\+Linker\+::next\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAcePlaysUtils}{Ace\+Plays\+Utils}} \&}]{callback\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Abstract method. 
+
+Implement method in a Derived class
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback\+Data} & an \mbox{\hyperlink{structAcePlaysUtils}{Ace\+Plays\+Utils}} type object to pass all relevant data down the Ace\+Plays pipeline \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classGamePlay_a6ba723e153e0692561855c97598bf9de}{Game\+Play}}, and \mbox{\hyperlink{classDetectCard_aa00bd7587e6168fd9b858d7ec16baac6}{Detect\+Card}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Callback\+Linker.\+h\end{DoxyCompactItemize}

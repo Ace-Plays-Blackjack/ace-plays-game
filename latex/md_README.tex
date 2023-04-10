@@ -1,0 +1,192 @@
+Table of Contents
+
+\label{_readme-top}%
+
+
+~\newline
+  \href{https://github.com/Ace-Plays-Blackjack/ace-plays-game}{\texttt{  }}
+
+\doxysubsubsection*{Ace\+Plays}
+
+
+
+ 
+
+ A device that can help you win at Blackjack by indicating the optimal play. ~\newline
+ 
+
+ 
+
+\href{https://github.com/Ace-Plays-Blackjack/ace-plays-game/graphs/contributors}{\texttt{ }} \href{https://github.com/Ace-Plays-Blackjack/ace-plays-game/network/members}{\texttt{ }} \href{https://github.com/Ace-Plays-Blackjack/ace-plays-game/stargazers}{\texttt{ }} \href{https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/master/LICENSE.txt}{\texttt{ }}
+
+\href{https://twitter.com/AcePlays_UoG}{\texttt{ }} \href{https://www.youtube.com/channel/UCsEz7-PU1gYQ-DuntVkb_oQ}{\texttt{ }}
+
+$<$details$>$
+
+
+\begin{DoxyEnumerate}
+\item \href{\#about-the-project}{\texttt{ About The Project}} 
+\begin{DoxyItemize}
+\item \href{\#built-with}{\texttt{ Built With}} 
+\end{DoxyItemize}
+\item \href{\#getting-started}{\texttt{ Getting Started}} 
+\begin{DoxyItemize}
+\item \href{\#prerequisites}{\texttt{ Prerequisites}} 
+\item \href{\#installation}{\texttt{ Installation}} 
+\end{DoxyItemize}
+\item \href{\#usage}{\texttt{ Usage}} 
+\item \href{\#roadmap}{\texttt{ Roadmap}} 
+\item \href{\#contributing}{\texttt{ Contributing}} 
+\item \href{\#license}{\texttt{ License}} 
+\item \href{\#contact}{\texttt{ Contact}} 
+\item \href{\#acknowledgments}{\texttt{ Acknowledgments}} 
+\end{DoxyEnumerate}$<$/details$>$\hypertarget{md_README_autotoc_md0}{}\doxysection{About The Project}\label{md_README_autotoc_md0}
+The Ace\+Plays device helps you learn about the game of Blackjack and win against your friends. By identifying the cards played in real-\/time, Ace\+Plays can teach the player how to play the game with the optimal strategy, telling them whether to Hit, Stand, Double or Split.
+
+(\href{\#readme-top}{\texttt{ back to top}})\hypertarget{md_README_autotoc_md1}{}\doxysection{Getting Started}\label{md_README_autotoc_md1}
+\hypertarget{md_README_autotoc_md2}{}\doxysubsection{Prerequisites}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item The Ace\+Plays code has been developed using a {\bfseries{Raspberry Pi 3B}}. However, any model {\itshape shoud} work.
+\item Installation of the {\bfseries{Raspbian Bullseye}} Raspberry Pi OS.
+\item A working {\bfseries{Raspberry Pi \mbox{\hyperlink{classCamera}{Camera}}}} (Module V2 has been used for development). Follow \href{https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/0}{\texttt{ https\+://projects.\+raspberrypi.\+org/en/projects/getting-\/started-\/with-\/picamera/0}} for first-\/usage instructions.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysubsection{Installation}\label{md_README_autotoc_md3}
+
+\begin{DoxyEnumerate}
+\item Clone this repository on your Pi\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ git clone https://github.com/Ace-\/Plays-\/Blackjack/ace-\/plays-\/game.git}
+
+\end{DoxyCode}
+
+\item Install {\ttfamily cmake} and {\ttfamily gcc} compiler\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo apt install cmake gcc}
+
+\end{DoxyCode}
+
+\item Install Open\+CV. Easiest method is to use the following command, which will install all Open\+CV libraries and dependencies\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo apt install libopencv-\/dev}
+
+\end{DoxyCode}
+
+\item Install the {\ttfamily libcamera} dependencies\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo apt install libcamera-\/dev}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Install pigpio\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ wget https://github.com/joan2937/pigpio/archive/master.zip}
+\DoxyCodeLine{\$ unzip master.zip}
+\DoxyCodeLine{\$ cd pigpio-\/master}
+\DoxyCodeLine{\$ make}
+\DoxyCodeLine{\$ sudo make install}
+
+\end{DoxyCode}
+
+\item Install Doxygen and Graphviz\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo apt-\/get install doxygen}
+\DoxyCodeLine{\$ sudo apt install graphviz}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md4}{}\doxysection{Usage}\label{md_README_autotoc_md4}
+The Raspbian Bullseye OS introduced a new camera stack driver called \href{https://www.raspberrypi.com/documentation/computers/camera_software.html\#getting-started}{\texttt{ libcamera}} (follow the link for more information).
+
+Open\+CV can find an appropriate driver automatically, however the resolution defaults at the lowest available option. Moreover, Open\+CV does not support libcamera at the moment.
+
+The \href{https://github.com/Qengineering/LCCV}{\texttt{ LCCV}} repo by \href{https://github.com/Qengineering}{\texttt{ QEngineering}} has been used to provide support for the new camera stack. Follow the link for more detailed explanation.
+
+Users have the freedom to select between the {\bfseries{OLD}} or {\bfseries{NEW}} stack. Unfortunately, when using the OLD stack the resolution cannot be changed.\hypertarget{md_README_autotoc_md5}{}\doxysubsection{Using the NEW stack}\label{md_README_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Disable}} Legacy stack support in Pi configuration. Write the following command in the terminal\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo raspi-\/config}
+
+\end{DoxyCode}
+
+\item Navigate to {\ttfamily Interface \mbox{\hyperlink{classOptions}{Options}}} -\/$>$ {\ttfamily Legacy \mbox{\hyperlink{classCamera}{Camera}}} -\/$>$ {\ttfamily No}
+\item Reboot to enable the changes
+\item In {\ttfamily CMake\+Lists.\+txt} set the {\ttfamily NEW\+\_\+\+CAM\+\_\+\+STACK} option to {\ttfamily ON}\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{option(NEW\_CAM\_STACK "{}Select new or old CAM stack: NEW==ON, OLD==OFF"{} ON)}
+
+\end{DoxyCode}
+
+\begin{DoxyEnumerate}
+\item Build the project
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md6}{}\doxysubsection{Using the OLD stack}\label{md_README_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Enable}} Legacy stack support in Pi configuration. Write the following command in the terminal\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo raspi-\/config}
+
+\end{DoxyCode}
+
+\item Navigate to {\ttfamily Interface \mbox{\hyperlink{classOptions}{Options}}} -\/$>$ {\ttfamily Legacy \mbox{\hyperlink{classCamera}{Camera}}} -\/$>$ {\ttfamily Yes}
+\item Reboot to enable the changes
+\item In {\ttfamily CMake\+Lists.\+txt} set the {\ttfamily NEW\+\_\+\+CAM\+\_\+\+STACK} option to {\ttfamily OFF}\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{option(NEW\_CAM\_STACK "{}Select new or old CAM stack: NEW==ON, OLD==OFF"{} OFF)}
+
+\end{DoxyCode}
+
+\begin{DoxyEnumerate}
+\item Open\+CV needs to be pointed to the \href{https://www.kernel.org/doc/html/v4.8/media/v4l-drivers/index.html}{\texttt{ V4L Linux Driver}} to access the camera. Ensure that {\ttfamily cv\+::\+CAP\+\_\+\+V4\+L2} is used in the {\ttfamily camera\+\_\+obj} constructor in {\ttfamily camera.\+cpp}\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{CamSettings.camApi = cv::CAP\_V4L2;}
+
+\end{DoxyCode}
+
+\begin{DoxyEnumerate}
+\item Build the project
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md7}{}\doxysubsection{Running the project}\label{md_README_autotoc_md7}
+An {\ttfamily $\sim$/ace-\/plays-\/game/build} folder is used to place all built project files from CMake.
+
+Navigate to the cloned Ace\+Plays directory and run the following\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ mkdir build \&\& cd build}
+\DoxyCodeLine{\$ cmake .. \&\& make}
+\DoxyCodeLine{\$ sudo ./ACE\_PLAYS}
+
+\end{DoxyCode}
+
+
+Command {\ttfamily \$ sudo ./\+ACE\+\_\+\+PLAYS} runs the created {\ttfamily ACE\+\_\+\+PLAYS.\+exe}. {\ttfamily pigpio} library requires running with {\ttfamily sudo} privileges.\hypertarget{md_README_autotoc_md8}{}\doxysection{Roadmap}\label{md_README_autotoc_md8}
+Future Work\hypertarget{md_README_autotoc_md9}{}\doxysection{Contributing}\label{md_README_autotoc_md9}
+\hypertarget{md_README_autotoc_md10}{}\doxysection{License}\label{md_README_autotoc_md10}
+Distributed under the XXXXX License. See \href{https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/main/LICENCE}{\texttt{ {\ttfamily LICENSE}}} for more information. Need to rework the license. 
+
+(\href{\#readme-top}{\texttt{ back to top}})\hypertarget{md_README_autotoc_md11}{}\doxysection{Contact}\label{md_README_autotoc_md11}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/titasg}{\texttt{ Georgios Titas}} -\/-\/$>$ \href{mailto:giorgostitas@gmail.com}{\texttt{ giorgostitas@gmail.\+com}}
+\item \href{https://github.com/Eagleeye101}{\texttt{ Alexander Douglas}} -\/-\/$>$ \href{mailto:lex4ander@gmail.com}{\texttt{ lex4ander@gmail.\+com}}
+\item \href{https://github.com/jijoNV}{\texttt{ Jijo Neeruvilayil Varghese}} -\/-\/$>$ \href{mailto:jijon92@gmail.com}{\texttt{ jijon92@gmail.\+com}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md12}{}\doxysection{Acknowledgments}\label{md_README_autotoc_md12}
+We would like to thank the following repositories\+:
+\begin{DoxyItemize}
+\item \href{https://github.com/EdjeElectronics/OpenCV-Playing-Card-Detector}{\texttt{ Edje\+Electronics}}\+: Ace\+Plays builds on top of this Python-\/based card detection repo
+\item \href{https://github.com/Qengineering/LCCV}{\texttt{ QEngineering}}\+: Ace\+Plays uses the Libcamera C++ API wrapper for Open\+CV (LCCV) to support the new Rasp Pi camera stack
+\end{DoxyItemize}
+
+(\href{\#readme-top}{\texttt{ back to top}})

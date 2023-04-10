@@ -1,0 +1,177 @@
+\hypertarget{classLibcameraApp}{}\doxysection{Libcamera\+App Class Reference}
+\label{classLibcameraApp}\index{LibcameraApp@{LibcameraApp}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structLibcameraApp_1_1Msg}{Msg}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ae9b5a0f50fcd842d820e7615da6ea79f}\label{classLibcameraApp_ae9b5a0f50fcd842d820e7615da6ea79f}} 
+enum class {\bfseries Msg\+Type} \{ {\bfseries Request\+Complete}
+, {\bfseries Quit}
+ \}
+\item 
+\mbox{\Hypertarget{classLibcameraApp_adf6475132ce78635b7e5f83d0ef686a8}\label{classLibcameraApp_adf6475132ce78635b7e5f83d0ef686a8}} 
+using {\bfseries Stream} = libcamera\+::\+Stream
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ae4cfb9ea9bc3659d42714850e209db5e}\label{classLibcameraApp_ae4cfb9ea9bc3659d42714850e209db5e}} 
+using {\bfseries Frame\+Buffer} = libcamera\+::\+Frame\+Buffer
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a0ca7ba60a40f6716f15499c677a33c63}\label{classLibcameraApp_a0ca7ba60a40f6716f15499c677a33c63}} 
+using {\bfseries Control\+List} = libcamera\+::\+Control\+List
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a8716045e74cca80419b5ef266e028361}\label{classLibcameraApp_a8716045e74cca80419b5ef266e028361}} 
+using {\bfseries Request} = libcamera\+::\+Request
+\item 
+\mbox{\Hypertarget{classLibcameraApp_aecd33414ab2b5a7e7ab1b6612da8c5a8}\label{classLibcameraApp_aecd33414ab2b5a7e7ab1b6612da8c5a8}} 
+using {\bfseries Camera\+Manager} = libcamera\+::\+Camera\+Manager
+\item 
+\mbox{\Hypertarget{classLibcameraApp_aed86366293cdb87ca45311c3cae08e30}\label{classLibcameraApp_aed86366293cdb87ca45311c3cae08e30}} 
+using {\bfseries Camera} = libcamera\+::\+Camera
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a2f1484f09187fe28ea86b350d0c60923}\label{classLibcameraApp_a2f1484f09187fe28ea86b350d0c60923}} 
+using {\bfseries Camera\+Configuration} = libcamera\+::\+Camera\+Configuration
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a8494e1606cf01c2a87bc30132d8c460c}\label{classLibcameraApp_a8494e1606cf01c2a87bc30132d8c460c}} 
+using {\bfseries Frame\+Buffer\+Allocator} = libcamera\+::\+Frame\+Buffer\+Allocator
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a5ec5339ace30cb751ba14678340d81ad}\label{classLibcameraApp_a5ec5339ace30cb751ba14678340d81ad}} 
+using {\bfseries Stream\+Role} = libcamera\+::\+Stream\+Role
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a57dfc0a66a7819980b7960b3399b71d1}\label{classLibcameraApp_a57dfc0a66a7819980b7960b3399b71d1}} 
+using {\bfseries Stream\+Roles} = libcamera\+::\+Stream\+Roles
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a9554eaa57cdbdf885ab9908cdbf13585}\label{classLibcameraApp_a9554eaa57cdbdf885ab9908cdbf13585}} 
+using {\bfseries Pixel\+Format} = libcamera\+::\+Pixel\+Format
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a45edbfd7cd31d635a3fa4d51e9d2acb8}\label{classLibcameraApp_a45edbfd7cd31d635a3fa4d51e9d2acb8}} 
+using {\bfseries Stream\+Configuration} = libcamera\+::\+Stream\+Configuration
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a8a39205c4100e9ff0390dbe01403c894}\label{classLibcameraApp_a8a39205c4100e9ff0390dbe01403c894}} 
+using {\bfseries Buffer\+Map} = Request\+::\+Buffer\+Map
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a43d27702163be125fb4307727e135809}\label{classLibcameraApp_a43d27702163be125fb4307727e135809}} 
+using {\bfseries Size} = libcamera\+::\+Size
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a0eddcee764301da6348d3454c2c28c2f}\label{classLibcameraApp_a0eddcee764301da6348d3454c2c28c2f}} 
+using {\bfseries Rectangle} = libcamera\+::\+Rectangle
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a9cf2fba4f6f29a495b6dbd29e4ac93bc}\label{classLibcameraApp_a9cf2fba4f6f29a495b6dbd29e4ac93bc}} 
+typedef std\+::variant$<$ Completed\+Request\+Ptr $>$ {\bfseries Msg\+Payload}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a89146dc9d97bec64ef9c42367911af27}\label{classLibcameraApp_a89146dc9d97bec64ef9c42367911af27}} 
+{\bfseries Libcamera\+App} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classOptions}{Options}} $>$ const opts=nullptr)
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a62162c1d232783806dc23bcbe210ad6e}\label{classLibcameraApp_a62162c1d232783806dc23bcbe210ad6e}} 
+\mbox{\hyperlink{classOptions}{Options}} $\ast$ {\bfseries Get\+Options} () const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ad4559dbe2bf6d277b1d7779da407ea79}\label{classLibcameraApp_ad4559dbe2bf6d277b1d7779da407ea79}} 
+std\+::string const  \& {\bfseries Camera\+Id} () const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a6f7f3ee39dcedf418590e16f3495e73d}\label{classLibcameraApp_a6f7f3ee39dcedf418590e16f3495e73d}} 
+void {\bfseries Open\+Camera} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a58014a47031ba60afd13545edd26d665}\label{classLibcameraApp_a58014a47031ba60afd13545edd26d665}} 
+void {\bfseries Close\+Camera} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_aca7d807865d8d1df94f890f87c348862}\label{classLibcameraApp_aca7d807865d8d1df94f890f87c348862}} 
+void {\bfseries Configure\+Still} (unsigned int flags=FLAG\+\_\+\+STILL\+\_\+\+NONE)
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a15fea5c98f545ff7a55f1e69fce23294}\label{classLibcameraApp_a15fea5c98f545ff7a55f1e69fce23294}} 
+void {\bfseries Configure\+Viewfinder} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a5297cd6917e971cf675c4c978c6036c7}\label{classLibcameraApp_a5297cd6917e971cf675c4c978c6036c7}} 
+void {\bfseries Teardown} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_afc4d6b4fd4401409e81ac752612f684c}\label{classLibcameraApp_afc4d6b4fd4401409e81ac752612f684c}} 
+void {\bfseries Start\+Camera} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a02813add2b9edadb43570d35024f7454}\label{classLibcameraApp_a02813add2b9edadb43570d35024f7454}} 
+void {\bfseries Stop\+Camera} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_abe9fa8deeca7162d78427961871898fc}\label{classLibcameraApp_abe9fa8deeca7162d78427961871898fc}} 
+\mbox{\hyperlink{structLibcameraApp_1_1Msg}{Msg}} {\bfseries Wait} ()
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a697695d81db8830c067092e53f51401c}\label{classLibcameraApp_a697695d81db8830c067092e53f51401c}} 
+void {\bfseries Post\+Message} (Msg\+Type \&t, Msg\+Payload \&p)
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ac8e8173f65f3ade5b48582abb6f727be}\label{classLibcameraApp_ac8e8173f65f3ade5b48582abb6f727be}} 
+Stream $\ast$ {\bfseries Get\+Stream} (std\+::string const \&name, unsigned int $\ast$w=nullptr, unsigned int $\ast$h=nullptr, unsigned int $\ast$stride=nullptr) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a2ce21c14da01c38ef07b71985d6330ea}\label{classLibcameraApp_a2ce21c14da01c38ef07b71985d6330ea}} 
+Stream $\ast$ {\bfseries Viewfinder\+Stream} (unsigned int $\ast$w=nullptr, unsigned int $\ast$h=nullptr, unsigned int $\ast$stride=nullptr) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a2968061927363754dd87019d0bed8a73}\label{classLibcameraApp_a2968061927363754dd87019d0bed8a73}} 
+Stream $\ast$ {\bfseries Still\+Stream} (unsigned int $\ast$w=nullptr, unsigned int $\ast$h=nullptr, unsigned int $\ast$stride=nullptr) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ae8e04e0de927e6e11eb544bcf2d3fb0a}\label{classLibcameraApp_ae8e04e0de927e6e11eb544bcf2d3fb0a}} 
+Stream $\ast$ {\bfseries Raw\+Stream} (unsigned int $\ast$w=nullptr, unsigned int $\ast$h=nullptr, unsigned int $\ast$stride=nullptr) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_aa0e1168ead2097f6951a924bfcb6d7fb}\label{classLibcameraApp_aa0e1168ead2097f6951a924bfcb6d7fb}} 
+Stream $\ast$ {\bfseries Video\+Stream} (unsigned int $\ast$w=nullptr, unsigned int $\ast$h=nullptr, unsigned int $\ast$stride=nullptr) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a45a460a15d3b25978db21b521f3b573a}\label{classLibcameraApp_a45a460a15d3b25978db21b521f3b573a}} 
+Stream $\ast$ {\bfseries Lores\+Stream} (unsigned int $\ast$w=nullptr, unsigned int $\ast$h=nullptr, unsigned int $\ast$stride=nullptr) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_aec4360362423836ee0b25ddd95b1115a}\label{classLibcameraApp_aec4360362423836ee0b25ddd95b1115a}} 
+Stream $\ast$ {\bfseries Get\+Main\+Stream} () const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a9dd2d737ce70dfddabb16c79e59551d0}\label{classLibcameraApp_a9dd2d737ce70dfddabb16c79e59551d0}} 
+std\+::vector$<$ libcamera\+::\+Span$<$ uint8\+\_\+t $>$ $>$ {\bfseries Mmap} (Frame\+Buffer $\ast$buffer) const
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ae62fb1d708713aec3f92e40ef362db96}\label{classLibcameraApp_ae62fb1d708713aec3f92e40ef362db96}} 
+void {\bfseries Set\+Controls} (Control\+List \&controls)
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a891ecda1ddeb8076800c09e4a27c4f53}\label{classLibcameraApp_a891ecda1ddeb8076800c09e4a27c4f53}} 
+void {\bfseries Stream\+Dimensions} (Stream const $\ast$stream, unsigned int $\ast$w, unsigned int $\ast$h, unsigned int $\ast$stride) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a47776108e9ad1af2acafe513d006190e}\label{classLibcameraApp_a47776108e9ad1af2acafe513d006190e}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+NONE} = 0
+\item 
+\mbox{\Hypertarget{classLibcameraApp_ab2996b7902a8808c4e6f9cae46d2d189}\label{classLibcameraApp_ab2996b7902a8808c4e6f9cae46d2d189}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+BGR} = 1
+\item 
+\mbox{\Hypertarget{classLibcameraApp_afd61a8d86c27bb7e14ebccec477eff6c}\label{classLibcameraApp_afd61a8d86c27bb7e14ebccec477eff6c}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+RGB} = 2
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a69fe46a42c04cfa9104144e0e639fcb4}\label{classLibcameraApp_a69fe46a42c04cfa9104144e0e639fcb4}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+RAW} = 4
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a1abf44edc2cbecb77cc48f3b00a89e9b}\label{classLibcameraApp_a1abf44edc2cbecb77cc48f3b00a89e9b}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+DOUBLE\+\_\+\+BUFFER} = 8
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a66b0381aa17281fc82449f5761543186}\label{classLibcameraApp_a66b0381aa17281fc82449f5761543186}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+TRIPLE\+\_\+\+BUFFER} = 16
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a29ae7b2f862d56b6f4604079dc648f80}\label{classLibcameraApp_a29ae7b2f862d56b6f4604079dc648f80}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+STILL\+\_\+\+BUFFER\+\_\+\+MASK} = 24
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a8c94619c1e8b615e25d3a9f7720c66b4}\label{classLibcameraApp_a8c94619c1e8b615e25d3a9f7720c66b4}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+VIDEO\+\_\+\+NONE} = 0
+\item 
+\mbox{\Hypertarget{classLibcameraApp_acd9655f07adbcdf1de17f5250edf1526}\label{classLibcameraApp_acd9655f07adbcdf1de17f5250edf1526}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+VIDEO\+\_\+\+RAW} = 1
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a1d4799734d3a94683f3eb29637a65941}\label{classLibcameraApp_a1d4799734d3a94683f3eb29637a65941}} 
+static constexpr unsigned int {\bfseries FLAG\+\_\+\+VIDEO\+\_\+\+JPEG\+\_\+\+COLOURSPACE} = 2
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLibcameraApp_a69c52fb2a5204c06734ecc8252b20aed}\label{classLibcameraApp_a69c52fb2a5204c06734ecc8252b20aed}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classOptions}{Options}} $>$ {\bfseries options\+\_\+}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+LCCV/include/libcamera\+\_\+app.\+hpp\item 
+LCCV/src/libcamera\+\_\+app.\+cpp\end{DoxyCompactItemize}
