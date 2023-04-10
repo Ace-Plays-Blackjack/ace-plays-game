@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-#ifndef CARD_DISCRIMINATOR_H
-#define CARD_DISCRIMINATOR_H
-=======
 /*
 Copyright 2023 Georgios Titas
 Copyright 2023 Alexander Douglas
@@ -13,7 +9,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 #ifndef CARDDISCRIMINATOR
 #define CARDDISCRIMINATOR
->>>>>>> Stashed changes
+
 
 #include "Card.h"
 
