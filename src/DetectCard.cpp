@@ -43,6 +43,8 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
     {
         const char* err_msg = e.what();
         std::cout << "Exception caught (DetectCard::preprocess_image): cv::cvtColor:\n" << err_msg << std::endl;
+        err_frame = true;
+        return image;
     }
     try{
         /* GaussianBlur may crash if image is empty */
@@ -52,6 +54,8 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
     {
         const char* err_msg = e.what();
         std::cout << "Exception caught (DetectCard::preprocess_image): cv::GaussianBlur:\n" << err_msg << std::endl;
+        err_frame = true;
+        return image;
     }
     /* Canny Edge Detection filter seems to improve detection of cards with Red coloured suits*/
     // cv::Canny(processed_img, processed_img, 100, 200);
@@ -386,26 +390,28 @@ void DetectCard::processingThreadLoop(){
             // std::cout << "Frames dropped: " << frame_counter << std::endl;
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
-            /* Next find cards in the frame */
-            Card_params card_params = find_cards(processed_image);
-            /* Find the cards rank ROI (region of interest) */
-            preprocess_cards(card_params, processed_image);
-            /* Take isolated ranks and match them with the template cards */
-            template_matching(card_params);
-
-            // card_params.currentFrame = processed_image;
-            card_params.currentFrame = currentFrame;
+            if (!err_frame){
+                /* Next find cards in the frame */
+                Card_params card_params = find_cards(processed_image);
+                /* Find the cards rank ROI (region of interest) */
+                preprocess_cards(card_params, processed_image);
+                /* Take isolated ranks and match them with the template cards */
+                template_matching(card_params);
+                // card_params.currentFrame = processed_image;
+                card_params.currentFrame = currentFrame;
+                /* Take Card Names and respective Card Positions 
+                * and pass it to the GamePlay class */
+                AcePlaysUtils callbackData;
+                callbackData.cardParams = card_params;
+                processingCallback->nextCallback(callbackData);
+            }
 
             /* Processing finished */
             newFrame = false;
             busy = false;
+            err_frame = false;
             frame_counter = 0;
             
-            /* Take Card Names and respective Card Positions 
-             * and pass it to the GamePlay class */
-            AcePlaysUtils callbackData;
-            callbackData.cardParams = card_params;
-            processingCallback->nextCallback(callbackData);
             int key = cv::waitKey(1);
             if (key == 27/*ESC*/){break;}
         }

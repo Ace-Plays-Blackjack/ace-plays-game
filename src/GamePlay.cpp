@@ -1,11 +1,13 @@
 #include "GamePlay.h"
 
-GamePlay::GamePlay(double res_w, double res_h){
+GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     /* Get resolution of frame */
     frame_w = res_w;
     frame_h = res_h;
     frame_w_midpoint = (int)(frame_w/2);
     frame_h_midpoint = (int)(frame_h/2);
+    /* Reset LEDs at startup */
+    leds.flashled(STOP);
 }
 
 std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
@@ -61,7 +63,6 @@ std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
 }
 
 
-
 void GamePlay::clear_whosHand(){
     /* Clear the whos_hand vector when done */
     // if (!whos_hand.empty()){
@@ -106,6 +107,52 @@ void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Po
     }
 }
 
+void GamePlay::game_reset(){
+    gameStarted = false;
+    total_cards = 0;
+    prev_total_cards = 0;
+    clear_whosHand();
+    dealersHand.cards.clear();
+    dealersHand.card_midpoint.clear();
+    playersHand.cards.clear();
+    playersHand.card_midpoint.clear();
+    leds.flashled(STOP);
+}
+
+void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts){
+
+    /* Get how many new cards have been played */
+    int new_cards_played = total_cards - prev_total_cards;
+    /* If 3, then we started the game. Clear the hand. */
+    if (new_cards_played == 3){
+        clear_whosHand();
+    }
+
+    /* At the game start, prev_total_cards == 0 and new_cards_played == 3 */
+    /* When new card is played, prev_total_cards == 3 and total_cards == 4*/
+    for (int i = prev_total_cards; i < total_cards; i++){
+        whosHand(cards_centre_pts[i]);
+        /* If true, card in dealer's hand */
+        if (whos_hand[i]){
+            dealersHand.cards.push_back(cards_played[i]);
+            dealersHand.card_midpoint.push_back(cards_centre_pts[i]);
+        }
+        else if (!whos_hand[i]){
+            playersHand.cards.push_back(cards_played[i]);
+            playersHand.card_midpoint.push_back(cards_centre_pts[i]);
+        }
+    }
+
+    /* Demonstration of Strategy Engine */
+    /* Dealer only plays one card */
+    decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
+    /* Demonstration of LED Toggling*/
+    leds.flashled(choice);
+    /* New card has been played, hence make prev equal to current */
+    prev_total_cards = total_cards;
+}
+
+
 void GamePlay::nextCallback(AcePlaysUtils &callbackData){
     Card_params Card_params = callbackData.cardParams;
     /* Received Card_params need to be accumulated */
@@ -125,6 +172,7 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         /* Check if 1 card in dealers side and 2 cards in players side */
         if (num_dealer_cards == 1 && num_player_cards == 2){
             gameStarted = true;
+            total_cards = 3;
         }
         else if (num_dealer_cards > 1 && num_player_cards > 2){
             clear_whosHand();
@@ -143,20 +191,21 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         cv::putText(Card_params.currentFrame, "Game Started!",cv::Point(25,25),cv::FONT_HERSHEY_COMPLEX, 1,font_Color_GS, font_weight);
         /* Accumulate results */
         // accumulator(cards_names_int, cards_centre_pts);
+
+        /* If new cards played, then play the game */
+        if(cards_names_int.size() > total_cards){
+            total_cards++;
+        }
+        else if(cards_names_int.size() == 0){
+            /* Game Reset */
+            game_reset();
+        }
+        /* This check also verifies that ocassionally missed detections */
+        /* will not trigger wrong counting */
+        if(total_cards > prev_total_cards){
+            play_game(cards_names_int, cards_centre_pts);
+        }
     }
-
-    /* Count how many cards have been played */
-    /* If suddenly the detections are less than what we had then reject this reading */
-    /* If we have another the detection (+1) then it is valid and keep playing */
-
-
-    /* If counter expires, check most prominent result */
-    // if (accum_cntr == ACCUM_CNTR_THRESH){
-    //     /* Reset counter */
-    //     accum_cntr = 0;
-    //     /* Also clear hand in case the buffer has filled accidentaly */
-    //     clear_whosHand();
-    // }
 
     try
     {

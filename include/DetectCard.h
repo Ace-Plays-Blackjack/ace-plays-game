@@ -13,6 +13,7 @@ private:
     bool isProcessing = false;
     bool busy = false;
     bool newFrame = false;
+    bool err_frame = false;
     int frame_counter = 0;
     cv::Mat currentFrame;
 
