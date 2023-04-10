@@ -1,14 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
 
 
 <!-- PROJECT LOGO -->
@@ -18,12 +8,25 @@
     <img src="logo/aceplays-blackjack-logo-transparent3.png" alt="Logo" width="400" height="400">
   </a>
 
-<h3 align="center">AcePlays</h3>
+<h2 align="center">AcePlays</h2>
 
   <p align="center">
     A device that can help you win at Blackjack by indicating the optimal play.
     <br />
   </p>
+
+<h2 align="center">
+  <a href="https://ace-plays-blackjack.github.io/ace-plays-game/">
+  Documentation
+  </a>
+<br />
+  <a href="https://github.com/Ace-Plays-Blackjack/ace-plays-game/wiki">
+  Wiki
+  </a>
+  for more infromation
+</h2>
+<br />
+
 </div>
 
 <!-- LINKS -->
@@ -44,9 +47,6 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -184,7 +184,7 @@ Future Work
 
 <!-- LICENSE -->
 # License
-Distributed under the XXXXX License. See [`LICENSE`](https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/main/LICENCE) for more information.
+Distributed under the `MIT` License. See [`LICENSE`](https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/main/LICENCE) for more information.
 Need to rework the license.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
