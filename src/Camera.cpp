@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream:src/Camera.cpp
-#include "Camera.h"
-=======
 /*
 Copyright 2023 Georgios Titas
 Copyright 2023 Alexander Douglas
@@ -11,7 +8,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 */
 
 #include "camera.h"
->>>>>>> Stashed changes:src/camera.cpp
+
 
 /**
  * @brief Construct a new Camera:: Camera object

@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream:src/Leds.cpp
-#include "Leds.h"
-=======
 /*
 Copyright 2023 Georgios Titas
 Copyright 2023 Alexander Douglas
@@ -11,7 +8,6 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 */
 
 #include "leds.h"
->>>>>>> Stashed changes:src/leds.cpp
 #include "pigpio.h"
 
 

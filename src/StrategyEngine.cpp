@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 /*
 Copyright 2023 Georgios Titas
 Copyright 2023 Alexander Douglas
@@ -10,7 +8,6 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 */
 
 #include <iostream>
->>>>>>> Stashed changes
 #include "StrategyEngine.h"
 
 StrategyEngine::StrategyEngine() {
