@@ -51,7 +51,7 @@ decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards
 		std::cout << "DOUBLE!" << std::endl;
 		return DOUBLE;
 	}
-	if ((playertotal == 9) && ((dealercard == 3) || (dealercard == 4) || (dealercard == 5) || (dealercard = 6))) {
+	if ((playertotal == 9) && (numofcards == 2) && (dealercard > 2) && (dealercard < 7)) {
 		std::cout << "DOUBLE!" << std::endl;
 		return DOUBLE;
 	}
