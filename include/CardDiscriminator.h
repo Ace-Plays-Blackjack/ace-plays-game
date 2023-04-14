@@ -13,6 +13,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 #include "Card.h"
 
+/**
+ * @brief Simple structure to hold loaded images
+ * and their respective names
+ * 
+ */
 struct TemplateImages{
     /* Images of loaded template cards */
     std::vector<cv::Mat> template_cards;
@@ -111,7 +116,12 @@ public:
     }
 };
 
-
+/**
+ * @brief Class to implement detection method from 
+ * Card Rank ROIs. Can be adapted for other solutions
+ * such as machine learning
+ * 
+ */
 class CardDiscriminator {
 	public:
 		CardDiscriminator(cv::String folder_path);
