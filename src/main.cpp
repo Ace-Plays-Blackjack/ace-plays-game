@@ -16,10 +16,6 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "StrategyEngine.h"
 #include "GamePlay.h"
 
-using namespace cv;
-using namespace std;
-using std::cout; using std::cerr; using std::endl;
-
 int main(int, char**)
 {
     /* Uncomment to print out build information */
