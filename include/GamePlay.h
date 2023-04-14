@@ -15,7 +15,14 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "Card.h"
 #include "CallbackLinker.h"
 
+/* Number of detection before accumulator 
+determines the card's rank */
 #define ACCUM_CNTR_THRESH 4
+
+/**
+ * @brief Class to implement the gameplay logic/architecture.
+ * 
+ */
 class GamePlay : public CallbackLinker
 {
 private:
@@ -48,7 +55,6 @@ private:
     std::vector<int> convertStr2Int(std::vector<cv::String> &card_names);
     void whosHand(cv::Point_<int> &card_midpoint);
     void clear_whosHand();
-    // void identifyHand();
     void play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts);
     void game_reset();
 
