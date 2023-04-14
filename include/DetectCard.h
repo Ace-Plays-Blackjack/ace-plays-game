@@ -16,6 +16,10 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "CallbackLinker.h"
 #include "CardDiscriminator.h"
 
+/**
+ * @brief Class for the detection of cards. Runs the processing pipeline.
+ * 
+ */
 class DetectCard : public CallbackLinker
 {
 private:

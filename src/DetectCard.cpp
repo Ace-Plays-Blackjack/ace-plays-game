@@ -8,30 +8,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 */
 
 #include "DetectCard.h"
-/*
-string type2str(int type) {
-  string r;
 
-  uchar depth = type & CV_MAT_DEPTH_MASK;
-  uchar chans = 1 + (type >> CV_CN_SHIFT);
-
-  switch ( depth ) {
-    case CV_8U:  r = "8U"; break;
-    case CV_8S:  r = "8S"; break;
-    case CV_16U: r = "16U"; break;
-    case CV_16S: r = "16S"; break;
-    case CV_32S: r = "32S"; break;
-    case CV_32F: r = "32F"; break;
-    case CV_64F: r = "64F"; break;
-    default:     r = "User"; break;
-  }
-
-  r += "C";
-  r += (chans+'0');
-
-  return r;
-}
-*/
 
 /**
  * @brief Preprocesses a frame. Frame is turned to grayscale and blurred
@@ -66,23 +43,10 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
         err_frame = true;
         return image;
     }
-    /* Canny Edge Detection filter seems to improve detection of cards with Red coloured suits*/
-    // cv::Canny(processed_img, processed_img, 100, 200);
-    // The best threshold level depends on the ambient lighting conditions.
-    // For bright lighting, a high threshold must be used to isolate the cards
-    // from the background. For dim lighting, a low threshold must be used.
-    // To make the card detector independent of lighting conditions, the
-    // following adaptive threshold method is used.
-    // A background pixel in the center top of the image is sampled to determine
-    // its intensity. The adaptive threshold is set at 50 (THRESH_ADDER) higher
-    // than that. This allows the threshold to adapt to the lighting conditions.
-
-    // cv::Size img_size = image.size();
-    // int thresh_level = processed_img.at<uchar>(img_size.height/100, img_size.width/2) + BKG_ADAPTIVE_THRESH;
 
     /* Adaptive threshold provides image in the same format as
      * the matching template, thus reducing the need to re-format
-     * in later steps */
+     * in later steps and the processing workload */
     cv::adaptiveThreshold(processed_img, processed_img, 255,cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY_INV,3,3);
 
     return processed_img;
@@ -93,7 +57,8 @@ cv::Mat DetectCard::preprocess_image(cv::Mat &image){
  * shaped objects in the frame.
  * 
  * @param image the frame to process
- * @return struct Card_params contains contours and bounding boxes for all cards
+ * @return struct Card_params contains contours, bounding boxes and other parameters
+ * for all cards, required in later steps of the pipeline
  */
 Card_params DetectCard::find_cards(cv::Mat &image){
 
@@ -163,6 +128,16 @@ Card_params DetectCard::find_cards(cv::Mat &image){
     return Card_params;
 }
 
+/**
+ * @brief Flatten the detected card bounding box
+ * by applying a warpPrespective opencv method.
+ * Aids in counteracting optical distorion for objects
+ * in the corners of the camera FoV.
+ * 
+ * @param qCard structure to store information about single card in the camera image
+ * @param image the current frame
+ * @return cv::Mat flattened card
+ */
 cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
     /* If card is placed VERTICALLY, then card Rank is 
      * in the [0] and [2] corner points */
@@ -207,13 +182,10 @@ cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
             roi_corners[2] = qCard.corner_pts[3]; // B-R
             roi_corners[3] = qCard.corner_pts[0]; // T-R
         }
-
-        // std::cout << "Card is VERTICAL" << endl;
     }
     
     /* For HORIZONTAL cards, width > height, and ratio
      * height/width = ~ 1/1.3 = 0.77 */
-    
     if (height <= 0.77 * width){
         if (tl == qCard.corner_pts[0]){
             roi_corners[0] = qCard.corner_pts[3]; // T-L
@@ -227,7 +199,6 @@ cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
             roi_corners[2] = qCard.corner_pts[2]; // B-R
             roi_corners[3] = qCard.corner_pts[3]; // T-R
         }
-        // std::cout << "Card is HORIZONTAL" << endl;
     }
 
     /* For cards at an angle, height/width < 1.4 and height/width > 0.72
@@ -240,7 +211,6 @@ cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
             roi_corners[1] = qCard.corner_pts[1]; // B-L
             roi_corners[2] = qCard.corner_pts[2]; // B-R
             roi_corners[3] = qCard.corner_pts[3]; // T-R
-            // std::cout << "Card is TILTED RIGHT" << endl;
         }
         /* Card tilted to the left*/
         if (qCard.corner_pts[1].y < qCard.corner_pts[3].y 
@@ -249,12 +219,11 @@ cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
             roi_corners[1] = qCard.corner_pts[2]; // B-L
             roi_corners[2] = qCard.corner_pts[3]; // B-R
             roi_corners[3] = qCard.corner_pts[0]; // T-R
-            // std::cout << "Card is TILTED LEFT" << endl;
         }
     }
 
 
-    // Create destination array, calculate perspective transform matrix, and warp card image
+    /* Create destination array, calculate perspective transform matrix, and warp card image */
     std::vector<cv::Point2f> dst = {
         cv::Point2f(0, 0), // T-L
         cv::Point2f((float)0, (float)(FLATTENED_HEIGHT-1)), // B-L
@@ -267,9 +236,16 @@ cv::Mat DetectCard::flatten_card(qCard &qCard, cv::Mat &image){
     cv::warpPerspective(image, wrapped, M, cv::Size(FLATTENED_WIDTH, FLATTENED_HEIGHT));
 
     return wrapped;
-
 }
 
+/**
+ * @brief Extract the Cards Ranks as Regions of Interest.
+ * Isolates the ranks as vector of cv::Mat.
+ * 
+ * @param Card_params structure holding all parameters of
+ * card-shaped objects
+ * @param image the current frame to be processed
+ */
 void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
 {
     /* Uses contour to find information about the query card. Isolates rank
@@ -309,10 +285,6 @@ void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
         /* Flatten the card to fix for wrapped perspective */
         cv::Mat flat_card = flatten_card(qCard, image);
 
-        // std::cout << "Card angle: " << Card_params.rotatedbox[0].angle << endl;
-        // Warp card into 200x300 flattened image using perspective transform
-        // cv::imshow("Flattened", flat_card);
-
         /* The corner division by 7 is good for the wider cards*/
         /* Corner dimension relative to card width-height to account
         * for varying camera vertical height (distance to card) */
@@ -350,7 +322,7 @@ void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
             return cv::contourArea(c1, false) > cv::contourArea(c2, false);
         });
 
-        /* Create a bounding box around the largest contours and upsize it to the dimensions 
+        /* Create a bounding box around the largest contour and upsize it to the dimensions 
         * of the reference images that will be used for matching */
         cv::Mat rank_roi, suit_roi;
         if(rank_contours.size()){
@@ -358,7 +330,6 @@ void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
             cv::Rect rank_box = cv::boundingRect(rank_contours[0]);
             rank_roi = rank(rank_box);
             cv::resize(rank_roi, rank_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
-            // cv::imshow("Rank ROI", rank_roi);
             rank_rois.push_back(rank_roi);
         }
         if(suit_contours.size()){
@@ -366,33 +337,41 @@ void DetectCard::preprocess_cards(Card_params &Card_params, cv::Mat &image)
             cv::Rect suit_box = cv::boundingRect(suit_contours[0]);
             suit_roi = suit(suit_box);
             cv::resize(suit_roi, suit_roi, cv::Size(RANK_WIDTH, RANK_HEIGHT), 1, 1, cv::INTER_LINEAR);
-            // cv::imshow("Suit ROI", suit_roi);
         }
     }
 
-    // cv::cvtColor(image, image, cv::COLOR_GRAY2BGR);
-    // for(int k = 0; k < Card_params.num_of_cards; k++){
-    //     /* Draw the Box */
-    //     for (int i = 0; i < 4; i++){
-    //         cv::line(image, Card_params.rotatedbox_pts[k][i], Card_params.rotatedbox_pts[k][(i+1)%4], Scalar(0,255,0), 2);
-    //     }
-    // }
-    // cv::imshow("Bounding box", image);
-        
+    /* Store the Rank ROIs to be passed on the template matching method */
     Card_params.rank_rois = rank_rois;
-    /* Return the Rank ROI to be passed on the template matching function*/
-    // return rank_rois;
 }
 
+/**
+ * @brief Template matching method is responsible for determining
+ * the card Rank. In this release, the matching method
+ * is a simple absolute difference of the Rank ROI against a 
+ * template image, however future releases could incorporate a completely
+ * different solution, such as a Machine Learning model, recognising
+ * numbers and letters.
+ * 
+ * @param params structure holding all parameters of
+ * card-shaped objects
+ * @param rank boolean, can be used to select detection of
+ * rank (== true) or suit (== false). Suit detection is currently
+ * not implemented. 
+ * 
+ */
 void DetectCard::template_matching(Card_params &params, bool rank){
     carddiscriminator.template_matching(params, rank);
 }
 
+/**
+ * @brief Main loop used by Processing Thread.
+ * Here all the processing is performed whenever a new frame
+ * has been captured by the camera. Loop ends by calling 
+ * the callback of the obe
+ * 
+ */
 void DetectCard::processingThreadLoop(){
     while(isProcessing){
-        /* Need to Show frame after find_cards()*/
-        /* imshow converts image to 3-channel */
-        /* find_cards() requires single monochrome channel */
         if(newFrame){
             /* Processing loop busy */
             busy = true;
@@ -400,19 +379,24 @@ void DetectCard::processingThreadLoop(){
             /* First preprocess the entire frame */
             cv::Mat processed_image = preprocess_image(currentFrame);
             if (!err_frame){
-                /* Next find cards in the frame */
+                /* Next find cards in the frame
+                 * Need to Show frame after find_cards()
+                 * cv::imshow converts image to 3-channel
+                 * find_cards() requires single monochrome channel */
                 Card_params card_params = find_cards(processed_image);
                 /* Find the cards rank ROI (region of interest) */
                 preprocess_cards(card_params, processed_image);
                 /* Take isolated ranks and match them with the template cards */
                 template_matching(card_params);
-                // card_params.currentFrame = processed_image;
+
                 card_params.currentFrame = currentFrame;
                 /* Take Card Names and respective Card Positions 
-                * and pass it to the GamePlay class */
-                AcePlaysUtils callbackData;
-                callbackData.cardParams = card_params;
-                processingCallback->nextCallback(callbackData);
+                 * and pass it to the GamePlay class */
+                if (processingCallback){
+                    AcePlaysUtils callbackData;
+                    callbackData.cardParams = card_params;
+                    processingCallback->nextCallback(callbackData);
+                }
             }
 
             /* Processing finished */
@@ -421,27 +405,26 @@ void DetectCard::processingThreadLoop(){
             err_frame = false;
             frame_counter = 0;
             
+            /* The following cv::waitKey() statement is needed 
+            for cv::imshow to work. Can be removed if using a different
+            frame showing package, such as Qt GUI */
             int key = cv::waitKey(1);
             if (key == 27/*ESC*/){break;}
         }
     }
 }
 
+/**
+ * @brief Implement the nextCallback virtual method to pass
+ * information down the pipeline
+ * 
+ * @param callbackData an AcePlaysUtils callback object
+ */
 void DetectCard::nextCallback(AcePlaysUtils &callbackData){
     /* Count dropped frames when processing loop is busy */
     frame_counter++;
-    
-    try
-    {
-        newFrame = true;
-        currentFrame = callbackData.nextFrame;
-        // cv::imshow("Frame", currentFrame);
-    }
-    catch (cv::Exception& e)
-    {
-        const char* err_msg = e.what();
-        std::cout << "Exception caught: imshow:\n" << err_msg << std::endl;
-    }
+    newFrame = true;
+    currentFrame = callbackData.nextFrame;
 }
 
 /**
@@ -461,14 +444,24 @@ void DetectCard::unregisterCallback(){
     processingCallback = nullptr;
 }
 
+/**
+ * @brief Method call to start the Processing Thread
+ * 
+ */
 void DetectCard::startProcessing(){
     isProcessing = true;
     /* Start Thread */
     procThread = std::thread(&DetectCard::processingThreadLoop, this);
 }
 
+/**
+ * @brief Method call to stop the Processing Thread
+ * 
+ */
 void DetectCard::stopProcessing(){
     // isProcessing = false;
+    /* If not using Qt or dont have anything running in main() 
+      use .join() method to keep the procThread running */
     procThread.join();
 }
 
@@ -476,12 +469,16 @@ void DetectCard::stopProcessing(){
  * @brief Construct a new Detect Card:: Detect Card object
  * 
  * @param folder_path get folder path of template cards and 
- * call cardTemplates constructor to load all templates
+ * call CardDiscriminator constructor to load all templates
  */
 DetectCard::DetectCard(cv::String folder_path):carddiscriminator(folder_path)
 {
 }
 
+/**
+ * @brief Destroy the Detect Card:: Detect Card object
+ * 
+ */
 DetectCard::~DetectCard()
 {
 }
