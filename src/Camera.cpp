@@ -79,9 +79,11 @@ void Camera::camThreadLoop(){
 #endif
         else{
             /* Here add the callback */
-            AcePlaysUtils callbackData;
-            callbackData.nextFrame = currentFrame;
-            cameraCallback->nextCallback(callbackData);
+            if (cameraCallback){
+                AcePlaysUtils callbackData;
+                callbackData.nextFrame = currentFrame;
+                cameraCallback->nextCallback(callbackData);
+            }
         }
     }
 }
