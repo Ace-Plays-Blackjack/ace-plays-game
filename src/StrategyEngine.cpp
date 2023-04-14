@@ -27,7 +27,7 @@ decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards
 		}
 	}
 	while (i < numofcards) {
-		if ((playercards[i] == 11) && (playertotal + playercards[i] <= 21)) {
+		if ((playercards[i] == 11) && ((playertotal + playercards[i]) >= 21)) {
 			soft = true;
 		}
 		playertotal = playercards[i] + playertotal;
@@ -37,12 +37,12 @@ decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards
 			soft = false;
 		}
 		std::cout << playertotal << std::endl;
-		if (playertotal > 21) {
-			std::cout << "You Lose!" << std::endl;
-			return LOSE;
-		}
+	if (playertotal > 21) {
+		std::cout << "You Lose!" << std::endl;
+		return LOSE;
 	}
-	
+	}
+				
 	if ((playertotal == 11) && (dealercard < 11) && (numofcards == 2)) {
 		std::cout << "DOUBLE!" << std::endl;
 		return DOUBLE;
@@ -51,7 +51,7 @@ decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards
 		std::cout << "DOUBLE!" << std::endl;
 		return DOUBLE;
 	}
-	if ((playertotal == 9) && ((dealercard == 3) || (dealercard == 4) || (dealercard == 5) || (dealercard = 6))) {
+	if ((playertotal == 9) && (numofcards == 2) && (dealercard > 2) && (dealercard < 7)) {
 		std::cout << "DOUBLE!" << std::endl;
 		return DOUBLE;
 	}
