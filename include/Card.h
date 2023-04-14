@@ -27,7 +27,11 @@ such as camera height from table/cards */
 #define RANK_WIDTH 70
 #define RANK_HEIGHT 125
 
-
+/**
+ * @brief A Blackjack enum decisions
+ * to determine the next Optimal Play
+ * 
+ */
 enum decisions {
     HIT,
     STAND,
