@@ -37,6 +37,10 @@ enum Err_type{
     ERR_EMPTY_FRAME
 };
 
+/**
+ * @brief Class for initialising a Camera object and capturing frames.
+ * 
+ */
 class Camera
 {
 private:
@@ -69,8 +73,6 @@ public:
     int getErr();
     
 };
-
-
 
 
 #endif /* CAMERA_H */
