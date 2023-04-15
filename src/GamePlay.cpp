@@ -308,18 +308,37 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
 
 }
 
+/**
+ * @brief Register callback for the LED class.
+ * 
+ * @param CallbackLinker is the class that deals with callbacks.
+ * @param cb is a pointer to the callback
+ */
 void GamePlay::registerCallback(CallbackLinker* cb){
     ledCallback = cb;
 }
 
+/**
+ * @brief Unregister callback for the LED class.
+ * 
+ */
 void GamePlay::unregisterCallback(){
     ledCallback = nullptr;
 }
-
+/**
+ * @brief Register callback for the Strategy Engine class.
+ * 
+ * @param CallbackLinker is the class that deals with callbacks.
+ * @param cb is a pointer to the callback
+ */
 void GamePlay::registerstrategyCallback(CallbackLinker* cb){
     strategyCallback = cb;
 }
 
+/**
+ * @brief Unregister callback for the LED class.
+ * 
+ */
 void GamePlay::unregisterstrategyCallback(){
     strategyCallback = nullptr;
 }

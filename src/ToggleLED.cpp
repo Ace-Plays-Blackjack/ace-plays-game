@@ -99,6 +99,12 @@ ToggleLED::~ToggleLED() {
 	gpioTerminate();
 }
 
+/**
+ * @brief Implement the nextCallback virtual method to pass
+ * information down the pipeline
+ * 
+ * @param callbackData an AcePlaysUtils callback object
+ */
 void ToggleLED::nextCallback(AcePlaysUtils &callbackData){
 	flashled(callbackData.blackjackDecision);
 	
