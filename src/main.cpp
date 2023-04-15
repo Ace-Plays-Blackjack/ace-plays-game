@@ -36,7 +36,6 @@ int main(int, char**)
 */ 
     double res_w = 1024;
     double res_h = 768;
-    std::cout << "Opening camera..." << std::endl;
     Camera camera_obj(0, res_w, res_h); 
 
     /* PATH depends on where the executable is called from */
@@ -46,20 +45,10 @@ int main(int, char**)
     camera_obj.registerCallback(&cards_obj);
     cards_obj.registerCallback(&gameplay_obj);
     cards_obj.startProcessing();
+    
+    std::cout << "Opening camera..." << std::endl;
     camera_obj.startRecording();
     
-    /* Demonstration of LED Toggling*/
-    ToggleLED leds_obj;
-    leds_obj.flashled(SPLIT);
-    leds_obj.flashled(HIT);
-    leds_obj.flashled(STOP);
-    
-    /* Demonstration of Strategy Engine */
-    std::vector<int> vect{ 11, 6, 5, 10};
-    StrategyEngine firstdecision;
-    decisions choice = firstdecision.getchoice(10, vect);
-    
-    // camera_obj.stopRecording();
     /* Stop Processing Method effectively calls std::join 
     method to keep the processing thread running since nothing 
     else happens in main */
