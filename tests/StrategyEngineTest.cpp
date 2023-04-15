@@ -10,34 +10,36 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include <gtest/gtest.h>
 #include "StrategyEngine.h"
 
-
-StrategyEngine strategy;
-
 TEST(StrategyTest, Hit) {
+  StrategyEngine strategy;
   std::vector<int> cards = {7, 8}; // player cards
   decisions result = strategy.getchoice(7, cards); // dealer card
   EXPECT_EQ(result, HIT);
 }
 
 TEST(StrategyTest, Double) {
+  StrategyEngine strategy;
   std::vector<int> cards = {7, 4}; 
   decisions result = strategy.getchoice(5, cards); 
   EXPECT_EQ(result, DOUBLE);
 }
 
 TEST(StrategyTest, Split) {
+  StrategyEngine strategy;
   std::vector<int> cards = {6, 6}; 
   decisions result = strategy.getchoice(4, cards); 
   EXPECT_EQ(result, SPLIT);
 }
 
 TEST(StrategyTest, Stand) {
+  StrategyEngine strategy;
   std::vector<int> cards = {10, 7}; 
   decisions result = strategy.getchoice(2, cards); 
   EXPECT_EQ(result, STAND);
 }
 
 TEST(StrategyTest, Lose) {
+  StrategyEngine strategy;
   std::vector<int> cards = {10, 9, 3}; 
   decisions result = strategy.getchoice(5, cards); 
   EXPECT_EQ(result, LOSE);
