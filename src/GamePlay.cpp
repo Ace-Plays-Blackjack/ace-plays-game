@@ -21,9 +21,10 @@ GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     frame_h = res_h;
     frame_w_midpoint = (int)(frame_w/2);
     frame_h_midpoint = (int)(frame_h/2);
+    /* Register the LED and Strategy Engine callbacks */
+    registerLEDCallback(&leds);
+    registerStrategyCallback(&game_engine);
     /* Reset LEDs at startup */
-    registerCallback(&leds);
-    registerstrategyCallback(&game_engine);
     leds.flashled(STOP);
 }
 
@@ -203,10 +204,7 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
     }
 
     /* Dealer only plays one card */
-    //decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
-    /* Demonstration of LED Toggling*/
     AcePlaysUtils callbackData;
-    //callbackData.blackjackDecision = choice;
     callbackData.dealercard = dealersHand.cards[0];
     callbackData.playercards = playersHand.cards;
     strategyCallback->nextCallback(callbackData);
@@ -314,7 +312,7 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
  * @param CallbackLinker is the class that deals with callbacks.
  * @param cb is a pointer to the callback
  */
-void GamePlay::registerCallback(CallbackLinker* cb){
+void GamePlay::registerLEDCallback(CallbackLinker* cb){
     ledCallback = cb;
 }
 
@@ -322,7 +320,7 @@ void GamePlay::registerCallback(CallbackLinker* cb){
  * @brief Unregister callback for the LED class.
  * 
  */
-void GamePlay::unregisterCallback(){
+void GamePlay::unregisterLEDCallback(){
     ledCallback = nullptr;
 }
 /**
@@ -331,7 +329,7 @@ void GamePlay::unregisterCallback(){
  * @param CallbackLinker is the class that deals with callbacks.
  * @param cb is a pointer to the callback
  */
-void GamePlay::registerstrategyCallback(CallbackLinker* cb){
+void GamePlay::registerStrategyCallback(CallbackLinker* cb){
     strategyCallback = cb;
 }
 
@@ -339,7 +337,7 @@ void GamePlay::registerstrategyCallback(CallbackLinker* cb){
  * @brief Unregister callback for the LED class.
  * 
  */
-void GamePlay::unregisterstrategyCallback(){
+void GamePlay::unregisterStrategyCallback(){
     strategyCallback = nullptr;
 }
 

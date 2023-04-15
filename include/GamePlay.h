@@ -64,10 +64,10 @@ public:
     GamePlay(double res_w, double res_h);
     ~GamePlay();
     void nextCallback(AcePlaysUtils &callbackData);
-    void registerCallback(CallbackLinker* cb);
-    void unregisterCallback();
-    void registerstrategyCallback(CallbackLinker* cb);
-    void unregisterstrategyCallback();
+    void registerLEDCallback(CallbackLinker* cb);
+    void unregisterLEDCallback();
+    void registerStrategyCallback(CallbackLinker* cb);
+    void unregisterStrategyCallback();
 };
 
 #endif /* PLAY_GAME_H */
