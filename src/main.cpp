@@ -16,14 +16,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "StrategyEngine.h"
 #include "GamePlay.h"
 
-using namespace cv;
-using namespace std;
-using std::cout; using std::cerr; using std::endl;
-
 int main(int, char**)
 {
-    std::cout<<cv::getBuildInformation();
-    cout << "Opening camera..." << endl;
+    /* Uncomment to print out build information */
+    /* std::cout << cv::getBuildInformation(); */
+    cout << "Welcome to AcePlays!" << endl;
 
 /*  Choose one of the resolutions bellow when using the 
     new LIBCAMERA stack with LCCV
@@ -39,11 +36,11 @@ int main(int, char**)
 */ 
     double res_w = 1024;
     double res_h = 768;
+    cout << "Opening camera..." << endl;
     Camera camera_obj(0, res_w, res_h); 
 
     /* PATH depends on where the executable is called from */
-    // DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
-    DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
+    DetectCard cards_obj("../Card_Imgs/");
     GamePlay gameplay_obj(res_w, res_h);
 
     camera_obj.registerCallback(&cards_obj);
@@ -52,18 +49,9 @@ int main(int, char**)
     cards_obj.startProcessing();
     camera_obj.startRecording();
     
-    /* Demonstration of LED Toggling*/
-    ToggleLED leds;
-    leds.flashled(SPLIT);
-    leds.flashled(HIT);
-    leds.flashled(STOP);
-
-    /* Demonstration of Strategy Engine */
-    std::vector<int> vect{ 11, 6, 5, 10};
-    StrategyEngine firstdecision;
-    decisions choice = firstdecision.getchoice(10, vect);
-    
-    // camera_obj.stopRecording();
+    /* Stop Processing Method effectively calls std::join 
+    method to keep the processing thread running since nothing 
+    else happens in main */
     cards_obj.stopProcessing();
     return 0;
 }

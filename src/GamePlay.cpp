@@ -9,6 +9,12 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 #include "GamePlay.h"
 
+/**
+ * @brief Construct a new Game Play:: Game Play object
+ * 
+ * @param res_w desired resolution width
+ * @param res_h desired resolution height
+ */
 GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     /* Get resolution of frame */
     frame_w = res_w;
@@ -19,6 +25,15 @@ GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     leds.flashled(STOP);
 }
 
+/**
+ * @brief Convert from detected card names
+ * from strings to their equivalent integer
+ * Blackjack value
+ * 
+ * @param card_names array of string card names
+ * @return std::vector<int> array of converted card 
+ * names to integer
+ */
 std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
     std::vector<int> cards_int;
 
@@ -71,15 +86,27 @@ std::vector<int> GamePlay::convertStr2Int(std::vector<cv::String> &card_names){
     return cards_int;
 }
 
-
+/**
+ * @brief Method to clear the whos_hand object
+ * and reset the num of dealer and player card
+ * counting
+ * 
+ */
 void GamePlay::clear_whosHand(){
     /* Clear the whos_hand vector when done */
-    // if (!whos_hand.empty()){
     whos_hand.clear();
     num_dealer_cards = 0;
     num_player_cards = 0;
 }
 
+/**
+ * @brief Method to discriminate between a detected
+ * card belonging to the player vs the dealer. The 
+ * idea is to determine whether the card's midpoint
+ * is above or below frame's midpoint
+ * 
+ * @param card_midpoint the card's midpoint
+ */
 void GamePlay::whosHand(cv::Point_<int> &card_midpoint){
     /* Camera view is upside down, hence top of frame will be 
      * for the player (top of frame has smaller y value)*/
@@ -93,13 +120,25 @@ void GamePlay::whosHand(cv::Point_<int> &card_midpoint){
     }
 }
 
+/**
+ * @brief NOT IMPLEMENTED:
+ * A method to accumulate results of card detections,
+ * find the mode (most prevalent detection) after 
+ * ACCUM_CNTR_THRESH detections, and choose that as the
+ * true detection. Idea is to have probability distribution
+ * of detections and choose the most prominent (highest peak)
+ * result.
+ * 
+ * @param cards_names_int vector of card detections as integers
+ * @param cards_centre_pts vector of card midpoints as cv::Point array
+ */
 void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Point_<int>> &cards_centre_pts){
     
     if (accum_cntr == ACCUM_CNTR_THRESH){
         /* Reset counter */
         accum_cntr = 0;
         /* Decide on card value */
-        // identifyHand();
+        // NOT IMPLEMENTED: identifyHand();
 
         if (!card_accum.empty()){
             card_accum.clear();
@@ -115,7 +154,10 @@ void GamePlay::accumulator(std::vector<int> &cards_names_int, std::vector<cv::Po
         accum_cntr ++;
     }
 }
-
+/**
+ * @brief Method to reset the game
+ * 
+ */
 void GamePlay::game_reset(){
     gameStarted = false;
     total_cards = 0;
@@ -128,6 +170,12 @@ void GamePlay::game_reset(){
     leds.flashled(STOP);
 }
 
+/**
+ * @brief Method to play the game
+ * 
+ * @param cards_played vector of cards played expressed as integers
+ * @param cards_centre_pts vector of card midpoints expressed as cv::Point array
+ */
 void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts){
 
     /* Get how many new cards have been played */
@@ -152,7 +200,6 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
         }
     }
 
-    /* Demonstration of Strategy Engine */
     /* Dealer only plays one card */
     decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
     /* Demonstration of LED Toggling*/
@@ -161,7 +208,12 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
     prev_total_cards = total_cards;
 }
 
-
+/**
+ * @brief Implement the nextCallback virtual method to pass
+ * information down the pipeline
+ * 
+ * @param callbackData an AcePlaysUtils callback object
+ */
 void GamePlay::nextCallback(AcePlaysUtils &callbackData){
     Card_params Card_params = callbackData.cardParams;
     /* Received Card_params need to be accumulated */
@@ -189,17 +241,20 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         }
     }
     
-
-    int font_size = 1;//Declaring the font size//
-    cv::Scalar font_Color_GS(0, 0, 255);//Declaring the color of the font//
-    int font_weight = 2;//Declaring the font weight//
+    /* Declaring the font size */
+    int font_size = 1;
+    /* Declaring the color of the font */
+    cv::Scalar font_Color_GS(0, 0, 255);
+    /* Declaring the font weight */
+    int font_weight = 2;
+    /* Text position offset */
     int x_offset = 30;
     
     /* By this point it is verified that the game has started */
     if (gameStarted){
         cv::putText(Card_params.currentFrame, "Game Started!",cv::Point(25,25),cv::FONT_HERSHEY_COMPLEX, 1,font_Color_GS, font_weight);
         /* Accumulate results */
-        // accumulator(cards_names_int, cards_centre_pts);
+        // NOT IMPLEMENTED: accumulator(cards_names_int, cards_centre_pts);
 
         /* If new cards played, then play the game */
         if(cards_names_int.size() > total_cards){
@@ -246,6 +301,10 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
 
 }
 
-
+/**
+ * @brief Destroy the Game Play:: Game Play object
+ * 
+ */
 GamePlay::~GamePlay(){
+    cv::destroyWindow("Frame");
 }

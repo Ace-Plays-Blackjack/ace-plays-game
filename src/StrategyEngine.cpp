@@ -10,10 +10,22 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include <iostream>
 #include "StrategyEngine.h"
 
+/**
+ * @brief Construct a new Strategy Engine:: Strategy Engine object
+ * 
+ */
 StrategyEngine::StrategyEngine() {
 
 }
 
+/**
+ * @brief Method to implement the Blackjack optimum 
+ * strategy and compute the next optimum play.
+ * 
+ * @param dealercard the dealer's card as an integer
+ * @param playercards vector of the player's hand as integers
+ * @return decisions the computed optimum play
+ */
 decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards) {
 	
 	int numofcards = (int)playercards.size();

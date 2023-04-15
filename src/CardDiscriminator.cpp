@@ -10,10 +10,31 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "CardDiscriminator.h"
 #include "Card.h"
 
+/**
+ * @brief Construct a new Card Discriminator:: Card Discriminator object
+ * 
+ * @param folder_path get folder path of template cards and 
+ * call cardTemplates constructor to load all templates
+ */
 CardDiscriminator::CardDiscriminator(cv::String folder_path): cardTemplates(folder_path) {
 	
 }
 
+/**
+ * @brief Template matching method is responsible for determining
+ * the card Rank. In this release, the matching method
+ * is a simple absolute difference of the Rank ROI against a 
+ * template image, however future releases could incorporate a completely
+ * different solution, such as a Machine Learning model, recognising
+ * numbers and letters.
+ * 
+ * @param params structure holding all parameters of
+ * card-shaped objects
+ * @param rank boolean, can be used to select detection of
+ * rank (== true) or suit (== false). Suit detection is currently
+ * not implemented. 
+ * 
+ */
 void CardDiscriminator::template_matching(Card_params &params, bool rank){
 
     std::vector<cv::String> result_name;
@@ -46,13 +67,9 @@ void CardDiscriminator::template_matching(Card_params &params, bool rank){
                     matching_card_idx = k;
                 }
             }
-            // result = card_templates.getCard(matching_card_idx);
             result_name.push_back(cardTemplates.getCardRank(matching_card_idx));
         }
     }
-    // for (int i = 0; i < result_name.size(); i++){
-    //     std::cout << "Card " + std::to_string(i) + ":" << result_name[i] << std::endl;
-    // }
 
     params.card_names = result_name;
 }

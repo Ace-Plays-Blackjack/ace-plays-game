@@ -11,11 +11,15 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #define LEDS_H
 #include "Card.h"
 
+/**
+ * @brief Class to control the Rasp Pi pins and toggle LEDs ON/OFF.
+ * 
+ */
 class ToggleLED {
 public: 
     ToggleLED();
     ~ToggleLED();
-    bool flashled(decisions choice);
+    void flashled(decisions choice);
 private:
     void gpio(int led);
 
