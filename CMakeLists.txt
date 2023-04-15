@@ -4,7 +4,7 @@ option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" ON)
 
 add_definitions(-DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK})
 
-include(CTest)
+include(GoogleTest)
 enable_testing()
 
 include_directories(include)
@@ -69,7 +69,6 @@ find_package_handle_standard_args(pigpio
 
 target_link_libraries( ${PROJECT_NAME} PUBLIC ${pigpio_LIBRARY})
 
-
 # Include LCCV library
 if(NEW_CAM_STACK)
 
@@ -78,6 +77,15 @@ target_link_libraries(${PROJECT_NAME} PUBLIC LCCV)
 
 endif(NEW_CAM_STACK)
 
+#Include Google test
+option(PACKAGE_TESTS "Build the tests" ON)
+
+if(PACKAGE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+    add_subdirectory(tests)
+
+endif()
 
 message("**** OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS} ****")
 # message("OpenCV_LIBS: ${OpenCV_LIBS}")
