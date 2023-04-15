@@ -87,55 +87,58 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;CallbackLinker.h&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;CardDiscriminator.h&quot;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classDetectCard.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDetectCard.html">DetectCard</a> : <span class="keyword">public</span> <a class="code" href="classCallbackLinker.html">CallbackLinker</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">bool</span> isProcessing = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">bool</span> busy = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">bool</span> newFrame = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">bool</span> err_frame = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> frame_counter = 0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    cv::Mat currentFrame;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::thread procThread;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> processingThreadLoop();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classCallbackLinker.html">CallbackLinker</a>* processingCallback = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classDetectCard.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDetectCard.html">DetectCard</a> : <span class="keyword">public</span> <a class="code" href="classCallbackLinker.html">CallbackLinker</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">bool</span> isProcessing = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> busy = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> newFrame = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">bool</span> err_frame = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">int</span> frame_counter = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    cv::Mat currentFrame;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    cv::Mat preprocess_image(cv::Mat &amp;image);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="structCard__params.html">Card_params</a> find_cards(cv::Mat &amp;image);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    cv::Mat flatten_card(<a class="code" href="structqCard.html">qCard</a> &amp;<a class="code" href="structqCard.html">qCard</a>, cv::Mat &amp;image);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> preprocess_cards(<a class="code" href="structCard__params.html">Card_params</a> &amp;<a class="code" href="structCard__params.html">Card_params</a>, cv::Mat &amp;image);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">/* Output, match template and store cards detected */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> template_matching(<a class="code" href="structCard__params.html">Card_params</a> &amp;<a class="code" href="structCard__params.html">Card_params</a>, <span class="keywordtype">bool</span> rank=<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classCardDiscriminator.html">CardDiscriminator</a> carddiscriminator;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::thread procThread;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> processingThreadLoop();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classCallbackLinker.html">CallbackLinker</a>* processingCallback = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    cv::Mat preprocess_image(cv::Mat &amp;image);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="structCard__params.html">Card_params</a> find_cards(cv::Mat &amp;image);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    cv::Mat flatten_card(<a class="code" href="structqCard.html">qCard</a> &amp;<a class="code" href="structqCard.html">qCard</a>, cv::Mat &amp;image);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> preprocess_cards(<a class="code" href="structCard__params.html">Card_params</a> &amp;<a class="code" href="structCard__params.html">Card_params</a>, cv::Mat &amp;image);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classDetectCard.html#a48997cc0a6fdc0bc19881e2497d0e3b3">DetectCard</a>(cv::String folder_path);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ~<a class="code" href="classDetectCard.html">DetectCard</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#a0953c5436ade541a690b474adf261c8e">registerCallback</a>(<a class="code" href="classCallbackLinker.html">CallbackLinker</a>* cb);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#a597a730ad33d68de7364f0f6f33b4467">unregisterCallback</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#aa00bd7587e6168fd9b858d7ec16baac6">nextCallback</a>(<a class="code" href="structAcePlaysUtils.html">AcePlaysUtils</a> &amp;callbackData);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">/* Spawn thread */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> startProcessing();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> stopProcessing();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DETECT_CARD_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">/* Output, match template and store cards detected */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> template_matching(<a class="code" href="structCard__params.html">Card_params</a> &amp;<a class="code" href="structCard__params.html">Card_params</a>, <span class="keywordtype">bool</span> rank=<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classCardDiscriminator.html">CardDiscriminator</a> carddiscriminator;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classDetectCard.html#a48997cc0a6fdc0bc19881e2497d0e3b3">DetectCard</a>(cv::String folder_path);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classDetectCard.html#aaec79b99df2d395284fc0e3bc5f99c12">~DetectCard</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#a0953c5436ade541a690b474adf261c8e">registerCallback</a>(<a class="code" href="classCallbackLinker.html">CallbackLinker</a>* cb);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#a597a730ad33d68de7364f0f6f33b4467">unregisterCallback</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#aa00bd7587e6168fd9b858d7ec16baac6">nextCallback</a>(<a class="code" href="structAcePlaysUtils.html">AcePlaysUtils</a> &amp;callbackData);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">/* Spawn thread */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#a807d0b7f4e2f13ec1c9cb356f488f8e8">startProcessing</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classDetectCard.html#ab082dd0e79979627651ec928fd0d476b">stopProcessing</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DETECT_CARD_H */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aclassCallbackLinker_html"><div class="ttname"><a href="classCallbackLinker.html">CallbackLinker</a></div><div class="ttdoc">Generic abstract Callback Interface class.</div><div class="ttdef"><b>Definition:</b> CallbackLinker.h:20</div></div>
-<div class="ttc" id="aclassCardDiscriminator_html"><div class="ttname"><a href="classCardDiscriminator.html">CardDiscriminator</a></div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:115</div></div>
-<div class="ttc" id="aclassDetectCard_html"><div class="ttname"><a href="classDetectCard.html">DetectCard</a></div><div class="ttdef"><b>Definition:</b> DetectCard.h:20</div></div>
-<div class="ttc" id="aclassDetectCard_html_a0953c5436ade541a690b474adf261c8e"><div class="ttname"><a href="classDetectCard.html#a0953c5436ade541a690b474adf261c8e">DetectCard::registerCallback</a></div><div class="ttdeci">void registerCallback(CallbackLinker *cb)</div><div class="ttdoc">Register a Callback for the DetectCard Class.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:452</div></div>
-<div class="ttc" id="aclassDetectCard_html_a48997cc0a6fdc0bc19881e2497d0e3b3"><div class="ttname"><a href="classDetectCard.html#a48997cc0a6fdc0bc19881e2497d0e3b3">DetectCard::DetectCard</a></div><div class="ttdeci">DetectCard(cv::String folder_path)</div><div class="ttdoc">Construct a new Detect Card:: Detect Card object.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:481</div></div>
-<div class="ttc" id="aclassDetectCard_html_a597a730ad33d68de7364f0f6f33b4467"><div class="ttname"><a href="classDetectCard.html#a597a730ad33d68de7364f0f6f33b4467">DetectCard::unregisterCallback</a></div><div class="ttdeci">void unregisterCallback()</div><div class="ttdoc">Unregister existing callback.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:460</div></div>
-<div class="ttc" id="aclassDetectCard_html_aa00bd7587e6168fd9b858d7ec16baac6"><div class="ttname"><a href="classDetectCard.html#aa00bd7587e6168fd9b858d7ec16baac6">DetectCard::nextCallback</a></div><div class="ttdeci">void nextCallback(AcePlaysUtils &amp;callbackData)</div><div class="ttdoc">Abstract method.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:430</div></div>
-<div class="ttc" id="astructAcePlaysUtils_html"><div class="ttname"><a href="structAcePlaysUtils.html">AcePlaysUtils</a></div><div class="ttdef"><b>Definition:</b> Card.h:63</div></div>
-<div class="ttc" id="astructCard__params_html"><div class="ttname"><a href="structCard__params.html">Card_params</a></div><div class="ttdef"><b>Definition:</b> Card.h:41</div></div>
-<div class="ttc" id="astructqCard_html"><div class="ttname"><a href="structqCard.html">qCard</a></div><div class="ttdef"><b>Definition:</b> Card.h:72</div></div>
+<div class="ttc" id="aclassCardDiscriminator_html"><div class="ttname"><a href="classCardDiscriminator.html">CardDiscriminator</a></div><div class="ttdoc">Class to implement detection method from Card Rank ROIs. Can be adapted for other solutions such as m...</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:125</div></div>
+<div class="ttc" id="aclassDetectCard_html"><div class="ttname"><a href="classDetectCard.html">DetectCard</a></div><div class="ttdoc">Class for the detection of cards. Runs the processing pipeline.</div><div class="ttdef"><b>Definition:</b> DetectCard.h:24</div></div>
+<div class="ttc" id="aclassDetectCard_html_a0953c5436ade541a690b474adf261c8e"><div class="ttname"><a href="classDetectCard.html#a0953c5436ade541a690b474adf261c8e">DetectCard::registerCallback</a></div><div class="ttdeci">void registerCallback(CallbackLinker *cb)</div><div class="ttdoc">Register a Callback for the DetectCard Class.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:435</div></div>
+<div class="ttc" id="aclassDetectCard_html_a48997cc0a6fdc0bc19881e2497d0e3b3"><div class="ttname"><a href="classDetectCard.html#a48997cc0a6fdc0bc19881e2497d0e3b3">DetectCard::DetectCard</a></div><div class="ttdeci">DetectCard(cv::String folder_path)</div><div class="ttdoc">Construct a new Detect Card:: Detect Card object.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:474</div></div>
+<div class="ttc" id="aclassDetectCard_html_a597a730ad33d68de7364f0f6f33b4467"><div class="ttname"><a href="classDetectCard.html#a597a730ad33d68de7364f0f6f33b4467">DetectCard::unregisterCallback</a></div><div class="ttdeci">void unregisterCallback()</div><div class="ttdoc">Unregister existing callback.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:443</div></div>
+<div class="ttc" id="aclassDetectCard_html_a807d0b7f4e2f13ec1c9cb356f488f8e8"><div class="ttname"><a href="classDetectCard.html#a807d0b7f4e2f13ec1c9cb356f488f8e8">DetectCard::startProcessing</a></div><div class="ttdeci">void startProcessing()</div><div class="ttdoc">Method call to start the Processing Thread.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:451</div></div>
+<div class="ttc" id="aclassDetectCard_html_aa00bd7587e6168fd9b858d7ec16baac6"><div class="ttname"><a href="classDetectCard.html#aa00bd7587e6168fd9b858d7ec16baac6">DetectCard::nextCallback</a></div><div class="ttdeci">void nextCallback(AcePlaysUtils &amp;callbackData)</div><div class="ttdoc">Implement the nextCallback virtual method to pass information down the pipeline.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:423</div></div>
+<div class="ttc" id="aclassDetectCard_html_aaec79b99df2d395284fc0e3bc5f99c12"><div class="ttname"><a href="classDetectCard.html#aaec79b99df2d395284fc0e3bc5f99c12">DetectCard::~DetectCard</a></div><div class="ttdeci">~DetectCard()</div><div class="ttdoc">Destroy the Detect Card:: Detect Card object.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:482</div></div>
+<div class="ttc" id="aclassDetectCard_html_ab082dd0e79979627651ec928fd0d476b"><div class="ttname"><a href="classDetectCard.html#ab082dd0e79979627651ec928fd0d476b">DetectCard::stopProcessing</a></div><div class="ttdeci">void stopProcessing()</div><div class="ttdoc">Method call to stop the Processing Thread.</div><div class="ttdef"><b>Definition:</b> DetectCard.cpp:461</div></div>
+<div class="ttc" id="astructAcePlaysUtils_html"><div class="ttname"><a href="structAcePlaysUtils.html">AcePlaysUtils</a></div><div class="ttdoc">Utility structure used by the AcePlays repo for passing necessary information down the processing pip...</div><div class="ttdef"><b>Definition:</b> Card.h:80</div></div>
+<div class="ttc" id="astructCard__params_html"><div class="ttname"><a href="structCard__params.html">Card_params</a></div><div class="ttdoc">Structure holding the parameters of all detected card shapes in a frame, such as their position in th...</div><div class="ttdef"><b>Definition:</b> Card.h:52</div></div>
+<div class="ttc" id="astructqCard_html"><div class="ttname"><a href="structqCard.html">qCard</a></div><div class="ttdoc">Structure to store information about single card in the camera image.</div><div class="ttdef"><b>Definition:</b> Card.h:93</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

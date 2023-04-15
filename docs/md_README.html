@@ -112,7 +112,7 @@ Prerequisites</h2>
 <ul>
 <li>The AcePlays code has been developed using a <b>Raspberry Pi 3B</b>. However, any model <em>shoud</em> work.</li>
 <li>Installation of the <b>Raspbian Bullseye</b> Raspberry Pi OS.</li>
-<li>A working <b>Raspberry Pi <a class="el" href="classCamera.html">Camera</a></b> (Module V2 has been used for development). Follow <a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/0">https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/0</a> for first-usage instructions.</li>
+<li>A working <b>Raspberry Pi <a class="el" href="classCamera.html" title="Class for initialising a Camera object and capturing frames.">Camera</a></b> (Module V2 has been used for development). Follow <a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/0">https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/0</a> for first-usage instructions.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Installation</h2>
@@ -148,7 +148,7 @@ Using the NEW stack</h2>
 <ol type="1">
 <li><b>Disable</b> Legacy stack support in Pi configuration. Write the following command in the terminal: <div class="fragment"><div class="line">$ sudo raspi-config</div>
 </div><!-- fragment --></li>
-<li>Navigate to <code>Interface <a class="el" href="classOptions.html">Options</a></code> -&gt; <code>Legacy <a class="el" href="classCamera.html">Camera</a></code> -&gt; <code>No</code></li>
+<li>Navigate to <code>Interface <a class="el" href="classOptions.html">Options</a></code> -&gt; <code>Legacy <a class="el" href="classCamera.html" title="Class for initialising a Camera object and capturing frames.">Camera</a></code> -&gt; <code>No</code></li>
 <li>Reboot to enable the changes</li>
 <li>In <code>CMakeLists.txt</code> set the <code>NEW_CAM_STACK</code> option to <code>ON</code>:</li>
 </ol>
@@ -161,7 +161,7 @@ Using the OLD stack</h2>
 <ol type="1">
 <li><b>Enable</b> Legacy stack support in Pi configuration. Write the following command in the terminal: <div class="fragment"><div class="line">$ sudo raspi-config</div>
 </div><!-- fragment --></li>
-<li>Navigate to <code>Interface <a class="el" href="classOptions.html">Options</a></code> -&gt; <code>Legacy <a class="el" href="classCamera.html">Camera</a></code> -&gt; <code>Yes</code></li>
+<li>Navigate to <code>Interface <a class="el" href="classOptions.html">Options</a></code> -&gt; <code>Legacy <a class="el" href="classCamera.html" title="Class for initialising a Camera object and capturing frames.">Camera</a></code> -&gt; <code>Yes</code></li>
 <li>Reboot to enable the changes</li>
 <li>In <code>CMakeLists.txt</code> set the <code>NEW_CAM_STACK</code> option to <code>OFF</code>:</li>
 </ol>

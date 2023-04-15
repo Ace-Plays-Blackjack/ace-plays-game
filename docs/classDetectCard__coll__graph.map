@@ -1,4 +1,4 @@
 <map id="DetectCard" name="DetectCard">
-<area shape="rect" id="node1" title=" " alt="" coords="17,80,111,107"/>
+<area shape="rect" id="node1" title="Class for the detection of cards. Runs the processing pipeline." alt="" coords="17,80,111,107"/>
 <area shape="rect" id="node2" href="$classCallbackLinker.html" title="Generic abstract Callback Interface class." alt="" coords="5,5,123,32"/>
 </map>

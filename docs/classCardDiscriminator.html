@@ -68,16 +68,88 @@ $(function() {
 <div class="title">CardDiscriminator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class to implement detection method from Card Rank ROIs. Can be adapted for other solutions such as machine learning.  
+ <a href="classCardDiscriminator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="CardDiscriminator_8h_source.html">CardDiscriminator.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1a424eb8f23f65ca34a59378482aec82"><td class="memItemLeft" align="right" valign="top"><a id="a1a424eb8f23f65ca34a59378482aec82"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CardDiscriminator</b> (cv::String folder_path)</td></tr>
+<tr class="memitem:a1a424eb8f23f65ca34a59378482aec82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCardDiscriminator.html#a1a424eb8f23f65ca34a59378482aec82">CardDiscriminator</a> (cv::String folder_path)</td></tr>
+<tr class="memdesc:a1a424eb8f23f65ca34a59378482aec82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Card Discriminator:: Card Discriminator object.  <a href="classCardDiscriminator.html#a1a424eb8f23f65ca34a59378482aec82">More...</a><br /></td></tr>
 <tr class="separator:a1a424eb8f23f65ca34a59378482aec82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e1f0e120f280eb45f75e15116f84316"><td class="memItemLeft" align="right" valign="top"><a id="a4e1f0e120f280eb45f75e15116f84316"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>template_matching</b> (<a class="el" href="structCard__params.html">Card_params</a> &amp;<a class="el" href="structCard__params.html">Card_params</a>, bool rank)</td></tr>
+<tr class="memitem:a4e1f0e120f280eb45f75e15116f84316"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCardDiscriminator.html#a4e1f0e120f280eb45f75e15116f84316">template_matching</a> (<a class="el" href="structCard__params.html">Card_params</a> &amp;<a class="el" href="structCard__params.html">Card_params</a>, bool rank)</td></tr>
+<tr class="memdesc:a4e1f0e120f280eb45f75e15116f84316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template matching method is responsible for determining the card Rank. In this release, the matching method is a simple absolute difference of the Rank ROI against a template image, however future releases could incorporate a completely different solution, such as a Machine Learning model, recognising numbers and letters.  <a href="classCardDiscriminator.html#a4e1f0e120f280eb45f75e15116f84316">More...</a><br /></td></tr>
 <tr class="separator:a4e1f0e120f280eb45f75e15116f84316"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to implement detection method from Card Rank ROIs. Can be adapted for other solutions such as machine learning. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1a424eb8f23f65ca34a59378482aec82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a424eb8f23f65ca34a59378482aec82">&#9670;&nbsp;</a></span>CardDiscriminator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CardDiscriminator::CardDiscriminator </td>
+          <td>(</td>
+          <td class="paramtype">cv::String&#160;</td>
+          <td class="paramname"><em>folder_path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new Card Discriminator:: Card Discriminator object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">folder_path</td><td>get folder path of template cards and call cardTemplates constructor to load all templates </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4e1f0e120f280eb45f75e15116f84316"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e1f0e120f280eb45f75e15116f84316">&#9670;&nbsp;</a></span>template_matching()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CardDiscriminator::template_matching </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCard__params.html">Card_params</a> &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>rank</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Template matching method is responsible for determining the card Rank. In this release, the matching method is a simple absolute difference of the Rank ROI against a template image, however future releases could incorporate a completely different solution, such as a Machine Learning model, recognising numbers and letters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">params</td><td>structure holding all parameters of card-shaped objects </td></tr>
+    <tr><td class="paramname">rank</td><td>boolean, can be used to select detection of rank (== true) or suit (== false). Suit detection is currently not implemented. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="CardDiscriminator_8h_source.html">CardDiscriminator.h</a></li>
 <li>src/CardDiscriminator.cpp</li>

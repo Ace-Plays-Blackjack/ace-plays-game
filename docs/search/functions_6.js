@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['startrecording_58',['startRecording',['../classCamera.html#af276333ed7eb98117a1be06b764fd41f',1,'Camera']]],
-  ['stoprecording_59',['stopRecording',['../classCamera.html#a89cd61acf2c79e518686a1c10feee0d0',1,'Camera']]]
+  ['registercallback_73',['registerCallback',['../classCamera.html#a1c5068178e256f98215dcacef5ff76d7',1,'Camera::registerCallback()'],['../classDetectCard.html#a0953c5436ade541a690b474adf261c8e',1,'DetectCard::registerCallback()']]],
+  ['registerledcallback_74',['registerLEDCallback',['../classGamePlay.html#ac616a881fa9696e3b586a7f6581a9a10',1,'GamePlay']]],
+  ['registerstrategycallback_75',['registerStrategyCallback',['../classGamePlay.html#ae70e0f98615c96e21067abada66a48bb',1,'GamePlay']]]
 ];
