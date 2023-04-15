@@ -81,6 +81,8 @@ struct AcePlaysUtils{
     cv::Mat nextFrame;
     Card_params cardParams;
     decisions blackjackDecision;
+    int dealercard; 
+    std::vector<int> playercards;
 };
 
 /**

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Blackjack Decision Maker: include/CallbackLinker.h Source File</title>
+<title>Blackjack Decision Maker: include/ToggleLED.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">CallbackLinker.h</div>  </div>
+<div class="title">ToggleLED.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
@@ -78,21 +78,26 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef CALLBACK_LINKER_H </span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define CALLBACK_LINKER_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;Card.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef LEDS_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define LEDS_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;Card.h&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;CallbackLinker.h&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classCallbackLinker.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCallbackLinker.html">CallbackLinker</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classCallbackLinker.html#a44f8a8924124460e8f8ff37fcb6159b0">   29</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classCallbackLinker.html#a44f8a8924124460e8f8ff37fcb6159b0">nextCallback</a>(<a class="code" href="structAcePlaysUtils.html">AcePlaysUtils</a> &amp;callbackData) = 0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*CALLBACK_LINKER_H*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classToggleLED.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classToggleLED.html">ToggleLED</a> : <span class="keyword">public</span> <a class="code" href="classCallbackLinker.html">CallbackLinker</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classToggleLED.html">ToggleLED</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    ~<a class="code" href="classToggleLED.html">ToggleLED</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">bool</span> flashled(decisions choice);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToggleLED.html#a2e1024d03171e63047dfff75281723bb">nextCallback</a>(<a class="code" href="structAcePlaysUtils.html">AcePlaysUtils</a> &amp;callbackData);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> gpio(<span class="keywordtype">int</span> led);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//LEDS_H</span></div>
 <div class="ttc" id="aclassCallbackLinker_html"><div class="ttname"><a href="classCallbackLinker.html">CallbackLinker</a></div><div class="ttdoc">Generic abstract Callback Interface class.</div><div class="ttdef"><b>Definition:</b> CallbackLinker.h:20</div></div>
-<div class="ttc" id="aclassCallbackLinker_html_a44f8a8924124460e8f8ff37fcb6159b0"><div class="ttname"><a href="classCallbackLinker.html#a44f8a8924124460e8f8ff37fcb6159b0">CallbackLinker::nextCallback</a></div><div class="ttdeci">virtual void nextCallback(AcePlaysUtils &amp;callbackData)=0</div><div class="ttdoc">Abstract method.</div></div>
+<div class="ttc" id="aclassToggleLED_html"><div class="ttname"><a href="classToggleLED.html">ToggleLED</a></div><div class="ttdef"><b>Definition:</b> ToggleLED.h:16</div></div>
+<div class="ttc" id="aclassToggleLED_html_a2e1024d03171e63047dfff75281723bb"><div class="ttname"><a href="classToggleLED.html#a2e1024d03171e63047dfff75281723bb">ToggleLED::nextCallback</a></div><div class="ttdeci">void nextCallback(AcePlaysUtils &amp;callbackData)</div><div class="ttdoc">Abstract method.</div><div class="ttdef"><b>Definition:</b> ToggleLED.cpp:84</div></div>
 <div class="ttc" id="astructAcePlaysUtils_html"><div class="ttname"><a href="structAcePlaysUtils.html">AcePlaysUtils</a></div><div class="ttdef"><b>Definition:</b> Card.h:63</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

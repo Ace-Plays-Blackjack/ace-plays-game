@@ -21,6 +21,9 @@ GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     frame_h = res_h;
     frame_w_midpoint = (int)(frame_w/2);
     frame_h_midpoint = (int)(frame_h/2);
+    /* Register the LED and Strategy Engine callbacks */
+    registerLEDCallback(&leds);
+    registerStrategyCallback(&game_engine);
     /* Reset LEDs at startup */
     leds.flashled(STOP);
 }
@@ -201,9 +204,11 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
     }
 
     /* Dealer only plays one card */
-    decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
-    /* Demonstration of LED Toggling*/
-    leds.flashled(choice);
+    AcePlaysUtils callbackData;
+    callbackData.dealercard = dealersHand.cards[0];
+    callbackData.playercards = playersHand.cards;
+    strategyCallback->nextCallback(callbackData);
+    ledCallback->nextCallback(callbackData);
     /* New card has been played, hence make prev equal to current */
     prev_total_cards = total_cards;
 }
@@ -299,6 +304,41 @@ void GamePlay::nextCallback(AcePlaysUtils &callbackData){
         std::cout << "Exception caught: cv::imshow:\n" << err_msg << std::endl;
     }
 
+}
+
+/**
+ * @brief Register callback for the LED class.
+ * 
+ * @param CallbackLinker is the class that deals with callbacks.
+ * @param cb is a pointer to the callback
+ */
+void GamePlay::registerLEDCallback(CallbackLinker* cb){
+    ledCallback = cb;
+}
+
+/**
+ * @brief Unregister callback for the LED class.
+ * 
+ */
+void GamePlay::unregisterLEDCallback(){
+    ledCallback = nullptr;
+}
+/**
+ * @brief Register callback for the Strategy Engine class.
+ * 
+ * @param CallbackLinker is the class that deals with callbacks.
+ * @param cb is a pointer to the callback
+ */
+void GamePlay::registerStrategyCallback(CallbackLinker* cb){
+    strategyCallback = cb;
+}
+
+/**
+ * @brief Unregister callback for the LED class.
+ * 
+ */
+void GamePlay::unregisterStrategyCallback(){
+    strategyCallback = nullptr;
 }
 
 /**

@@ -132,3 +132,15 @@ decisions StrategyEngine::getchoice(int dealercard, std::vector<int> playercards
 	std::cout << "STAND!" << std::endl;
 	return STAND;
 }
+
+/**
+ * @brief Implement the nextCallback virtual method to pass
+ * information down the pipeline
+ * 
+ * @param callbackData an AcePlaysUtils callback object
+ */
+void StrategyEngine::nextCallback(AcePlaysUtils &callbackData){
+	
+	callbackData.blackjackDecision = getchoice(callbackData.dealercard, callbackData.playercards);
+	
+}

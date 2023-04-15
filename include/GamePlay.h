@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #ifndef PLAY_GAME_H 
 #define PLAY_GAME_H
 
-#include "Leds.h"
+#include "ToggleLED.h"
 #include "StrategyEngine.h"
 #include "Card.h"
 #include "CallbackLinker.h"
@@ -57,11 +57,17 @@ private:
     void clear_whosHand();
     void play_game(std::vector<int> cards_played, std::vector<cv::Point_<int>> cards_centre_pts);
     void game_reset();
+    CallbackLinker* ledCallback = nullptr;
+    CallbackLinker* strategyCallback = nullptr;
 
 public:
     GamePlay(double res_w, double res_h);
     ~GamePlay();
     void nextCallback(AcePlaysUtils &callbackData);
+    void registerLEDCallback(CallbackLinker* cb);
+    void unregisterLEDCallback();
+    void registerStrategyCallback(CallbackLinker* cb);
+    void unregisterStrategyCallback();
 };
 
 #endif /* PLAY_GAME_H */

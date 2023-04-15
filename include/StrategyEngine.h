@@ -13,15 +13,17 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include <iostream>
 #include <vector>
 #include "Card.h"
+#include "CallbackLinker.h"
 
 /**
  * @brief Class implementing the optimum Blackjack strategy.
  * 
  */
-class StrategyEngine {
+class StrategyEngine : public CallbackLinker {
 public:
 	StrategyEngine();
-	decisions getchoice(int dealercard, std::vector<int> playecards);
+	decisions getchoice(int dealercard, std::vector<int> playercards);
+	void nextCallback(AcePlaysUtils &callbackData);
 };
 
 #endif //STRATEGY_ENGINE_H

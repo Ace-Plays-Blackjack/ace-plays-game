@@ -10,19 +10,20 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #ifndef LEDS_H
 #define LEDS_H
 #include "Card.h"
+#include "CallbackLinker.h"
 
 /**
  * @brief Class to control the Rasp Pi pins and toggle LEDs ON/OFF.
  * 
  */
-class ToggleLED {
+class ToggleLED : public CallbackLinker
+{
 public: 
     ToggleLED();
     ~ToggleLED();
     void flashled(decisions choice);
+    void nextCallback(AcePlaysUtils &callbackData);
 private:
     void gpio(int led);
-
 };
-
 #endif //LEDS_H

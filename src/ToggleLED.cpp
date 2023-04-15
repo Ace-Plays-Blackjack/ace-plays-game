@@ -7,7 +7,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "Leds.h"
+#include "ToggleLED.h"
 #include "pigpio.h"
 
 /* Declare the Rasp Pi pins here */
@@ -97,4 +97,15 @@ void ToggleLED::gpio(int led) {
  */
 ToggleLED::~ToggleLED() {
 	gpioTerminate();
+}
+
+/**
+ * @brief Implement the nextCallback virtual method to pass
+ * information down the pipeline
+ * 
+ * @param callbackData an AcePlaysUtils callback object
+ */
+void ToggleLED::nextCallback(AcePlaysUtils &callbackData){
+	flashled(callbackData.blackjackDecision);
+	
 }

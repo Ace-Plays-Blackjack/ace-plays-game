@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include <opencv2/core.hpp>
 #include <iostream>
 
-#include "Leds.h"
+#include "ToggleLED.h"
 #include "Camera.h"
 #include "DetectCard.h"
 #include "StrategyEngine.h"
@@ -20,7 +20,7 @@ int main(int, char**)
 {
     /* Uncomment to print out build information */
     /* std::cout << cv::getBuildInformation(); */
-    cout << "Welcome to AcePlays!" << endl;
+    std::cout << "Welcome to AcePlays!" << std::endl;
 
 /*  Choose one of the resolutions bellow when using the 
     new LIBCAMERA stack with LCCV
@@ -36,7 +36,6 @@ int main(int, char**)
 */ 
     double res_w = 1024;
     double res_h = 768;
-    cout << "Opening camera..." << endl;
     Camera camera_obj(0, res_w, res_h); 
 
     /* PATH depends on where the executable is called from */
@@ -45,8 +44,9 @@ int main(int, char**)
 
     camera_obj.registerCallback(&cards_obj);
     cards_obj.registerCallback(&gameplay_obj);
-
     cards_obj.startProcessing();
+    
+    std::cout << "Opening camera..." << std::endl;
     camera_obj.startRecording();
     
     /* Stop Processing Method effectively calls std::join 
