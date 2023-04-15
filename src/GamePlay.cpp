@@ -1,3 +1,12 @@
+/*
+Copyright 2023 Georgios Titas
+Copyright 2023 Alexander Douglas
+Copyright 2023 Jijo Varghese
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 #include "GamePlay.h"
 
 GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
@@ -7,6 +16,8 @@ GamePlay::GamePlay(double res_w, double res_h):leds(),game_engine(){
     frame_w_midpoint = (int)(frame_w/2);
     frame_h_midpoint = (int)(frame_h/2);
     /* Reset LEDs at startup */
+    registerCallback(&leds);
+    registerstrategyCallback(&game_engine);
     leds.flashled(STOP);
 }
 
@@ -145,10 +156,13 @@ void GamePlay::play_game(std::vector<int> cards_played, std::vector<cv::Point_<i
 
     /* Demonstration of Strategy Engine */
     /* Dealer only plays one card */
-    decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
+    //decisions choice = game_engine.getchoice(dealersHand.cards[0], playersHand.cards);
     /* Demonstration of LED Toggling*/
     AcePlaysUtils callbackData;
-    callbackData.blackjackDecision = choice;
+    //callbackData.blackjackDecision = choice;
+    callbackData.dealercard = dealersHand.cards[0];
+    callbackData.playercards = playersHand.cards;
+    strategyCallback->nextCallback(callbackData);
     ledCallback->nextCallback(callbackData);
     /* New card has been played, hence make prev equal to current */
     prev_total_cards = total_cards;
@@ -245,6 +259,14 @@ void GamePlay::registerCallback(CallbackLinker* cb){
 
 void GamePlay::unregisterCallback(){
     ledCallback = nullptr;
+}
+
+void GamePlay::registerstrategyCallback(CallbackLinker* cb){
+    strategyCallback = cb;
+}
+
+void GamePlay::unregisterstrategyCallback(){
+    strategyCallback = nullptr;
 }
 
 
