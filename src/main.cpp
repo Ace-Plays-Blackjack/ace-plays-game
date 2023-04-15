@@ -16,14 +16,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "StrategyEngine.h"
 #include "GamePlay.h"
 
-using namespace cv;
-using namespace std;
-using std::cout; using std::cerr; using std::endl;
-
 int main(int, char**)
 {
-    std::cout<<cv::getBuildInformation();
-    cout << "Opening camera..." << endl;
+    /* Uncomment to print out build information */
+    /* std::cout << cv::getBuildInformation(); */
+    std::cout << "Welcome to AcePlays!" << std::endl;
 
 /*  Choose one of the resolutions bellow when using the 
     new LIBCAMERA stack with LCCV
@@ -39,11 +36,11 @@ int main(int, char**)
 */ 
     double res_w = 1024;
     double res_h = 768;
+    std::cout << "Opening camera..." << std::endl;
     Camera camera_obj(0, res_w, res_h); 
 
     /* PATH depends on where the executable is called from */
-    // DetectCard cards_obj("../../Card_Imgs/"); // this path works for Windows
-    DetectCard cards_obj("../Card_Imgs/"); // this path works for Pi
+    DetectCard cards_obj("../Card_Imgs/");
     GamePlay gameplay_obj(res_w, res_h);
 
     camera_obj.registerCallback(&cards_obj);
@@ -63,6 +60,9 @@ int main(int, char**)
     decisions choice = firstdecision.getchoice(10, vect);
     
     // camera_obj.stopRecording();
+    /* Stop Processing Method effectively calls std::join 
+    method to keep the processing thread running since nothing 
+    else happens in main */
     cards_obj.stopProcessing();
     return 0;
 }

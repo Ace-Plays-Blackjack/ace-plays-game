@@ -15,6 +15,10 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "Card.h"
 #include "CallbackLinker.h"
 
+/**
+ * @brief Class implementing the optimum Blackjack strategy.
+ * 
+ */
 class StrategyEngine : public CallbackLinker {
 public:
 	StrategyEngine();

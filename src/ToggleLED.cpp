@@ -10,12 +10,16 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include "ToggleLED.h"
 #include "pigpio.h"
 
-
+/* Declare the Rasp Pi pins here */
 #define HIT_PIN 12
 #define STAND_PIN 19
 #define SPLIT_PIN 18
 #define DOUBLE_PIN 13
 
+/**
+ * @brief Construct a new ToggleLED::ToggleLED object
+ * 
+ */
 ToggleLED::ToggleLED(){
 	int status;   
 	status = gpioInitialise();
@@ -30,7 +34,14 @@ ToggleLED::ToggleLED(){
 	gpio(DOUBLE_PIN);
 }
 
-bool ToggleLED::flashled(decisions choice) {
+/**
+ * @brief Method to flash an LED
+ * 
+ * @param choice an enum decisions arguement to choose
+ * between one of the LEDs to be toggled according to the 
+ * Blackjack decision condition
+ */
+void ToggleLED::flashled(decisions choice) {
 	
 	switch (choice) {
 		case HIT:
@@ -66,10 +77,13 @@ bool ToggleLED::flashled(decisions choice) {
 			gpioWrite(STAND_PIN, PI_HIGH);
 			break;
 	}
-	
-	return true;
 }
 
+/**
+ * @brief Method to initialise the LEDs in a default configuration
+ * 
+ * @param led the LED pin number
+ */
 void ToggleLED::gpio(int led) {
 	int GPIO = led;
 	gpioSetMode(GPIO, PI_OUTPUT);
@@ -77,6 +91,10 @@ void ToggleLED::gpio(int led) {
 	gpioDelay(1); /* 1 micro delay to let GPIO reach level reliably */
 }
 
+/**
+ * @brief Destroy the ToggleLED::ToggleLED object
+ * 
+ */
 ToggleLED::~ToggleLED() {
 	gpioTerminate();
 }

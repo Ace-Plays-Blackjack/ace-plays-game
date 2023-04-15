@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
  * @brief Construct a new Camera:: Camera object
  * 
  * @param camIdx Defaults to 0. If multiple cameras present can be used to define
- * which one to be used
+ * which one to be used with the old stack.
  * @param res_w Defaults to 640. Camera resolution (width)
  * @param res_h Defaults to 480. Camera resolution (width)
  */
@@ -37,8 +37,7 @@ Camera::Camera(int camIdx, double res_w, double res_h)
     /* Set Camera Settings */
     CamSettings.camIdx = camIdx;
     /* cv::CAP_V4L2 required to run with OLD camera stack */
-    // CamSettings.camApi = cv::CAP_V4L2;
-    CamSettings.camApi = cv::CAP_ANY;
+    CamSettings.camApi = cv::CAP_V4L2;
 
     /* Open Camera */
     cv::VideoCapture capture(CamSettings.camIdx, CamSettings.camApi);
@@ -80,12 +79,12 @@ void Camera::camThreadLoop(){
 #endif
         else{
             /* Here add the callback */
-            AcePlaysUtils callbackData;
-            callbackData.nextFrame = currentFrame;
-            cameraCallback->nextCallback(callbackData);
+            if (cameraCallback){
+                AcePlaysUtils callbackData;
+                callbackData.nextFrame = currentFrame;
+                cameraCallback->nextCallback(callbackData);
+            }
         }
-        // int key = cv::waitKey(1);
-        // if (key == 27/*ESC*/){break;}
     }
 }
 
@@ -133,6 +132,8 @@ void Camera::startRecording(){
  */
 void Camera::stopRecording(){
     // CamSettings.isOn = false;
+    /* If not using Qt or dont have anything running in main() 
+      use .join() method to keep the CameraThread running */
     camThread.join();
 }
 
@@ -158,5 +159,4 @@ Camera::~Camera()
 #else
     activeCapture.release();
 #endif
-    cv::destroyWindow("Frame");
 }

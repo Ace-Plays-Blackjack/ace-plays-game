@@ -16,17 +16,22 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 #include <vector>
 #include <iostream>
 
-#define BKG_ADAPTIVE_THRESH 50
+/* Defined based on specific Hardware setup 
+such as camera height from table/cards */
 #define CARD_MAX_AREA 120000
 #define CARD_MIN_AREA 10000
-// Width and height of card corner, where rank and suit are
+/* Width and height of card corner, where rank and suit are */
 #define FLATTENED_WIDTH 230
 #define FLATTENED_HEIGHT 300
-// Dimensions of rank train images
+/* Dimensions of rank train images */
 #define RANK_WIDTH 70
 #define RANK_HEIGHT 125
 
-
+/**
+ * @brief A Blackjack enum decisions
+ * to determine the next Optimal Play
+ * 
+ */
 enum decisions {
     HIT,
     STAND,
@@ -37,6 +42,12 @@ enum decisions {
     STOP
 };
 
+/**
+ * @brief Structure holding the parameters of all detected
+ * card shapes in a frame, such as their position in the frame,
+ * the isolated Rank RoIs and others.
+ * 
+ */
 struct Card_params
 {
     int err = 0;
@@ -60,6 +71,12 @@ struct Card_params
     std::vector<cv::String> card_names;
 };
 
+/**
+ * @brief Utility structure used by the AcePlays repo
+ * for passing necessary information down the processing
+ * pipeline, from one class to the next
+ * 
+ */
 struct AcePlaysUtils{
     cv::Mat nextFrame;
     Card_params cardParams;
@@ -68,9 +85,12 @@ struct AcePlaysUtils{
     std::vector<int> playercards;
 };
 
+/**
+ * @brief Structure to store information about single card in the camera image.
+ * 
+ */
 struct qCard
 {
-    /* Structure to store information about single card in the camera image.*/
     /* Card dimensions */
     cv::Size card_size;
     /* Card centre points */
