@@ -8,7 +8,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 */
 
 #include <gtest/gtest.h>
-#include "Leds.h"
+#include "ToggleLED.h"
 
 class ToggleLEDTest : public ::testing::Test {
 protected:
