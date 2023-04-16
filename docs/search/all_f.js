@@ -1,6 +1,25 @@
 var searchData=
 [
-  ['unregistercallback_35',['unregisterCallback',['../classCamera.html#ad02464df6b73520304055e597b368c68',1,'Camera::unregisterCallback()'],['../classDetectCard.html#a597a730ad33d68de7364f0f6f33b4467',1,'DetectCard::unregisterCallback()']]],
-  ['unregisterledcallback_36',['unregisterLEDCallback',['../classGamePlay.html#a554faf50ee0fc2d91069a6ecd08d5bf8',1,'GamePlay']]],
-  ['unregisterstrategycallback_37',['unregisterStrategyCallback',['../classGamePlay.html#a771d4758076f5d1fb09d0d09766293e1',1,'GamePlay']]]
+  ['rank_5fheight_180',['RANK_HEIGHT',['../Card_8h.html#abf0db52749585b784de6c1366e6ed49d',1,'Card.h']]],
+  ['rank_5frois_181',['rank_rois',['../structCard__params.html#a948dc6aefab8a5dda9beef3adb8c84b5',1,'Card_params']]],
+  ['rank_5fwidth_182',['RANK_WIDTH',['../Card_8h.html#a0f486b005079f72dcaac8d29ffbff325',1,'Card.h']]],
+  ['rawfull_183',['rawfull',['../classOptions.html#a29967884ef44ee54758014250f0e49cf',1,'Options']]],
+  ['rawstream_184',['RawStream',['../classLibcameraApp.html#ae8e04e0de927e6e11eb544bcf2d3fb0a',1,'LibcameraApp']]],
+  ['readme_185',['README',['../md_README.html',1,'']]],
+  ['readme_2emd_186',['README.md',['../README_8md.html',1,'']]],
+  ['rectangle_187',['Rectangle',['../classLibcameraApp.html#a0eddcee764301da6348d3454c2c28c2f',1,'LibcameraApp']]],
+  ['registercallback_188',['registerCallback',['../classDetectCard.html#a0953c5436ade541a690b474adf261c8e',1,'DetectCard::registerCallback()'],['../classCamera.html#a1c5068178e256f98215dcacef5ff76d7',1,'Camera::registerCallback()']]],
+  ['registerledcallback_189',['registerLEDCallback',['../classGamePlay.html#ac616a881fa9696e3b586a7f6581a9a10',1,'GamePlay']]],
+  ['registerstrategycallback_190',['registerStrategyCallback',['../classGamePlay.html#ae70e0f98615c96e21067abada66a48bb',1,'GamePlay']]],
+  ['request_191',['Request',['../structCompletedRequest.html#a38a7ac58bdb443c3f1eb023f0a32d16c',1,'CompletedRequest::Request()'],['../classLibcameraApp.html#a8716045e74cca80419b5ef266e028361',1,'LibcameraApp::Request()']]],
+  ['request_192',['request',['../structCompletedRequest.html#abe86fce1c05db44aa5128915967ad733',1,'CompletedRequest']]],
+  ['requestcomplete_193',['RequestComplete',['../classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79fa15a9cbe6391d79ffe0930cd82a6fc078',1,'LibcameraApp']]],
+  ['roi_5fheight_194',['roi_height',['../classOptions.html#a5b0e426f17a7cc45680e55472bc1038b',1,'Options']]],
+  ['roi_5fwidth_195',['roi_width',['../classOptions.html#a326d3606e2628269048f8bf6d3d93519',1,'Options']]],
+  ['roi_5fx_196',['roi_x',['../classOptions.html#ac4fa701c542344274f465b70ce1b41fd',1,'Options']]],
+  ['roi_5fy_197',['roi_y',['../classOptions.html#a99e2c3c970b98bc992635261a66ff05f',1,'Options']]],
+  ['rotatedbox_198',['rotatedbox',['../structCard__params.html#a06c88eb83ab85ca1fdbd8565d2db2ff5',1,'Card_params::rotatedbox()'],['../structqCard.html#a4b5b558449e3e930a866b6f43581a8d6',1,'qCard::rotatedbox()']]],
+  ['rotatedbox_5fpts_199',['rotatedbox_pts',['../structCard__params.html#ab250c8648e04e22d408dd2e774caa4fe',1,'Card_params']]],
+  ['run_200',['run',['../classlccv_1_1PiCamera.html#a206cf5b60144d6cc7e77f1ad5b571360',1,'lccv::PiCamera']]],
+  ['running_201',['running',['../classlccv_1_1PiCamera.html#aed4285854f20b69d3d43c3dfb44858af',1,'lccv::PiCamera']]]
 ];

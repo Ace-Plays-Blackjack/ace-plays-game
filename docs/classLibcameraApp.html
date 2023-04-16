@@ -72,6 +72,14 @@ $(function() {
 <div class="title">LibcameraApp Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="libcamera__app_8hpp_source.html">libcamera_app.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for LibcameraApp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classLibcameraApp__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -80,170 +88,1173 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ae9b5a0f50fcd842d820e7615da6ea79f"><td class="memItemLeft" align="right" valign="top"><a id="ae9b5a0f50fcd842d820e7615da6ea79f"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>MsgType</b> { <b>RequestComplete</b>
-, <b>Quit</b>
+<tr class="memitem:ae9b5a0f50fcd842d820e7615da6ea79f"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79f">MsgType</a> { <a class="el" href="classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79fa15a9cbe6391d79ffe0930cd82a6fc078">RequestComplete</a>
+, <a class="el" href="classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79fa0d82790b0612935992bd564a17ce37d6">Quit</a>
  }</td></tr>
 <tr class="separator:ae9b5a0f50fcd842d820e7615da6ea79f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf6475132ce78635b7e5f83d0ef686a8"><td class="memItemLeft" align="right" valign="top"><a id="adf6475132ce78635b7e5f83d0ef686a8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Stream</b> = libcamera::Stream</td></tr>
+<tr class="memitem:adf6475132ce78635b7e5f83d0ef686a8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> = libcamera::Stream</td></tr>
 <tr class="separator:adf6475132ce78635b7e5f83d0ef686a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4cfb9ea9bc3659d42714850e209db5e"><td class="memItemLeft" align="right" valign="top"><a id="ae4cfb9ea9bc3659d42714850e209db5e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>FrameBuffer</b> = libcamera::FrameBuffer</td></tr>
+<tr class="memitem:ae4cfb9ea9bc3659d42714850e209db5e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ae4cfb9ea9bc3659d42714850e209db5e">FrameBuffer</a> = libcamera::FrameBuffer</td></tr>
 <tr class="separator:ae4cfb9ea9bc3659d42714850e209db5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ca7ba60a40f6716f15499c677a33c63"><td class="memItemLeft" align="right" valign="top"><a id="a0ca7ba60a40f6716f15499c677a33c63"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>ControlList</b> = libcamera::ControlList</td></tr>
+<tr class="memitem:a0ca7ba60a40f6716f15499c677a33c63"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a0ca7ba60a40f6716f15499c677a33c63">ControlList</a> = libcamera::ControlList</td></tr>
 <tr class="separator:a0ca7ba60a40f6716f15499c677a33c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8716045e74cca80419b5ef266e028361"><td class="memItemLeft" align="right" valign="top"><a id="a8716045e74cca80419b5ef266e028361"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Request</b> = libcamera::Request</td></tr>
+<tr class="memitem:a8716045e74cca80419b5ef266e028361"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a8716045e74cca80419b5ef266e028361">Request</a> = libcamera::Request</td></tr>
 <tr class="separator:a8716045e74cca80419b5ef266e028361"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecd33414ab2b5a7e7ab1b6612da8c5a8"><td class="memItemLeft" align="right" valign="top"><a id="aecd33414ab2b5a7e7ab1b6612da8c5a8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>CameraManager</b> = libcamera::CameraManager</td></tr>
+<tr class="memitem:aecd33414ab2b5a7e7ab1b6612da8c5a8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#aecd33414ab2b5a7e7ab1b6612da8c5a8">CameraManager</a> = libcamera::CameraManager</td></tr>
 <tr class="separator:aecd33414ab2b5a7e7ab1b6612da8c5a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed86366293cdb87ca45311c3cae08e30"><td class="memItemLeft" align="right" valign="top"><a id="aed86366293cdb87ca45311c3cae08e30"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Camera</b> = libcamera::Camera</td></tr>
+<tr class="memitem:aed86366293cdb87ca45311c3cae08e30"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#aed86366293cdb87ca45311c3cae08e30">Camera</a> = libcamera::Camera</td></tr>
 <tr class="separator:aed86366293cdb87ca45311c3cae08e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f1484f09187fe28ea86b350d0c60923"><td class="memItemLeft" align="right" valign="top"><a id="a2f1484f09187fe28ea86b350d0c60923"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>CameraConfiguration</b> = libcamera::CameraConfiguration</td></tr>
+<tr class="memitem:a2f1484f09187fe28ea86b350d0c60923"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a2f1484f09187fe28ea86b350d0c60923">CameraConfiguration</a> = libcamera::CameraConfiguration</td></tr>
 <tr class="separator:a2f1484f09187fe28ea86b350d0c60923"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8494e1606cf01c2a87bc30132d8c460c"><td class="memItemLeft" align="right" valign="top"><a id="a8494e1606cf01c2a87bc30132d8c460c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>FrameBufferAllocator</b> = libcamera::FrameBufferAllocator</td></tr>
+<tr class="memitem:a8494e1606cf01c2a87bc30132d8c460c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a8494e1606cf01c2a87bc30132d8c460c">FrameBufferAllocator</a> = libcamera::FrameBufferAllocator</td></tr>
 <tr class="separator:a8494e1606cf01c2a87bc30132d8c460c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ec5339ace30cb751ba14678340d81ad"><td class="memItemLeft" align="right" valign="top"><a id="a5ec5339ace30cb751ba14678340d81ad"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>StreamRole</b> = libcamera::StreamRole</td></tr>
+<tr class="memitem:a5ec5339ace30cb751ba14678340d81ad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a5ec5339ace30cb751ba14678340d81ad">StreamRole</a> = libcamera::StreamRole</td></tr>
 <tr class="separator:a5ec5339ace30cb751ba14678340d81ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57dfc0a66a7819980b7960b3399b71d1"><td class="memItemLeft" align="right" valign="top"><a id="a57dfc0a66a7819980b7960b3399b71d1"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>StreamRoles</b> = libcamera::StreamRoles</td></tr>
+<tr class="memitem:a57dfc0a66a7819980b7960b3399b71d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a57dfc0a66a7819980b7960b3399b71d1">StreamRoles</a> = libcamera::StreamRoles</td></tr>
 <tr class="separator:a57dfc0a66a7819980b7960b3399b71d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9554eaa57cdbdf885ab9908cdbf13585"><td class="memItemLeft" align="right" valign="top"><a id="a9554eaa57cdbdf885ab9908cdbf13585"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>PixelFormat</b> = libcamera::PixelFormat</td></tr>
+<tr class="memitem:a9554eaa57cdbdf885ab9908cdbf13585"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a9554eaa57cdbdf885ab9908cdbf13585">PixelFormat</a> = libcamera::PixelFormat</td></tr>
 <tr class="separator:a9554eaa57cdbdf885ab9908cdbf13585"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45edbfd7cd31d635a3fa4d51e9d2acb8"><td class="memItemLeft" align="right" valign="top"><a id="a45edbfd7cd31d635a3fa4d51e9d2acb8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>StreamConfiguration</b> = libcamera::StreamConfiguration</td></tr>
+<tr class="memitem:a45edbfd7cd31d635a3fa4d51e9d2acb8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a45edbfd7cd31d635a3fa4d51e9d2acb8">StreamConfiguration</a> = libcamera::StreamConfiguration</td></tr>
 <tr class="separator:a45edbfd7cd31d635a3fa4d51e9d2acb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a39205c4100e9ff0390dbe01403c894"><td class="memItemLeft" align="right" valign="top"><a id="a8a39205c4100e9ff0390dbe01403c894"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>BufferMap</b> = Request::BufferMap</td></tr>
+<tr class="memitem:a8a39205c4100e9ff0390dbe01403c894"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a8a39205c4100e9ff0390dbe01403c894">BufferMap</a> = Request::BufferMap</td></tr>
 <tr class="separator:a8a39205c4100e9ff0390dbe01403c894"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43d27702163be125fb4307727e135809"><td class="memItemLeft" align="right" valign="top"><a id="a43d27702163be125fb4307727e135809"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Size</b> = libcamera::Size</td></tr>
+<tr class="memitem:a43d27702163be125fb4307727e135809"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a43d27702163be125fb4307727e135809">Size</a> = libcamera::Size</td></tr>
 <tr class="separator:a43d27702163be125fb4307727e135809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eddcee764301da6348d3454c2c28c2f"><td class="memItemLeft" align="right" valign="top"><a id="a0eddcee764301da6348d3454c2c28c2f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Rectangle</b> = libcamera::Rectangle</td></tr>
+<tr class="memitem:a0eddcee764301da6348d3454c2c28c2f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a0eddcee764301da6348d3454c2c28c2f">Rectangle</a> = libcamera::Rectangle</td></tr>
 <tr class="separator:a0eddcee764301da6348d3454c2c28c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cf2fba4f6f29a495b6dbd29e4ac93bc"><td class="memItemLeft" align="right" valign="top"><a id="a9cf2fba4f6f29a495b6dbd29e4ac93bc"></a>
-typedef std::variant&lt; CompletedRequestPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>MsgPayload</b></td></tr>
+<tr class="memitem:a9cf2fba4f6f29a495b6dbd29e4ac93bc"><td class="memItemLeft" align="right" valign="top">typedef std::variant&lt; <a class="el" href="libcamera__app_8hpp.html#aaf48835f5a9b79c7d3b1e3f918e79cf8">CompletedRequestPtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a9cf2fba4f6f29a495b6dbd29e4ac93bc">MsgPayload</a></td></tr>
 <tr class="separator:a9cf2fba4f6f29a495b6dbd29e4ac93bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a89146dc9d97bec64ef9c42367911af27"><td class="memItemLeft" align="right" valign="top"><a id="a89146dc9d97bec64ef9c42367911af27"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LibcameraApp</b> (std::unique_ptr&lt; <a class="el" href="classOptions.html">Options</a> &gt; const opts=nullptr)</td></tr>
+<tr class="memitem:a89146dc9d97bec64ef9c42367911af27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a89146dc9d97bec64ef9c42367911af27">LibcameraApp</a> (std::unique_ptr&lt; <a class="el" href="classOptions.html">Options</a> &gt; const opts=nullptr)</td></tr>
 <tr class="separator:a89146dc9d97bec64ef9c42367911af27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62162c1d232783806dc23bcbe210ad6e"><td class="memItemLeft" align="right" valign="top"><a id="a62162c1d232783806dc23bcbe210ad6e"></a>
-<a class="el" href="classOptions.html">Options</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptions</b> () const</td></tr>
+<tr class="memitem:a55821d8dd770bc781c56b862e8094cef"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a55821d8dd770bc781c56b862e8094cef">~LibcameraApp</a> ()</td></tr>
+<tr class="separator:a55821d8dd770bc781c56b862e8094cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62162c1d232783806dc23bcbe210ad6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classOptions.html">Options</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a62162c1d232783806dc23bcbe210ad6e">GetOptions</a> () const</td></tr>
 <tr class="separator:a62162c1d232783806dc23bcbe210ad6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4559dbe2bf6d277b1d7779da407ea79"><td class="memItemLeft" align="right" valign="top"><a id="ad4559dbe2bf6d277b1d7779da407ea79"></a>
-std::string const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>CameraId</b> () const</td></tr>
+<tr class="memitem:ad4559dbe2bf6d277b1d7779da407ea79"><td class="memItemLeft" align="right" valign="top">std::string const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ad4559dbe2bf6d277b1d7779da407ea79">CameraId</a> () const</td></tr>
 <tr class="separator:ad4559dbe2bf6d277b1d7779da407ea79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f7f3ee39dcedf418590e16f3495e73d"><td class="memItemLeft" align="right" valign="top"><a id="a6f7f3ee39dcedf418590e16f3495e73d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OpenCamera</b> ()</td></tr>
+<tr class="memitem:a6f7f3ee39dcedf418590e16f3495e73d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a6f7f3ee39dcedf418590e16f3495e73d">OpenCamera</a> ()</td></tr>
 <tr class="separator:a6f7f3ee39dcedf418590e16f3495e73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58014a47031ba60afd13545edd26d665"><td class="memItemLeft" align="right" valign="top"><a id="a58014a47031ba60afd13545edd26d665"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>CloseCamera</b> ()</td></tr>
+<tr class="memitem:a58014a47031ba60afd13545edd26d665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a58014a47031ba60afd13545edd26d665">CloseCamera</a> ()</td></tr>
 <tr class="separator:a58014a47031ba60afd13545edd26d665"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca7d807865d8d1df94f890f87c348862"><td class="memItemLeft" align="right" valign="top"><a id="aca7d807865d8d1df94f890f87c348862"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ConfigureStill</b> (unsigned int flags=FLAG_STILL_NONE)</td></tr>
+<tr class="memitem:aca7d807865d8d1df94f890f87c348862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#aca7d807865d8d1df94f890f87c348862">ConfigureStill</a> (unsigned int flags=<a class="el" href="classLibcameraApp.html#a47776108e9ad1af2acafe513d006190e">FLAG_STILL_NONE</a>)</td></tr>
 <tr class="separator:aca7d807865d8d1df94f890f87c348862"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15fea5c98f545ff7a55f1e69fce23294"><td class="memItemLeft" align="right" valign="top"><a id="a15fea5c98f545ff7a55f1e69fce23294"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ConfigureViewfinder</b> ()</td></tr>
+<tr class="memitem:a15fea5c98f545ff7a55f1e69fce23294"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a15fea5c98f545ff7a55f1e69fce23294">ConfigureViewfinder</a> ()</td></tr>
 <tr class="separator:a15fea5c98f545ff7a55f1e69fce23294"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5297cd6917e971cf675c4c978c6036c7"><td class="memItemLeft" align="right" valign="top"><a id="a5297cd6917e971cf675c4c978c6036c7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Teardown</b> ()</td></tr>
+<tr class="memitem:a5297cd6917e971cf675c4c978c6036c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a5297cd6917e971cf675c4c978c6036c7">Teardown</a> ()</td></tr>
 <tr class="separator:a5297cd6917e971cf675c4c978c6036c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc4d6b4fd4401409e81ac752612f684c"><td class="memItemLeft" align="right" valign="top"><a id="afc4d6b4fd4401409e81ac752612f684c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StartCamera</b> ()</td></tr>
+<tr class="memitem:afc4d6b4fd4401409e81ac752612f684c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#afc4d6b4fd4401409e81ac752612f684c">StartCamera</a> ()</td></tr>
 <tr class="separator:afc4d6b4fd4401409e81ac752612f684c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02813add2b9edadb43570d35024f7454"><td class="memItemLeft" align="right" valign="top"><a id="a02813add2b9edadb43570d35024f7454"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StopCamera</b> ()</td></tr>
+<tr class="memitem:a02813add2b9edadb43570d35024f7454"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a02813add2b9edadb43570d35024f7454">StopCamera</a> ()</td></tr>
 <tr class="separator:a02813add2b9edadb43570d35024f7454"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe9fa8deeca7162d78427961871898fc"><td class="memItemLeft" align="right" valign="top"><a id="abe9fa8deeca7162d78427961871898fc"></a>
-<a class="el" href="structLibcameraApp_1_1Msg.html">Msg</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Wait</b> ()</td></tr>
+<tr class="memitem:abe9fa8deeca7162d78427961871898fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLibcameraApp_1_1Msg.html">Msg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#abe9fa8deeca7162d78427961871898fc">Wait</a> ()</td></tr>
 <tr class="separator:abe9fa8deeca7162d78427961871898fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a697695d81db8830c067092e53f51401c"><td class="memItemLeft" align="right" valign="top"><a id="a697695d81db8830c067092e53f51401c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PostMessage</b> (MsgType &amp;t, MsgPayload &amp;p)</td></tr>
+<tr class="memitem:a697695d81db8830c067092e53f51401c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a697695d81db8830c067092e53f51401c">PostMessage</a> (<a class="el" href="classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79f">MsgType</a> &amp;t, <a class="el" href="classLibcameraApp.html#a9cf2fba4f6f29a495b6dbd29e4ac93bc">MsgPayload</a> &amp;p)</td></tr>
 <tr class="separator:a697695d81db8830c067092e53f51401c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e8173f65f3ade5b48582abb6f727be"><td class="memItemLeft" align="right" valign="top"><a id="ac8e8173f65f3ade5b48582abb6f727be"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>GetStream</b> (std::string const &amp;name, unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
+<tr class="memitem:ac8e8173f65f3ade5b48582abb6f727be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ac8e8173f65f3ade5b48582abb6f727be">GetStream</a> (std::string const &amp;name, unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
 <tr class="separator:ac8e8173f65f3ade5b48582abb6f727be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ce21c14da01c38ef07b71985d6330ea"><td class="memItemLeft" align="right" valign="top"><a id="a2ce21c14da01c38ef07b71985d6330ea"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>ViewfinderStream</b> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
+<tr class="memitem:a2ce21c14da01c38ef07b71985d6330ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a2ce21c14da01c38ef07b71985d6330ea">ViewfinderStream</a> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
 <tr class="separator:a2ce21c14da01c38ef07b71985d6330ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2968061927363754dd87019d0bed8a73"><td class="memItemLeft" align="right" valign="top"><a id="a2968061927363754dd87019d0bed8a73"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>StillStream</b> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
+<tr class="memitem:a2968061927363754dd87019d0bed8a73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a2968061927363754dd87019d0bed8a73">StillStream</a> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
 <tr class="separator:a2968061927363754dd87019d0bed8a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8e04e0de927e6e11eb544bcf2d3fb0a"><td class="memItemLeft" align="right" valign="top"><a id="ae8e04e0de927e6e11eb544bcf2d3fb0a"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>RawStream</b> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
+<tr class="memitem:ae8e04e0de927e6e11eb544bcf2d3fb0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ae8e04e0de927e6e11eb544bcf2d3fb0a">RawStream</a> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
 <tr class="separator:ae8e04e0de927e6e11eb544bcf2d3fb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0e1168ead2097f6951a924bfcb6d7fb"><td class="memItemLeft" align="right" valign="top"><a id="aa0e1168ead2097f6951a924bfcb6d7fb"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>VideoStream</b> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
+<tr class="memitem:aa0e1168ead2097f6951a924bfcb6d7fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#aa0e1168ead2097f6951a924bfcb6d7fb">VideoStream</a> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
 <tr class="separator:aa0e1168ead2097f6951a924bfcb6d7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45a460a15d3b25978db21b521f3b573a"><td class="memItemLeft" align="right" valign="top"><a id="a45a460a15d3b25978db21b521f3b573a"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>LoresStream</b> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
+<tr class="memitem:a45a460a15d3b25978db21b521f3b573a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a45a460a15d3b25978db21b521f3b573a">LoresStream</a> (unsigned int *w=nullptr, unsigned int *h=nullptr, unsigned int *stride=nullptr) const</td></tr>
 <tr class="separator:a45a460a15d3b25978db21b521f3b573a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec4360362423836ee0b25ddd95b1115a"><td class="memItemLeft" align="right" valign="top"><a id="aec4360362423836ee0b25ddd95b1115a"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMainStream</b> () const</td></tr>
+<tr class="memitem:aec4360362423836ee0b25ddd95b1115a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#aec4360362423836ee0b25ddd95b1115a">GetMainStream</a> () const</td></tr>
 <tr class="separator:aec4360362423836ee0b25ddd95b1115a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dd2d737ce70dfddabb16c79e59551d0"><td class="memItemLeft" align="right" valign="top"><a id="a9dd2d737ce70dfddabb16c79e59551d0"></a>
-std::vector&lt; libcamera::Span&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Mmap</b> (FrameBuffer *buffer) const</td></tr>
+<tr class="memitem:a9dd2d737ce70dfddabb16c79e59551d0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; libcamera::Span&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a9dd2d737ce70dfddabb16c79e59551d0">Mmap</a> (<a class="el" href="classLibcameraApp.html#ae4cfb9ea9bc3659d42714850e209db5e">FrameBuffer</a> *buffer) const</td></tr>
 <tr class="separator:a9dd2d737ce70dfddabb16c79e59551d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae62fb1d708713aec3f92e40ef362db96"><td class="memItemLeft" align="right" valign="top"><a id="ae62fb1d708713aec3f92e40ef362db96"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetControls</b> (ControlList &amp;controls)</td></tr>
+<tr class="memitem:ae62fb1d708713aec3f92e40ef362db96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ae62fb1d708713aec3f92e40ef362db96">SetControls</a> (<a class="el" href="classLibcameraApp.html#a0ca7ba60a40f6716f15499c677a33c63">ControlList</a> &amp;controls)</td></tr>
 <tr class="separator:ae62fb1d708713aec3f92e40ef362db96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a891ecda1ddeb8076800c09e4a27c4f53"><td class="memItemLeft" align="right" valign="top"><a id="a891ecda1ddeb8076800c09e4a27c4f53"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StreamDimensions</b> (Stream const *stream, unsigned int *w, unsigned int *h, unsigned int *stride) const</td></tr>
+<tr class="memitem:a891ecda1ddeb8076800c09e4a27c4f53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a891ecda1ddeb8076800c09e4a27c4f53">StreamDimensions</a> (<a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> const *stream, unsigned int *w, unsigned int *h, unsigned int *stride) const</td></tr>
 <tr class="separator:a891ecda1ddeb8076800c09e4a27c4f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a47776108e9ad1af2acafe513d006190e"><td class="memItemLeft" align="right" valign="top"><a id="a47776108e9ad1af2acafe513d006190e"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_NONE</b> = 0</td></tr>
+<tr class="memitem:a47776108e9ad1af2acafe513d006190e"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a47776108e9ad1af2acafe513d006190e">FLAG_STILL_NONE</a> = 0</td></tr>
 <tr class="separator:a47776108e9ad1af2acafe513d006190e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2996b7902a8808c4e6f9cae46d2d189"><td class="memItemLeft" align="right" valign="top"><a id="ab2996b7902a8808c4e6f9cae46d2d189"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_BGR</b> = 1</td></tr>
+<tr class="memitem:ab2996b7902a8808c4e6f9cae46d2d189"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#ab2996b7902a8808c4e6f9cae46d2d189">FLAG_STILL_BGR</a> = 1</td></tr>
 <tr class="separator:ab2996b7902a8808c4e6f9cae46d2d189"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd61a8d86c27bb7e14ebccec477eff6c"><td class="memItemLeft" align="right" valign="top"><a id="afd61a8d86c27bb7e14ebccec477eff6c"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_RGB</b> = 2</td></tr>
+<tr class="memitem:afd61a8d86c27bb7e14ebccec477eff6c"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#afd61a8d86c27bb7e14ebccec477eff6c">FLAG_STILL_RGB</a> = 2</td></tr>
 <tr class="separator:afd61a8d86c27bb7e14ebccec477eff6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69fe46a42c04cfa9104144e0e639fcb4"><td class="memItemLeft" align="right" valign="top"><a id="a69fe46a42c04cfa9104144e0e639fcb4"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_RAW</b> = 4</td></tr>
+<tr class="memitem:a69fe46a42c04cfa9104144e0e639fcb4"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a69fe46a42c04cfa9104144e0e639fcb4">FLAG_STILL_RAW</a> = 4</td></tr>
 <tr class="separator:a69fe46a42c04cfa9104144e0e639fcb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1abf44edc2cbecb77cc48f3b00a89e9b"><td class="memItemLeft" align="right" valign="top"><a id="a1abf44edc2cbecb77cc48f3b00a89e9b"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_DOUBLE_BUFFER</b> = 8</td></tr>
+<tr class="memitem:a1abf44edc2cbecb77cc48f3b00a89e9b"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a1abf44edc2cbecb77cc48f3b00a89e9b">FLAG_STILL_DOUBLE_BUFFER</a> = 8</td></tr>
 <tr class="separator:a1abf44edc2cbecb77cc48f3b00a89e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66b0381aa17281fc82449f5761543186"><td class="memItemLeft" align="right" valign="top"><a id="a66b0381aa17281fc82449f5761543186"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_TRIPLE_BUFFER</b> = 16</td></tr>
+<tr class="memitem:a66b0381aa17281fc82449f5761543186"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a66b0381aa17281fc82449f5761543186">FLAG_STILL_TRIPLE_BUFFER</a> = 16</td></tr>
 <tr class="separator:a66b0381aa17281fc82449f5761543186"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29ae7b2f862d56b6f4604079dc648f80"><td class="memItemLeft" align="right" valign="top"><a id="a29ae7b2f862d56b6f4604079dc648f80"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_STILL_BUFFER_MASK</b> = 24</td></tr>
+<tr class="memitem:a29ae7b2f862d56b6f4604079dc648f80"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a29ae7b2f862d56b6f4604079dc648f80">FLAG_STILL_BUFFER_MASK</a> = 24</td></tr>
 <tr class="separator:a29ae7b2f862d56b6f4604079dc648f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c94619c1e8b615e25d3a9f7720c66b4"><td class="memItemLeft" align="right" valign="top"><a id="a8c94619c1e8b615e25d3a9f7720c66b4"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_VIDEO_NONE</b> = 0</td></tr>
+<tr class="memitem:a8c94619c1e8b615e25d3a9f7720c66b4"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a8c94619c1e8b615e25d3a9f7720c66b4">FLAG_VIDEO_NONE</a> = 0</td></tr>
 <tr class="separator:a8c94619c1e8b615e25d3a9f7720c66b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd9655f07adbcdf1de17f5250edf1526"><td class="memItemLeft" align="right" valign="top"><a id="acd9655f07adbcdf1de17f5250edf1526"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_VIDEO_RAW</b> = 1</td></tr>
+<tr class="memitem:acd9655f07adbcdf1de17f5250edf1526"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#acd9655f07adbcdf1de17f5250edf1526">FLAG_VIDEO_RAW</a> = 1</td></tr>
 <tr class="separator:acd9655f07adbcdf1de17f5250edf1526"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d4799734d3a94683f3eb29637a65941"><td class="memItemLeft" align="right" valign="top"><a id="a1d4799734d3a94683f3eb29637a65941"></a>
-static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>FLAG_VIDEO_JPEG_COLOURSPACE</b> = 2</td></tr>
+<tr class="memitem:a1d4799734d3a94683f3eb29637a65941"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a1d4799734d3a94683f3eb29637a65941">FLAG_VIDEO_JPEG_COLOURSPACE</a> = 2</td></tr>
 <tr class="separator:a1d4799734d3a94683f3eb29637a65941"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a69c52fb2a5204c06734ecc8252b20aed"><td class="memItemLeft" align="right" valign="top"><a id="a69c52fb2a5204c06734ecc8252b20aed"></a>
-std::unique_ptr&lt; <a class="el" href="classOptions.html">Options</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>options_</b></td></tr>
+<tr class="memitem:a69c52fb2a5204c06734ecc8252b20aed"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classOptions.html">Options</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLibcameraApp.html#a69c52fb2a5204c06734ecc8252b20aed">options_</a></td></tr>
 <tr class="separator:a69c52fb2a5204c06734ecc8252b20aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8a39205c4100e9ff0390dbe01403c894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a39205c4100e9ff0390dbe01403c894">&#9670;&nbsp;</a></span>BufferMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a8a39205c4100e9ff0390dbe01403c894">LibcameraApp::BufferMap</a> =  Request::BufferMap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed86366293cdb87ca45311c3cae08e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed86366293cdb87ca45311c3cae08e30">&#9670;&nbsp;</a></span>Camera</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#aed86366293cdb87ca45311c3cae08e30">LibcameraApp::Camera</a> =  libcamera::Camera</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f1484f09187fe28ea86b350d0c60923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f1484f09187fe28ea86b350d0c60923">&#9670;&nbsp;</a></span>CameraConfiguration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a2f1484f09187fe28ea86b350d0c60923">LibcameraApp::CameraConfiguration</a> =  libcamera::CameraConfiguration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aecd33414ab2b5a7e7ab1b6612da8c5a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecd33414ab2b5a7e7ab1b6612da8c5a8">&#9670;&nbsp;</a></span>CameraManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#aecd33414ab2b5a7e7ab1b6612da8c5a8">LibcameraApp::CameraManager</a> =  libcamera::CameraManager</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ca7ba60a40f6716f15499c677a33c63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca7ba60a40f6716f15499c677a33c63">&#9670;&nbsp;</a></span>ControlList</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a0ca7ba60a40f6716f15499c677a33c63">LibcameraApp::ControlList</a> =  libcamera::ControlList</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4cfb9ea9bc3659d42714850e209db5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4cfb9ea9bc3659d42714850e209db5e">&#9670;&nbsp;</a></span>FrameBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#ae4cfb9ea9bc3659d42714850e209db5e">LibcameraApp::FrameBuffer</a> =  libcamera::FrameBuffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8494e1606cf01c2a87bc30132d8c460c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8494e1606cf01c2a87bc30132d8c460c">&#9670;&nbsp;</a></span>FrameBufferAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a8494e1606cf01c2a87bc30132d8c460c">LibcameraApp::FrameBufferAllocator</a> =  libcamera::FrameBufferAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cf2fba4f6f29a495b6dbd29e4ac93bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cf2fba4f6f29a495b6dbd29e4ac93bc">&#9670;&nbsp;</a></span>MsgPayload</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::variant&lt;<a class="el" href="libcamera__app_8hpp.html#aaf48835f5a9b79c7d3b1e3f918e79cf8">CompletedRequestPtr</a>&gt; <a class="el" href="classLibcameraApp.html#a9cf2fba4f6f29a495b6dbd29e4ac93bc">LibcameraApp::MsgPayload</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9554eaa57cdbdf885ab9908cdbf13585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9554eaa57cdbdf885ab9908cdbf13585">&#9670;&nbsp;</a></span>PixelFormat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a9554eaa57cdbdf885ab9908cdbf13585">LibcameraApp::PixelFormat</a> =  libcamera::PixelFormat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0eddcee764301da6348d3454c2c28c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eddcee764301da6348d3454c2c28c2f">&#9670;&nbsp;</a></span>Rectangle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a0eddcee764301da6348d3454c2c28c2f">LibcameraApp::Rectangle</a> =  libcamera::Rectangle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8716045e74cca80419b5ef266e028361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8716045e74cca80419b5ef266e028361">&#9670;&nbsp;</a></span>Request</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a8716045e74cca80419b5ef266e028361">LibcameraApp::Request</a> =  libcamera::Request</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43d27702163be125fb4307727e135809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43d27702163be125fb4307727e135809">&#9670;&nbsp;</a></span>Size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a43d27702163be125fb4307727e135809">LibcameraApp::Size</a> =  libcamera::Size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf6475132ce78635b7e5f83d0ef686a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf6475132ce78635b7e5f83d0ef686a8">&#9670;&nbsp;</a></span>Stream</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">LibcameraApp::Stream</a> =  libcamera::Stream</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45edbfd7cd31d635a3fa4d51e9d2acb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45edbfd7cd31d635a3fa4d51e9d2acb8">&#9670;&nbsp;</a></span>StreamConfiguration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a45edbfd7cd31d635a3fa4d51e9d2acb8">LibcameraApp::StreamConfiguration</a> =  libcamera::StreamConfiguration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ec5339ace30cb751ba14678340d81ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ec5339ace30cb751ba14678340d81ad">&#9670;&nbsp;</a></span>StreamRole</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a5ec5339ace30cb751ba14678340d81ad">LibcameraApp::StreamRole</a> =  libcamera::StreamRole</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57dfc0a66a7819980b7960b3399b71d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57dfc0a66a7819980b7960b3399b71d1">&#9670;&nbsp;</a></span>StreamRoles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classLibcameraApp.html#a57dfc0a66a7819980b7960b3399b71d1">LibcameraApp::StreamRoles</a> =  libcamera::StreamRoles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ae9b5a0f50fcd842d820e7615da6ea79f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b5a0f50fcd842d820e7615da6ea79f">&#9670;&nbsp;</a></span>MsgType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79f">LibcameraApp::MsgType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae9b5a0f50fcd842d820e7615da6ea79fa15a9cbe6391d79ffe0930cd82a6fc078"></a>RequestComplete&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae9b5a0f50fcd842d820e7615da6ea79fa0d82790b0612935992bd564a17ce37d6"></a>Quit&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a89146dc9d97bec64ef9c42367911af27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89146dc9d97bec64ef9c42367911af27">&#9670;&nbsp;</a></span>LibcameraApp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LibcameraApp::LibcameraApp </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classOptions.html">Options</a> &gt; const&#160;</td>
+          <td class="paramname"><em>opts</em> = <code>nullptr</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55821d8dd770bc781c56b862e8094cef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55821d8dd770bc781c56b862e8094cef">&#9670;&nbsp;</a></span>~LibcameraApp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LibcameraApp::~LibcameraApp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad4559dbe2bf6d277b1d7779da407ea79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4559dbe2bf6d277b1d7779da407ea79">&#9670;&nbsp;</a></span>CameraId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string const  &amp; LibcameraApp::CameraId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a58014a47031ba60afd13545edd26d665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58014a47031ba60afd13545edd26d665">&#9670;&nbsp;</a></span>CloseCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::CloseCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca7d807865d8d1df94f890f87c348862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca7d807865d8d1df94f890f87c348862">&#9670;&nbsp;</a></span>ConfigureStill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::ConfigureStill </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>flags</em> = <code><a class="el" href="classLibcameraApp.html#a47776108e9ad1af2acafe513d006190e">FLAG_STILL_NONE</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15fea5c98f545ff7a55f1e69fce23294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15fea5c98f545ff7a55f1e69fce23294">&#9670;&nbsp;</a></span>ConfigureViewfinder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::ConfigureViewfinder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec4360362423836ee0b25ddd95b1115a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec4360362423836ee0b25ddd95b1115a">&#9670;&nbsp;</a></span>GetMainStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::GetMainStream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62162c1d232783806dc23bcbe210ad6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62162c1d232783806dc23bcbe210ad6e">&#9670;&nbsp;</a></span>GetOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classOptions.html">Options</a>* LibcameraApp::GetOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8e8173f65f3ade5b48582abb6f727be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e8173f65f3ade5b48582abb6f727be">&#9670;&nbsp;</a></span>GetStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::GetStream </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45a460a15d3b25978db21b521f3b573a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45a460a15d3b25978db21b521f3b573a">&#9670;&nbsp;</a></span>LoresStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::LoresStream </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9dd2d737ce70dfddabb16c79e59551d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd2d737ce70dfddabb16c79e59551d0">&#9670;&nbsp;</a></span>Mmap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; libcamera::Span&lt; uint8_t &gt; &gt; LibcameraApp::Mmap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLibcameraApp.html#ae4cfb9ea9bc3659d42714850e209db5e">FrameBuffer</a> *&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f7f3ee39dcedf418590e16f3495e73d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7f3ee39dcedf418590e16f3495e73d">&#9670;&nbsp;</a></span>OpenCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::OpenCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a697695d81db8830c067092e53f51401c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a697695d81db8830c067092e53f51401c">&#9670;&nbsp;</a></span>PostMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::PostMessage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79f">MsgType</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classLibcameraApp.html#a9cf2fba4f6f29a495b6dbd29e4ac93bc">MsgPayload</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae8e04e0de927e6e11eb544bcf2d3fb0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e04e0de927e6e11eb544bcf2d3fb0a">&#9670;&nbsp;</a></span>RawStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::RawStream </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae62fb1d708713aec3f92e40ef362db96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae62fb1d708713aec3f92e40ef362db96">&#9670;&nbsp;</a></span>SetControls()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::SetControls </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLibcameraApp.html#a0ca7ba60a40f6716f15499c677a33c63">ControlList</a> &amp;&#160;</td>
+          <td class="paramname"><em>controls</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc4d6b4fd4401409e81ac752612f684c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc4d6b4fd4401409e81ac752612f684c">&#9670;&nbsp;</a></span>StartCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::StartCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2968061927363754dd87019d0bed8a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2968061927363754dd87019d0bed8a73">&#9670;&nbsp;</a></span>StillStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::StillStream </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02813add2b9edadb43570d35024f7454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02813add2b9edadb43570d35024f7454">&#9670;&nbsp;</a></span>StopCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::StopCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a891ecda1ddeb8076800c09e4a27c4f53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a891ecda1ddeb8076800c09e4a27c4f53">&#9670;&nbsp;</a></span>StreamDimensions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::StreamDimensions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLibcameraApp.html#adf6475132ce78635b7e5f83d0ef686a8">Stream</a> const *&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5297cd6917e971cf675c4c978c6036c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5297cd6917e971cf675c4c978c6036c7">&#9670;&nbsp;</a></span>Teardown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LibcameraApp::Teardown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0e1168ead2097f6951a924bfcb6d7fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0e1168ead2097f6951a924bfcb6d7fb">&#9670;&nbsp;</a></span>VideoStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::VideoStream </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ce21c14da01c38ef07b71985d6330ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ce21c14da01c38ef07b71985d6330ea">&#9670;&nbsp;</a></span>ViewfinderStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libcamera::Stream * LibcameraApp::ViewfinderStream </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>w</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>stride</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe9fa8deeca7162d78427961871898fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe9fa8deeca7162d78427961871898fc">&#9670;&nbsp;</a></span>Wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structLibcameraApp_1_1Msg.html">LibcameraApp::Msg</a> LibcameraApp::Wait </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab2996b7902a8808c4e6f9cae46d2d189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2996b7902a8808c4e6f9cae46d2d189">&#9670;&nbsp;</a></span>FLAG_STILL_BGR</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_BGR = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29ae7b2f862d56b6f4604079dc648f80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29ae7b2f862d56b6f4604079dc648f80">&#9670;&nbsp;</a></span>FLAG_STILL_BUFFER_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_BUFFER_MASK = 24</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1abf44edc2cbecb77cc48f3b00a89e9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1abf44edc2cbecb77cc48f3b00a89e9b">&#9670;&nbsp;</a></span>FLAG_STILL_DOUBLE_BUFFER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_DOUBLE_BUFFER = 8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a47776108e9ad1af2acafe513d006190e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47776108e9ad1af2acafe513d006190e">&#9670;&nbsp;</a></span>FLAG_STILL_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_NONE = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69fe46a42c04cfa9104144e0e639fcb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fe46a42c04cfa9104144e0e639fcb4">&#9670;&nbsp;</a></span>FLAG_STILL_RAW</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_RAW = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd61a8d86c27bb7e14ebccec477eff6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd61a8d86c27bb7e14ebccec477eff6c">&#9670;&nbsp;</a></span>FLAG_STILL_RGB</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_RGB = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66b0381aa17281fc82449f5761543186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66b0381aa17281fc82449f5761543186">&#9670;&nbsp;</a></span>FLAG_STILL_TRIPLE_BUFFER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_STILL_TRIPLE_BUFFER = 16</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d4799734d3a94683f3eb29637a65941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d4799734d3a94683f3eb29637a65941">&#9670;&nbsp;</a></span>FLAG_VIDEO_JPEG_COLOURSPACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_VIDEO_JPEG_COLOURSPACE = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c94619c1e8b615e25d3a9f7720c66b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c94619c1e8b615e25d3a9f7720c66b4">&#9670;&nbsp;</a></span>FLAG_VIDEO_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_VIDEO_NONE = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd9655f07adbcdf1de17f5250edf1526"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd9655f07adbcdf1de17f5250edf1526">&#9670;&nbsp;</a></span>FLAG_VIDEO_RAW</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr unsigned int LibcameraApp::FLAG_VIDEO_RAW = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69c52fb2a5204c06734ecc8252b20aed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69c52fb2a5204c06734ecc8252b20aed">&#9670;&nbsp;</a></span>options_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classOptions.html">Options</a>&gt; LibcameraApp::options_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>LCCV/include/<a class="el" href="libcamera__app_8hpp_source.html">libcamera_app.hpp</a></li>
-<li>LCCV/src/libcamera_app.cpp</li>
+<li>LCCV/src/<a class="el" href="libcamera__app_8cpp.html">libcamera_app.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

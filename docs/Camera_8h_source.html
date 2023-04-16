@@ -69,7 +69,7 @@ $(function() {
 <div class="title">Camera.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="Camera_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright 2023 Georgios Titas</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">Copyright 2023 Alexander Douglas</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">Copyright 2023 Jijo Varghese</span></div>
@@ -86,7 +86,7 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;CallbackLinker.h&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="CallbackLinker_8h.html">CallbackLinker.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/* Choose the old or new Pi camera stack from CMakeLists.txt file*/</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#if defined(CMAKE_NEW_CAM_STACK_ON)</span></div>
@@ -94,27 +94,27 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#elif defined(CMAKE_NEW_CAM_STACK_OFF)</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define NEW_CAM_STACK 0</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define NEW_CAM_STACK 0</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="Camera_8h.html#ac0322c7e9e8372f7647e4f6779b7f067">   26</a></span>&#160;<span class="preprocessor">#define NEW_CAM_STACK 0</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#if NEW_CAM_STACK</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;lccv.hpp&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="lccv_8hpp.html">lccv.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">enum</span> Err_type{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    NO_ERROR,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ERR_INIT,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ERR_EMPTY_FRAME</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ff">   34</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ff">Err_type</a>{</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffabf350750d0d4fabd8954c0f1e9bbae94">   35</a></span>&#160;    <a class="code" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffabf350750d0d4fabd8954c0f1e9bbae94">NO_ERROR</a>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffad64d9c982833860d10f54b846f9c5e46">   36</a></span>&#160;    <a class="code" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffad64d9c982833860d10f54b846f9c5e46">ERR_INIT</a>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffaa78f86634368c6b782c878302d060b02">ERR_EMPTY_FRAME</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffaa78f86634368c6b782c878302d060b02">   38</a></span>&#160;};</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classCamera.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCamera.html">Camera</a></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">struct</span>{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">int</span> camIdx; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">int</span> camApi;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">bool</span> isOn = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classCamera.html#a120c30ec0bc76344e30ac85127ee105b">   48</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classCamera.html#a120c30ec0bc76344e30ac85127ee105b">camIdx</a>; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classCamera.html#a3af8f1173f9ea846e42fadb29a360834">   49</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classCamera.html#a3af8f1173f9ea846e42fadb29a360834">camApi</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classCamera.html#ace0e16ce976feae85503f6830735b185">   50</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classCamera.html#ace0e16ce976feae85503f6830735b185">isOn</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    } CamSettings;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span> errCode;</div>
@@ -131,7 +131,7 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classCallbackLinker.html">CallbackLinker</a>* cameraCallback = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classCamera.html#a59928f55f480fefed14420ef7633aefb">Camera</a>(<span class="keywordtype">int</span> camIdx = 0, <span class="keywordtype">double</span> res_w = 640, <span class="keywordtype">double</span> res_h = 480);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classCamera.html#a59928f55f480fefed14420ef7633aefb">Camera</a>(<span class="keywordtype">int</span> <a class="code" href="classCamera.html#a120c30ec0bc76344e30ac85127ee105b">camIdx</a> = 0, <span class="keywordtype">double</span> res_w = 640, <span class="keywordtype">double</span> res_h = 480);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classCamera.html#ad1897942d0ccf91052386388a497349f">~Camera</a>();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCamera.html#a1c5068178e256f98215dcacef5ff76d7">registerCallback</a>(<a class="code" href="classCallbackLinker.html">CallbackLinker</a>* cb);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCamera.html#ad02464df6b73520304055e597b368c68">unregisterCallback</a>();</div>
@@ -143,16 +143,25 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CAMERA_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aCallbackLinker_8h_html"><div class="ttname"><a href="CallbackLinker_8h.html">CallbackLinker.h</a></div></div>
+<div class="ttc" id="aCamera_8h_html_abe1ad9a2def78cc1bba5eb401336f9ff"><div class="ttname"><a href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ff">Err_type</a></div><div class="ttdeci">Err_type</div><div class="ttdef"><b>Definition:</b> Camera.h:34</div></div>
+<div class="ttc" id="aCamera_8h_html_abe1ad9a2def78cc1bba5eb401336f9ffaa78f86634368c6b782c878302d060b02"><div class="ttname"><a href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffaa78f86634368c6b782c878302d060b02">ERR_EMPTY_FRAME</a></div><div class="ttdeci">@ ERR_EMPTY_FRAME</div><div class="ttdef"><b>Definition:</b> Camera.h:37</div></div>
+<div class="ttc" id="aCamera_8h_html_abe1ad9a2def78cc1bba5eb401336f9ffabf350750d0d4fabd8954c0f1e9bbae94"><div class="ttname"><a href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffabf350750d0d4fabd8954c0f1e9bbae94">NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div><div class="ttdef"><b>Definition:</b> Camera.h:35</div></div>
+<div class="ttc" id="aCamera_8h_html_abe1ad9a2def78cc1bba5eb401336f9ffad64d9c982833860d10f54b846f9c5e46"><div class="ttname"><a href="Camera_8h.html#abe1ad9a2def78cc1bba5eb401336f9ffad64d9c982833860d10f54b846f9c5e46">ERR_INIT</a></div><div class="ttdeci">@ ERR_INIT</div><div class="ttdef"><b>Definition:</b> Camera.h:36</div></div>
 <div class="ttc" id="aclassCallbackLinker_html"><div class="ttname"><a href="classCallbackLinker.html">CallbackLinker</a></div><div class="ttdoc">Generic abstract Callback Interface class.</div><div class="ttdef"><b>Definition:</b> CallbackLinker.h:20</div></div>
 <div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">Class for initialising a Camera object and capturing frames.</div><div class="ttdef"><b>Definition:</b> Camera.h:45</div></div>
+<div class="ttc" id="aclassCamera_html_a120c30ec0bc76344e30ac85127ee105b"><div class="ttname"><a href="classCamera.html#a120c30ec0bc76344e30ac85127ee105b">Camera::camIdx</a></div><div class="ttdeci">int camIdx</div><div class="ttdef"><b>Definition:</b> Camera.h:48</div></div>
 <div class="ttc" id="aclassCamera_html_a1c5068178e256f98215dcacef5ff76d7"><div class="ttname"><a href="classCamera.html#a1c5068178e256f98215dcacef5ff76d7">Camera::registerCallback</a></div><div class="ttdeci">void registerCallback(CallbackLinker *cb)</div><div class="ttdoc">Register a Callback for the Camera Class.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:96</div></div>
+<div class="ttc" id="aclassCamera_html_a3af8f1173f9ea846e42fadb29a360834"><div class="ttname"><a href="classCamera.html#a3af8f1173f9ea846e42fadb29a360834">Camera::camApi</a></div><div class="ttdeci">int camApi</div><div class="ttdef"><b>Definition:</b> Camera.h:49</div></div>
 <div class="ttc" id="aclassCamera_html_a59928f55f480fefed14420ef7633aefb"><div class="ttname"><a href="classCamera.html#a59928f55f480fefed14420ef7633aefb">Camera::Camera</a></div><div class="ttdeci">Camera(int camIdx=0, double res_w=640, double res_h=480)</div><div class="ttdoc">Construct a new Camera:: Camera object.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:21</div></div>
 <div class="ttc" id="aclassCamera_html_a89cd61acf2c79e518686a1c10feee0d0"><div class="ttname"><a href="classCamera.html#a89cd61acf2c79e518686a1c10feee0d0">Camera::stopRecording</a></div><div class="ttdeci">void stopRecording()</div><div class="ttdoc">Method call to stop the camera recording thread Call when exiting the programme.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:133</div></div>
 <div class="ttc" id="aclassCamera_html_a9f7a71e069c969f5dcc2242bb2287b06"><div class="ttname"><a href="classCamera.html#a9f7a71e069c969f5dcc2242bb2287b06">Camera::getErr</a></div><div class="ttdeci">int getErr()</div><div class="ttdoc">Get latest Error Code.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:145</div></div>
+<div class="ttc" id="aclassCamera_html_ace0e16ce976feae85503f6830735b185"><div class="ttname"><a href="classCamera.html#ace0e16ce976feae85503f6830735b185">Camera::isOn</a></div><div class="ttdeci">bool isOn</div><div class="ttdef"><b>Definition:</b> Camera.h:50</div></div>
 <div class="ttc" id="aclassCamera_html_ad02464df6b73520304055e597b368c68"><div class="ttname"><a href="classCamera.html#ad02464df6b73520304055e597b368c68">Camera::unregisterCallback</a></div><div class="ttdeci">void unregisterCallback()</div><div class="ttdoc">Unregister existing callback.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:104</div></div>
 <div class="ttc" id="aclassCamera_html_ad1897942d0ccf91052386388a497349f"><div class="ttname"><a href="classCamera.html#ad1897942d0ccf91052386388a497349f">Camera::~Camera</a></div><div class="ttdeci">~Camera()</div><div class="ttdoc">Destroy the Camera:: Camera object.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:153</div></div>
 <div class="ttc" id="aclassCamera_html_af276333ed7eb98117a1be06b764fd41f"><div class="ttname"><a href="classCamera.html#af276333ed7eb98117a1be06b764fd41f">Camera::startRecording</a></div><div class="ttdeci">void startRecording()</div><div class="ttdoc">Method call to start the camera recording thread.</div><div class="ttdef"><b>Definition:</b> Camera.cpp:112</div></div>
 <div class="ttc" id="aclasslccv_1_1PiCamera_html"><div class="ttname"><a href="classlccv_1_1PiCamera.html">lccv::PiCamera</a></div><div class="ttdef"><b>Definition:</b> lccv.hpp:53</div></div>
+<div class="ttc" id="alccv_8hpp_html"><div class="ttname"><a href="lccv_8hpp.html">lccv.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['startprocessing_27',['startProcessing',['../classDetectCard.html#a807d0b7f4e2f13ec1c9cb356f488f8e8',1,'DetectCard']]],
-  ['startrecording_28',['startRecording',['../classCamera.html#af276333ed7eb98117a1be06b764fd41f',1,'Camera']]],
-  ['stopprocessing_29',['stopProcessing',['../classDetectCard.html#ab082dd0e79979627651ec928fd0d476b',1,'DetectCard']]],
-  ['stoprecording_30',['stopRecording',['../classCamera.html#a89cd61acf2c79e518686a1c10feee0d0',1,'Camera']]],
-  ['strategyengine_31',['StrategyEngine',['../classStrategyEngine.html',1,'StrategyEngine'],['../classStrategyEngine.html#aec1e117e849819bb50d14ec34032ea3b',1,'StrategyEngine::StrategyEngine()']]]
+  ['payload_168',['payload',['../structLibcameraApp_1_1Msg.html#a09c49fc06f40aece02cb5679c81744f4',1,'LibcameraApp::Msg']]],
+  ['photo_5fheight_169',['photo_height',['../classOptions.html#a5720d403c6be01a3f38fba52602a260a',1,'Options']]],
+  ['photo_5fwidth_170',['photo_width',['../classOptions.html#a47371c7bef497e70f8891d26c1703d1e',1,'Options']]],
+  ['picamera_171',['PiCamera',['../classlccv_1_1PiCamera.html',1,'lccv::PiCamera'],['../classlccv_1_1PiCamera.html#a669d5e9ac6b1fbae9860c3373be376ec',1,'lccv::PiCamera::PiCamera()']]],
+  ['pixelformat_172',['PixelFormat',['../classLibcameraApp.html#a9554eaa57cdbdf885ab9908cdbf13585',1,'LibcameraApp']]],
+  ['platform_5fid_173',['PLATFORM_ID',['../CMakeCCompilerId_8c.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID():&#160;CMakeCXXCompilerId.cpp']]],
+  ['playercards_174',['playercards',['../structAcePlaysUtils.html#a9d52fe9c2a2598fabbaa647b82559d84',1,'AcePlaysUtils']]],
+  ['post_5fprocess_5fmetadata_175',['post_process_metadata',['../structCompletedRequest.html#aafd0afc65407cd932412b94b01b19b28',1,'CompletedRequest']]],
+  ['postmessage_176',['PostMessage',['../classLibcameraApp.html#a697695d81db8830c067092e53f51401c',1,'LibcameraApp']]],
+  ['print_177',['Print',['../classOptions.html#ab2b54462aeee976361b608422f56200c',1,'Options']]]
 ];

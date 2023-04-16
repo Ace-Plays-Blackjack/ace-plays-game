@@ -69,7 +69,7 @@ $(function() {
 <div class="title">CardDiscriminator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="CardDiscriminator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright 2023 Georgios Titas</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">Copyright 2023 Alexander Douglas</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">Copyright 2023 Jijo Varghese</span></div>
@@ -82,13 +82,13 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define CARDDISCRIMINATOR</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;Card.h&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Card_8h.html">Card.h</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structTemplateImages.html">   21</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structTemplateImages.html">TemplateImages</a>{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">/* Images of loaded template cards */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    std::vector&lt;cv::Mat&gt; template_cards;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structTemplateImages.html#a8e0085888a734b5635332557330981a1">   23</a></span>&#160;    std::vector&lt;cv::Mat&gt; <a class="code" href="structTemplateImages.html#a8e0085888a734b5635332557330981a1">template_cards</a>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">/* Names of loaded template cards */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::vector&lt;cv::String&gt; names;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structTemplateImages.html#aeb67f7e4e7877587a825dbdc2d09c6f4">   25</a></span>&#160;    std::vector&lt;cv::String&gt; <a class="code" href="structTemplateImages.html#aeb67f7e4e7877587a825dbdc2d09c6f4">names</a>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classCardTemplate.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCardTemplate.html">CardTemplate</a></div>
@@ -101,9 +101,9 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">/* Keep track on number of template cards stored */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> num_template_cards;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classCardTemplate.html#a8cc5bfd9f0732fd1a239a07109d0ad47">   43</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="classCardTemplate.html#a8cc5bfd9f0732fd1a239a07109d0ad47">num_template_cards</a>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classCardTemplate.html#a320a2ebfbaa7ee0a8765926fb47a1636">   55</a></span>&#160;    <a class="code" href="classCardTemplate.html#a320a2ebfbaa7ee0a8765926fb47a1636">CardTemplate</a>(cv::String folder) : rank_images(<a class="code" href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">init</a>(folder, false)), suit_images(<a class="code" href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">init</a>(folder, true)), num_template_cards((int)rank_images.template_cards.size()) {};</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classCardTemplate.html#a320a2ebfbaa7ee0a8765926fb47a1636">   55</a></span>&#160;    <a class="code" href="classCardTemplate.html#a320a2ebfbaa7ee0a8765926fb47a1636">CardTemplate</a>(cv::String folder) : rank_images(<a class="code" href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">init</a>(folder, false)), suit_images(<a class="code" href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">init</a>(folder, true)), <a class="code" href="classCardTemplate.html#a8cc5bfd9f0732fd1a239a07109d0ad47">num_template_cards</a>((int)rank_images.template_cards.size()) {};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    </div>
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">   66</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="structTemplateImages.html">TemplateImages</a> <a class="code" href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">init</a>(cv::String folder, <span class="keywordtype">bool</span> suit_flag)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
@@ -124,25 +124,25 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            result.push_back(cv::imread(filename, cv::IMREAD_GRAYSCALE));</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        temp.template_cards = result;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        temp.names = card_names;        </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        temp.<a class="code" href="structTemplateImages.html#a8e0085888a734b5635332557330981a1">template_cards</a> = result;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        temp.<a class="code" href="structTemplateImages.html#aeb67f7e4e7877587a825dbdc2d09c6f4">names</a> = card_names;        </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> temp;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classCardTemplate.html#a3af3ca7f24df221a29178271a46e265f">   96</a></span>&#160;    cv::Mat <a class="code" href="classCardTemplate.html#a3af3ca7f24df221a29178271a46e265f">getCard</a>(<span class="keywordtype">int</span> index){</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">if</span>(index &gt; rank_images.template_cards.size() || index &lt; 0){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">if</span>(index &gt; rank_images.<a class="code" href="structTemplateImages.html#a8e0085888a734b5635332557330981a1">template_cards</a>.size() || index &lt; 0){</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;Error: Index Invalid&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">return</span> cv::Mat{};</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> rank_images.template_cards.at(index);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> rank_images.<a class="code" href="structTemplateImages.html#a8e0085888a734b5635332557330981a1">template_cards</a>.at(index);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classCardTemplate.html#a9a6d66d1b0db71514366d248a932616a">  110</a></span>&#160;    cv::String <a class="code" href="classCardTemplate.html#a9a6d66d1b0db71514366d248a932616a">getCardRank</a>(<span class="keywordtype">int</span> index){</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">if</span>(index &gt; rank_images.names.size() || index &lt; 0){</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">if</span>(index &gt; rank_images.<a class="code" href="structTemplateImages.html#aeb67f7e4e7877587a825dbdc2d09c6f4">names</a>.size() || index &lt; 0){</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;Error: Index Invalid&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;None&quot;</span>;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span> rank_images.names.at(index);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span> rank_images.<a class="code" href="structTemplateImages.html#aeb67f7e4e7877587a825dbdc2d09c6f4">names</a>.at(index);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
@@ -157,16 +157,20 @@ $(function() {
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;};</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//CARD_DISCRIMINATOR_H</span></div>
+<div class="ttc" id="aCard_8h_html"><div class="ttname"><a href="Card_8h.html">Card.h</a></div></div>
 <div class="ttc" id="aclassCardDiscriminator_html"><div class="ttname"><a href="classCardDiscriminator.html">CardDiscriminator</a></div><div class="ttdoc">Class to implement detection method from Card Rank ROIs. Can be adapted for other solutions such as m...</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:125</div></div>
 <div class="ttc" id="aclassCardDiscriminator_html_a1a424eb8f23f65ca34a59378482aec82"><div class="ttname"><a href="classCardDiscriminator.html#a1a424eb8f23f65ca34a59378482aec82">CardDiscriminator::CardDiscriminator</a></div><div class="ttdeci">CardDiscriminator(cv::String folder_path)</div><div class="ttdoc">Construct a new Card Discriminator:: Card Discriminator object.</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.cpp:19</div></div>
 <div class="ttc" id="aclassCardDiscriminator_html_a4e1f0e120f280eb45f75e15116f84316"><div class="ttname"><a href="classCardDiscriminator.html#a4e1f0e120f280eb45f75e15116f84316">CardDiscriminator::template_matching</a></div><div class="ttdeci">void template_matching(Card_params &amp;Card_params, bool rank)</div><div class="ttdoc">Template matching method is responsible for determining the card Rank. In this release,...</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.cpp:38</div></div>
 <div class="ttc" id="aclassCardTemplate_html"><div class="ttname"><a href="classCardTemplate.html">CardTemplate</a></div><div class="ttdoc">Class to load and store the template cards from a folder path.</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:34</div></div>
 <div class="ttc" id="aclassCardTemplate_html_a320a2ebfbaa7ee0a8765926fb47a1636"><div class="ttname"><a href="classCardTemplate.html#a320a2ebfbaa7ee0a8765926fb47a1636">CardTemplate::CardTemplate</a></div><div class="ttdeci">CardTemplate(cv::String folder)</div><div class="ttdoc">Construct a new Card Template object. Template cards are defined as constant. The following procedure...</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:55</div></div>
 <div class="ttc" id="aclassCardTemplate_html_a3af3ca7f24df221a29178271a46e265f"><div class="ttname"><a href="classCardTemplate.html#a3af3ca7f24df221a29178271a46e265f">CardTemplate::getCard</a></div><div class="ttdeci">cv::Mat getCard(int index)</div><div class="ttdoc">Get the Card object.</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:96</div></div>
+<div class="ttc" id="aclassCardTemplate_html_a8cc5bfd9f0732fd1a239a07109d0ad47"><div class="ttname"><a href="classCardTemplate.html#a8cc5bfd9f0732fd1a239a07109d0ad47">CardTemplate::num_template_cards</a></div><div class="ttdeci">const int num_template_cards</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:43</div></div>
 <div class="ttc" id="aclassCardTemplate_html_a9a6d66d1b0db71514366d248a932616a"><div class="ttname"><a href="classCardTemplate.html#a9a6d66d1b0db71514366d248a932616a">CardTemplate::getCardRank</a></div><div class="ttdeci">cv::String getCardRank(int index)</div><div class="ttdoc">Get the Card name.</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:110</div></div>
 <div class="ttc" id="aclassCardTemplate_html_aa0af08025bfccf47ab7fcdc9e2e82160"><div class="ttname"><a href="classCardTemplate.html#aa0af08025bfccf47ab7fcdc9e2e82160">CardTemplate::init</a></div><div class="ttdeci">static TemplateImages init(cv::String folder, bool suit_flag)</div><div class="ttdoc">Init function to parse the folder path and read the template card images.</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:66</div></div>
 <div class="ttc" id="astructCard__params_html"><div class="ttname"><a href="structCard__params.html">Card_params</a></div><div class="ttdoc">Structure holding the parameters of all detected card shapes in a frame, such as their position in th...</div><div class="ttdef"><b>Definition:</b> Card.h:52</div></div>
 <div class="ttc" id="astructTemplateImages_html"><div class="ttname"><a href="structTemplateImages.html">TemplateImages</a></div><div class="ttdoc">Simple structure to hold loaded images and their respective names.</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:21</div></div>
+<div class="ttc" id="astructTemplateImages_html_a8e0085888a734b5635332557330981a1"><div class="ttname"><a href="structTemplateImages.html#a8e0085888a734b5635332557330981a1">TemplateImages::template_cards</a></div><div class="ttdeci">std::vector&lt; cv::Mat &gt; template_cards</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:23</div></div>
+<div class="ttc" id="astructTemplateImages_html_aeb67f7e4e7877587a825dbdc2d09c6f4"><div class="ttname"><a href="structTemplateImages.html#aeb67f7e4e7877587a825dbdc2d09c6f4">TemplateImages::names</a></div><div class="ttdeci">std::vector&lt; cv::String &gt; names</div><div class="ttdef"><b>Definition:</b> CardDiscriminator.h:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

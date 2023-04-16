@@ -69,7 +69,7 @@ $(function() {
 <div class="title">ToggleLED.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="ToggleLED_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright 2023 Georgios Titas</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">Copyright 2023 Alexander Douglas</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">Copyright 2023 Jijo Varghese</span></div>
@@ -80,20 +80,23 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef LEDS_H</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define LEDS_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;Card.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;CallbackLinker.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Card_8h.html">Card.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="CallbackLinker_8h.html">CallbackLinker.h</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classToggleLED.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classToggleLED.html">ToggleLED</a> : <span class="keyword">public</span> <a class="code" href="classCallbackLinker.html">CallbackLinker</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>: </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classToggleLED.html#a0c5e9cd0a1dbe0346945023cd7096bf5">ToggleLED</a>();</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classToggleLED.html#a33f925e821ff77ee641ced9a92cb7d5c">~ToggleLED</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToggleLED.html#a12d8ee82a3b89455eb832e5b6048412b">flashled</a>(decisions choice);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToggleLED.html#a12d8ee82a3b89455eb832e5b6048412b">flashled</a>(<a class="code" href="Card_8h.html#add35a31ad8e0a5dfbdb66e5f1316771c">decisions</a> choice);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToggleLED.html#a2e1024d03171e63047dfff75281723bb">nextCallback</a>(<a class="code" href="structAcePlaysUtils.html">AcePlaysUtils</a> &amp;callbackData);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> gpio(<span class="keywordtype">int</span> led);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//LEDS_H</span></div>
+<div class="ttc" id="aCallbackLinker_8h_html"><div class="ttname"><a href="CallbackLinker_8h.html">CallbackLinker.h</a></div></div>
+<div class="ttc" id="aCard_8h_html"><div class="ttname"><a href="Card_8h.html">Card.h</a></div></div>
+<div class="ttc" id="aCard_8h_html_add35a31ad8e0a5dfbdb66e5f1316771c"><div class="ttname"><a href="Card_8h.html#add35a31ad8e0a5dfbdb66e5f1316771c">decisions</a></div><div class="ttdeci">decisions</div><div class="ttdoc">A Blackjack enum decisions to determine the next Optimal Play.</div><div class="ttdef"><b>Definition:</b> Card.h:35</div></div>
 <div class="ttc" id="aclassCallbackLinker_html"><div class="ttname"><a href="classCallbackLinker.html">CallbackLinker</a></div><div class="ttdoc">Generic abstract Callback Interface class.</div><div class="ttdef"><b>Definition:</b> CallbackLinker.h:20</div></div>
 <div class="ttc" id="aclassToggleLED_html"><div class="ttname"><a href="classToggleLED.html">ToggleLED</a></div><div class="ttdoc">Class to control the Rasp Pi pins and toggle LEDs ON/OFF.</div><div class="ttdef"><b>Definition:</b> ToggleLED.h:20</div></div>
 <div class="ttc" id="aclassToggleLED_html_a0c5e9cd0a1dbe0346945023cd7096bf5"><div class="ttname"><a href="classToggleLED.html#a0c5e9cd0a1dbe0346945023cd7096bf5">ToggleLED::ToggleLED</a></div><div class="ttdeci">ToggleLED()</div><div class="ttdoc">Construct a new ToggleLED::ToggleLED object.</div><div class="ttdef"><b>Definition:</b> ToggleLED.cpp:23</div></div>

@@ -1,0 +1,3 @@
+<map id="CardTemplate" name="CardTemplate">
+<area shape="rect" id="node1" title="Class to load and store the template cards from a folder path." alt="" coords="5,5,180,127"/>
+</map>

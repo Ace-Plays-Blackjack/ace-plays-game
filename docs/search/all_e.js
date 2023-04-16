@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['template_5fmatching_32',['template_matching',['../classCardDiscriminator.html#a4e1f0e120f280eb45f75e15116f84316',1,'CardDiscriminator']]],
-  ['templateimages_33',['TemplateImages',['../structTemplateImages.html',1,'']]],
-  ['toggleled_34',['ToggleLED',['../classToggleLED.html',1,'ToggleLED'],['../classToggleLED.html#a0c5e9cd0a1dbe0346945023cd7096bf5',1,'ToggleLED::ToggleLED()']]]
+  ['qcard_178',['qCard',['../structqCard.html',1,'']]],
+  ['quit_179',['Quit',['../classLibcameraApp.html#ae9b5a0f50fcd842d820e7615da6ea79fa0d82790b0612935992bd564a17ce37d6',1,'LibcameraApp']]]
 ];
