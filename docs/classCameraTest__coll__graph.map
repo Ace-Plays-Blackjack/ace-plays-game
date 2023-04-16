@@ -1,0 +1,7 @@
+<map id="CameraTest" name="CameraTest">
+<area shape="rect" id="node1" title=" " alt="" coords="141,389,265,467"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,191,107,268"/>
+<area shape="rect" id="node3" href="$classTestCallbackLinker.html" title=" " alt="" coords="131,191,274,268"/>
+<area shape="rect" id="node4" href="$classCallbackLinker.html" title="Generic abstract Callback Interface class." alt="" coords="137,5,269,83"/>
+<area shape="rect" id="node5" href="$classCamera.html" title="Class for initialising a Camera object and capturing frames." alt="" coords="298,132,467,327"/>
+</map>

@@ -23,7 +23,7 @@
   <a href="https://github.com/Ace-Plays-Blackjack/ace-plays-game/wiki">
   Wiki
   </a>
-  for more infromation
+  for more information
 </h2>
 <br />
 
@@ -192,7 +192,7 @@ $ doxygen
 
 <!-- ROADMAP -->
 # Roadmap
-Future Work
+Future work will be to add a new ShowFrame class that output a frame. This would allow more modularity if we wanted to use Qt GUI in the future.
 
 <!-- CONTRIBUTING -->
 # Contributing
@@ -200,7 +200,6 @@ Future Work
 <!-- LICENSE -->
 # License
 Distributed under the `MIT` License. See [`LICENSE`](https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/main/LICENCE) for more information.
-Need to rework the license.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['platform_5fid_577',['PLATFORM_ID',['../CMakeCCompilerId_8c.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID():&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#adbc5372f40838899018fadbc89bd588b',1,'PLATFORM_ID():&#160;CMakeCXXCompilerId.cpp']]]
+  ['rank_5fheight_592',['RANK_HEIGHT',['../Card_8h.html#abf0db52749585b784de6c1366e6ed49d',1,'Card.h']]],
+  ['rank_5fwidth_593',['RANK_WIDTH',['../Card_8h.html#a0f486b005079f72dcaac8d29ffbff325',1,'Card.h']]]
 ];

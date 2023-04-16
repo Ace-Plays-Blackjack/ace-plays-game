@@ -1,7 +1,8 @@
 <map id="CallbackLinker" name="CallbackLinker">
-<area shape="rect" id="node1" title="Generic abstract Callback Interface class." alt="" coords="349,5,481,83"/>
+<area shape="rect" id="node1" title="Generic abstract Callback Interface class." alt="" coords="455,5,587,83"/>
 <area shape="rect" id="node2" href="$classDetectCard.html" title="Class for the detection of cards. Runs the processing pipeline." alt="" coords="5,131,175,296"/>
 <area shape="rect" id="node3" href="$classGamePlay.html" title="Class to implement the gameplay logic/architecture." alt="" coords="199,131,423,296"/>
 <area shape="rect" id="node4" href="$classStrategyEngine.html" title="Class implementing the optimum Blackjack strategy." alt="" coords="447,160,594,267"/>
-<area shape="rect" id="node5" href="$classToggleLED.html" title="Class to control the Rasp Pi pins and toggle LEDs ON/OFF." alt="" coords="619,153,751,274"/>
+<area shape="rect" id="node5" href="$classTestCallbackLinker.html" title=" " alt="" coords="619,175,761,252"/>
+<area shape="rect" id="node6" href="$classToggleLED.html" title="Class to control the Rasp Pi pins and toggle LEDs ON/OFF." alt="" coords="785,153,917,274"/>
 </map>

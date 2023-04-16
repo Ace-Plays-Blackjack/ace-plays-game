@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Blackjack Decision Maker: Main Page</title>
+<title>Blackjack Decision Maker: AcePlays Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,11 +60,20 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Blackjack Decision Maker Documentation</div>  </div>
+<div class="title">AcePlays Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><dl class="section author"><dt>Authors</dt><dd>AcePlay's Workforce</dd></dl>
+<h1><a class="anchor" id="intro"></a>
+Introduction</h1>
+<p>This documentation covers the classes and their interactions for our blackjack decison maker. Our code is as realtime as possible thanks to our outputs immediately notifying the user of the optimum strategy that should be played. Our camera (detector) can detect cards in each frame straight away before passing this information to our <a class="el" href="classStrategyEngine.html" title="Class implementing the optimum Blackjack strategy.">StrategyEngine</a> class via a callback. The decision from the <a class="el" href="classStrategyEngine.html" title="Class implementing the optimum Blackjack strategy.">StrategyEngine</a> is then passed to the <a class="el" href="classToggleLED.html" title="Class to control the Rasp Pi pins and toggle LEDs ON/OFF.">ToggleLED</a> class to turn on a specific LED to notify the player of the optimum blackjack decision.</p>
+<p>Check out our wiki which can be accessed via the README file on our Github landing page.</p>
+<p>Here is the state diagram that describes our system: </p><div class="image">
+<object type="image/svg+xml" data="SystemOverviewDiagram.svg" style="pointer-events: none;"></object>
+</div>
+ </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

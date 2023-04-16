@@ -38,10 +38,10 @@ unset(NEW_CAM_STACK CACHE)
 add_executable(StrategyEngineTest StrategyEngineTest.cpp ../src/StrategyEngine.cpp)
 target_link_libraries(StrategyEngineTest gtest gtest_main)
 
-add_executable(LedsTest LedsTest.cpp ../src/Leds.cpp)
-target_link_libraries(LedsTest ${OpenCV_LIBS} gtest gtest_main pigpio)
+add_executable(ToggleLEDTest ToggleLEDTest.cpp ../src/ToggleLED.cpp)
+target_link_libraries(ToggleLEDTest ${OpenCV_LIBS} gtest gtest_main pigpio)
 
-add_executable(GamePlayTest GamePlayTest.cpp ../src/GamePlay.cpp ../src/StrategyEngine.cpp ../src/Leds.cpp ../src/DetectCard.cpp ../src/CardDiscriminator.cpp)
+add_executable(GamePlayTest GamePlayTest.cpp ../src/GamePlay.cpp ../src/StrategyEngine.cpp ../src/ToggleLED.cpp ../src/DetectCard.cpp ../src/CardDiscriminator.cpp)
 target_link_libraries(GamePlayTest ${OpenCV_LIBS} gtest gtest_main pigpio)
 
 add_executable(CardDiscriminatorTest CardDiscriminatorTest.cpp ../src/Camera.cpp ../src/CardDiscriminator.cpp)
