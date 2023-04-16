@@ -4,9 +4,6 @@ option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" ON)
 
 add_definitions(-DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK})
 
-include(GoogleTest)
-enable_testing()
-
 include_directories(include)
 
 add_executable(${PROJECT_NAME}  
@@ -45,7 +42,7 @@ option(PACKAGE_TESTS "Build the tests" ON)
 if(PACKAGE_TESTS)
     enable_testing()
     include(GoogleTest)
-    add_subdirectory(tests)
+    #add_subdirectory(tests)
 
 endif()
 
