@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['startprocessing_76',['startProcessing',['../classDetectCard.html#a807d0b7f4e2f13ec1c9cb356f488f8e8',1,'DetectCard']]],
-  ['startrecording_77',['startRecording',['../classCamera.html#af276333ed7eb98117a1be06b764fd41f',1,'Camera']]],
-  ['stopprocessing_78',['stopProcessing',['../classDetectCard.html#ab082dd0e79979627651ec928fd0d476b',1,'DetectCard']]],
-  ['stoprecording_79',['stopRecording',['../classCamera.html#a89cd61acf2c79e518686a1c10feee0d0',1,'Camera']]],
-  ['strategyengine_80',['StrategyEngine',['../classStrategyEngine.html#aec1e117e849819bb50d14ec34032ea3b',1,'StrategyEngine']]]
+  ['nextcallback_366',['nextCallback',['../classCallbackLinker.html#a44f8a8924124460e8f8ff37fcb6159b0',1,'CallbackLinker::nextCallback()'],['../classDetectCard.html#aa00bd7587e6168fd9b858d7ec16baac6',1,'DetectCard::nextCallback()'],['../classGamePlay.html#a6ba723e153e0692561855c97598bf9de',1,'GamePlay::nextCallback()'],['../classStrategyEngine.html#a9b2beb3d6a3fc0e7940e15e8e9565486',1,'StrategyEngine::nextCallback()'],['../classToggleLED.html#a2e1024d03171e63047dfff75281723bb',1,'ToggleLED::nextCallback()']]]
 ];

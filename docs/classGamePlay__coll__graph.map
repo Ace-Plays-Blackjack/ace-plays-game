@@ -1,4 +1,4 @@
 <map id="GamePlay" name="GamePlay">
-<area shape="rect" id="node1" title="Class to implement the gameplay logic/architecture." alt="" coords="19,80,109,107"/>
-<area shape="rect" id="node2" href="$classCallbackLinker.html" title="Generic abstract Callback Interface class." alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node1" title="Class to implement the gameplay logic/architecture." alt="" coords="5,131,229,296"/>
+<area shape="rect" id="node2" href="$classCallbackLinker.html" title="Generic abstract Callback Interface class." alt="" coords="51,5,183,83"/>
 </map>

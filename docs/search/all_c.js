@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['readme_23',['README',['../md_README.html',1,'']]],
-  ['registercallback_24',['registerCallback',['../classCamera.html#a1c5068178e256f98215dcacef5ff76d7',1,'Camera::registerCallback()'],['../classDetectCard.html#a0953c5436ade541a690b474adf261c8e',1,'DetectCard::registerCallback()']]],
-  ['registerledcallback_25',['registerLEDCallback',['../classGamePlay.html#ac616a881fa9696e3b586a7f6581a9a10',1,'GamePlay']]],
-  ['registerstrategycallback_26',['registerStrategyCallback',['../classGamePlay.html#ae70e0f98615c96e21067abada66a48bb',1,'GamePlay']]]
+  ['opencamera_163',['OpenCamera',['../classLibcameraApp.html#a6f7f3ee39dcedf418590e16f3495e73d',1,'LibcameraApp']]],
+  ['operator_3d_164',['operator=',['../classMetadata.html#a1538cac0e54fef81eb3727cb325019cc',1,'Metadata::operator=(Metadata const &amp;other)'],['../classMetadata.html#af8c9b933d9711b81555842bce434299f',1,'Metadata::operator=(Metadata &amp;&amp;other)']]],
+  ['options_165',['Options',['../classOptions.html',1,'Options'],['../classOptions.html#ab72fb640172a6109e34c8a5366563753',1,'Options::Options()']]],
+  ['options_166',['options',['../classlccv_1_1PiCamera.html#a9753019b6a0b96ef11f98da04ebfcd04',1,'lccv::PiCamera']]],
+  ['options_5f_167',['options_',['../classLibcameraApp.html#a69c52fb2a5204c06734ecc8252b20aed',1,'LibcameraApp']]]
 ];
