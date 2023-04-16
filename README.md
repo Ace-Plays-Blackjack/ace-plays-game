@@ -39,7 +39,9 @@
 [![Twitter][twitter-shield]][twitter-url]
 [![Youtube][youtube-shield]][youtube-url]
 
-
+<!-- Demo of our Working Blackjack Decision Maker -->
+# Demo of our Working Blackjack Decision Maker
+[![Blackjack Decision Maker Demo](https://img.youtube.com/vi/ok-4RcKvypY/0.jpg)](https://www.youtube.com/watch?v=ok-4RcKvypY)
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -64,8 +66,6 @@
   </ol>
 </details>
 
-<!-- Demo of our Working Blackjack Decision Maker -->
-[![Blackjack Decision Maker Demo](https://img.youtube.com/vi/ok-4RcKvypY/0.jpg)](https://www.youtube.com/watch?v=ok-4RcKvypY)
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
