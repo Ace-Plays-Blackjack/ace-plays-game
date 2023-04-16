@@ -192,7 +192,7 @@ $ doxygen
 
 <!-- ROADMAP -->
 # Roadmap
-Future work will be to add a new ShowFrame class that output a frame. This would allow more modularity if we want to use Qt GUI in the future.
+Future work will be to add a new ShowFrame class that output a frame. This would allow more modularity if we wanted to use Qt GUI in the future.
 
 <!-- CONTRIBUTING -->
 # Contributing
