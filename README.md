@@ -39,8 +39,13 @@
 [![Twitter][twitter-shield]][twitter-url]
 [![Youtube][youtube-shield]][youtube-url]
 
+<!-- Demo of our Working Blackjack Decision Maker -->
+# Demo of our Working Blackjack Decision Maker
+<h2 align="center">
 
+[![Blackjack Decision Maker Demo](https://img.youtube.com/vi/ok-4RcKvypY/0.jpg)](https://www.youtube.com/watch?v=ok-4RcKvypY)
 
+</h2>
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -63,8 +68,6 @@
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
-
-
 
 <!-- ABOUT THE PROJECT -->
 # About The Project
@@ -179,6 +182,13 @@ $ sudo ./ACE_PLAYS
 
 Command `$ sudo ./ACE_PLAYS` runs the created `ACE_PLAYS.exe`.
 `pigpio` library requires running with `sudo` privileges.
+
+## Creating the Documentation
+Navigate to the ace-plays-game main folder and run the following:
+
+```
+$ doxygen
+```
 
 <!-- ROADMAP -->
 # Roadmap
