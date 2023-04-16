@@ -23,7 +23,7 @@
   <a href="https://github.com/Ace-Plays-Blackjack/ace-plays-game/wiki">
   Wiki
   </a>
-  for more infromation
+  for more information
 </h2>
 <br />
 
@@ -200,7 +200,6 @@ Future Work
 <!-- LICENSE -->
 # License
 Distributed under the `MIT` License. See [`LICENSE`](https://github.com/Ace-Plays-Blackjack/ace-plays-game/blob/main/LICENCE) for more information.
-Need to rework the license.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
