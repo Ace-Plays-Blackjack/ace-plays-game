@@ -175,6 +175,13 @@ $ sudo ./ACE_PLAYS
 Command `$ sudo ./ACE_PLAYS` runs the created `ACE_PLAYS.exe`.
 `pigpio` library requires running with `sudo` privileges.
 
+## Creating the Documentation
+Navigate to the ace-plays-game main folder and run the following:
+
+```
+$ doxygen
+```
+
 <!-- ROADMAP -->
 # Roadmap
 Future Work
