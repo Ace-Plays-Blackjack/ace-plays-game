@@ -4,7 +4,7 @@ option(NEW_CAM_STACK "Select new or old CAM stack: NEW==ON, OLD==OFF" ON)
 
 add_definitions(-DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK})
 
-include(CTest)
+include(GoogleTest)
 enable_testing()
 
 include_directories(include)
@@ -39,6 +39,16 @@ find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS})
 target_link_libraries( ${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
 
+#Include Google test
+option(PACKAGE_TESTS "Build the tests" ON)
+
+if(PACKAGE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+    add_subdirectory(tests)
+
+endif()
+
 # Find the path to the pigpio includes.
 find_path(pigpio_INCLUDE_DIR 
 	NAMES pigpio.h pigpiod_if.h pigpiod_if2.h
@@ -69,7 +79,6 @@ find_package_handle_standard_args(pigpio
 
 target_link_libraries( ${PROJECT_NAME} PUBLIC ${pigpio_LIBRARY})
 
-
 # Include LCCV library
 if(NEW_CAM_STACK)
 
@@ -77,7 +86,6 @@ add_subdirectory(LCCV)
 target_link_libraries(${PROJECT_NAME} PUBLIC LCCV)
 
 endif(NEW_CAM_STACK)
-
 
 message("**** OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS} ****")
 # message("OpenCV_LIBS: ${OpenCV_LIBS}")
@@ -87,3 +95,4 @@ message("**** New CAM stack option: -DCMAKE_NEW_CAM_STACK_${NEW_CAM_STACK} ****"
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 # Clean cache to always load the latest NEW_CAM_STACK option 
 unset(NEW_CAM_STACK CACHE)
+
