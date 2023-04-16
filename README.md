@@ -64,8 +64,8 @@
   </ol>
 </details>
 
-
-
+<!-- Demo of our Working Blackjack Decision Maker -->
+[![Blackjack Decision Maker Demo](https://img.youtube.com/vi/ok-4RcKvypY/0.jpg)](https://www.youtube.com/watch?v=ok-4RcKvypY)
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
@@ -121,12 +121,12 @@ $ sudo apt install graphviz
 <!-- USAGE EXAMPLES -->
 # Usage
 The Raspbian Bullseye OS introduced a new camera stack driver called [libcamera](https://www.raspberrypi.com/documentation/computers/camera_software.html#getting-started) (follow the link for more information).
-
-OpenCV can find an appropriate driver automatically, however the resolution defaults at the lowest available option. Moreover, OpenCV does not support libcamera at the moment.
+OpenCV does not support libcamera at the moment.
 
 The [LCCV](https://github.com/Qengineering/LCCV) repo by [QEngineering](https://github.com/Qengineering) has been used to provide support for the new camera stack. Follow the link for more detailed explanation.
 
-Users have the freedom to select between the **OLD** or **NEW** stack. Unfortunately, when using the OLD stack the resolution cannot be changed.
+Users have the freedom to select
+OpenCV can find an appropriate driver automatically, however the resolution defaults at the lowest available option. Moreover,  between the **OLD** or **NEW** stack. Unfortunately, when using the OLD stack the resolution cannot be changed.
 
 ## Using the NEW stack
 1. **Disable** Legacy stack support in Pi configuration. Write the following command in the terminal:
