@@ -69,12 +69,17 @@ $(function() {
 <div class="title">GamePlay Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class to implement the gameplay logic/architecture.  
+ <a href="classGamePlay.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GamePlay_8h_source.html">GamePlay.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GamePlay:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGamePlay__inherit__graph.png" border="0" usemap="#aGamePlay_inherit__map" alt="Inheritance graph"/></div>
 <map name="aGamePlay_inherit__map" id="aGamePlay_inherit__map">
-<area shape="rect" title=" " alt="" coords="19,80,109,107"/>
+<area shape="rect" title="Class to implement the gameplay logic/architecture." alt="" coords="19,80,109,107"/>
 <area shape="rect" href="classCallbackLinker.html" title="Generic abstract Callback Interface class." alt="" coords="5,5,123,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -83,32 +88,78 @@ Collaboration diagram for GamePlay:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGamePlay__coll__graph.png" border="0" usemap="#aGamePlay_coll__map" alt="Collaboration graph"/></div>
 <map name="aGamePlay_coll__map" id="aGamePlay_coll__map">
-<area shape="rect" title=" " alt="" coords="19,80,109,107"/>
+<area shape="rect" title="Class to implement the gameplay logic/architecture." alt="" coords="19,80,109,107"/>
 <area shape="rect" href="classCallbackLinker.html" title="Generic abstract Callback Interface class." alt="" coords="5,5,123,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7e6426423c97c9ffab2d9d6d8a46419d"><td class="memItemLeft" align="right" valign="top"><a id="a7e6426423c97c9ffab2d9d6d8a46419d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GamePlay</b> (double res_w, double res_h)</td></tr>
+<tr class="memitem:a7e6426423c97c9ffab2d9d6d8a46419d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#a7e6426423c97c9ffab2d9d6d8a46419d">GamePlay</a> (double res_w, double res_h)</td></tr>
+<tr class="memdesc:a7e6426423c97c9ffab2d9d6d8a46419d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Game Play:: Game Play object.  <a href="classGamePlay.html#a7e6426423c97c9ffab2d9d6d8a46419d">More...</a><br /></td></tr>
 <tr class="separator:a7e6426423c97c9ffab2d9d6d8a46419d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae68e44e5fe70b45d7dfe1a3f1c1577d0"><td class="memItemLeft" align="right" valign="top"><a id="ae68e44e5fe70b45d7dfe1a3f1c1577d0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#ae68e44e5fe70b45d7dfe1a3f1c1577d0">~GamePlay</a> ()</td></tr>
+<tr class="memdesc:ae68e44e5fe70b45d7dfe1a3f1c1577d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the Game Play:: Game Play object. <br /></td></tr>
+<tr class="separator:ae68e44e5fe70b45d7dfe1a3f1c1577d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ba723e153e0692561855c97598bf9de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#a6ba723e153e0692561855c97598bf9de">nextCallback</a> (<a class="el" href="structAcePlaysUtils.html">AcePlaysUtils</a> &amp;callbackData)</td></tr>
-<tr class="memdesc:a6ba723e153e0692561855c97598bf9de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract method.  <a href="classGamePlay.html#a6ba723e153e0692561855c97598bf9de">More...</a><br /></td></tr>
+<tr class="memdesc:a6ba723e153e0692561855c97598bf9de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the nextCallback virtual method to pass information down the pipeline.  <a href="classGamePlay.html#a6ba723e153e0692561855c97598bf9de">More...</a><br /></td></tr>
 <tr class="separator:a6ba723e153e0692561855c97598bf9de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2ce8fdc528f51feee4a61d8e757be73"><td class="memItemLeft" align="right" valign="top"><a id="ad2ce8fdc528f51feee4a61d8e757be73"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>registerCallback</b> (<a class="el" href="classCallbackLinker.html">CallbackLinker</a> *cb)</td></tr>
-<tr class="separator:ad2ce8fdc528f51feee4a61d8e757be73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d541af2cfd61b20908bcb99f91bbe7d"><td class="memItemLeft" align="right" valign="top"><a id="a1d541af2cfd61b20908bcb99f91bbe7d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unregisterCallback</b> ()</td></tr>
-<tr class="separator:a1d541af2cfd61b20908bcb99f91bbe7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bcc15560ba05b35708d1098af91896f"><td class="memItemLeft" align="right" valign="top"><a id="a3bcc15560ba05b35708d1098af91896f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>registerstrategyCallback</b> (<a class="el" href="classCallbackLinker.html">CallbackLinker</a> *cb)</td></tr>
-<tr class="separator:a3bcc15560ba05b35708d1098af91896f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5af857b7d7b218af2183a9d1820e1fc7"><td class="memItemLeft" align="right" valign="top"><a id="a5af857b7d7b218af2183a9d1820e1fc7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unregisterstrategyCallback</b> ()</td></tr>
-<tr class="separator:a5af857b7d7b218af2183a9d1820e1fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac616a881fa9696e3b586a7f6581a9a10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#ac616a881fa9696e3b586a7f6581a9a10">registerLEDCallback</a> (<a class="el" href="classCallbackLinker.html">CallbackLinker</a> *cb)</td></tr>
+<tr class="memdesc:ac616a881fa9696e3b586a7f6581a9a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register callback for the LED class.  <a href="classGamePlay.html#ac616a881fa9696e3b586a7f6581a9a10">More...</a><br /></td></tr>
+<tr class="separator:ac616a881fa9696e3b586a7f6581a9a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554faf50ee0fc2d91069a6ecd08d5bf8"><td class="memItemLeft" align="right" valign="top"><a id="a554faf50ee0fc2d91069a6ecd08d5bf8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#a554faf50ee0fc2d91069a6ecd08d5bf8">unregisterLEDCallback</a> ()</td></tr>
+<tr class="memdesc:a554faf50ee0fc2d91069a6ecd08d5bf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregister callback for the LED class. <br /></td></tr>
+<tr class="separator:a554faf50ee0fc2d91069a6ecd08d5bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae70e0f98615c96e21067abada66a48bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#ae70e0f98615c96e21067abada66a48bb">registerStrategyCallback</a> (<a class="el" href="classCallbackLinker.html">CallbackLinker</a> *cb)</td></tr>
+<tr class="memdesc:ae70e0f98615c96e21067abada66a48bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register callback for the Strategy Engine class.  <a href="classGamePlay.html#ae70e0f98615c96e21067abada66a48bb">More...</a><br /></td></tr>
+<tr class="separator:ae70e0f98615c96e21067abada66a48bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a771d4758076f5d1fb09d0d09766293e1"><td class="memItemLeft" align="right" valign="top"><a id="a771d4758076f5d1fb09d0d09766293e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGamePlay.html#a771d4758076f5d1fb09d0d09766293e1">unregisterStrategyCallback</a> ()</td></tr>
+<tr class="memdesc:a771d4758076f5d1fb09d0d09766293e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregister callback for the LED class. <br /></td></tr>
+<tr class="separator:a771d4758076f5d1fb09d0d09766293e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to implement the gameplay logic/architecture. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7e6426423c97c9ffab2d9d6d8a46419d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e6426423c97c9ffab2d9d6d8a46419d">&#9670;&nbsp;</a></span>GamePlay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GamePlay::GamePlay </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>res_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>res_h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new Game Play:: Game Play object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">res_w</td><td>desired resolution width </td></tr>
+    <tr><td class="paramname">res_h</td><td>desired resolution height </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6ba723e153e0692561855c97598bf9de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ba723e153e0692561855c97598bf9de">&#9670;&nbsp;</a></span>nextCallback()</h2>
@@ -134,16 +185,69 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unregisterstrategyCal
 </table>
 </div><div class="memdoc">
 
-<p>Abstract method. </p>
-<p>Implement method in a Derived class</p>
+<p>Implement the nextCallback virtual method to pass information down the pipeline. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">callbackData</td><td>an <a class="el" href="structAcePlaysUtils.html">AcePlaysUtils</a> type object to pass all relevant data down the AcePlays pipeline </td></tr>
+    <tr><td class="paramname">callbackData</td><td>an <a class="el" href="structAcePlaysUtils.html" title="Utility structure used by the AcePlays repo for passing necessary information down the processing pip...">AcePlaysUtils</a> callback object </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implements <a class="el" href="classCallbackLinker.html#a44f8a8924124460e8f8ff37fcb6159b0">CallbackLinker</a>.</p>
+
+</div>
+</div>
+<a id="ac616a881fa9696e3b586a7f6581a9a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac616a881fa9696e3b586a7f6581a9a10">&#9670;&nbsp;</a></span>registerLEDCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GamePlay::registerLEDCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCallbackLinker.html">CallbackLinker</a> *&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register callback for the LED class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="classCallbackLinker.html" title="Generic abstract Callback Interface class.">CallbackLinker</a></td><td>is the class that deals with callbacks. </td></tr>
+    <tr><td class="paramname">cb</td><td>is a pointer to the callback </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae70e0f98615c96e21067abada66a48bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae70e0f98615c96e21067abada66a48bb">&#9670;&nbsp;</a></span>registerStrategyCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GamePlay::registerStrategyCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCallbackLinker.html">CallbackLinker</a> *&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register callback for the Strategy Engine class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="classCallbackLinker.html" title="Generic abstract Callback Interface class.">CallbackLinker</a></td><td>is the class that deals with callbacks. </td></tr>
+    <tr><td class="paramname">cb</td><td>is a pointer to the callback </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
